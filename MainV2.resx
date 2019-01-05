@@ -120,53 +120,11 @@
   <metadata name="MainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="CTX_mainmenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>127, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="autoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
-  </data>
-  <data name="autoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>AutoHide</value>
-  </data>
-  <data name="fullScreenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
-  </data>
-  <data name="fullScreenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Full Screen</value>
-  </data>
-  <data name="readonlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
-  </data>
-  <data name="readonlyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Readonly</value>
-  </data>
-  <data name="connectionOptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
-  </data>
-  <data name="connectionOptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Connection Options</value>
-  </data>
-  <data name="connectionListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
-  </data>
-  <data name="connectionListToolStripMenuItem.Text" xml:space="preserve">
-    <value>Connection List</value>
-  </data>
-  <data name="CTX_mainmenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 114</value>
-  </data>
-  <data name="&gt;&gt;CTX_mainmenu.Name" xml:space="preserve">
-    <value>CTX_mainmenu</value>
-  </data>
-  <data name="&gt;&gt;CTX_mainmenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="MainMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="MenuFlightData.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 6pt</value>
   </data>
@@ -722,6 +680,48 @@
   </data>
   <data name="&gt;&gt;MainMenu.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <metadata name="CTX_mainmenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>127, 17</value>
+  </metadata>
+  <data name="CTX_mainmenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 114</value>
+  </data>
+  <data name="&gt;&gt;CTX_mainmenu.Name" xml:space="preserve">
+    <value>CTX_mainmenu</value>
+  </data>
+  <data name="&gt;&gt;CTX_mainmenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="autoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="autoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>AutoHide</value>
+  </data>
+  <data name="fullScreenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="fullScreenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
+  <data name="readonlyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="readonlyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Readonly</value>
+  </data>
+  <data name="connectionOptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="connectionOptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Connection Options</value>
+  </data>
+  <data name="connectionListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="connectionListToolStripMenuItem.Text" xml:space="preserve">
+    <value>Connection List</value>
   </data>
   <data name="menu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2451,36 +2451,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Mission Planner - By Michael Oborne</value>
   </data>
-  <data name="&gt;&gt;autoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>autoHideToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;autoHideToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fullScreenToolStripMenuItem.Name" xml:space="preserve">
-    <value>fullScreenToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;fullScreenToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;readonlyToolStripMenuItem.Name" xml:space="preserve">
-    <value>readonlyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;readonlyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;connectionOptionsToolStripMenuItem.Name" xml:space="preserve">
-    <value>connectionOptionsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;connectionOptionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;connectionListToolStripMenuItem.Name" xml:space="preserve">
-    <value>connectionListToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;connectionListToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;MenuFlightData.Name" xml:space="preserve">
     <value>MenuFlightData</value>
   </data>
@@ -2546,6 +2516,36 @@
   </data>
   <data name="&gt;&gt;MenuArduPilot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>autoHideToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;autoHideToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fullScreenToolStripMenuItem.Name" xml:space="preserve">
+    <value>fullScreenToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;fullScreenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;readonlyToolStripMenuItem.Name" xml:space="preserve">
+    <value>readonlyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;readonlyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;connectionOptionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>connectionOptionsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;connectionOptionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;connectionListToolStripMenuItem.Name" xml:space="preserve">
+    <value>connectionListToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;connectionListToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainV2</value>
