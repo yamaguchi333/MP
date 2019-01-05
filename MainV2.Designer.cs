@@ -44,6 +44,7 @@ namespace MissionPlanner
             this.MenuHelp = new System.Windows.Forms.ToolStripButton();
             this.MenuDonate = new System.Windows.Forms.ToolStripButton();
             this.MenuConnect = new System.Windows.Forms.ToolStripButton();
+            this.MenuStart = new System.Windows.Forms.ToolStripButton();
             this.toolStripConnectionControl = new MissionPlanner.Controls.ToolStripConnectionControl();
             this.MenuArduPilot = new System.Windows.Forms.ToolStripButton();
             this.CTX_mainmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -54,6 +55,7 @@ namespace MissionPlanner
             this.connectionListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.MenuReturn = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -74,6 +76,8 @@ namespace MissionPlanner
             this.MenuTerminal,
             this.MenuHelp,
             this.MenuDonate,
+            this.MenuReturn,
+            this.MenuStart,
             this.MenuConnect,
             this.toolStripConnectionControl,
             this.MenuArduPilot});
@@ -166,6 +170,15 @@ namespace MissionPlanner
             this.MenuConnect.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.MenuConnect.Click += new System.EventHandler(this.MenuConnect_Click);
             // 
+            // MenuStart
+            // 
+            this.MenuStart.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.MenuStart, "MenuStart");
+            this.MenuStart.ForeColor = System.Drawing.Color.White;
+            this.MenuStart.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuStart.Name = "MenuStart";
+            this.MenuStart.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            // 
             // toolStripConnectionControl
             // 
             this.toolStripConnectionControl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -248,6 +261,15 @@ namespace MissionPlanner
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
             // 
+            // MenuReturn
+            // 
+            this.MenuReturn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.MenuReturn, "MenuReturn");
+            this.MenuReturn.ForeColor = System.Drawing.Color.White;
+            this.MenuReturn.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuReturn.Name = "MenuReturn";
+            this.MenuReturn.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            // 
             // MainV2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -291,5 +313,7 @@ namespace MissionPlanner
         private System.Windows.Forms.ToolStripMenuItem connectionOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton MenuArduPilot;
         private System.Windows.Forms.ToolStripMenuItem connectionListToolStripMenuItem;
+        public System.Windows.Forms.ToolStripButton MenuStart;
+        public System.Windows.Forms.ToolStripButton MenuReturn;
     }
 }
