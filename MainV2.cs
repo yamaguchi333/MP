@@ -3349,6 +3349,7 @@ namespace MissionPlanner
                 MenuFlightPlanner_Click(null, null);
                 return true;
             }
+            /*
             if (keyData == Keys.F4)
             {
                 MenuTuning_Click(null, null);
@@ -3369,11 +3370,13 @@ namespace MissionPlanner
                 frm.Show();
                 return true;
             }
+            */
             /*if (keyData == (Keys.Control | Keys.S)) // screenshot
             {
                 ScreenShot();
                 return true;
             }*/
+            /*
             if (keyData == (Keys.Control | Keys.G)) // nmea out
             {
                 Form frm = new SerialOutputNMEA();
@@ -3435,6 +3438,7 @@ namespace MissionPlanner
                 CustomMessageBox.Show("Done MAV_ACTION_STORAGE_WRITE");
                 return true;
             }
+            */
             if (keyData == (Keys.Control | Keys.J))
             {
                 /*

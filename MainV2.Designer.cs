@@ -43,8 +43,9 @@ namespace MissionPlanner
             this.MenuTerminal = new System.Windows.Forms.ToolStripButton();
             this.MenuHelp = new System.Windows.Forms.ToolStripButton();
             this.MenuDonate = new System.Windows.Forms.ToolStripButton();
-            this.MenuConnect = new System.Windows.Forms.ToolStripButton();
+            this.MenuReturn = new System.Windows.Forms.ToolStripButton();
             this.MenuStart = new System.Windows.Forms.ToolStripButton();
+            this.MenuConnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripConnectionControl = new MissionPlanner.Controls.ToolStripConnectionControl();
             this.MenuArduPilot = new System.Windows.Forms.ToolStripButton();
             this.CTX_mainmenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -55,7 +56,6 @@ namespace MissionPlanner
             this.connectionListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.MenuReturn = new System.Windows.Forms.ToolStripButton();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -76,9 +76,9 @@ namespace MissionPlanner
             this.MenuTerminal,
             this.MenuHelp,
             this.MenuDonate,
-            this.MenuReturn,
-            this.MenuStart,
             this.MenuConnect,
+            this.MenuStart,
+            this.MenuReturn,
             this.toolStripConnectionControl,
             this.MenuArduPilot});
             this.MainMenu.Name = "MainMenu";
@@ -160,15 +160,14 @@ namespace MissionPlanner
             this.MenuDonate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.MenuDonate.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // MenuConnect
+            // MenuReturn
             // 
-            this.MenuConnect.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.MenuConnect, "MenuConnect");
-            this.MenuConnect.ForeColor = System.Drawing.Color.White;
-            this.MenuConnect.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuConnect.Name = "MenuConnect";
-            this.MenuConnect.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.MenuConnect.Click += new System.EventHandler(this.MenuConnect_Click);
+            this.MenuReturn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.MenuReturn, "MenuReturn");
+            this.MenuReturn.ForeColor = System.Drawing.Color.White;
+            this.MenuReturn.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuReturn.Name = "MenuReturn";
+            this.MenuReturn.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             // 
             // MenuStart
             // 
@@ -178,6 +177,16 @@ namespace MissionPlanner
             this.MenuStart.Margin = new System.Windows.Forms.Padding(0);
             this.MenuStart.Name = "MenuStart";
             this.MenuStart.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            // 
+            // MenuConnect
+            // 
+            this.MenuConnect.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.MenuConnect, "MenuConnect");
+            this.MenuConnect.ForeColor = System.Drawing.Color.White;
+            this.MenuConnect.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuConnect.Name = "MenuConnect";
+            this.MenuConnect.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.MenuConnect.Click += new System.EventHandler(this.MenuConnect_Click);
             // 
             // toolStripConnectionControl
             // 
@@ -260,15 +269,6 @@ namespace MissionPlanner
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
-            // 
-            // MenuReturn
-            // 
-            this.MenuReturn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            resources.ApplyResources(this.MenuReturn, "MenuReturn");
-            this.MenuReturn.ForeColor = System.Drawing.Color.White;
-            this.MenuReturn.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuReturn.Name = "MenuReturn";
-            this.MenuReturn.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             // 
             // MainV2
             // 
