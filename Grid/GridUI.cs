@@ -204,6 +204,8 @@ namespace MissionPlanner
             loading = false;
 
             domainUpDown1_ValueChanged(this, null);
+
+            BUT_Accept_Click(this, null);   // @eams add
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
@@ -297,7 +299,8 @@ namespace MissionPlanner
             // Copter Settings
             NUM_copter_delay.Value = griddata.copter_delay;
             CHK_copter_headinghold.Checked = griddata.copter_headinghold_chk;
-            TXT_headinghold.Text = griddata.copter_headinghold.ToString();
+            //TXT_headinghold.Text = griddata.copter_headinghold.ToString();    //@eams disabled
+            TXT_headinghold.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
 
             // Plane Settings
             NUM_Lane_Dist.Value = griddata.minlaneseparation;
@@ -369,7 +372,7 @@ namespace MissionPlanner
             if (plugin.Host.config.ContainsKey("grid_camera"))
             {
                 loadsetting("grid_alt", NUM_altitude);
-                //  loadsetting("grid_angle", NUM_angle);
+                loadsetting("grid_angle", NUM_angle);       // @eams enabled
                 loadsetting("grid_camdir", CHK_camdirection);
                 loadsetting("grid_usespeed", CHK_usespeed);
                 loadsetting("grid_speed", NUM_UpDownFlySpeed);
@@ -396,12 +399,19 @@ namespace MissionPlanner
                 loadsetting("grid_repeatservo_pwm", num_reptpwm);
                 loadsetting("grid_repeatservo_cycle", NUM_repttime);
 
+                // do set servo @eams add
+                loadsetting("grid_dosetservo", rad_do_set_servo);
+                loadsetting("grid_dosetservo_no", num_setservono);
+                loadsetting("grid_dosetservo_PWML", num_setservolow);
+                loadsetting("grid_dosetservo_PWMH", num_setservohigh);
+
                 // camera last to it invokes a reload
                 loadsetting("grid_camera", CMB_camera);
 
                 // Copter Settings
                 loadsetting("grid_copter_delay", NUM_copter_delay);
-                //loadsetting("grid_copter_headinghold_chk", CHK_copter_headinghold);
+                loadsetting("grid_copter_headinghold_chk", CHK_copter_headinghold);   //@eams enabled
+                TXT_headinghold.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
 
                 // Plane Settings
                 loadsetting("grid_min_lane_separation", NUM_Lane_Dist);
@@ -448,6 +458,7 @@ namespace MissionPlanner
             plugin.Host.config["grid_camdir"] = CHK_camdirection.Checked.ToString();
 
             plugin.Host.config["grid_usespeed"] = CHK_usespeed.Checked.ToString();
+            plugin.Host.config["grid_speed"] = NUM_UpDownFlySpeed.Value.ToString(); //@eams add
 
             plugin.Host.config["grid_dist"] = NUM_Distance.Value.ToString();
             plugin.Host.config["grid_overshoot1"] = NUM_overshoot.Value.ToString();
@@ -471,6 +482,12 @@ namespace MissionPlanner
             plugin.Host.config["grid_digicam"] = rad_digicam.Checked.ToString();
             plugin.Host.config["grid_repeatservo"] = rad_repeatservo.Checked.ToString();
             plugin.Host.config["grid_breakstopstart"] = chk_stopstart.Checked.ToString();
+
+            // do set servo @emas
+            plugin.Host.config["grid_dosetservo"] = rad_do_set_servo.Checked.ToString();
+            plugin.Host.config["grid_dosetservo_no"] = num_setservono.Value.ToString();
+            plugin.Host.config["grid_dosetservo_PWML"] = num_setservolow.Value.ToString();
+            plugin.Host.config["grid_dosetservo_PWMH"] = num_setservohigh.Value.ToString();
 
             // Copter Settings
             plugin.Host.config["grid_copter_delay"] = NUM_copter_delay.Value.ToString();
@@ -1076,12 +1093,12 @@ namespace MissionPlanner
                 if (CHK_camdirection.Checked)
                 {
                     NUM_spacing.Value = (decimal)((1 - (overlap / 100.0f)) * viewheight);
-                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewwidth);
+//                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewwidth);     // @eams diabled
                 }
                 else
                 {
                     NUM_spacing.Value = (decimal)((1 - (overlap / 100.0f)) * viewwidth);
-                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewheight);
+//                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewheight);    // @eams disabled
                 }
                 NUM_spacing.ValueChanged += domainUpDown1_ValueChanged;
                 NUM_Distance.ValueChanged += domainUpDown1_ValueChanged;

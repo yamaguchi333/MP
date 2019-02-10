@@ -73,6 +73,7 @@ namespace MissionPlanner
                 }
                 else
                 {
+#if false
                     if (
                         CustomMessageBox.Show("No polygon defined. Load a file?", "Load File", MessageBoxButtons.YesNo) ==
                         (int)DialogResult.Yes)
@@ -82,8 +83,9 @@ namespace MissionPlanner
                     }
                     else
                     {
+#endif
                         CustomMessageBox.Show("Please define a polygon.", "Error");
-                    }
+//                    }
                 }
             }
         }

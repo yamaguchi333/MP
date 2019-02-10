@@ -996,15 +996,16 @@ namespace MissionPlanner
             }
 
             // add menu visible settings for #eams
+            MenuDonate.Visible = false;
+            MenuTerminal.Visible = false;
+#if false
             MenuInitConfig.Visible = false;
             MenuConfigTune.Visible = false;
             MenuSimulation.Visible = false;
-            MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
-            MenuDonate.Visible = false;
             MenuArduPilot.Visible = false;
             toolStripConnectionControl.Visible = false;
-
+#endif
             Application.DoEvents();
 
             Comports.Add(comPort);

@@ -206,6 +206,7 @@ namespace MissionPlanner.GCSViews
             this.panelBASE = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.autoGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Commands)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -827,6 +828,7 @@ namespace MissionPlanner.GCSViews
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoGridToolStripMenuItem,
             this.deleteWPToolStripMenuItem,
             this.insertWpToolStripMenuItem,
             this.insertSplineWPToolStripMenuItem,
@@ -1361,6 +1363,12 @@ namespace MissionPlanner.GCSViews
             this.timer1.Interval = 1200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // autoGridToolStripMenuItem
+            // 
+            this.autoGridToolStripMenuItem.Name = "autoGridToolStripMenuItem";
+            resources.ApplyResources(this.autoGridToolStripMenuItem, "autoGridToolStripMenuItem");
+            this.autoGridToolStripMenuItem.Click += new System.EventHandler(this.surveyGridToolStripMenuItem_Click);
+            // 
             // FlightPlanner
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1541,5 +1549,6 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.ToolStripMenuItem createCircleSurveyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentPositionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem surveyGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoGridToolStripMenuItem;
     }
 }

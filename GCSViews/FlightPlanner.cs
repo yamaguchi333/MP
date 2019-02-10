@@ -476,6 +476,8 @@ namespace MissionPlanner.GCSViews
                 callMeDrag("H", lat, lng, alt);
                 return;
             }
+
+            return; //@eams
             // creating a WP
 
             selectedrow = Commands.Rows.Add();
@@ -922,7 +924,7 @@ namespace MissionPlanner.GCSViews
                 if (TXT_homelat.Text != "")
                 {
                     MainMap.Position = new PointLatLng(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text));
-                    MainMap.Zoom = 16;
+                    MainMap.Zoom = 18;  // @eams change value 16 to 18
                 }
             }
             catch (Exception ex)
@@ -3490,6 +3492,7 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     polygongridmode = false;
+                    clearPolygonToolStripMenuItem_Click(this, null);
                 }
 
                 return;
@@ -3824,7 +3827,8 @@ namespace MissionPlanner.GCSViews
             {
                 try
                 {
-                    trackBar1.Value = (int) (MainMap.Zoom);
+//                    trackBar1.Value = (int) (MainMap.Zoom);   // @eams diabled
+                    trackBar1.Value = (float)(MainMap.Zoom);
                 }
                 catch (Exception ex)
                 {
@@ -3930,7 +3934,7 @@ namespace MissionPlanner.GCSViews
             // MainMap.Focus();
         }
 
-        #endregion
+#endregion
 
         private void comboBoxMapType_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -6026,6 +6030,29 @@ namespace MissionPlanner.GCSViews
             }
 
             isMouseClickOffMenu = false; // Just incase
+
+            // @eamd add
+            deleteWPToolStripMenuItem.Visible = false;
+            insertWpToolStripMenuItem.Visible = false;
+            insertSplineWPToolStripMenuItem.Visible = false;
+            loiterToolStripMenuItem.Visible = false;
+            jumpToolStripMenuItem.Visible = false;
+            rTLToolStripMenuItem.Visible = false;
+            landToolStripMenuItem.Visible = false;
+            takeoffToolStripMenuItem.Visible = false;
+            setROIToolStripMenuItem.Visible = false;
+            toolStripSeparator1.Visible = false;
+            polygonToolStripMenuItem.Visible = false;
+            rallyPointsToolStripMenuItem.Visible = false;
+            geoFenceToolStripMenuItem.Visible = false;
+            autoWPToolStripMenuItem.Visible = false;
+            mapToolToolStripMenuItem.Visible = false;
+            fileLoadSaveToolStripMenuItem.Visible = false;
+            pOIToolStripMenuItem.Visible = false;
+            trackerHomeToolStripMenuItem.Visible = false;
+            modifyAltToolStripMenuItem.Visible = false;
+            enterUTMCoordToolStripMenuItem.Visible = false;
+            switchDockingToolStripMenuItem.Visible = false;
         }
 
         private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
@@ -6132,6 +6159,8 @@ namespace MissionPlanner.GCSViews
             e.Graphics.ResetTransform();
 
             polyicon.Location = new Point(10,100);
+            polyicon.Width = 45;    // @eams add
+            polyicon.Height = 45;   // @eams add
             polyicon.Paint(e.Graphics);
         }
 
