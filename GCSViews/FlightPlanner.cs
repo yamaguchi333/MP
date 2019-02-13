@@ -936,6 +936,10 @@ namespace MissionPlanner.GCSViews
 
             panelMap.Visible = true;
 
+            // @eams add
+            panel3.Visible = false;
+            panel4.Visible = false;
+
             writeKML();
 
             // switch the action and wp table
@@ -5779,6 +5783,21 @@ namespace MissionPlanner.GCSViews
             writeKML();
         }
 
+        public int CommandCount()   // @eams add
+        {
+            return Commands.Rows.Count;
+        }
+
+        public void DeleteCommand(int rowIndex)   // @eams add
+        {
+            quickadd = true;
+            // mono fix
+            Commands.CurrentCell = null;
+            Commands.Rows.RemoveAt(rowIndex);
+            quickadd = false;
+            writeKML();
+        }
+
         private void FillCommand(int rowIndex, MAVLink.MAV_CMD cmd, double p1, double p2, double p3, double p4, double x,
             double y, double z, object tag = null)
         {
@@ -6053,6 +6072,8 @@ namespace MissionPlanner.GCSViews
             modifyAltToolStripMenuItem.Visible = false;
             enterUTMCoordToolStripMenuItem.Visible = false;
             switchDockingToolStripMenuItem.Visible = false;
+            autoGridToolStripMenuItem.Visible = false;
+            clearMissionToolStripMenuItem.Visible = false;
         }
 
         private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)

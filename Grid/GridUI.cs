@@ -187,6 +187,8 @@ namespace MissionPlanner
             loading = false;
         }
 
+        bool deleteLastLAND = false;
+
         private void GridUI_Load(object sender, EventArgs e)
         {
             loading = true;
@@ -205,7 +207,21 @@ namespace MissionPlanner
 
             domainUpDown1_ValueChanged(this, null);
 
-            BUT_Accept_Click(this, null);   // @eams add
+            // @eams add
+            int wpcount = plugin.Host.WPCount();
+            if (wpcount > 0)
+            {
+                // end RTL/LAND delete
+                plugin.Host.DeleteWP(wpcount - 1);
+                CHK_toandland.Checked = false;
+                deleteLastLAND = true;
+            }
+            else
+            {
+                CHK_toandland.Checked = true;
+            }
+
+//            BUT_Accept_Click(this, null);   // @eams add
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
@@ -1625,9 +1641,13 @@ namespace MissionPlanner
                     {
                         if (plugin.Host.cs.firmware == MainV2.Firmwares.ArduCopter2)
                         {
+#if true    // @eams change
+                            var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.TAKEOFF, 20, 0, 0, 0, 0, 0,
+                                (int)NUM_altitude.Value, gridobject);
+#else
                             var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.TAKEOFF, 20, 0, 0, 0, 0, 0,
                                 (int) (30*CurrentState.multiplierdist), gridobject);
-
+#endif
                             wpsplitstart.Add(wpno);
                         }
                         else
@@ -1637,6 +1657,11 @@ namespace MissionPlanner
 
                             wpsplitstart.Add(wpno);
                         }
+                        // @eams add
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                            (float)num_setservono.Value,
+                            (float)num_setservohigh.Value, 0, 0, 0, 0, 0,
+                            gridobject);
                     }
 
                     if (CHK_usespeed.Checked)
@@ -1820,6 +1845,13 @@ namespace MissionPlanner
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
                                 plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
                         }
+                    }
+
+                    // @eams add
+                    if (deleteLastLAND)
+                    {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
+                            plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
                     }
                 }
 

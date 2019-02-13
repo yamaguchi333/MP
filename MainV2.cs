@@ -995,15 +995,15 @@ namespace MissionPlanner
                 MenuDonate.Image = Program.Logo;
             }
 
-            // add menu visible settings for #eams
+            // add menu visible settings for @eams
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
+            MenuHelp.Visible = false;
+            MenuArduPilot.Visible = false;
 #if false
             MenuInitConfig.Visible = false;
             MenuConfigTune.Visible = false;
             MenuSimulation.Visible = false;
-            MenuHelp.Visible = false;
-            MenuArduPilot.Visible = false;
             toolStripConnectionControl.Visible = false;
 #endif
             Application.DoEvents();

@@ -241,6 +241,18 @@ namespace MissionPlanner.Plugin
             InsertWP(idx, cmd, p1, p2, p3, p4, x, y, z, null);
         }
 
+        // @eams add
+        public int WPCount()
+        {
+            return MainV2.instance.FlightPlanner.CommandCount();
+        }
+
+        // @eams add
+        public void DeleteWP(int idx)
+        {
+            MainV2.instance.FlightPlanner.DeleteCommand(idx);
+        }
+
         /// <summary>
         /// refresh command list on flight planner tab from autopilot
         /// </summary>

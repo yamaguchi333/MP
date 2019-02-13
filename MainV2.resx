@@ -695,7 +695,7 @@
     <value>ImageAboveText</value>
   </data>
   <data name="MenuStart.ToolTipText" xml:space="preserve">
-    <value>Simulation</value>
+    <value>Start</value>
   </data>
   <data name="MenuReturn.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 6pt</value>
@@ -756,7 +756,7 @@
     <value>ImageAboveText</value>
   </data>
   <data name="MenuReturn.ToolTipText" xml:space="preserve">
-    <value>Simulation</value>
+    <value>Return</value>
   </data>
   <data name="toolStripConnectionControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 60</value>
@@ -2621,10 +2621,10 @@
   <data name="&gt;&gt;MenuDonate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MenuReturn.Name" xml:space="preserve">
-    <value>MenuReturn</value>
+  <data name="&gt;&gt;MenuConnect.Name" xml:space="preserve">
+    <value>MenuConnect</value>
   </data>
-  <data name="&gt;&gt;MenuReturn.Type" xml:space="preserve">
+  <data name="&gt;&gt;MenuConnect.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;MenuStart.Name" xml:space="preserve">
@@ -2633,10 +2633,10 @@
   <data name="&gt;&gt;MenuStart.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MenuConnect.Name" xml:space="preserve">
-    <value>MenuConnect</value>
+  <data name="&gt;&gt;MenuReturn.Name" xml:space="preserve">
+    <value>MenuReturn</value>
   </data>
-  <data name="&gt;&gt;MenuConnect.Type" xml:space="preserve">
+  <data name="&gt;&gt;MenuReturn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripConnectionControl.Name" xml:space="preserve">
