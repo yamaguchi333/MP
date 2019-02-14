@@ -4610,6 +4610,47 @@ namespace MissionPlanner.GCSViews
             MainV2.comPort.setMountConfigure(MAVLink.MAV_MOUNT_MODE.MAVLINK_TARGETING, false, false, false);
             MainV2.comPort.setMountControl((float)trackBarPitch.Value * 100.0f, (float)trackBarRoll.Value * 100.0f, (float)trackBarYaw.Value * 100.0f, false);
         }
+
+        private void BUT_zoomIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Zoomlevel.Value += (decimal)0.5;
+                if (gMapControl1.MaxZoom < (double)Zoomlevel.Value)
+                {
+                    Zoomlevel.Value = gMapControl1.MaxZoom;
+                    gMapControl1.Zoom = (double)Zoomlevel.Value;
+                }
+                else
+                {
+                    gMapControl1.Zoom = (double)Zoomlevel.Value;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private void BUT_zoomOut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Zoomlevel.Value -= (decimal)0.5;
+                if (gMapControl1.MinZoom > (double)Zoomlevel.Value)
+                {
+                    Zoomlevel.Value = gMapControl1.MinZoom;
+                    gMapControl1.Zoom = (double)Zoomlevel.Value;
+                }
+                else
+                {
+                    gMapControl1.Zoom = (double)Zoomlevel.Value;
+                }
+            }
+            catch
+            {
+            }
+
+        }
     }
 }
  

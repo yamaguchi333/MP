@@ -76,9 +76,9 @@ namespace MissionPlanner
             this.MenuTerminal,
             this.MenuHelp,
             this.MenuDonate,
-            this.MenuConnect,
             this.MenuStart,
             this.MenuReturn,
+            this.MenuConnect,
             this.toolStripConnectionControl,
             this.MenuArduPilot});
             this.MainMenu.Name = "MainMenu";
@@ -173,20 +173,24 @@ namespace MissionPlanner
             // MenuStart
             // 
             this.MenuStart.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.MenuStart.BackColor = System.Drawing.Color.DarkSeaGreen;
             resources.ApplyResources(this.MenuStart, "MenuStart");
             this.MenuStart.ForeColor = System.Drawing.Color.White;
             this.MenuStart.Margin = new System.Windows.Forms.Padding(0);
             this.MenuStart.Name = "MenuStart";
-            this.MenuStart.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.MenuStart.Padding = new System.Windows.Forms.Padding(10, 0, 0, 10);
+            this.MenuStart.Click += new System.EventHandler(this.MenuStart_Click);
             // 
             // MenuReturn
             // 
             this.MenuReturn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.MenuReturn.BackColor = System.Drawing.Color.RosyBrown;
             resources.ApplyResources(this.MenuReturn, "MenuReturn");
             this.MenuReturn.ForeColor = System.Drawing.Color.White;
             this.MenuReturn.Margin = new System.Windows.Forms.Padding(0);
             this.MenuReturn.Name = "MenuReturn";
-            this.MenuReturn.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.MenuReturn.Padding = new System.Windows.Forms.Padding(10, 0, 0, 10);
+            this.MenuReturn.Click += new System.EventHandler(this.MenuReturn_Click);
             // 
             // toolStripConnectionControl
             // 

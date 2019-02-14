@@ -939,6 +939,7 @@ namespace MissionPlanner.GCSViews
             // @eams add
             panel3.Visible = false;
             panel4.Visible = false;
+            panel5.Visible = false;
 
             writeKML();
 
@@ -947,6 +948,8 @@ namespace MissionPlanner.GCSViews
             {
                 switchDockingToolStripMenuItem_Click(null, null);
             }
+
+            panelWaypoints.Expand = false;  // @eams add
 
             Visible = true;
             updateDisplayView();
@@ -2596,9 +2599,13 @@ namespace MissionPlanner.GCSViews
                     {
                         if (cellhome.Value.ToString() != TXT_homelat.Text && cellhome.Value.ToString() != "0")
                         {
+#if true    // @eams change
+                            var dr = CustomMessageBox.Show("ホーム位置をロードした座標でリセットします。", "ホーム座標リセット",
+                                MessageBoxButtons.YesNo);
+#else
                             var dr = CustomMessageBox.Show("Reset Home to loaded coords", "Reset Home Coords",
                                 MessageBoxButtons.YesNo);
-
+#endif
                             if (dr == (int)DialogResult.Yes)
                             {
                                 TXT_homelat.Text = (double.Parse(cellhome.Value.ToString())).ToString();
@@ -3127,7 +3134,7 @@ namespace MissionPlanner.GCSViews
 
         //public long ElapsedMilliseconds;
 
-        #region -- map events --
+#region -- map events --
 
         void MainMap_OnMarkerLeave(GMapMarker item)
         {
@@ -7154,6 +7161,38 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
         private void Commands_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             writeKML();
+        }
+
+        private void BUT_zoomIn_Click(object sender, EventArgs e)
+        {
+            MainMap.Zoom += 0.5;
+            try
+            {
+                trackBar1.Value = (float)(MainMap.Zoom);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+            center.Position = MainMap.Position;
+        }
+
+        private void BUT_zoomOut_Click(object sender, EventArgs e)
+        {
+            MainMap.Zoom -= 0.5;
+            if (MainMap.Zoom < 0)
+            {
+                MainMap.Zoom = 0;
+            }
+            try
+            {
+                trackBar1.Value = (float)(MainMap.Zoom);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+            center.Position = MainMap.Position;
         }
     }
 }

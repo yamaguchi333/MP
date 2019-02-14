@@ -221,7 +221,7 @@ namespace MissionPlanner
                 CHK_toandland.Checked = true;
             }
 
-//            BUT_Accept_Click(this, null);   // @eams add
+            BUT_Accept_Click(this, null);   // @eams add
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
@@ -1850,8 +1850,11 @@ namespace MissionPlanner
                     // @eams add
                     if (deleteLastLAND)
                     {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.RETURN_TO_LAUNCH, 0, 0, 0, 0, 0, 0, 0, gridobject);
+#if false
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
-                            plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
+                        plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
+#endif
                     }
                 }
 
