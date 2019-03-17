@@ -4015,7 +4015,7 @@ namespace MissionPlanner
                     return;
                 }
             }
-            MainV2.comPort.setMode("STABILIZE");
+            MainV2.comPort.setMode("Loiter");
 
             // arm the MAV
             try

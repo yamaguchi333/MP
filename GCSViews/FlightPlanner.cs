@@ -640,7 +640,8 @@ namespace MissionPlanner.GCSViews
             CMB_altmode.DataSource = EnumTranslator.EnumToList<altmode>();
 
             //set default
-            CMB_altmode.SelectedItem = altmode.Relative;
+//            CMB_altmode.SelectedItem = altmode.Relative;
+            CMB_altmode.SelectedItem = altmode.Terrain;    // @eams change
 
             RegeneratePolygon();
 
