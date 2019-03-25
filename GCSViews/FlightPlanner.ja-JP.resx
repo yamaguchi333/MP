@@ -196,7 +196,7 @@
     <value>高さの検証</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>高度 (絶対値)</value>
+    <value>高度</value>
   </data>
   <data name="mapToolToolStripMenuItem.Text" xml:space="preserve">
     <value>マップ･ツール</value>

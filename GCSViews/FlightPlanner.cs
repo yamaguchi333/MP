@@ -26,6 +26,7 @@ using GMap.NET.WindowsForms.Markers;
 using Ionic.Zip;
 using log4net;
 using MissionPlanner.Controls;
+using MissionPlanner.Controls.Waypoints;
 using MissionPlanner.Maps;
 using MissionPlanner.Properties;
 using MissionPlanner.Utilities;
@@ -478,6 +479,8 @@ namespace MissionPlanner.GCSViews
                 callMeDrag("H", lat, lng, alt);
                 return;
             }
+
+            return; //@eams
             // creating a WP
 
             selectedrow = Commands.Rows.Add();
@@ -640,7 +643,10 @@ namespace MissionPlanner.GCSViews
             CMB_altmode.DataSource = EnumTranslator.EnumToList<altmode>();
 
             //set default
-            CMB_altmode.SelectedItem = altmode.Relative;
+//            CMB_altmode.SelectedItem = altmode.Relative;
+            CMB_altmode.SelectedItem = altmode.Terrain;    // @eams change
+
+//            RegeneratePolygon();
 
             updateCMDParams();
 
@@ -911,7 +917,7 @@ namespace MissionPlanner.GCSViews
                 if (TXT_homelat.Text != "")
                 {
                     MainMap.Position = new PointLatLng(double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text));
-                    MainMap.Zoom = 16;
+                    MainMap.Zoom = 18;  // @eams change value 16 to 18
                 }
             }
             catch (Exception ex)
@@ -923,6 +929,11 @@ namespace MissionPlanner.GCSViews
 
             panelMap.Visible = true;
 
+            // @eams add
+            panel3.Visible = false;
+            panel4.Visible = false;
+            panel5.Visible = false;
+
             writeKML();
 
             // switch the action and wp table
@@ -930,6 +941,8 @@ namespace MissionPlanner.GCSViews
             {
                 switchDockingToolStripMenuItem_Click(null, null);
             }
+
+            panelWaypoints.Expand = false;  // @eams add
 
             Visible = true;
             updateDisplayView();
@@ -2363,9 +2376,13 @@ namespace MissionPlanner.GCSViews
                     {
                         if (cellhome.Value.ToString() != TXT_homelat.Text && cellhome.Value.ToString() != "0")
                         {
+#if true    // @eams change
+                            var dr = CustomMessageBox.Show("ホーム位置をロードした座標でリセットします。", "ホーム座標リセット",
+                                MessageBoxButtons.YesNo);
+#else
                             var dr = CustomMessageBox.Show("Reset Home to loaded coords", "Reset Home Coords",
                                 MessageBoxButtons.YesNo);
-
+#endif
                             if (dr == (int)DialogResult.Yes)
                             {
                                 TXT_homelat.Text = (double.Parse(cellhome.Value.ToString())).ToString();
@@ -2893,7 +2910,7 @@ namespace MissionPlanner.GCSViews
 
         //public long ElapsedMilliseconds;
 
-        #region -- map events --
+#region -- map events --
 
         void MainMap_OnMarkerLeave(GMapMarker item)
         {
@@ -3261,6 +3278,7 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     polygongridmode = false;
+                    clearPolygonToolStripMenuItem_Click(this, null);
                 }
 
                 return;
@@ -3599,7 +3617,8 @@ namespace MissionPlanner.GCSViews
             {
                 try
                 {
-                    trackBar1.Value = (int) (MainMap.Zoom);
+//                    trackBar1.Value = (int) (MainMap.Zoom);   // @eams diabled
+                    trackBar1.Value = (float)(MainMap.Zoom);
                 }
                 catch (Exception ex)
                 {
@@ -3705,7 +3724,7 @@ namespace MissionPlanner.GCSViews
             // MainMap.Focus();
         }
 
-        #endregion
+#endregion
 
         private void comboBoxMapType_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -5593,6 +5612,21 @@ namespace MissionPlanner.GCSViews
             writeKML();
         }
 
+        public int CommandCount()   // @eams add
+        {
+            return Commands.Rows.Count;
+        }
+
+        public void DeleteCommand(int rowIndex)   // @eams add
+        {
+            quickadd = true;
+            // mono fix
+            Commands.CurrentCell = null;
+            Commands.Rows.RemoveAt(rowIndex);
+            quickadd = false;
+            writeKML();
+        }
+
         private void FillCommand(int rowIndex, MAVLink.MAV_CMD cmd, double p1, double p2, double p3, double p4, double x,
             double y, double z, object tag = null)
         {
@@ -5847,6 +5881,31 @@ namespace MissionPlanner.GCSViews
             }
 
             isMouseClickOffMenu = false; // Just incase
+
+            // @eamd add
+            deleteWPToolStripMenuItem.Visible = false;
+            insertWpToolStripMenuItem.Visible = false;
+            insertSplineWPToolStripMenuItem.Visible = false;
+            loiterToolStripMenuItem.Visible = false;
+            jumpToolStripMenuItem.Visible = false;
+            rTLToolStripMenuItem.Visible = false;
+            landToolStripMenuItem.Visible = false;
+            takeoffToolStripMenuItem.Visible = false;
+            setROIToolStripMenuItem.Visible = false;
+            toolStripSeparator1.Visible = false;
+            polygonToolStripMenuItem.Visible = false;
+            rallyPointsToolStripMenuItem.Visible = false;
+            geoFenceToolStripMenuItem.Visible = false;
+            autoWPToolStripMenuItem.Visible = false;
+            mapToolToolStripMenuItem.Visible = false;
+            fileLoadSaveToolStripMenuItem.Visible = false;
+            pOIToolStripMenuItem.Visible = false;
+            trackerHomeToolStripMenuItem.Visible = false;
+            modifyAltToolStripMenuItem.Visible = false;
+            enterUTMCoordToolStripMenuItem.Visible = false;
+            switchDockingToolStripMenuItem.Visible = false;
+            autoGridToolStripMenuItem.Visible = false;
+            clearMissionToolStripMenuItem.Visible = false;
         }
 
         private void contextMenuStrip1_Closed(object sender, ToolStripDropDownClosedEventArgs e)
@@ -5953,6 +6012,8 @@ namespace MissionPlanner.GCSViews
             e.Graphics.ResetTransform();
 
             polyicon.Location = new Point(10,100);
+            polyicon.Width = 45;    // @eams add
+            polyicon.Height = 45;   // @eams add
             polyicon.Paint(e.Graphics);
         }
 
@@ -7013,6 +7074,38 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             frmProgressReporter.Dispose();
 
             MainMap.Focus();
+        }
+
+        private void BUT_zoomIn_Click(object sender, EventArgs e)
+        {
+            MainMap.Zoom += 0.5;
+            try
+            {
+                trackBar1.Value = (float)(MainMap.Zoom);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+            center.Position = MainMap.Position;
+        }
+
+        private void BUT_zoomOut_Click(object sender, EventArgs e)
+        {
+            MainMap.Zoom -= 0.5;
+            if (MainMap.Zoom < 0)
+            {
+                MainMap.Zoom = 0;
+            }
+            try
+            {
+                trackBar1.Value = (float)(MainMap.Zoom);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
+            center.Position = MainMap.Position;
         }
     }
 }

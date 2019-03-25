@@ -124,6 +124,8 @@ namespace MissionPlanner.Grid
             loading = false;
         }
 
+        bool deleteLastLAND = false;
+
         private void GridUI_Load(object sender, EventArgs e)
         {
             loading = true;
@@ -141,6 +143,22 @@ namespace MissionPlanner.Grid
             loading = false;
 
             domainUpDown1_ValueChanged(this, null);
+
+            // @eams add
+            int wpcount = plugin.Host.WPCount();
+            if (wpcount > 0)
+            {
+                // end RTL/LAND delete
+                plugin.Host.DeleteWP(wpcount - 1);
+                CHK_toandland.Checked = false;
+                deleteLastLAND = true;
+            }
+            else
+            {
+                CHK_toandland.Checked = true;
+            }
+
+            BUT_Accept_Click(this, null);   // @eams add
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
@@ -234,7 +252,8 @@ namespace MissionPlanner.Grid
             // Copter Settings
             NUM_copter_delay.Value = griddata.copter_delay;
             CHK_copter_headinghold.Checked = griddata.copter_headinghold_chk;
-            TXT_headinghold.Text = griddata.copter_headinghold.ToString();
+            //TXT_headinghold.Text = griddata.copter_headinghold.ToString();    //@eams disabled
+            TXT_headinghold.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
 
             // Plane Settings
             NUM_Lane_Dist.Value = griddata.minlaneseparation;
@@ -306,7 +325,7 @@ namespace MissionPlanner.Grid
             if (plugin.Host.config.ContainsKey("grid_camera"))
             {
                 loadsetting("grid_alt", NUM_altitude);
-                //  loadsetting("grid_angle", NUM_angle);
+                loadsetting("grid_angle", NUM_angle);       // @eams enabled
                 loadsetting("grid_camdir", CHK_camdirection);
                 loadsetting("grid_usespeed", CHK_usespeed);
                 loadsetting("grid_speed", NUM_UpDownFlySpeed);
@@ -333,12 +352,19 @@ namespace MissionPlanner.Grid
                 loadsetting("grid_repeatservo_pwm", num_reptpwm);
                 loadsetting("grid_repeatservo_cycle", NUM_repttime);
 
+                // do set servo @eams add
+                loadsetting("grid_dosetservo", rad_do_set_servo);
+                loadsetting("grid_dosetservo_no", num_setservono);
+                loadsetting("grid_dosetservo_PWML", num_setservolow);
+                loadsetting("grid_dosetservo_PWMH", num_setservohigh);
+
                 // camera last to it invokes a reload
                 loadsetting("grid_camera", CMB_camera);
 
                 // Copter Settings
                 loadsetting("grid_copter_delay", NUM_copter_delay);
-                //loadsetting("grid_copter_headinghold_chk", CHK_copter_headinghold);
+                loadsetting("grid_copter_headinghold_chk", CHK_copter_headinghold);   //@eams enabled
+                TXT_headinghold.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
 
                 // Plane Settings
                 loadsetting("grid_min_lane_separation", NUM_Lane_Dist);
@@ -385,6 +411,7 @@ namespace MissionPlanner.Grid
             plugin.Host.config["grid_camdir"] = CHK_camdirection.Checked.ToString();
 
             plugin.Host.config["grid_usespeed"] = CHK_usespeed.Checked.ToString();
+            plugin.Host.config["grid_speed"] = NUM_UpDownFlySpeed.Value.ToString(); //@eams add
 
             plugin.Host.config["grid_dist"] = NUM_Distance.Value.ToString();
             plugin.Host.config["grid_overshoot1"] = NUM_overshoot.Value.ToString();
@@ -408,6 +435,12 @@ namespace MissionPlanner.Grid
             plugin.Host.config["grid_digicam"] = rad_digicam.Checked.ToString();
             plugin.Host.config["grid_repeatservo"] = rad_repeatservo.Checked.ToString();
             plugin.Host.config["grid_breakstopstart"] = chk_stopstart.Checked.ToString();
+
+            // do set servo @emas
+            plugin.Host.config["grid_dosetservo"] = rad_do_set_servo.Checked.ToString();
+            plugin.Host.config["grid_dosetservo_no"] = num_setservono.Value.ToString();
+            plugin.Host.config["grid_dosetservo_PWML"] = num_setservolow.Value.ToString();
+            plugin.Host.config["grid_dosetservo_PWMH"] = num_setservohigh.Value.ToString();
 
             // Copter Settings
             plugin.Host.config["grid_copter_delay"] = NUM_copter_delay.Value.ToString();
@@ -1014,12 +1047,12 @@ namespace MissionPlanner.Grid
                 if (CHK_camdirection.Checked)
                 {
                     NUM_spacing.Value = (decimal)((1 - (overlap / 100.0f)) * viewheight);
-                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewwidth);
+//                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewwidth);     // @eams diabled
                 }
                 else
                 {
                     NUM_spacing.Value = (decimal)((1 - (overlap / 100.0f)) * viewwidth);
-                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewheight);
+//                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewheight);    // @eams disabled
                 }
                 NUM_spacing.ValueChanged += domainUpDown1_ValueChanged;
                 NUM_Distance.ValueChanged += domainUpDown1_ValueChanged;
@@ -1546,9 +1579,13 @@ namespace MissionPlanner.Grid
                     {
                         if (plugin.Host.cs.firmware == Firmwares.ArduCopter2)
                         {
+#if true    // @eams change
+                            var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.TAKEOFF, 20, 0, 0, 0, 0, 0,
+                                (int)NUM_altitude.Value, gridobject);
+#else
                             var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.TAKEOFF, 20, 0, 0, 0, 0, 0,
                                 (int) (30*CurrentState.multiplierdist), gridobject);
-
+#endif
                             wpsplitstart.Add(wpno);
                         }
                         else
@@ -1558,6 +1595,11 @@ namespace MissionPlanner.Grid
 
                             wpsplitstart.Add(wpno);
                         }
+                        // @eams add
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                            (float)num_setservono.Value,
+                            (float)num_setservohigh.Value, 0, 0, 0, 0, 0,
+                            gridobject);
                     }
 
                     if (CHK_usespeed.Checked)
@@ -1741,6 +1783,16 @@ namespace MissionPlanner.Grid
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
                                 plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
                         }
+                    }
+
+                    // @eams add
+                    if (deleteLastLAND)
+                    {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.RETURN_TO_LAUNCH, 0, 0, 0, 0, 0, 0, 0, gridobject);
+#if false
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, plugin.Host.cs.HomeLocation.Lng,
+                        plugin.Host.cs.HomeLocation.Lat, 0, gridobject);
+#endif
                     }
                 }
 

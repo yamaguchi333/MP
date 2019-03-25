@@ -1003,8 +1003,17 @@ namespace MissionPlanner
                 MenuDonate.Image = Program.Logo;
             }
 
-
-
+            // add menu visible settings for @eams
+            MenuDonate.Visible = false;
+            MenuTerminal.Visible = false;
+            MenuHelp.Visible = false;
+#if false
+            MenuInitConfig.Visible = false;
+            MenuConfigTune.Visible = false;
+            MenuSimulation.Visible = false;
+            MenuArduPilot.Visible = false;
+            toolStripConnectionControl.Visible = false;
+#endif
             Application.DoEvents();
 
             Comports.Add(comPort);
@@ -3435,6 +3444,7 @@ namespace MissionPlanner
                 MenuFlightPlanner_Click(null, null);
                 return true;
             }
+            /*
             if (keyData == Keys.F4)
             {
                 MenuTuning_Click(null, null);
@@ -3455,11 +3465,13 @@ namespace MissionPlanner
                 frm.Show();
                 return true;
             }
+            */
             /*if (keyData == (Keys.Control | Keys.S)) // screenshot
             {
                 ScreenShot();
                 return true;
             }*/
+            /*
             if (keyData == (Keys.Control | Keys.G)) // nmea out
             {
                 Form frm = new SerialOutputNMEA();
@@ -3521,6 +3533,7 @@ namespace MissionPlanner
                 CustomMessageBox.Show("Done MAV_ACTION_STORAGE_WRITE");
                 return true;
             }
+            */
             if (keyData == (Keys.Control | Keys.J))
             {
                 /*
@@ -4000,6 +4013,7 @@ namespace MissionPlanner
 
         private void MenuArduPilot_Click(object sender, EventArgs e)
         {
+            return; //@eams add
             try
             {
                 System.Diagnostics.Process.Start("http://ardupilot.org/?utm_source=Menu&utm_campaign=MP");
@@ -4086,6 +4100,86 @@ namespace MissionPlanner
                     });
                 }
             }
+        }
+
+        // @eams add
+        private void MenuStart_Click(object sender, EventArgs e)
+        {
+            // connect MUAV
+            if (!MainV2.comPort.BaseStream.IsOpen)
+            {
+                Connect();
+//                CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
+//                return;
+            }
+
+            // write mission to UAV
+            MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
+
+            // change mode STABILIZE
+            if (MainV2.comPort.MAV.cs.failsafe)
+            {
+                if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "Failsafe", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+            MainV2.comPort.setMode("Loiter");
+
+            // arm the MAV
+            try
+            {
+#if false
+                if (MainV2.comPort.MAV.cs.armed)
+                    if (CustomMessageBox.Show("Are you sure you want to Disarm?", "Disarm?", MessageBoxButtons.YesNo) !=
+                        (int)DialogResult.Yes)
+                        return;
+#endif
+                bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
+                if (ans == false)
+                    CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+            }
+
+            // Mission Start
+            try
+            {
+                ((ToolStripButton)sender).Enabled = false;
+
+                int param1 = 0;
+                int param3 = 1;
+
+                MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
+                    param1, 0, param3, 0, 0, 0, 0);
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+                ((ToolStripButton)sender).Enabled = true;
+        }
+
+        // @eams add
+        private void MenuReturn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((ToolStripButton)sender).Enabled = false;
+                MainV2.comPort.setMode("RTL");
+#if false
+                CurrentState cs = MainV2.comPort.MAV.cs;
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
+                    (float)(cs.HomeLocation.Lng), 0);
+#endif
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+            ((ToolStripButton)sender).Enabled = true;
         }
     }
 }

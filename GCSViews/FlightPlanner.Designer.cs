@@ -96,6 +96,9 @@ namespace MissionPlanner.GCSViews
             this.panelAction = new BSE.Windows.Forms.Panel();
             this.splitter2 = new BSE.Windows.Forms.Splitter();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.BUT_autoGrid = new MissionPlanner.Controls.MyButton();
+            this.BUT_clearMission = new MissionPlanner.Controls.MyButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.chk_grid = new System.Windows.Forms.CheckBox();
@@ -113,6 +116,7 @@ namespace MissionPlanner.GCSViews
             this.lbl_distance = new System.Windows.Forms.Label();
             this.MainMap = new MissionPlanner.Controls.myGMAP();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.autoGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteWPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertWpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,6 +191,9 @@ namespace MissionPlanner.GCSViews
             this.panelBASE = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.BUT_zoomIn = new MissionPlanner.Controls.MyButton();
+            this.BUT_zoomOut = new MissionPlanner.Controls.MyButton();
             this.Command = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Param1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Param2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -213,6 +220,7 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.SuspendLayout();
             this.panelAction.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -220,6 +228,7 @@ namespace MissionPlanner.GCSViews
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelBASE.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // Commands
@@ -562,6 +571,8 @@ namespace MissionPlanner.GCSViews
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.panel7);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
@@ -569,6 +580,27 @@ namespace MissionPlanner.GCSViews
             this.flowLayoutPanel1.Controls.Add(this.panel1);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.BUT_autoGrid);
+            this.panel6.Controls.Add(this.BUT_clearMission);
+            resources.ApplyResources(this.panel6, "panel6");
+            this.panel6.Name = "panel6";
+            // 
+            // BUT_autoGrid
+            // 
+            resources.ApplyResources(this.BUT_autoGrid, "BUT_autoGrid");
+            this.BUT_autoGrid.Name = "BUT_autoGrid";
+            this.BUT_autoGrid.UseVisualStyleBackColor = true;
+            this.BUT_autoGrid.Click += new System.EventHandler(this.surveyGridToolStripMenuItem_Click);
+            // 
+            // BUT_clearMission
+            // 
+            resources.ApplyResources(this.BUT_clearMission, "BUT_clearMission");
+            this.BUT_clearMission.Name = "BUT_clearMission";
+            this.BUT_clearMission.UseVisualStyleBackColor = true;
+            this.BUT_clearMission.Click += new System.EventHandler(this.clearMissionToolStripMenuItem_Click);
             // 
             // panel4
             // 
@@ -711,6 +743,7 @@ namespace MissionPlanner.GCSViews
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoGridToolStripMenuItem,
             this.deleteWPToolStripMenuItem,
             this.insertWpToolStripMenuItem,
             this.insertSplineWPToolStripMenuItem,
@@ -738,6 +771,12 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.contextMenuStrip1_Closed);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // autoGridToolStripMenuItem
+            // 
+            this.autoGridToolStripMenuItem.Name = "autoGridToolStripMenuItem";
+            resources.ApplyResources(this.autoGridToolStripMenuItem, "autoGridToolStripMenuItem");
+            this.autoGridToolStripMenuItem.Click += new System.EventHandler(this.surveyGridToolStripMenuItem_Click);
             // 
             // deleteWPToolStripMenuItem
             // 
@@ -1227,6 +1266,27 @@ namespace MissionPlanner.GCSViews
             this.timer1.Interval = 1200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.BUT_zoomIn);
+            this.panel7.Controls.Add(this.BUT_zoomOut);
+            resources.ApplyResources(this.panel7, "panel7");
+            this.panel7.Name = "panel7";
+            // 
+            // BUT_zoomIn
+            // 
+            resources.ApplyResources(this.BUT_zoomIn, "BUT_zoomIn");
+            this.BUT_zoomIn.Name = "BUT_zoomIn";
+            this.BUT_zoomIn.UseVisualStyleBackColor = true;
+            this.BUT_zoomIn.Click += new System.EventHandler(this.BUT_zoomIn_Click);
+            // 
+            // BUT_zoomOut
+            // 
+            resources.ApplyResources(this.BUT_zoomOut, "BUT_zoomOut");
+            this.BUT_zoomOut.Name = "BUT_zoomOut";
+            this.BUT_zoomOut.UseVisualStyleBackColor = true;
+            this.BUT_zoomOut.Click += new System.EventHandler(this.BUT_zoomOut_Click);
+            // 
             // Command
             // 
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(68)))), ((int)(((byte)(69)))));
@@ -1371,6 +1431,7 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.PerformLayout();
             this.panelAction.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -1381,6 +1442,7 @@ namespace MissionPlanner.GCSViews
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.panelBASE.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1534,5 +1596,12 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.DataGridViewTextBoxColumn Dist;
         private System.Windows.Forms.DataGridViewTextBoxColumn AZ;
         private System.Windows.Forms.DataGridViewTextBoxColumn TagData;
+        private System.Windows.Forms.ToolStripMenuItem autoGridToolStripMenuItem;
+        private System.Windows.Forms.Panel panel6;
+        private MyButton BUT_autoGrid;
+        private MyButton BUT_clearMission;
+        private System.Windows.Forms.Panel panel7;
+        private MyButton BUT_zoomIn;
+        private MyButton BUT_zoomOut;
     }
 }
