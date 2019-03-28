@@ -101,7 +101,7 @@ namespace MissionPlanner.GCSViews
         private void HardwareConfig_Load(object sender, EventArgs e)
         {
             ResourceManager rm = new ResourceManager(this.GetType());
-
+#if false   // @eams hidden
             if (MainV2.DisplayConfiguration.displayInstallFirmware)
             {
                 if (!Program.WindowsStoreApp)
@@ -118,15 +118,16 @@ namespace MissionPlanner.GCSViews
                 AddBackstageViewPage(typeof(ConfigWizard), rm.GetString("backstageViewPagewizard.Text"));
             }
 
+#endif
             var mand = AddBackstageViewPage(typeof(ConfigMandatory), rm.GetString("backstageViewPagemand.Text"), isConnected);
-
+#if false   // @eams hidden
             if (MainV2.DisplayConfiguration.displayFrameType)
             {
                 AddBackstageViewPage(typeof(ConfigTradHeli), rm.GetString("backstageViewPagetradheli.Text"), isHeli, mand);
                 AddBackstageViewPage(typeof(ConfigFrameType), rm.GetString("backstageViewPageframetype.Text"), isCopter && !isCopter35plus, mand);
                 AddBackstageViewPage(typeof(ConfigFrameClassType), rm.GetString("backstageViewPageframetype.Text"), isCopter && isCopter35plus, mand);
             }
-
+#endif
             if (MainV2.DisplayConfiguration.displayAccelCalibration)
             {
                 AddBackstageViewPage(typeof(ConfigAccelerometerCalibration), rm.GetString("backstageViewPageaccel.Text"), isConnected, mand);
@@ -137,9 +138,10 @@ namespace MissionPlanner.GCSViews
             if (MainV2.DisplayConfiguration.displayRadioCalibration)
             {
                 AddBackstageViewPage(typeof(ConfigRadioInput), rm.GetString("backstageViewPageradio.Text"), isConnected, mand);
-                AddBackstageViewPage(typeof(ConfigRadioOutput), "Servo Output", isConnected, mand);
+//                AddBackstageViewPage(typeof(ConfigRadioOutput), "Servo Output", isConnected, mand);   // @eams hidden
                 
             }
+#if false   // @eams hidden
             if (MainV2.DisplayConfiguration.displayEscCalibration)
             {
                 AddBackstageViewPage(typeof(ConfigESCCalibration), "ESC Calibration", isConnected, mand);
@@ -148,13 +150,15 @@ namespace MissionPlanner.GCSViews
             {
                 AddBackstageViewPage(typeof(ConfigFlightModes), rm.GetString("backstageViewPageflmode.Text"), isConnected, mand);
             }
+#endif
             if (MainV2.DisplayConfiguration.displayFailSafe)
             {
                 AddBackstageViewPage(typeof(ConfigFailSafe), rm.GetString("backstageViewPagefs.Text"), isConnected, mand);
             }
-
+#if false   // @eams hidden
             var opt = AddBackstageViewPage(typeof(ConfigOptional), rm.GetString("backstageViewPageopt.Text"));
             AddBackstageViewPage(typeof(ConfigGPSInject), "RTK/GPS Inject", true, opt);
+
             if (MainV2.DisplayConfiguration.displaySikRadio)
             {
                 AddBackstageViewPage(typeof(Sikradio), rm.GetString("backstageViewPageSikradio.Text"), true, opt);
@@ -222,7 +226,11 @@ namespace MissionPlanner.GCSViews
             }
 
             AddBackstageViewPage(typeof(ConfigFFT), "FFT Setup", isConnected, opt);
-
+#endif
+#if true    // @eams add
+            if (MainV2.comPort.MAV.cs.firmware == Firmwares.ArduCopter2)
+                AddBackstageViewPage(typeof(ConfigAC_Fence), Strings.GeoFence);
+#endif
             // remeber last page accessed
             foreach (BackstageViewPage page in backstageView.Pages)
             {
