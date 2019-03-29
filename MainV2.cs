@@ -422,6 +422,10 @@ namespace MissionPlanner
 
         public static bool TerminalTheming = true;
 
+        // @eams add
+        public static int servo7_func_normal;
+        public static int servo7_func_auto;
+
         public void updateLayout(object sender, EventArgs e)
         {
             MenuSimulation.Visible = DisplayConfiguration.displaySimulation;
@@ -1014,6 +1018,10 @@ namespace MissionPlanner
             MenuArduPilot.Visible = false;
             toolStripConnectionControl.Visible = false;
 #endif
+            // @eams add
+            servo7_func_normal = Settings.Instance.GetInt32("servo7_func_normal");
+            servo7_func_auto = Settings.Instance.GetInt32("servo7_func_auto");
+
             Application.DoEvents();
 
             Comports.Add(comPort);
@@ -1553,6 +1561,9 @@ namespace MissionPlanner
 
                 if (getparams)
                     comPort.getParamList();
+
+                // set SERVO7_FUNCTION normal @eams
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
 
                 _connectionControl.UpdateSysIDS();
 
@@ -4113,10 +4124,18 @@ namespace MissionPlanner
 //                return;
             }
 
+            // set SERVO7_FUNCTION normal @eams
+            if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+            {
+                CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                return;
+            }
+            MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
+
             // write mission to UAV
             MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
 
-            // change mode STABILIZE
+            // change mode STABILIZE/Loiter
             if (MainV2.comPort.MAV.cs.failsafe)
             {
                 if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "Failsafe", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
@@ -4159,7 +4178,7 @@ namespace MissionPlanner
             {
                 CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
             }
-                ((ToolStripButton)sender).Enabled = true;
+            ((ToolStripButton)sender).Enabled = true;
         }
 
         // @eams add
@@ -4168,7 +4187,49 @@ namespace MissionPlanner
             try
             {
                 ((ToolStripButton)sender).Enabled = false;
+
+                // set SERVO7_FUNCTION normal @eams
+                if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+                {
+                    CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                    return;
+                }
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+
+                // set mode RTL
+                ((ToolStripButton)sender).Enabled = false;
                 MainV2.comPort.setMode("RTL");
+#if false
+                CurrentState cs = MainV2.comPort.MAV.cs;
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
+                    (float)(cs.HomeLocation.Lng), 0);
+#endif
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+            ((ToolStripButton)sender).Enabled = true;
+        }
+
+        // @eams add
+        private void MenuStop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((ToolStripButton)sender).Enabled = false;
+
+                // set SERVO7_FUNCTION normal @eams
+                if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+                {
+                    CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                    return;
+                }
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+
+                // set mode RTL
+                ((ToolStripButton)sender).Enabled = false;
+                MainV2.comPort.setMode("Loiter");
 #if false
                 CurrentState cs = MainV2.comPort.MAV.cs;
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
