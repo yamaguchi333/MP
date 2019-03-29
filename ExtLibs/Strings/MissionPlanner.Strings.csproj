@@ -81,6 +81,9 @@
     <None Remove="Warnings\**" />
     <None Remove="Wizard\**" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Strings.ru-KZ.resx" />
+  </ItemGroup>
   
   <ItemGroup>
     <Compile Update="Strings.Designer.cs" />
@@ -103,7 +106,6 @@
     <EmbeddedResource Update="Strings.ja-JP.resx"><DependentUpon>Strings.cs</DependentUpon> </EmbeddedResource>
     <EmbeddedResource Update="Strings.ko-KR.resx"><DependentUpon>Strings.cs</DependentUpon> </EmbeddedResource>
     <EmbeddedResource Update="Strings.pt.resx"><DependentUpon>Strings.cs</DependentUpon> </EmbeddedResource>
-    <EmbeddedResource Update="Strings.ru-KZ.resx"><DependentUpon>Strings.cs</DependentUpon> </EmbeddedResource>
     <EmbeddedResource Update="Strings.tr.resx"><DependentUpon>Strings.cs</DependentUpon> </EmbeddedResource>
     <EmbeddedResource Update="Strings.zh-Hans.resx"><DependentUpon>Strings.cs</DependentUpon> </EmbeddedResource>
  
