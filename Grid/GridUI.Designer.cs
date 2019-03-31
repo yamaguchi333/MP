@@ -158,6 +158,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.TXT_angle = new System.Windows.Forms.TextBox();
+            this.BUT_angleminus = new System.Windows.Forms.Button();
+            this.BUT_angleplus = new System.Windows.Forms.Button();
+            this.label45 = new System.Windows.Forms.Label();
+            this.myButton1 = new MissionPlanner.Controls.MyButton();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -196,6 +201,11 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.myButton1);
+            this.groupBox5.Controls.Add(this.label45);
+            this.groupBox5.Controls.Add(this.TXT_angle);
+            this.groupBox5.Controls.Add(this.BUT_angleminus);
+            this.groupBox5.Controls.Add(this.BUT_angleplus);
             this.groupBox5.Controls.Add(this.lbl_minshutter);
             this.groupBox5.Controls.Add(this.label44);
             this.groupBox5.Controls.Add(this.lbl_gndelev);
@@ -1290,7 +1300,6 @@
             // 
             // map
             // 
-            resources.ApplyResources(this.map, "map");
             this.map.Bearing = 0F;
             this.map.CanDragMap = true;
             this.map.EmptyTileColor = System.Drawing.Color.Gray;
@@ -1298,6 +1307,7 @@
             this.map.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.map.HoldInvalidation = false;
             this.map.LevelsKeepInMemmory = 5;
+            resources.ApplyResources(this.map, "map");
             this.map.MarkersEnabled = true;
             this.map.MaxZoom = 19;
             this.map.MinZoom = 2;
@@ -1313,6 +1323,38 @@
             this.map.Zoom = 3D;
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
+            // 
+            // TXT_angle
+            // 
+            resources.ApplyResources(this.TXT_angle, "TXT_angle");
+            this.TXT_angle.Name = "TXT_angle";
+            this.TXT_angle.ReadOnly = true;
+            // 
+            // BUT_angleminus
+            // 
+            resources.ApplyResources(this.BUT_angleminus, "BUT_angleminus");
+            this.BUT_angleminus.Name = "BUT_angleminus";
+            this.BUT_angleminus.UseVisualStyleBackColor = true;
+            this.BUT_angleminus.Click += new System.EventHandler(this.BUT_angleminus_Click);
+            // 
+            // BUT_angleplus
+            // 
+            resources.ApplyResources(this.BUT_angleplus, "BUT_angleplus");
+            this.BUT_angleplus.Name = "BUT_angleplus";
+            this.BUT_angleplus.UseVisualStyleBackColor = true;
+            this.BUT_angleplus.Click += new System.EventHandler(this.BUT_angleplus_Click);
+            // 
+            // label45
+            // 
+            resources.ApplyResources(this.label45, "label45");
+            this.label45.Name = "label45";
+            // 
+            // myButton1
+            // 
+            resources.ApplyResources(this.myButton1, "myButton1");
+            this.myButton1.Name = "myButton1";
+            this.myButton1.UseVisualStyleBackColor = true;
+            this.myButton1.Click += new System.EventHandler(this.BUT_Accept_Click);
             // 
             // GridUI
             // 
@@ -1504,5 +1546,10 @@
         private System.Windows.Forms.CheckBox chk_test;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.NumericUpDown num_corridorwidth;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox TXT_angle;
+        private System.Windows.Forms.Button BUT_angleminus;
+        private System.Windows.Forms.Button BUT_angleplus;
+        private Controls.MyButton myButton1;
     }
 }

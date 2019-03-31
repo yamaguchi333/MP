@@ -101,6 +101,7 @@ namespace MissionPlanner.Grid
             // set and angle that is good
             NUM_angle.Value = (decimal) ((getAngleOfLongestSide(list) + 360)%360);
             TXT_headinghold.Text = (Math.Round(NUM_angle.Value)).ToString();
+            TXT_angle.Text = (Math.Round(NUM_angle.Value)).ToString();    // @eams add
 
             if (plugin.Host.cs.firmware == Firmwares.ArduPlane)
                 NUM_UpDownFlySpeed.Value = (decimal) (12*CurrentState.multiplierspeed);
@@ -158,7 +159,7 @@ namespace MissionPlanner.Grid
                 CHK_toandland.Checked = true;
             }
 
-            BUT_Accept_Click(this, null);   // @eams add
+//            BUT_Accept_Click(this, null);   // @eams add
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
@@ -254,6 +255,7 @@ namespace MissionPlanner.Grid
             CHK_copter_headinghold.Checked = griddata.copter_headinghold_chk;
             //TXT_headinghold.Text = griddata.copter_headinghold.ToString();    //@eams disabled
             TXT_headinghold.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
+            TXT_angle.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
 
             // Plane Settings
             NUM_Lane_Dist.Value = griddata.minlaneseparation;
@@ -365,6 +367,7 @@ namespace MissionPlanner.Grid
                 loadsetting("grid_copter_delay", NUM_copter_delay);
                 loadsetting("grid_copter_headinghold_chk", CHK_copter_headinghold);   //@eams enabled
                 TXT_headinghold.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
+                TXT_angle.Text = Decimal.Round(NUM_angle.Value).ToString();   //@eams add
 
                 // Plane Settings
                 loadsetting("grid_min_lane_separation", NUM_Lane_Dist);
@@ -570,7 +573,8 @@ namespace MissionPlanner.Grid
         }
 
         // Do Work
-        private async void domainUpDown1_ValueChanged(object sender, EventArgs e)
+//        private async void domainUpDown1_ValueChanged(object sender, EventArgs e)
+        private void domainUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (loading)
                 return;
@@ -592,7 +596,8 @@ namespace MissionPlanner.Grid
             }
             else
             {
-                grid = await Utilities.Grid.CreateGridAsync(list, CurrentState.fromDistDisplayUnit((double) NUM_altitude.Value),
+//                grid = await Utilities.Grid.CreateGridAsync(list, CurrentState.fromDistDisplayUnit((double) NUM_altitude.Value),
+                grid = Utilities.Grid.CreateGrid(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
                     (double) NUM_Distance.Value, (double) NUM_spacing.Value, (double) NUM_angle.Value,
                     (double) NUM_overshoot.Value, (double) NUM_overshoot2.Value,
                     (Utilities.Grid.StartPosition) Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
@@ -1609,6 +1614,16 @@ namespace MissionPlanner.Grid
                             gridobject);
                     }
 
+                    // @eams add startup delay
+                    int grid_startup_delay = Settings.Instance.GetInt32("grid_startup_delay");
+                    if (grid_startup_delay > 0)
+                    {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY,
+                            (float)grid_startup_delay, 0, 0, 0, 0, 0, 0,
+                            gridobject);
+
+                    }
+
                     int i = 0;
                     bool startedtrigdist = false;
                     PointLatLngAlt lastplla = PointLatLngAlt.Zero;
@@ -1870,6 +1885,42 @@ namespace MissionPlanner.Grid
         {
             // doCalc
             domainUpDown1_ValueChanged(sender, e);
+        }
+
+        private void BUT_angleplus_Click(object sender, EventArgs e)
+        {
+            int previous = (int)NUM_angle.Value;
+
+            if (previous + 1 > 359)
+            {
+//                TXT_headinghold.Text = (previous - 359).ToString();
+                TXT_angle.Text = (previous - 359).ToString();
+                NUM_angle.Value = (previous - 359);
+            }
+            else
+            {
+//                TXT_headinghold.Text = (previous + 1).ToString();
+                TXT_angle.Text = (previous + 1).ToString();
+                NUM_angle.Value = (previous + 1);
+            }
+        }
+
+        private void BUT_angleminus_Click(object sender, EventArgs e)
+        {
+            int previous = (int)NUM_angle.Value;
+
+            if (previous - 1 < 0)
+            {
+//                TXT_headinghold.Text = (previous + 359).ToString();
+                TXT_angle.Text = (previous + 359).ToString();
+                NUM_angle.Value = (previous + 359);
+            }
+            else
+            {
+//                TXT_headinghold.Text = (previous - 1).ToString();
+                TXT_angle.Text = (previous - 1).ToString();
+                NUM_angle.Value = (previous - 1);
+            }
         }
     }
 }
