@@ -2798,7 +2798,12 @@ namespace MissionPlanner
                         {
                             try
                             {
+                                bool old_armed = MAV.cs.armed;
                                 MAV.cs.UpdateCurrentSettings(null, false, port, MAV);
+                                if(MAV.cs.armed != old_armed && MAV.cs.armed == false)
+                                {
+                                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -4116,6 +4121,8 @@ namespace MissionPlanner
         // @eams add
         private void MenuStart_Click(object sender, EventArgs e)
         {
+            ((ToolStripButton)sender).Enabled = false;
+
             // connect MUAV
             if (!MainV2.comPort.BaseStream.IsOpen)
             {
@@ -4123,14 +4130,6 @@ namespace MissionPlanner
 //                CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
 //                return;
             }
-
-            // set SERVO7_FUNCTION normal @eams
-            if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
-            {
-                CustomMessageBox.Show("Your are not connected", Strings.ERROR);
-                return;
-            }
-            MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
 
             // write mission to UAV
             MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
@@ -4163,11 +4162,17 @@ namespace MissionPlanner
                 CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
             }
 
+            // set SERVO7_FUNCTION auto @eams
+            if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+            {
+                CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                return;
+            }
+            MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
+
             // Mission Start
             try
             {
-                ((ToolStripButton)sender).Enabled = false;
-
                 int param1 = 0;
                 int param3 = 1;
 

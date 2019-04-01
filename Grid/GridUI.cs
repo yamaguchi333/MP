@@ -1600,6 +1600,11 @@ namespace MissionPlanner.Grid
 
                             wpsplitstart.Add(wpno);
                         }
+#if false
+                        // @eams add set SERVO7_FUNCTION auto
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_PARAMETER,
+                            703, MainV2.servo7_func_auto, 0, 0, 0, 0, 0, gridobject);
+#endif
                         // @eams add
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                             (float)num_setservono.Value,
@@ -1772,6 +1777,11 @@ namespace MissionPlanner.Grid
                     }
 
                     // end
+#if false
+                    // @eams add set SERVO7_FUNCTION normal
+                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_PARAMETER,
+                        703, MainV2.servo7_func_normal, 0, 0, 0, 0, 0, gridobject);
+#endif
                     if (rad_trigdist.Checked)
                     {
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_CAM_TRIGG_DIST, 0, 0, 0, 0, 0, 0, 0, gridobject);
