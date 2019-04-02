@@ -4122,77 +4122,86 @@ namespace MissionPlanner
         private void MenuStart_Click(object sender, EventArgs e)
         {
             ((ToolStripButton)sender).Enabled = false;
-
-            // connect MUAV
-            if (!MainV2.comPort.BaseStream.IsOpen)
+            try
             {
-                Connect();
-//                CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
-//                return;
-            }
-
-            // write mission to UAV
-            MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
-
-            // change mode STABILIZE/Loiter
-            if (MainV2.comPort.MAV.cs.failsafe)
-            {
-                if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "Failsafe", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (CustomMessageBox.Show("自動散布を開始します。実行してもよろしいですか？", "Auto", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                 {
                     return;
                 }
-            }
-            MainV2.comPort.setMode("Loiter");
 
-            // arm the MAV
-            try
-            {
-#if false
+                // connect MUAV
+                if (!MainV2.comPort.BaseStream.IsOpen)
+                {
+                    Connect();
+//                    CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
+//                    return;
+                }
+
+                // write mission to UAV
+                MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
+
+                // change mode STABILIZE/Loiter
+                if (MainV2.comPort.MAV.cs.failsafe)
+                {
+                    if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "Failsafe", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+                MainV2.comPort.setMode("Loiter");
+
+                // arm the MAV
+                try
+                {
+#if false   //@eams
                 if (MainV2.comPort.MAV.cs.armed)
                     if (CustomMessageBox.Show("Are you sure you want to Disarm?", "Disarm?", MessageBoxButtons.YesNo) !=
                         (int)DialogResult.Yes)
                         return;
 #endif
-                bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
-                if (ans == false)
-                    CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
-            }
-            catch
-            {
-                CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
-            }
+                    bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
+                    if (ans == false)
+                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+                }
 
-            // set SERVO7_FUNCTION auto @eams
-            if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
-            {
-                CustomMessageBox.Show("Your are not connected", Strings.ERROR);
-                return;
-            }
-            MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
+                // set SERVO7_FUNCTION auto @eams
+                if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+                {
+                    CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                    return;
+                }
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
 
-            // Mission Start
-            try
-            {
-                int param1 = 0;
-                int param3 = 1;
+                // Mission Start
+                try
+                {
+                    int param1 = 0;
+                    int param3 = 1;
 
-                MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
-                    param1, 0, param3, 0, 0, 0, 0);
+                    MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
+                        param1, 0, param3, 0, 0, 0, 0);
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                }
             }
-            catch
+            finally
             {
-                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                ((ToolStripButton)sender).Enabled = true;
             }
-            ((ToolStripButton)sender).Enabled = true;
         }
 
         // @eams add
         private void MenuReturn_Click(object sender, EventArgs e)
         {
+            ((ToolStripButton)sender).Enabled = false;
             try
             {
-                ((ToolStripButton)sender).Enabled = false;
-
                 // set SERVO7_FUNCTION normal @eams
                 if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
                 {
@@ -4214,16 +4223,18 @@ namespace MissionPlanner
             {
                 CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
             }
-            ((ToolStripButton)sender).Enabled = true;
+            finally
+            {
+                ((ToolStripButton)sender).Enabled = true;
+            }
         }
 
         // @eams add
         private void MenuStop_Click(object sender, EventArgs e)
         {
+            ((ToolStripButton)sender).Enabled = false;
             try
             {
-                ((ToolStripButton)sender).Enabled = false;
-
                 // set SERVO7_FUNCTION normal @eams
                 if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
                 {
@@ -4245,7 +4256,10 @@ namespace MissionPlanner
             {
                 CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
             }
-            ((ToolStripButton)sender).Enabled = true;
+            finally
+            {
+                ((ToolStripButton)sender).Enabled = true;
+            }
         }
     }
 }
