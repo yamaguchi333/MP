@@ -1011,10 +1011,10 @@ namespace MissionPlanner
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
+            MenuConfigTune.Visible = false;     // for users
+            MenuSimulation.Visible = false;     // for users
 #if false
             MenuInitConfig.Visible = false;
-            MenuConfigTune.Visible = false;
-            MenuSimulation.Visible = false;
             MenuArduPilot.Visible = false;
             toolStripConnectionControl.Visible = false;
 #endif

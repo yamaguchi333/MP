@@ -161,7 +161,7 @@
     <value>130, 4</value>
   </data>
   <data name="cmb_Baud.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
+    <value>70, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmb_Baud.TabIndex" type="System.Int32, mscorlib">
@@ -183,7 +183,7 @@
     <value>201, 4</value>
   </data>
   <data name="cmb_ConnectionType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 21</value>
+    <value>26, 20</value>
   </data>
   <data name="cmb_ConnectionType.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -207,7 +207,7 @@
     <value>3, 4</value>
   </data>
   <data name="cmb_Connection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+    <value>121, 20</value>
   </data>
   <data name="cmb_Connection.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -231,7 +231,7 @@
     <value>3, 33</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
+    <value>38, 12</value>
   </data>
   <data name="linkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -258,10 +258,13 @@
     <value>49, 31</value>
   </data>
   <data name="cmb_sysid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 21</value>
+    <value>151, 20</value>
   </data>
   <data name="cmb_sysid.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="cmb_sysid.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;cmb_sysid.Name" xml:space="preserve">
     <value>cmb_sysid</value>
