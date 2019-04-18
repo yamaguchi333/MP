@@ -4124,7 +4124,7 @@ namespace MissionPlanner
             ((ToolStripButton)sender).Enabled = false;
             try
             {
-                if (CustomMessageBox.Show("自動散布を開始します。実行してもよろしいですか？", "Auto", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (CustomMessageBox.Show("自動飛行を開始します。実行してもよろしいですか？", "Auto", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                 {
                     return;
                 }

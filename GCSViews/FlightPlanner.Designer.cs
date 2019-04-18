@@ -116,21 +116,21 @@ namespace MissionPlanner.GCSViews
             this.panelAction = new BSE.Windows.Forms.Panel();
             this.splitter2 = new BSE.Windows.Forms.Splitter();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.BUT_zoomIn = new MissionPlanner.Controls.MyButton();
-            this.BUT_zoomOut = new MissionPlanner.Controls.MyButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.BUT_autoGrid = new MissionPlanner.Controls.MyButton();
             this.BUT_clearMission = new MissionPlanner.Controls.MyButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_wpfile = new System.Windows.Forms.Label();
+            this.BUT_loadwpfile = new MissionPlanner.Controls.MyButton();
+            this.BUT_saveWPFile = new MissionPlanner.Controls.MyButton();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.BUT_zoomIn = new MissionPlanner.Controls.MyButton();
+            this.BUT_zoomOut = new MissionPlanner.Controls.MyButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.chk_grid = new System.Windows.Forms.CheckBox();
             this.comboBoxMapType = new System.Windows.Forms.ComboBox();
             this.lnk_kml = new System.Windows.Forms.LinkLabel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_wpfile = new System.Windows.Forms.Label();
-            this.BUT_loadwpfile = new MissionPlanner.Controls.MyButton();
-            this.BUT_saveWPFile = new MissionPlanner.Controls.MyButton();
             this.panelMap = new System.Windows.Forms.Panel();
             this.lbl_homedist = new System.Windows.Forms.Label();
             this.lbl_prevdist = new System.Windows.Forms.Label();
@@ -220,11 +220,11 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.SuspendLayout();
             this.panelAction.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panelMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -708,27 +708,6 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.BUT_zoomIn);
-            this.panel7.Controls.Add(this.BUT_zoomOut);
-            resources.ApplyResources(this.panel7, "panel7");
-            this.panel7.Name = "panel7";
-            // 
-            // BUT_zoomIn
-            // 
-            resources.ApplyResources(this.BUT_zoomIn, "BUT_zoomIn");
-            this.BUT_zoomIn.Name = "BUT_zoomIn";
-            this.BUT_zoomIn.UseVisualStyleBackColor = true;
-            this.BUT_zoomIn.Click += new System.EventHandler(this.BUT_zoomIn_Click);
-            // 
-            // BUT_zoomOut
-            // 
-            resources.ApplyResources(this.BUT_zoomOut, "BUT_zoomOut");
-            this.BUT_zoomOut.Name = "BUT_zoomOut";
-            this.BUT_zoomOut.UseVisualStyleBackColor = true;
-            this.BUT_zoomOut.Click += new System.EventHandler(this.BUT_zoomOut_Click);
-            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.BUT_autoGrid);
@@ -749,6 +728,54 @@ namespace MissionPlanner.GCSViews
             this.BUT_clearMission.Name = "BUT_clearMission";
             this.BUT_clearMission.UseVisualStyleBackColor = true;
             this.BUT_clearMission.Click += new System.EventHandler(this.clearMissionToolStripMenuItem_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lbl_wpfile);
+            this.panel2.Controls.Add(this.BUT_loadwpfile);
+            this.panel2.Controls.Add(this.BUT_saveWPFile);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // lbl_wpfile
+            // 
+            resources.ApplyResources(this.lbl_wpfile, "lbl_wpfile");
+            this.lbl_wpfile.Name = "lbl_wpfile";
+            // 
+            // BUT_loadwpfile
+            // 
+            resources.ApplyResources(this.BUT_loadwpfile, "BUT_loadwpfile");
+            this.BUT_loadwpfile.Name = "BUT_loadwpfile";
+            this.BUT_loadwpfile.UseVisualStyleBackColor = true;
+            this.BUT_loadwpfile.Click += new System.EventHandler(this.BUT_loadwpfile_Click);
+            // 
+            // BUT_saveWPFile
+            // 
+            resources.ApplyResources(this.BUT_saveWPFile, "BUT_saveWPFile");
+            this.BUT_saveWPFile.Name = "BUT_saveWPFile";
+            this.BUT_saveWPFile.UseVisualStyleBackColor = true;
+            this.BUT_saveWPFile.Click += new System.EventHandler(this.BUT_saveWPFile_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.BUT_zoomIn);
+            this.panel7.Controls.Add(this.BUT_zoomOut);
+            resources.ApplyResources(this.panel7, "panel7");
+            this.panel7.Name = "panel7";
+            // 
+            // BUT_zoomIn
+            // 
+            resources.ApplyResources(this.BUT_zoomIn, "BUT_zoomIn");
+            this.BUT_zoomIn.Name = "BUT_zoomIn";
+            this.BUT_zoomIn.UseVisualStyleBackColor = true;
+            this.BUT_zoomIn.Click += new System.EventHandler(this.BUT_zoomIn_Click);
+            // 
+            // BUT_zoomOut
+            // 
+            resources.ApplyResources(this.BUT_zoomOut, "BUT_zoomOut");
+            this.BUT_zoomOut.Name = "BUT_zoomOut";
+            this.BUT_zoomOut.UseVisualStyleBackColor = true;
+            this.BUT_zoomOut.Click += new System.EventHandler(this.BUT_zoomOut_Click);
             // 
             // panel4
             // 
@@ -786,33 +813,6 @@ namespace MissionPlanner.GCSViews
             this.lnk_kml.Name = "lnk_kml";
             this.lnk_kml.TabStop = true;
             this.lnk_kml.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_kml_LinkClicked);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lbl_wpfile);
-            this.panel2.Controls.Add(this.BUT_loadwpfile);
-            this.panel2.Controls.Add(this.BUT_saveWPFile);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // lbl_wpfile
-            // 
-            resources.ApplyResources(this.lbl_wpfile, "lbl_wpfile");
-            this.lbl_wpfile.Name = "lbl_wpfile";
-            // 
-            // BUT_loadwpfile
-            // 
-            resources.ApplyResources(this.BUT_loadwpfile, "BUT_loadwpfile");
-            this.BUT_loadwpfile.Name = "BUT_loadwpfile";
-            this.BUT_loadwpfile.UseVisualStyleBackColor = true;
-            this.BUT_loadwpfile.Click += new System.EventHandler(this.BUT_loadwpfile_Click);
-            // 
-            // BUT_saveWPFile
-            // 
-            resources.ApplyResources(this.BUT_saveWPFile, "BUT_saveWPFile");
-            this.BUT_saveWPFile.Name = "BUT_saveWPFile";
-            this.BUT_saveWPFile.UseVisualStyleBackColor = true;
-            this.BUT_saveWPFile.Click += new System.EventHandler(this.BUT_saveWPFile_Click);
             // 
             // panelMap
             // 
@@ -1431,13 +1431,13 @@ namespace MissionPlanner.GCSViews
             this.panelWaypoints.PerformLayout();
             this.panelAction.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel7.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panelMap.ResumeLayout(false);
             this.panelMap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();

@@ -193,15 +193,15 @@
     <value>強制帰還</value>
   </data>
   <data name="MenuStart.Text" xml:space="preserve">
-    <value>散布開始</value>
+    <value>自動飛行開始</value>
   </data>
   <data name="MenuStart.ToolTipText" xml:space="preserve">
-    <value>散布開始</value>
+    <value>自動飛行開始</value>
   </data>
   <data name="MenuStop.Text" xml:space="preserve">
-    <value>散布停止</value>
+    <value>自動飛行停止</value>
   </data>
   <data name="MenuStop.ToolTipText" xml:space="preserve">
-    <value>散布停止</value>
+    <value>自動飛行停止</value>
   </data>
 </root>
