@@ -152,7 +152,8 @@ namespace MissionPlanner.GCSViews
         /// <param name="lat"></param>
         /// <param name="lng"></param>
         /// <param name="alt"></param>
-        public void setfromMap(double lat, double lng, int alt, double p1 = 0)
+//        public void setfromMap(double lat, double lng, int alt, double p1 = 0)
+        public void setfromMap(double lat, double lng, double alt, double p1 = 0)   // @eams change
         {
             if (selectedrow > Commands.RowCount)
             {
@@ -5646,8 +5647,11 @@ namespace MissionPlanner.GCSViews
             {
                 // add delay if supplied
                 Commands.Rows[rowIndex].Cells[Param1.Index].Value = p1;
-
+#if true    // @eams change
+                setfromMap(y, x, z, Math.Round(p1, 1));
+#else
                 setfromMap(y, x, (int)z, Math.Round(p1, 1));
+#endif
             }
             else if (cmd == MAVLink.MAV_CMD.LOITER_UNLIM)
             {
