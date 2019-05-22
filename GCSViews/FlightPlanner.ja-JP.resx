@@ -214,7 +214,8 @@
     <value>DO_SET_ROI</value>
   </data>
   <data name="BUT_saveWPFile.Text" xml:space="preserve">
-    <value>WPファイルの保存</value>
+    <value>ルート
+保存</value>
   </data>
   <data name="dataGridViewImageColumn1.HeaderText" xml:space="preserve">
     <value>上</value>
@@ -226,7 +227,8 @@
     <value>ホームロケーション</value>
   </data>
   <data name="BUT_loadwpfile.Text" xml:space="preserve">
-    <value>WPファイル読込</value>
+    <value>ルート
+読込み</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>ロイター半径</value>

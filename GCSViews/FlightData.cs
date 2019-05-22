@@ -1014,6 +1014,91 @@ namespace MissionPlanner.GCSViews
 
                 try
                 {
+                    // @eams update mode display
+                    string mode_jp = "";
+                    switch (MainV2.comPort.MAV.cs.mode.ToUpper())
+                    {
+                        case "LOITER":
+                            mode_jp = "GPSモード";
+                            break;
+                        case "ALTHOLD":
+                            mode_jp = "高度維持モード";
+                            break;
+                        case "STABILIZE":
+                            mode_jp = "マニュアルモード";
+                            break;
+                        case "AUTO":
+                            mode_jp = "自動飛行モード";
+                            break;
+                        case "ZIGZAG":
+                            mode_jp = "2点間飛行モード";
+                            break;
+                        case "RTL":
+                            mode_jp = "帰還モード";
+                            break;
+                        default:
+                            mode_jp = "";
+                            break;
+                    }
+                    if (labelMode.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() => labelMode.Text = mode_jp));
+                    }
+                    else
+                    {
+                        labelMode.Text = mode_jp;
+                    }
+
+                    // @eams update arming display
+                    if (labelArm.InvokeRequired)
+                    {
+                        if (MainV2.comPort.MAV.cs.armed)
+                        {
+                            Invoke((MethodInvoker)(() => labelArm.Text = "ARMED"));
+                        }
+                        else
+                        {
+                            Invoke((MethodInvoker)(() => labelArm.Text = "DISARMED"));
+                        }
+                    }
+                    else
+                    {
+                        labelMode.Text = MainV2.comPort.MAV.cs.mode;
+                    }
+
+                    // @eams update message high display
+                    string err_mes = "";
+                    if( MainV2.comPort.MAV.cs.messageHigh != null)
+                    {
+                        if (!MainV2.comPort.MAV.cs.messageHigh.StartsWith("PX4v2 "))
+                        {
+                            err_mes = MainV2.comPort.MAV.cs.messageHigh;
+                        }
+                    }
+                    if (labelError.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() => labelError.Text = err_mes));
+                    }
+                    else
+                    {
+                        labelError.Text = err_mes;
+                    }
+
+                    // @eams update message display
+                    string mes = "";
+                    if (MainV2.comPort.MAV.cs.message != null)
+                    {
+                        mes = MainV2.comPort.MAV.cs.message;
+                    }
+                    if (labelMessage.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() => labelMessage.Text = mes));
+                    }
+                    else
+                    {
+                        labelMessage.Text = err_mes;
+                    }
+
                     CheckAndBindPreFlightData();
                     //Console.WriteLine(DateTime.Now.Millisecond);
                     //int fixme;
@@ -3521,8 +3606,13 @@ namespace MissionPlanner.GCSViews
         {
             Console.WriteLine("HUD resize " + hud1.Width + " " + hud1.Height); // +"\n"+ System.Environment.StackTrace);
 
-            if (hud1.Parent == this.SubMainLeft.Panel1)
+            if (hud1.Parent == this.SubMainLeft.Panel1) //@eams changed
+            {
                 SubMainLeft.SplitterDistance = hud1.Height;
+//                SubMainLeft.Refresh();
+                tableLayoutPanelMessage.Height = hud1.Height;
+                tableLayoutPanelMessage.Width = hud1.Width;
+            }
         }
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4692,6 +4782,22 @@ namespace MissionPlanner.GCSViews
             }
 
         }
+
+        private void ButtonStart_Click(object sender, EventArgs e)
+        {
+            MainV2.instance.MenuStartClick(sender);
+        }
+
+        private void ButtonStop_Click(object sender, EventArgs e)
+        {
+            MainV2.instance.MenuStopClick(sender);
+        }
+
+        private void ButtonReturn_Click(object sender, EventArgs e)
+        {
+            MainV2.instance.MenuReturnClick(sender);
+        }
+
     }
 }
  

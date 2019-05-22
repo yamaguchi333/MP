@@ -12,6 +12,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainH = new System.Windows.Forms.SplitContainer();
             this.SubMainLeft = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanelMessage = new System.Windows.Forms.TableLayoutPanel();
+            this.labelMessage = new System.Windows.Forms.Label();
+            this.labelError = new System.Windows.Forms.Label();
+            this.labelArm = new System.Windows.Forms.Label();
+            this.labelMode = new System.Windows.Forms.Label();
             this.hud1 = new MissionPlanner.Controls.HUD();
             this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlactions = new System.Windows.Forms.TabControl();
@@ -109,6 +114,11 @@
             this.trackBarPitch = new System.Windows.Forms.TrackBar();
             this.TXT_gimbalPitchPos = new System.Windows.Forms.TextBox();
             this.tableMap = new System.Windows.Forms.TableLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ButtonStart = new System.Windows.Forms.Button();
+            this.ButtonStop = new System.Windows.Forms.Button();
+            this.ButtonReturn = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.zg1 = new ZedGraph.ZedGraphControl();
             this.contextMenuStripMap = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -191,6 +201,7 @@
             this.SubMainLeft.Panel1.SuspendLayout();
             this.SubMainLeft.Panel2.SuspendLayout();
             this.SubMainLeft.SuspendLayout();
+            this.tableLayoutPanelMessage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             this.tabControlactions.SuspendLayout();
             this.tabQuick.SuspendLayout();
@@ -220,6 +231,7 @@
             this.groupBoxPitch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPitch)).BeginInit();
             this.tableMap.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -257,11 +269,54 @@
             // 
             // SubMainLeft.Panel1
             // 
+            this.SubMainLeft.Panel1.Controls.Add(this.tableLayoutPanelMessage);
             this.SubMainLeft.Panel1.Controls.Add(this.hud1);
             // 
             // SubMainLeft.Panel2
             // 
             this.SubMainLeft.Panel2.Controls.Add(this.tabControlactions);
+            // 
+            // tableLayoutPanelMessage
+            // 
+            resources.ApplyResources(this.tableLayoutPanelMessage, "tableLayoutPanelMessage");
+            this.tableLayoutPanelMessage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tableLayoutPanelMessage.Controls.Add(this.labelMessage, 0, 3);
+            this.tableLayoutPanelMessage.Controls.Add(this.labelError, 0, 2);
+            this.tableLayoutPanelMessage.Controls.Add(this.labelArm, 0, 1);
+            this.tableLayoutPanelMessage.Controls.Add(this.labelMode, 0, 0);
+            this.tableLayoutPanelMessage.Name = "tableLayoutPanelMessage";
+            // 
+            // labelMessage
+            // 
+            this.labelMessage.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelMessage, "labelMessage");
+            this.labelMessage.ForeColor = System.Drawing.Color.Black;
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Tag = "custom";
+            // 
+            // labelError
+            // 
+            this.labelError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            resources.ApplyResources(this.labelError, "labelError");
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Name = "labelError";
+            this.labelError.Tag = "custom";
+            // 
+            // labelArm
+            // 
+            this.labelArm.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelArm, "labelArm");
+            this.labelArm.ForeColor = System.Drawing.Color.Red;
+            this.labelArm.Name = "labelArm";
+            this.labelArm.Tag = "custom";
+            // 
+            // labelMode
+            // 
+            this.labelMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            resources.ApplyResources(this.labelMode, "labelMode");
+            this.labelMode.ForeColor = System.Drawing.Color.Black;
+            this.labelMode.Name = "labelMode";
+            this.labelMode.Tag = "custom";
             // 
             // hud1
             // 
@@ -271,6 +326,7 @@
             this.hud1.AOA = 0F;
             this.hud1.BackColor = System.Drawing.Color.Black;
             this.hud1.batterylevel = 0F;
+            this.hud1.batteryon = false;
             this.hud1.batteryremaining = 0F;
             this.hud1.bgimage = null;
             this.hud1.connected = false;
@@ -318,7 +374,16 @@
             this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("SSA", this.bindingSourceHud, "SSA", true));
             this.hud1.DataBindings.Add(new System.Windows.Forms.Binding("critAOA", this.bindingSourceHud, "crit_AOA", true));
             this.hud1.datetime = new System.DateTime(((long)(0)));
+            this.hud1.displayalt = false;
             this.hud1.displayAOASSA = false;
+            this.hud1.displayconninfo = false;
+            this.hud1.displayekf = false;
+            this.hud1.displaygps = false;
+            this.hud1.displayheading = false;
+            this.hud1.displayrollpitch = false;
+            this.hud1.displayspeed = false;
+            this.hud1.displayvibe = false;
+            this.hud1.displayxtrack = false;
             this.hud1.disttowp = 0F;
             this.hud1.distunit = null;
             resources.ApplyResources(this.hud1, "hud1");
@@ -1697,9 +1762,57 @@
             // tableMap
             // 
             resources.ApplyResources(this.tableMap, "tableMap");
-            this.tableMap.Controls.Add(this.splitContainer1, 0, 0);
-            this.tableMap.Controls.Add(this.panel1, 0, 1);
+            this.tableMap.Controls.Add(this.panel3, 0, 0);
+            this.tableMap.Controls.Add(this.splitContainer1, 0, 1);
+            this.tableMap.Controls.Add(this.panel1, 0, 2);
             this.tableMap.Name = "tableMap";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.ButtonStart);
+            this.panel3.Controls.Add(this.ButtonStop);
+            this.panel3.Controls.Add(this.ButtonReturn);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.BackColor = System.Drawing.Color.Green;
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label7.Name = "label7";
+            this.label7.Tag = "custom";
+            // 
+            // ButtonStart
+            // 
+            this.ButtonStart.BackColor = System.Drawing.Color.MediumSeaGreen;
+            resources.ApplyResources(this.ButtonStart, "ButtonStart");
+            this.ButtonStart.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ButtonStart.Name = "ButtonStart";
+            this.toolTip1.SetToolTip(this.ButtonStart, resources.GetString("ButtonStart.ToolTip"));
+            this.ButtonStart.UseVisualStyleBackColor = false;
+            this.ButtonStart.Click += new System.EventHandler(this.ButtonStart_Click);
+            // 
+            // ButtonStop
+            // 
+            this.ButtonStop.BackColor = System.Drawing.Color.DodgerBlue;
+            resources.ApplyResources(this.ButtonStop, "ButtonStop");
+            this.ButtonStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ButtonStop.Name = "ButtonStop";
+            this.toolTip1.SetToolTip(this.ButtonStop, resources.GetString("ButtonStop.ToolTip"));
+            this.ButtonStop.UseVisualStyleBackColor = false;
+            this.ButtonStop.Click += new System.EventHandler(this.ButtonStop_Click);
+            // 
+            // ButtonReturn
+            // 
+            this.ButtonReturn.BackColor = System.Drawing.Color.Orchid;
+            resources.ApplyResources(this.ButtonReturn, "ButtonReturn");
+            this.ButtonReturn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ButtonReturn.Name = "ButtonReturn";
+            this.toolTip1.SetToolTip(this.ButtonReturn, resources.GetString("ButtonReturn.ToolTip"));
+            this.ButtonReturn.UseVisualStyleBackColor = false;
+            this.ButtonReturn.Click += new System.EventHandler(this.ButtonReturn_Click);
             // 
             // splitContainer1
             // 
@@ -2013,9 +2126,9 @@
             this.coords1.DataBindings.Add(new System.Windows.Forms.Binding("Alt", this.bindingSource1, "alt", true));
             this.coords1.DataBindings.Add(new System.Windows.Forms.Binding("Lat", this.bindingSource1, "lat", true));
             this.coords1.DataBindings.Add(new System.Windows.Forms.Binding("Lng", this.bindingSource1, "lng", true));
+            resources.ApplyResources(this.coords1, "coords1");
             this.coords1.Lat = 0D;
             this.coords1.Lng = 0D;
-            resources.ApplyResources(this.coords1, "coords1");
             this.coords1.Name = "coords1";
             this.coords1.Vertical = false;
             // 
@@ -2358,9 +2471,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.MainH)).EndInit();
             this.MainH.ResumeLayout(false);
             this.SubMainLeft.Panel1.ResumeLayout(false);
+            this.SubMainLeft.Panel1.PerformLayout();
             this.SubMainLeft.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SubMainLeft)).EndInit();
             this.SubMainLeft.ResumeLayout(false);
+            this.tableLayoutPanelMessage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
             this.tabControlactions.ResumeLayout(false);
             this.tabQuick.ResumeLayout(false);
@@ -2397,6 +2512,7 @@
             this.groupBoxPitch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPitch)).EndInit();
             this.tableMap.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -2591,6 +2707,15 @@
         private System.Windows.Forms.ToolStripMenuItem setHomeHereToolStripMenuItem1;
         private Controls.MyButton BUT_zoomOut;
         private Controls.MyButton BUT_zoomIn;
-
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button ButtonStart;
+        private System.Windows.Forms.Button ButtonStop;
+        private System.Windows.Forms.Button ButtonReturn;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMessage;
+        private System.Windows.Forms.Label labelMessage;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Label labelArm;
+        private System.Windows.Forms.Label labelMode;
     }
 }

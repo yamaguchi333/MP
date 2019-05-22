@@ -1012,10 +1012,13 @@ namespace MissionPlanner
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
             MenuConfigTune.Visible = false;     // for users
-            MenuSimulation.Visible = false;     // for users
+            MenuStart.Visible = false;
+            MenuStop.Visible = false;
+            MenuReturn.Visible = false;
 #if false
             MenuInitConfig.Visible = false;
             MenuArduPilot.Visible = false;
+            MenuSimulation.Visible = false;
             toolStripConnectionControl.Visible = false;
 #endif
             // @eams add
@@ -4121,10 +4124,23 @@ namespace MissionPlanner
         // @eams add
         private void MenuStart_Click(object sender, EventArgs e)
         {
-            ((ToolStripButton)sender).Enabled = false;
+            MenuStartClick(sender);
+        }
+
+        public void MenuStartClick(object sender)
+        {
+            Type sender_type = sender.GetType();
+            if (sender_type.Equals(typeof(ToolStripButton)))
+            {
+                ((ToolStripButton)sender).Enabled = false;
+            }
+            else if (sender_type.Equals(typeof(Button)))
+            {
+                ((Button)sender).Enabled = false;
+            }
             try
             {
-                if (CustomMessageBox.Show("自動飛行を開始します。実行してもよろしいですか？", "Auto", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (CustomMessageBox.Show("機体に接続しミッションを書き込んでもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                 {
                     return;
                 }
@@ -4143,12 +4159,20 @@ namespace MissionPlanner
                 // change mode STABILIZE/Loiter
                 if (MainV2.comPort.MAV.cs.failsafe)
                 {
-                    if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "Failsafe", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                    if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                     {
                         return;
                     }
                 }
                 MainV2.comPort.setMode("Loiter");
+
+                // force redraw map
+                GCSViews.FlightData.mymap.Refresh();
+
+                if (CustomMessageBox.Show("自動飛行を開始します。離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                {
+                    return;
+                }
 
                 // arm the MAV
                 try
@@ -4192,16 +4216,42 @@ namespace MissionPlanner
             }
             finally
             {
-                ((ToolStripButton)sender).Enabled = true;
+                if (sender_type.Equals(typeof(ToolStripButton)))
+                {
+                    ((ToolStripButton)sender).Enabled = true;
+                }
+                else if (sender_type.Equals(typeof(Button)))
+                {
+                    ((Button)sender).Enabled = true;
+                }
             }
         }
 
         // @eams add
         private void MenuReturn_Click(object sender, EventArgs e)
         {
-            ((ToolStripButton)sender).Enabled = false;
+            MenuReturnClick(sender);
+        }
+
+        public void MenuReturnClick(object sender)
+        {
+            Type sender_type = sender.GetType();
+            if (sender_type.Equals(typeof(ToolStripButton)))
+            {
+                ((ToolStripButton)sender).Enabled = false;
+            }
+            else if (sender_type.Equals(typeof(Button)))
+            {
+                ((Button)sender).Enabled = false;
+            }
+
             try
             {
+                if (CustomMessageBox.Show("強制帰還してもよろしいですか？", "強制帰還", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                {
+                    return;
+                }
+
                 // set SERVO7_FUNCTION normal @eams
                 if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
                 {
@@ -4211,7 +4261,6 @@ namespace MissionPlanner
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
 
                 // set mode RTL
-                ((ToolStripButton)sender).Enabled = false;
                 MainV2.comPort.setMode("RTL");
 #if false
                 CurrentState cs = MainV2.comPort.MAV.cs;
@@ -4225,14 +4274,35 @@ namespace MissionPlanner
             }
             finally
             {
-                ((ToolStripButton)sender).Enabled = true;
+                if (sender_type.Equals(typeof(ToolStripButton)))
+                {
+                    ((ToolStripButton)sender).Enabled = true;
+                }
+                else if (sender_type.Equals(typeof(Button)))
+                {
+                    ((Button)sender).Enabled = true;
+                }
             }
         }
 
         // @eams add
         private void MenuStop_Click(object sender, EventArgs e)
         {
-            ((ToolStripButton)sender).Enabled = false;
+            MenuStopClick(sender);
+        }
+
+        public void MenuStopClick(object sender)
+        {
+            Type sender_type = sender.GetType();
+            if (sender_type.Equals(typeof(ToolStripButton)))
+            {
+                ((ToolStripButton)sender).Enabled = false;
+            }
+            else if (sender_type.Equals(typeof(Button)))
+            {
+                ((Button)sender).Enabled = false;
+            }
+
             try
             {
                 // set SERVO7_FUNCTION normal @eams
@@ -4244,7 +4314,6 @@ namespace MissionPlanner
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
 
                 // set mode RTL
-                ((ToolStripButton)sender).Enabled = false;
                 MainV2.comPort.setMode("Loiter");
 #if false
                 CurrentState cs = MainV2.comPort.MAV.cs;
@@ -4258,7 +4327,14 @@ namespace MissionPlanner
             }
             finally
             {
-                ((ToolStripButton)sender).Enabled = true;
+                if (sender_type.Equals(typeof(ToolStripButton)))
+                {
+                    ((ToolStripButton)sender).Enabled = true;
+                }
+                else if (sender_type.Equals(typeof(Button)))
+                {
+                    ((Button)sender).Enabled = true;
+                }
             }
         }
     }

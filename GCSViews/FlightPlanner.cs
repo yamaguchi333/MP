@@ -936,11 +936,18 @@ namespace MissionPlanner.GCSViews
 
             writeKML();
 
+#if false
             // switch the action and wp table
             if (Settings.Instance["FP_docking"] == "Bottom")
             {
                 switchDockingToolStripMenuItem_Click(null, null);
             }
+#endif
+            // seto the action and wp table @eams add
+            panelAction.Dock = DockStyle.Left;
+//            panelAction.Height = 120;
+            panelWaypoints.Dock = DockStyle.Right;
+            panelWaypoints.Width = Width / 2;
 
             panelWaypoints.Expand = false;  // @eams add
 
