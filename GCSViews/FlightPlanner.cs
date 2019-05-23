@@ -7117,5 +7117,21 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
             center.Position = MainMap.Position;
         }
+
+        // @eams add
+        private void label4_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.MAV.cs.lat != 0)
+            {
+                TXT_homealt.Text = (MainV2.comPort.MAV.cs.altasl).ToString("0");
+                TXT_homelat.Text = MainV2.comPort.MAV.cs.lat.ToString();
+                TXT_homelng.Text = MainV2.comPort.MAV.cs.lng.ToString();
+            }
+            else
+            {
+                CustomMessageBox.Show(
+                    "If you're at the field, connect to your APM and wait for GPS lock. Then click 'Home Location' link to set home to your location");
+            }
+        }
     }
 }

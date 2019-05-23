@@ -1052,12 +1052,15 @@ mc:Ignorable=""d""
                 }
                 else if (ctl.GetType() == typeof (LinkLabel))
                 {
-                    ctl.BackColor = BGColor;
-                    ctl.ForeColor = TextColor;
-                    LinkLabel LNK = (LinkLabel) ctl;
-                    LNK.ActiveLinkColor = TextColor;
-                    LNK.LinkColor = TextColor;
-                    LNK.VisitedLinkColor = TextColor;
+                    if (!(ctl.Tag is string && (string)ctl.Tag == "custom"))    // @eams changed
+                    {
+                        ctl.BackColor = BGColor;
+                        ctl.ForeColor = TextColor;
+                        LinkLabel LNK = (LinkLabel)ctl;
+                        LNK.ActiveLinkColor = TextColor;
+                        LNK.LinkColor = TextColor;
+                        LNK.VisitedLinkColor = TextColor;
+                    }
                 }
                 else if (ctl.GetType() == typeof (BackstageView))
                 {

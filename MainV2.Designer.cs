@@ -46,6 +46,7 @@ namespace MissionPlanner
             this.MenuHelp = new System.Windows.Forms.ToolStripButton();
             this.MenuDonate = new System.Windows.Forms.ToolStripButton();
             this.MenuStart = new System.Windows.Forms.ToolStripButton();
+            this.MenuStop = new System.Windows.Forms.ToolStripButton();
             this.MenuReturn = new System.Windows.Forms.ToolStripButton();
             this.MenuConnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripConnectionControl = new MissionPlanner.Controls.ToolStripConnectionControl();
@@ -58,7 +59,7 @@ namespace MissionPlanner
             this.connectionListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new MissionPlanner.Controls.MyButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.MenuStop = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTextBoxCom = new System.Windows.Forms.ToolStripTextBox();
             this.MainMenu.SuspendLayout();
             this.CTX_mainmenu.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -83,6 +84,7 @@ namespace MissionPlanner
             this.MenuStop,
             this.MenuReturn,
             this.MenuConnect,
+            this.toolStripTextBoxCom,
             this.toolStripConnectionControl,
             this.MenuArduPilot});
             this.MainMenu.Name = "MainMenu";
@@ -174,6 +176,17 @@ namespace MissionPlanner
             this.MenuStart.Name = "MenuStart";
             this.MenuStart.Padding = new System.Windows.Forms.Padding(10, 0, 0, 10);
             this.MenuStart.Click += new System.EventHandler(this.MenuStart_Click);
+            // 
+            // MenuStop
+            // 
+            this.MenuStop.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.MenuStop.BackColor = System.Drawing.Color.RosyBrown;
+            resources.ApplyResources(this.MenuStop, "MenuStop");
+            this.MenuStop.ForeColor = System.Drawing.Color.White;
+            this.MenuStop.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuStop.Name = "MenuStop";
+            this.MenuStop.Padding = new System.Windows.Forms.Padding(10, 0, 0, 10);
+            this.MenuStop.Click += new System.EventHandler(this.MenuStop_Click);
             // 
             // MenuReturn
             // 
@@ -278,16 +291,13 @@ namespace MissionPlanner
             this.panel1.Name = "panel1";
             this.panel1.MouseLeave += new System.EventHandler(this.MainMenu_MouseLeave);
             // 
-            // MenuStop
+            // toolStripTextBoxCom
             // 
-            this.MenuStop.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.MenuStop.BackColor = System.Drawing.Color.RosyBrown;
-            resources.ApplyResources(this.MenuStop, "MenuStop");
-            this.MenuStop.ForeColor = System.Drawing.Color.White;
-            this.MenuStop.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuStop.Name = "MenuStop";
-            this.MenuStop.Padding = new System.Windows.Forms.Padding(10, 0, 0, 10);
-            this.MenuStop.Click += new System.EventHandler(this.MenuStop_Click);
+            this.toolStripTextBoxCom.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            resources.ApplyResources(this.toolStripTextBoxCom, "toolStripTextBoxCom");
+            this.toolStripTextBoxCom.BackColor = System.Drawing.Color.Red;
+            this.toolStripTextBoxCom.Name = "toolStripTextBoxCom";
+            this.toolStripTextBoxCom.ReadOnly = true;
             // 
             // MainV2
             // 
@@ -335,5 +345,6 @@ namespace MissionPlanner
         public System.Windows.Forms.ToolStripButton MenuStart;
         public System.Windows.Forms.ToolStripButton MenuReturn;
         public System.Windows.Forms.ToolStripButton MenuStop;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxCom;
     }
 }

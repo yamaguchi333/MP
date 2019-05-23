@@ -699,6 +699,18 @@
   <data name="MenuConnect.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
+  <data name="toolStripTextBoxCom.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripTextBoxCom.Font" type="System.Drawing.Font, System.Drawing">
+    <value>メイリオ, 11.25pt</value>
+  </data>
+  <data name="toolStripTextBoxCom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 30</value>
+  </data>
+  <data name="toolStripTextBoxCom.Text" xml:space="preserve">
+    <value>COM</value>
+  </data>
   <data name="toolStripConnectionControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 55</value>
   </data>
@@ -2571,6 +2583,12 @@
   <data name="&gt;&gt;MenuStart.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;MenuStop.Name" xml:space="preserve">
+    <value>MenuStop</value>
+  </data>
+  <data name="&gt;&gt;MenuStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;MenuReturn.Name" xml:space="preserve">
     <value>MenuReturn</value>
   </data>
@@ -2625,11 +2643,11 @@
   <data name="&gt;&gt;connectionListToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MenuStop.Name" xml:space="preserve">
-    <value>MenuStop</value>
+  <data name="&gt;&gt;toolStripTextBoxCom.Name" xml:space="preserve">
+    <value>toolStripTextBoxCom</value>
   </data>
-  <data name="&gt;&gt;MenuStop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripTextBoxCom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainV2</value>

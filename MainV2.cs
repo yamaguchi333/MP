@@ -3250,6 +3250,13 @@ namespace MissionPlanner
 
                 Settings.Instance["newuser"] = DateTime.Now.ToShortDateString();
             }
+
+            // @eams add custom timer
+            System.Windows.Forms.Timer timerCustom = new System.Windows.Forms.Timer();
+            timerCustom.Tick += new EventHandler(timerCustom_Tick);
+            timerCustom.Interval = 500;
+            timerCustom.Enabled = true; // timer.Start()と同じ
+
         }
 
         private Dictionary<string, string> ProcessCommandLine(string[] args)
@@ -3994,7 +4001,7 @@ namespace MissionPlanner
                 }
                 else
                 {
-                    item.BackColor = Color.Transparent;
+//                    item.BackColor = Color.Transparent;   // @eams disabled
                     item.BackgroundImage = displayicons.bg; //.BackColor = Color.Black;
                 }
             }
@@ -4335,6 +4342,33 @@ namespace MissionPlanner
                 {
                     ((Button)sender).Enabled = true;
                 }
+            }
+        }
+
+        // @eams update COM display
+        private void timerCustom_Tick(Object sender, EventArgs e)
+        {
+            if (toolStripTextBoxCom == null)
+            {
+                return;
+            }
+            try
+            {
+                string[] ports = SerialPort.GetPortNames();
+                if ( ports.Length > 0 )
+                {
+                    toolStripTextBoxCom.Text = ports[0];
+                    toolStripTextBoxCom.BackColor = Color.Green;
+                }
+                else
+                {
+                    toolStripTextBoxCom.Text = "COM";
+                    toolStripTextBoxCom.BackColor = Color.Red;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
             }
         }
     }
