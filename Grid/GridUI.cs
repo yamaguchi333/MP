@@ -123,6 +123,11 @@ namespace MissionPlanner.Grid
             xmlcamera(false, Settings.GetUserDataDirectory() + "cameras.xml");
 
             loading = false;
+
+
+            // @eams add / form max/min button are invisible
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
 
         bool deleteLastLAND = false;
@@ -1897,6 +1902,8 @@ namespace MissionPlanner.Grid
             domainUpDown1_ValueChanged(sender, e);
         }
 
+        // @eams add / below functions
+#if false
         private void BUT_angleplus_Click(object sender, EventArgs e)
         {
             int previous = (int)NUM_angle.Value;
@@ -1930,6 +1937,109 @@ namespace MissionPlanner.Grid
 //                TXT_headinghold.Text = (previous - 1).ToString();
                 TXT_angle.Text = (previous - 1).ToString();
                 NUM_angle.Value = (previous - 1);
+            }
+        }
+#endif
+        private int incrementValue = 1;
+        private static int def_increment = 1;
+        private static int def_interval = 800;
+
+        public int CurrentValue
+        {
+            set
+            {
+                if (value > 359)
+                {
+                    value = 0;
+                }
+                if (value < 0)
+                {
+                    value = 359;
+                }
+                TXT_angle.Text = value.ToString();
+                NUM_angle.Value = value;
+            }
+            get
+            {
+                int ret;
+                int.TryParse(TXT_angle.Text, out ret);
+                return ret;
+            }
+        }
+
+        int counter = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (incrementValue == 0)
+            {
+                counter = 0;
+                timer1.Stop();
+                return;
+            }
+            counter++;
+            if (counter < 10)
+            {
+                timer1.Interval = 200;
+            }
+            else
+            {
+                counter = 10;
+                timer1.Interval = 55;
+            }
+            CurrentValue += incrementValue;
+        }
+
+        private void BUT_angle_Down(object sender, MouseEventArgs e)
+        {
+            CurrentValue += (sender == BUT_angleplus) ? 1 : -1;
+            timer1.Interval = def_interval;
+            timer1.Start();
+            incrementValue = (sender == BUT_angleplus) ? def_increment : -def_increment;
+        }
+
+        private void BUT_angle_Up(object sender, MouseEventArgs e)
+        {
+            incrementValue = 0;
+        }
+
+        private void BUT_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BUT_zoomIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                map.Zoom += 0.5;
+//                TRK_zoom.Value += (float)0.5;
+#if false
+                if (TRK_zoom.Maximum < TRK_zoom.Value)
+                {
+                    TRK_zoom.Value = TRK_zoom.Maximum;
+                }
+#endif
+            }
+            catch
+            {
+            }
+        }
+
+        private void BUT_zoomOut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                map.Zoom -= 0.5;
+//                TRK_zoom.Value -= (float)0.5;
+#if false
+                if (TRK_zoom.Maximum < TRK_zoom.Value)
+                {
+                    TRK_zoom.Value = TRK_zoom.Maximum;
+                }
+#endif
+            }
+            catch
+            {
             }
         }
     }
