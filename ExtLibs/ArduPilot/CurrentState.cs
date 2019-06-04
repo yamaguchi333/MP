@@ -119,7 +119,11 @@ namespace MissionPlanner
         [DisplayText("Longitude (dd)")]
         public double lng { get; set; }
 
+#if true    // @eams changed
+        [DisplayText("気圧計対地高度 (m)")]
+#else
         [DisplayText("Altitude (alt)")]
+#endif
         public float alt
         {
             get { return (_alt - altoffsethome)* multiplieralt; }
@@ -179,10 +183,18 @@ namespace MissionPlanner
         [DisplayText("Gps Status")]
         public float gpsstatus { get; set; }
 
+#if true    // @eams changed
+        [DisplayText("GNSS精度")]
+#else
         [DisplayText("Gps HDOP")]
+#endif
         public float gpshdop { get; set; }
 
+#if true    // @eams changed
+        [DisplayText("衛星捕捉数")]
+#else
         [DisplayText("Sat Count")]
+#endif
         public float satcount { get; set; }
 
         [DisplayText("Horizontal Accuracy")]
@@ -251,7 +263,11 @@ namespace MissionPlanner
         [DisplayText("Airspeed Ratio")]
         public float asratio { get; set; }
 
+#if true    // @eams changed
+        [DisplayText("機体速度 (m/s)")]
+#else
         [DisplayText("GroundSpeed (speed)")]
+#endif
         public float groundspeed
         {
             get { return _groundspeed*multiplierspeed; }
@@ -763,7 +779,11 @@ namespace MissionPlanner
         public DateTime messageHighTime { get; set; }
 
         //battery
+#if true    // @eams changed
+        [DisplayText("機体バッテリ電圧 (V)")]
+#else
         [DisplayText("Bat Voltage (V)")]
+#endif
         public double battery_voltage
         {
             get { return _battery_voltage; }
@@ -1077,7 +1097,11 @@ namespace MissionPlanner
             }
         }
 
+#if true    // @eams changed
+        [DisplayText("計測対地高度 (m)")]
+#else
         [DisplayText("Sonar Range (meters)")]
+#endif
         public float sonarrange
         {
             get { return (float) toDistDisplayUnit(_sonarrange); }

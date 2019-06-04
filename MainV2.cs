@@ -1015,6 +1015,8 @@ namespace MissionPlanner
             MenuStart.Visible = false;
             MenuStop.Visible = false;
             MenuReturn.Visible = false;
+            MenuConnect.Visible = false;
+            toolStripTextBoxCom.Visible = false;
 #if false
             MenuInitConfig.Visible = false;
             MenuArduPilot.Visible = false;
@@ -1749,7 +1751,7 @@ namespace MissionPlanner
             Connect();
         }
 
-        private void Connect()
+        public void Connect()  // @eams change public
         {
             comPort.giveComport = false;
 
@@ -2270,6 +2272,7 @@ namespace MissionPlanner
                             this.MenuConnect.Image = displayicons.disconnect;
                             this.MenuConnect.Image.Tag = "Disconnect";
                             this.MenuConnect.Text = Strings.DISCONNECTc;
+                            MainV2.instance.FlightData.ButtonConnect_ChangeState(true);    // @eams add
                             _connectionControl.IsConnected(true);
                         });
                     }
@@ -2283,6 +2286,7 @@ namespace MissionPlanner
                             this.MenuConnect.Image = displayicons.connect;
                             this.MenuConnect.Image.Tag = "Connect";
                             this.MenuConnect.Text = Strings.CONNECTc;
+                            MainV2.instance.FlightData.ButtonConnect_ChangeState(false);    // @eams add
                             _connectionControl.IsConnected(false);
                             if (_connectionStats != null)
                             {
@@ -4176,7 +4180,7 @@ namespace MissionPlanner
                 // force redraw map
                 GCSViews.FlightData.mymap.Refresh();
 
-                if (CustomMessageBox.Show("自動飛行を開始します。離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (CustomMessageBox.Show("正しいミッションが表示されていますか？ 周囲の安全を確認してください。\n離陸してよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                 {
                     return;
                 }
@@ -4345,7 +4349,7 @@ namespace MissionPlanner
             }
         }
 
-        // @eams update COM display
+        // @eams add / update COM display
         private void timerCustom_Tick(Object sender, EventArgs e)
         {
             if (toolStripTextBoxCom == null)
@@ -4359,11 +4363,13 @@ namespace MissionPlanner
                 {
                     toolStripTextBoxCom.Text = ports[0];
                     toolStripTextBoxCom.BackColor = Color.Green;
+                    MainV2.instance.FlightData.LabelCom_ChangeState(ports[0]);
                 }
                 else
                 {
                     toolStripTextBoxCom.Text = "COM";
                     toolStripTextBoxCom.BackColor = Color.Red;
+                    MainV2.instance.FlightData.LabelCom_ChangeState("COM");
                 }
             }
             catch (Exception ex)

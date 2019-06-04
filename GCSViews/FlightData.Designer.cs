@@ -13,10 +13,18 @@
             this.MainH = new System.Windows.Forms.SplitContainer();
             this.SubMainLeft = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelMessage = new System.Windows.Forms.TableLayoutPanel();
-            this.labelMessage = new System.Windows.Forms.Label();
-            this.labelError = new System.Windows.Forms.Label();
-            this.labelArm = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.labelMode = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.labelArm = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.labelError = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.labelMessage = new System.Windows.Forms.Label();
             this.hud1 = new MissionPlanner.Controls.HUD();
             this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlactions = new System.Windows.Forms.TabControl();
@@ -115,7 +123,9 @@
             this.TXT_gimbalPitchPos = new System.Windows.Forms.TextBox();
             this.tableMap = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.LabelCom = new System.Windows.Forms.Label();
+            this.ButtonConnect = new System.Windows.Forms.Button();
+            this.LabelPreArm = new System.Windows.Forms.Label();
             this.ButtonStart = new System.Windows.Forms.Button();
             this.ButtonStop = new System.Windows.Forms.Button();
             this.ButtonReturn = new System.Windows.Forms.Button();
@@ -202,6 +212,10 @@
             this.SubMainLeft.Panel2.SuspendLayout();
             this.SubMainLeft.SuspendLayout();
             this.tableLayoutPanelMessage.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             this.tabControlactions.SuspendLayout();
             this.tabQuick.SuspendLayout();
@@ -280,27 +294,49 @@
             // 
             resources.ApplyResources(this.tableLayoutPanelMessage, "tableLayoutPanelMessage");
             this.tableLayoutPanelMessage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableLayoutPanelMessage.Controls.Add(this.labelMessage, 0, 3);
-            this.tableLayoutPanelMessage.Controls.Add(this.labelError, 0, 2);
-            this.tableLayoutPanelMessage.Controls.Add(this.labelArm, 0, 1);
-            this.tableLayoutPanelMessage.Controls.Add(this.labelMode, 0, 0);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel4, 0, 0);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel5, 0, 1);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel6, 0, 2);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel7, 0, 3);
             this.tableLayoutPanelMessage.Name = "tableLayoutPanelMessage";
             // 
-            // labelMessage
+            // panel4
             // 
-            this.labelMessage.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.labelMessage, "labelMessage");
-            this.labelMessage.ForeColor = System.Drawing.Color.Black;
-            this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Tag = "custom";
+            this.panel4.Controls.Add(this.label8);
+            this.panel4.Controls.Add(this.labelMode);
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Name = "panel4";
             // 
-            // labelError
+            // label8
             // 
-            this.labelError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            resources.ApplyResources(this.labelError, "labelError");
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Name = "labelError";
-            this.labelError.Tag = "custom";
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label8.Name = "label8";
+            this.label8.Tag = "custom";
+            // 
+            // labelMode
+            // 
+            this.labelMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            resources.ApplyResources(this.labelMode, "labelMode");
+            this.labelMode.ForeColor = System.Drawing.Color.Black;
+            this.labelMode.Name = "labelMode";
+            this.labelMode.Tag = "custom";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.labelArm);
+            resources.ApplyResources(this.panel5, "panel5");
+            this.panel5.Name = "panel5";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.BackColor = System.Drawing.Color.Silver;
+            this.label9.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label9.Name = "label9";
+            this.label9.Tag = "custom";
             // 
             // labelArm
             // 
@@ -310,13 +346,51 @@
             this.labelArm.Name = "labelArm";
             this.labelArm.Tag = "custom";
             // 
-            // labelMode
+            // panel6
             // 
-            this.labelMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            resources.ApplyResources(this.labelMode, "labelMode");
-            this.labelMode.ForeColor = System.Drawing.Color.Black;
-            this.labelMode.Name = "labelMode";
-            this.labelMode.Tag = "custom";
+            this.panel6.Controls.Add(this.label10);
+            this.panel6.Controls.Add(this.labelError);
+            resources.ApplyResources(this.panel6, "panel6");
+            this.panel6.Name = "panel6";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label10.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label10.Name = "label10";
+            this.label10.Tag = "custom";
+            // 
+            // labelError
+            // 
+            this.labelError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            resources.ApplyResources(this.labelError, "labelError");
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Name = "labelError";
+            this.labelError.Tag = "custom";
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label11);
+            this.panel7.Controls.Add(this.labelMessage);
+            resources.ApplyResources(this.panel7, "panel7");
+            this.panel7.Name = "panel7";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.BackColor = System.Drawing.Color.Silver;
+            this.label11.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label11.Name = "label11";
+            this.label11.Tag = "custom";
+            // 
+            // labelMessage
+            // 
+            this.labelMessage.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelMessage, "labelMessage");
+            this.labelMessage.ForeColor = System.Drawing.Color.Black;
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Tag = "custom";
             // 
             // hud1
             // 
@@ -1769,20 +1843,45 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.LabelCom);
+            this.panel3.Controls.Add(this.ButtonConnect);
+            this.panel3.Controls.Add(this.LabelPreArm);
             this.panel3.Controls.Add(this.ButtonStart);
             this.panel3.Controls.Add(this.ButtonStop);
             this.panel3.Controls.Add(this.ButtonReturn);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // label7
+            // LabelCom
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.BackColor = System.Drawing.Color.Green;
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Name = "label7";
-            this.label7.Tag = "custom";
+            resources.ApplyResources(this.LabelCom, "LabelCom");
+            this.LabelCom.BackColor = System.Drawing.Color.Red;
+            this.LabelCom.ForeColor = System.Drawing.Color.Black;
+            this.LabelCom.Name = "LabelCom";
+            this.LabelCom.Tag = "custom";
+            // 
+            // ButtonConnect
+            // 
+            this.ButtonConnect.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ButtonConnect.FlatAppearance.BorderColor = System.Drawing.Color.White;
+//            this.ButtonConnect.FlatAppearance.BorderSize = 0;
+//            this.ButtonConnect.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
+//            this.ButtonConnect.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            resources.ApplyResources(this.ButtonConnect, "ButtonConnect");
+            this.ButtonConnect.ForeColor = System.Drawing.Color.Black;
+            this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
+            this.ButtonConnect.Name = "ButtonConnect";
+            this.toolTip1.SetToolTip(this.ButtonConnect, resources.GetString("ButtonConnect.ToolTip"));
+            this.ButtonConnect.UseVisualStyleBackColor = false;
+            this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
+            // 
+            // LabelPreArm
+            // 
+            resources.ApplyResources(this.LabelPreArm, "LabelPreArm");
+            this.LabelPreArm.BackColor = System.Drawing.Color.Green;
+            this.LabelPreArm.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LabelPreArm.Name = "LabelPreArm";
+            this.LabelPreArm.Tag = "custom";
             // 
             // ButtonStart
             // 
@@ -2476,6 +2575,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.SubMainLeft)).EndInit();
             this.SubMainLeft.ResumeLayout(false);
             this.tableLayoutPanelMessage.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
             this.tabControlactions.ResumeLayout(false);
             this.tabQuick.ResumeLayout(false);
@@ -2711,11 +2818,21 @@
         private System.Windows.Forms.Button ButtonStart;
         private System.Windows.Forms.Button ButtonStop;
         private System.Windows.Forms.Button ButtonReturn;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label LabelPreArm;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMessage;
-        private System.Windows.Forms.Label labelMessage;
-        private System.Windows.Forms.Label labelError;
-        private System.Windows.Forms.Label labelArm;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label labelMode;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelArm;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelMessage;
+        private System.Windows.Forms.Button ButtonConnect;
+        private System.Windows.Forms.Label LabelCom;
     }
 }
