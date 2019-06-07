@@ -3516,14 +3516,14 @@
   <data name="ButtonConnect.Location" type="System.Drawing.Point, System.Drawing">
     <value>463, 2</value>
   </data>
+  <data name="ButtonConnect.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="ButtonConnect.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 61</value>
   </data>
   <data name="ButtonConnect.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
-  </data>
-  <data name="ButtonConnect.Text" xml:space="preserve">
-    <value>接続</value>
   </data>
   <data name="ButtonConnect.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -3583,7 +3583,7 @@
     <value>Flat</value>
   </data>
   <data name="ButtonStart.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 15.75pt</value>
+    <value>ＭＳ ゴシック, 15.75pt, style=Bold</value>
   </data>
   <data name="ButtonStart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3620,7 +3620,7 @@
     <value>Flat</value>
   </data>
   <data name="ButtonStop.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 15.75pt</value>
+    <value>ＭＳ ゴシック, 15.75pt, style=Bold</value>
   </data>
   <data name="ButtonStop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3657,7 +3657,7 @@
     <value>Flat</value>
   </data>
   <data name="ButtonReturn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 15.75pt</value>
+    <value>ＭＳ ゴシック, 15.75pt, style=Bold</value>
   </data>
   <data name="ButtonReturn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

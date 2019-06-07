@@ -1862,11 +1862,8 @@
             // 
             // ButtonConnect
             // 
-            this.ButtonConnect.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ButtonConnect.BackColor = System.Drawing.Color.Transparent;
             this.ButtonConnect.FlatAppearance.BorderColor = System.Drawing.Color.White;
-//            this.ButtonConnect.FlatAppearance.BorderSize = 0;
-//            this.ButtonConnect.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
-//            this.ButtonConnect.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientActiveCaption;
             resources.ApplyResources(this.ButtonConnect, "ButtonConnect");
             this.ButtonConnect.ForeColor = System.Drawing.Color.Black;
             this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;

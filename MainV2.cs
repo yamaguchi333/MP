@@ -425,6 +425,7 @@ namespace MissionPlanner
         // @eams add
         public static int servo7_func_normal;
         public static int servo7_func_auto;
+        public static List<string> ignore_port = new List<string>();
 
         public void updateLayout(object sender, EventArgs e)
         {
@@ -1011,7 +1012,7 @@ namespace MissionPlanner
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
-            MenuConfigTune.Visible = false;     // for users
+//            MenuConfigTune.Visible = false;     // for users
             MenuStart.Visible = false;
             MenuStop.Visible = false;
             MenuReturn.Visible = false;
@@ -1026,6 +1027,7 @@ namespace MissionPlanner
             // @eams add
             servo7_func_normal = Settings.Instance.GetInt32("servo7_func_normal");
             servo7_func_auto = Settings.Instance.GetInt32("servo7_func_auto");
+            ignore_port = Settings.Instance.GetList("ignore_port").ToList();
 
             Application.DoEvents();
 
@@ -1741,7 +1743,11 @@ namespace MissionPlanner
                 {
                     log.Warn(ex2);
                 }
+#if true    // @eams changed
+                CustomMessageBox.Show("接続が確立できません。\n\n" + ex.Message);
+#else
                 CustomMessageBox.Show("Can not establish a connection\n\n" + ex.Message);
+#endif
                 return;
             }
         }
@@ -1792,6 +1798,8 @@ namespace MissionPlanner
             }
             else
             {
+                PopulateSerialportList();
+                _connectionControl.CMB_serialport.SelectedIndex = _connectionControl.CMB_serialport.Items.IndexOf(detect_com);  // @eams add
                 doConnect(comPort, _connectionControl.CMB_serialport.Text, _connectionControl.CMB_baudrate.Text);
             }
 
@@ -4180,7 +4188,7 @@ namespace MissionPlanner
                 // force redraw map
                 GCSViews.FlightData.mymap.Refresh();
 
-                if (CustomMessageBox.Show("正しいミッションが表示されていますか？ 周囲の安全を確認してください。\n離陸してよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (CustomMessageBox.Show("正しいミッションが表示されていますか？ 周囲の安全を確認してください。\n\n離陸してよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                 {
                     return;
                 }
@@ -4206,7 +4214,7 @@ namespace MissionPlanner
                 // set SERVO7_FUNCTION auto @eams
                 if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
                 {
-                    CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                    CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
                     return;
                 }
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
@@ -4266,7 +4274,7 @@ namespace MissionPlanner
                 // set SERVO7_FUNCTION normal @eams
                 if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
                 {
-                    CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                    CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
                     return;
                 }
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
@@ -4319,18 +4327,19 @@ namespace MissionPlanner
                 // set SERVO7_FUNCTION normal @eams
                 if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
                 {
-                    CustomMessageBox.Show("Your are not connected", Strings.ERROR);
+                    CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
                     return;
                 }
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
 
-                // set mode RTL
+                // set mode Loiter
                 MainV2.comPort.setMode("Loiter");
 #if false
                 CurrentState cs = MainV2.comPort.MAV.cs;
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
                     (float)(cs.HomeLocation.Lng), 0);
 #endif
+                MainV2.instance.FlightData.ButtonStop_ChangeState(false);
             }
             catch
             {
@@ -4349,28 +4358,36 @@ namespace MissionPlanner
             }
         }
 
-        // @eams add / update COM display
+        // @eams add / update COM and failsafe display
+        string detect_com = "";
         private void timerCustom_Tick(Object sender, EventArgs e)
         {
-            if (toolStripTextBoxCom == null)
-            {
-                return;
-            }
             try
             {
-                string[] ports = SerialPort.GetPortNames();
-                if ( ports.Length > 0 )
+                // update COM display
+                string mes = "COM";
+                Color back_color = Color.Red;
+                string detect = "";
+                if (toolStripTextBoxCom != null)
                 {
-                    toolStripTextBoxCom.Text = ports[0];
-                    toolStripTextBoxCom.BackColor = Color.Green;
-                    MainV2.instance.FlightData.LabelCom_ChangeState(ports[0]);
+                    string[] ports = SerialPort.GetPortNames();
+                    foreach (var port in ports)
+                    {
+                        if (!ignore_port.Contains(port))
+                        {
+                            mes = port;
+                            back_color = Color.Green;
+                            detect = port;
+                            break;
+                        }
+                    }
+                    toolStripTextBoxCom.Text = mes;
+                    toolStripTextBoxCom.BackColor = back_color;
+                    MainV2.instance.FlightData.LabelCom_ChangeState(mes);
+                    detect_com = detect;
                 }
-                else
-                {
-                    toolStripTextBoxCom.Text = "COM";
-                    toolStripTextBoxCom.BackColor = Color.Red;
-                    MainV2.instance.FlightData.LabelCom_ChangeState("COM");
-                }
+                // update failsafe display
+                MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
             }
             catch (Exception ex)
             {

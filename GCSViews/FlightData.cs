@@ -4797,16 +4797,83 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             MainV2.instance.MenuStartClick(sender);
+            ButtonStop_ChangeState(true);
         }
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
-            MainV2.instance.MenuStopClick(sender);
+            if (ButtonStop.Text == "飛行停止")
+            {
+                MainV2.instance.MenuStopClick(sender);
+            }
+            else
+            {
+                if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+                {
+                    CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
+                    return;
+                }
+#if false
+                // arm the MAV
+                try
+                {
+                    bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
+                    if (ans == false)
+                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+                }
+#endif
+                // Mission Restart
+                try
+                {
+#if true
+                    MainV2.comPort.setMode("AUTO");
+#else
+                    int param1 = 0;
+                    int param3 = 1;
+                    //(int)MainV2.comPort.MAV.cs.lastautowp;
+
+                    MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
+                        param1, 0, param3, 0, 0, 0, 0);
+#endif
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                }
+                // set SERVO7_FUNCTION auto @eams
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
+
+                ButtonStop_ChangeState(true);
+            }
+        }
+
+        /// <summary>
+        /// 飛行停止ボタンの更新
+        /// <param name="state">true:飛行停止、false:飛行再開</param>
+        /// </summary>
+        public void ButtonStop_ChangeState(bool state)
+        {
+            if (state)
+            {
+                ButtonStop.Text = "飛行停止";
+                ButtonStop.BackColor = Color.DodgerBlue;
+            }
+            else
+            {
+                ButtonStop.Text = "飛行再開";
+                ButtonStop.BackColor = Color.DarkOrchid;
+            }
+
         }
 
         private void ButtonReturn_Click(object sender, EventArgs e)
         {
             MainV2.instance.MenuReturnClick(sender);
+            ButtonStop_ChangeState(true);
         }
 
         private void ButtonConnect_Click(object sender, EventArgs e)
@@ -4824,13 +4891,13 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             {
                 this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
                 this.ButtonConnect.Image.Tag = "Disconnect";
-                this.ButtonConnect.Text = "切断";
+//                this.ButtonConnect.Text = "切断";
             }
             else
             {
                 this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
                 this.ButtonConnect.Image.Tag = "Connect";
-                this.ButtonConnect.Text = "接続";
+//                this.ButtonConnect.Text = "接続";
             }
 
         }
@@ -4849,6 +4916,24 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             else
             {
                 LabelCom.BackColor = Color.Red;
+            }
+        }
+
+        /// <summary>
+        /// PreArm表示の更新
+        /// <param name="state">true=failsafe以外、false=failsafe中</param>
+        /// </summary>
+        public void LabelPreArm_ChangeState(bool state)
+        {
+            if (state)
+            {
+                LabelPreArm.Text = "飛行OK";
+                LabelPreArm.BackColor = Color.Green;
+            }
+            else
+            {
+                LabelPreArm.Text = "飛行NG";
+                LabelPreArm.BackColor = Color.Red;
             }
         }
     }
