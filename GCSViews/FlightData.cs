@@ -4800,6 +4800,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             ButtonStop_ChangeState(true);
         }
 
+        /// <summary>
+        /// 飛行開始ボタンの更新
+        /// <param name="state">true:enabled、false:disabled</param>
+        /// </summary>
+        public void ButtonStart_ChangeState(bool state)
+        {
+            ButtonStart.Enabled = state;
+        }
+
         private void ButtonStop_Click(object sender, EventArgs e)
         {
             if (ButtonStop.Text == "飛行停止")

@@ -426,6 +426,7 @@ namespace MissionPlanner
         public static int servo7_func_normal;
         public static int servo7_func_auto;
         public static List<string> ignore_port = new List<string>();
+        public static int ekf_status_flags;
 
         public void updateLayout(object sender, EventArgs e)
         {
@@ -1028,6 +1029,7 @@ namespace MissionPlanner
             servo7_func_normal = Settings.Instance.GetInt32("servo7_func_normal");
             servo7_func_auto = Settings.Instance.GetInt32("servo7_func_auto");
             ignore_port = Settings.Instance.GetList("ignore_port").ToList();
+            ekf_status_flags = Settings.Instance.GetInt32("ekf_status_flags");
 
             Application.DoEvents();
 
@@ -4196,13 +4198,7 @@ namespace MissionPlanner
                 // arm the MAV
                 try
                 {
-#if false   //@eams
-                if (MainV2.comPort.MAV.cs.armed)
-                    if (CustomMessageBox.Show("Are you sure you want to Disarm?", "Disarm?", MessageBoxButtons.YesNo) !=
-                        (int)DialogResult.Yes)
-                        return;
-#endif
-                    bool ans = MainV2.comPort.doARM(!MainV2.comPort.MAV.cs.armed);
+                    bool ans = MainV2.comPort.doARM(true);
                     if (ans == false)
                         CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
                 }
@@ -4386,8 +4382,13 @@ namespace MissionPlanner
                     MainV2.instance.FlightData.LabelCom_ChangeState(mes);
                     detect_com = detect;
                 }
+
                 // update failsafe display
-                MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
+//                MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
+                MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags== ekf_status_flags);
+
+                // update failsafe display
+                MainV2.instance.FlightData.ButtonStart_ChangeState(MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO");
             }
             catch (Exception ex)
             {
