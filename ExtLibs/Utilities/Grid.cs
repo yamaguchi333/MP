@@ -191,7 +191,14 @@ namespace MissionPlanner.Utilities
                 startpos, shutter, minLaneSeparation, leadin, HomeLocation)));
         }
 
-        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle, double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation)
+        public static List<PointLatLngAlt> CreateGrid(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, double angle,
+            double overshoot1, double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation)
+        {
+            return CreateGrid2(polygon, altitude, distance, spacing, ref angle, overshoot1, overshoot2,
+                startpos, shutter, minLaneSeparation, leadin, HomeLocation, 0, false);
+        }
+        public static List<PointLatLngAlt> CreateGrid2(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, ref double angle,
+            double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation, double offset, bool first)
         {
             //DoDebug();
 
@@ -242,13 +249,43 @@ namespace MissionPlanner.Utilities
 
             addtomap(new utmpos(x, y, utmzone),"Base");
 
+            //重心方向へポリゴンを縮小する @eams
+            utmpos gravity = new utmpos(x, y, utmzone);
+            for (int i = 0; i < utmpositions.Count(); i++)
+            {
+                double xp = utmpositions[i].x;
+                double yp = utmpositions[i].y;
+                double deg = utmpositions[i].GetBearing(gravity);
+                newpos(ref xp, ref yp, deg, offset);
+                utmpositions[i] = new utmpos (xp, yp, utmzone);
+            }
+
+            //初回のみポリゴンの最長辺に角度を自動的に合わせる @eams
+            if (first)
+            {
+                double dist_max = 0.0;
+                int index = 0;
+                for (int i = 1; i < utmpositions.Count(); i++)
+                {
+                    double dist = utmpositions[i].GetDistance(utmpositions[i - 1]);
+                    if (dist > dist_max)
+                    {
+                        dist_max = dist;
+                        index = i - 1;
+                    }
+                    angle = utmpositions[index].GetBearing(utmpositions[index + 1]);
+                }
+            }
+
             // get left extent
             double xb1 = x;
             double yb1 = y;
             // to the left
             newpos(ref xb1, ref yb1, angle - 90, diagdist / 2 + distance);
+//            newpos(ref xb1, ref yb1, angle - 90, diagdist / 2);
             // backwards
             newpos(ref xb1, ref yb1, angle + 180, diagdist / 2 + distance);
+//            newpos(ref xb1, ref yb1, angle + 180, diagdist / 2);
 
             utmpos left = new utmpos(xb1, yb1, utmzone);
 
@@ -259,8 +296,10 @@ namespace MissionPlanner.Utilities
             double yb2 = y;
             // to the right
             newpos(ref xb2, ref yb2, angle + 90, diagdist / 2 + distance);
+//            newpos(ref xb2, ref yb2, angle + 90, diagdist / 2);
             // backwards
             newpos(ref xb2, ref yb2, angle + 180, diagdist / 2 + distance);
+//            newpos(ref xb2, ref yb2, angle + 180, diagdist / 2);
 
             utmpos right = new utmpos(xb2, yb2, utmzone);
 
@@ -272,11 +311,13 @@ namespace MissionPlanner.Utilities
 
             // draw the outergrid, this is a grid that cover the entire area of the rectangle plus more.
             while (lines < ((diagdist + distance * 2) / distance))
+//            while (lines < ((diagdist) / distance))
             {
                 // copy the start point to generate the end point
                 double nx = x;
                 double ny = y;
                 newpos(ref nx, ref ny, angle, diagdist + distance*2);
+//                newpos(ref nx, ref ny, angle, diagdist);
 
                 linelatlng line = new linelatlng();
                 line.p1 = new utmpos(x, y, utmzone);
@@ -841,7 +882,6 @@ namespace MissionPlanner.Utilities
             }
             return inside;
         }
-
 
     }
 }

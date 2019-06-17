@@ -54,9 +54,9 @@
             this.lbl_spacing = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.lbl_distance = new System.Windows.Forms.Label();
-            this.lbl_area = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.lbl_area = new System.Windows.Forms.Label();
             this.tabCamera = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label42 = new System.Windows.Forms.Label();
@@ -77,7 +77,6 @@
             this.rad_repeatservo = new System.Windows.Forms.RadioButton();
             this.rad_trigdist = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.BUT_samplephoto = new MissionPlanner.Controls.MyButton();
             this.label21 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -95,7 +94,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.BUT_save = new MissionPlanner.Controls.MyButton();
             this.tabGrid = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.LBL_Alternating_lanes = new System.Windows.Forms.Label();
@@ -155,19 +153,26 @@
             this.CHK_grid = new System.Windows.Forms.CheckBox();
             this.CHK_markers = new System.Windows.Forms.CheckBox();
             this.CHK_boundary = new System.Windows.Forms.CheckBox();
-            this.BUT_Accept = new MissionPlanner.Controls.MyButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
-            this.map = new MissionPlanner.Controls.myGMAP();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.myButton1 = new MissionPlanner.Controls.MyButton();
             this.label45 = new System.Windows.Forms.Label();
             this.TXT_angle = new System.Windows.Forms.TextBox();
             this.BUT_angleminus = new System.Windows.Forms.Button();
             this.BUT_angleplus = new System.Windows.Forms.Button();
-            this.BUT_Close = new MissionPlanner.Controls.MyButton();
-            this.BUT_zoomIn = new MissionPlanner.Controls.MyButton();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.TXT_offset = new System.Windows.Forms.TextBox();
+            this.BUT_offsetminus = new System.Windows.Forms.Button();
+            this.BUT_offsetplus = new System.Windows.Forms.Button();
             this.BUT_zoomOut = new MissionPlanner.Controls.MyButton();
+            this.BUT_zoomIn = new MissionPlanner.Controls.MyButton();
+            this.BUT_Close = new MissionPlanner.Controls.MyButton();
+            this.myButton1 = new MissionPlanner.Controls.MyButton();
+            this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
+            this.map = new MissionPlanner.Controls.myGMAP();
+            this.BUT_Accept = new MissionPlanner.Controls.MyButton();
+            this.BUT_samplephoto = new MissionPlanner.Controls.MyButton();
+            this.BUT_save = new MissionPlanner.Controls.MyButton();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -229,7 +234,6 @@
             this.groupBox5.Controls.Add(this.lbl_spacing);
             this.groupBox5.Controls.Add(this.label27);
             this.groupBox5.Controls.Add(this.lbl_distance);
-            this.groupBox5.Controls.Add(this.lbl_area);
             this.groupBox5.Controls.Add(this.label23);
             this.groupBox5.Controls.Add(this.label22);
             resources.ApplyResources(this.groupBox5, "groupBox5");
@@ -351,11 +355,6 @@
             resources.ApplyResources(this.lbl_distance, "lbl_distance");
             this.lbl_distance.Name = "lbl_distance";
             // 
-            // lbl_area
-            // 
-            resources.ApplyResources(this.lbl_area, "lbl_area");
-            this.lbl_area.Name = "lbl_area";
-            // 
             // label23
             // 
             resources.ApplyResources(this.label23, "label23");
@@ -365,6 +364,11 @@
             // 
             resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
+            // 
+            // lbl_area
+            // 
+            resources.ApplyResources(this.lbl_area, "lbl_area");
+            this.lbl_area.Name = "lbl_area";
             // 
             // tabCamera
             // 
@@ -595,13 +599,6 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // BUT_samplephoto
-            // 
-            resources.ApplyResources(this.BUT_samplephoto, "BUT_samplephoto");
-            this.BUT_samplephoto.Name = "BUT_samplephoto";
-            this.BUT_samplephoto.UseVisualStyleBackColor = true;
-            this.BUT_samplephoto.Click += new System.EventHandler(this.BUT_samplephoto_Click);
-            // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
@@ -712,13 +709,6 @@
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            // 
-            // BUT_save
-            // 
-            resources.ApplyResources(this.BUT_save, "BUT_save");
-            this.BUT_save.Name = "BUT_save";
-            this.BUT_save.UseVisualStyleBackColor = true;
-            this.BUT_save.Click += new System.EventHandler(this.BUT_save_Click);
             // 
             // tabGrid
             // 
@@ -1269,13 +1259,6 @@
             this.CHK_boundary.UseVisualStyleBackColor = true;
             this.CHK_boundary.CheckedChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
             // 
-            // BUT_Accept
-            // 
-            resources.ApplyResources(this.BUT_Accept, "BUT_Accept");
-            this.BUT_Accept.Name = "BUT_Accept";
-            this.BUT_Accept.UseVisualStyleBackColor = true;
-            this.BUT_Accept.Click += new System.EventHandler(this.BUT_Accept_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabSimple);
@@ -1284,6 +1267,101 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 800;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label45
+            // 
+            resources.ApplyResources(this.label45, "label45");
+            this.label45.Name = "label45";
+            // 
+            // TXT_angle
+            // 
+            resources.ApplyResources(this.TXT_angle, "TXT_angle");
+            this.TXT_angle.Name = "TXT_angle";
+            this.TXT_angle.ReadOnly = true;
+            // 
+            // BUT_angleminus
+            // 
+            resources.ApplyResources(this.BUT_angleminus, "BUT_angleminus");
+            this.BUT_angleminus.Name = "BUT_angleminus";
+            this.BUT_angleminus.Tag = "custom";
+            this.BUT_angleminus.UseVisualStyleBackColor = true;
+            this.BUT_angleminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
+            this.BUT_angleminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Up);
+            // 
+            // BUT_angleplus
+            // 
+            resources.ApplyResources(this.BUT_angleplus, "BUT_angleplus");
+            this.BUT_angleplus.Name = "BUT_angleplus";
+            this.BUT_angleplus.Tag = "custom";
+            this.BUT_angleplus.UseVisualStyleBackColor = true;
+            this.BUT_angleplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
+            this.BUT_angleplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Up);
+            // 
+            // label46
+            // 
+            resources.ApplyResources(this.label46, "label46");
+            this.label46.Name = "label46";
+            // 
+            // label47
+            // 
+            resources.ApplyResources(this.label47, "label47");
+            this.label47.Name = "label47";
+            // 
+            // TXT_offset
+            // 
+            resources.ApplyResources(this.TXT_offset, "TXT_offset");
+            this.TXT_offset.Name = "TXT_offset";
+            this.TXT_offset.ReadOnly = true;
+            this.TXT_offset.TextChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // BUT_offsetminus
+            // 
+            resources.ApplyResources(this.BUT_offsetminus, "BUT_offsetminus");
+            this.BUT_offsetminus.Name = "BUT_offsetminus";
+            this.BUT_offsetminus.Tag = "custom";
+            this.BUT_offsetminus.UseVisualStyleBackColor = true;
+            this.BUT_offsetminus.Click += new System.EventHandler(this.BUT_offsetminus_Click);
+            // 
+            // BUT_offsetplus
+            // 
+            resources.ApplyResources(this.BUT_offsetplus, "BUT_offsetplus");
+            this.BUT_offsetplus.Name = "BUT_offsetplus";
+            this.BUT_offsetplus.Tag = "custom";
+            this.BUT_offsetplus.UseVisualStyleBackColor = true;
+            this.BUT_offsetplus.Click += new System.EventHandler(this.BUT_offsetplus_Click);
+            // 
+            // BUT_zoomOut
+            // 
+            resources.ApplyResources(this.BUT_zoomOut, "BUT_zoomOut");
+            this.BUT_zoomOut.Name = "BUT_zoomOut";
+            this.BUT_zoomOut.UseVisualStyleBackColor = true;
+            this.BUT_zoomOut.Click += new System.EventHandler(this.BUT_zoomOut_Click);
+            // 
+            // BUT_zoomIn
+            // 
+            resources.ApplyResources(this.BUT_zoomIn, "BUT_zoomIn");
+            this.BUT_zoomIn.Name = "BUT_zoomIn";
+            this.BUT_zoomIn.UseVisualStyleBackColor = true;
+            this.BUT_zoomIn.Click += new System.EventHandler(this.BUT_zoomIn_Click);
+            // 
+            // BUT_Close
+            // 
+            resources.ApplyResources(this.BUT_Close, "BUT_Close");
+            this.BUT_Close.Name = "BUT_Close";
+            this.BUT_Close.UseVisualStyleBackColor = true;
+            this.BUT_Close.Click += new System.EventHandler(this.BUT_Close_Click);
+            // 
+            // myButton1
+            // 
+            resources.ApplyResources(this.myButton1, "myButton1");
+            this.myButton1.Name = "myButton1";
+            this.myButton1.UseVisualStyleBackColor = true;
+            this.myButton1.Click += new System.EventHandler(this.BUT_Accept_Click);
             // 
             // TRK_zoom
             // 
@@ -1324,71 +1402,35 @@
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
-            // timer1
+            // BUT_Accept
             // 
-            this.timer1.Interval = 800;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            resources.ApplyResources(this.BUT_Accept, "BUT_Accept");
+            this.BUT_Accept.Name = "BUT_Accept";
+            this.BUT_Accept.UseVisualStyleBackColor = true;
+            this.BUT_Accept.Click += new System.EventHandler(this.BUT_Accept_Click);
             // 
-            // myButton1
+            // BUT_samplephoto
             // 
-            resources.ApplyResources(this.myButton1, "myButton1");
-            this.myButton1.Name = "myButton1";
-            this.myButton1.UseVisualStyleBackColor = true;
-            this.myButton1.Click += new System.EventHandler(this.BUT_Accept_Click);
+            resources.ApplyResources(this.BUT_samplephoto, "BUT_samplephoto");
+            this.BUT_samplephoto.Name = "BUT_samplephoto";
+            this.BUT_samplephoto.UseVisualStyleBackColor = true;
+            this.BUT_samplephoto.Click += new System.EventHandler(this.BUT_samplephoto_Click);
             // 
-            // label45
+            // BUT_save
             // 
-            resources.ApplyResources(this.label45, "label45");
-            this.label45.Name = "label45";
-            // 
-            // TXT_angle
-            // 
-            resources.ApplyResources(this.TXT_angle, "TXT_angle");
-            this.TXT_angle.Name = "TXT_angle";
-            this.TXT_angle.ReadOnly = true;
-            // 
-            // BUT_angleminus
-            // 
-            resources.ApplyResources(this.BUT_angleminus, "BUT_angleminus");
-            this.BUT_angleminus.Name = "BUT_angleminus";
-            this.BUT_angleminus.Tag = "custom";
-            this.BUT_angleminus.UseVisualStyleBackColor = true;
-            this.BUT_angleminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
-            this.BUT_angleminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Up);
-            // 
-            // BUT_angleplus
-            // 
-            resources.ApplyResources(this.BUT_angleplus, "BUT_angleplus");
-            this.BUT_angleplus.Name = "BUT_angleplus";
-            this.BUT_angleplus.Tag = "custom";
-            this.BUT_angleplus.UseVisualStyleBackColor = true;
-            this.BUT_angleplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
-            this.BUT_angleplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Up);
-            // 
-            // BUT_Close
-            // 
-            resources.ApplyResources(this.BUT_Close, "BUT_Close");
-            this.BUT_Close.Name = "BUT_Close";
-            this.BUT_Close.UseVisualStyleBackColor = true;
-            this.BUT_Close.Click += new System.EventHandler(this.BUT_Close_Click);
-            // 
-            // BUT_zoomIn
-            // 
-            resources.ApplyResources(this.BUT_zoomIn, "BUT_zoomIn");
-            this.BUT_zoomIn.Name = "BUT_zoomIn";
-            this.BUT_zoomIn.UseVisualStyleBackColor = true;
-            this.BUT_zoomIn.Click += new System.EventHandler(this.BUT_zoomIn_Click);
-            // 
-            // BUT_zoomOut
-            // 
-            resources.ApplyResources(this.BUT_zoomOut, "BUT_zoomOut");
-            this.BUT_zoomOut.Name = "BUT_zoomOut";
-            this.BUT_zoomOut.UseVisualStyleBackColor = true;
-            this.BUT_zoomOut.Click += new System.EventHandler(this.BUT_zoomOut_Click);
+            resources.ApplyResources(this.BUT_save, "BUT_save");
+            this.BUT_save.Name = "BUT_save";
+            this.BUT_save.UseVisualStyleBackColor = true;
+            this.BUT_save.Click += new System.EventHandler(this.BUT_save_Click);
             // 
             // GridUI
             // 
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.BUT_offsetminus);
+            this.Controls.Add(this.BUT_offsetplus);
+            this.Controls.Add(this.TXT_offset);
+            this.Controls.Add(this.label47);
+            this.Controls.Add(this.label46);
             this.Controls.Add(this.BUT_zoomOut);
             this.Controls.Add(this.BUT_zoomIn);
             this.Controls.Add(this.BUT_Close);
@@ -1401,6 +1443,7 @@
             this.Controls.Add(this.map);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.lbl_area);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GridUI";
             this.Load += new System.EventHandler(this.GridUI_Load);
@@ -1594,5 +1637,10 @@
         private Controls.MyButton BUT_Close;
         private Controls.MyButton BUT_zoomIn;
         private Controls.MyButton BUT_zoomOut;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox TXT_offset;
+        private System.Windows.Forms.Button BUT_offsetminus;
+        private System.Windows.Forms.Button BUT_offsetplus;
     }
 }

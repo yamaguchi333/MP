@@ -427,6 +427,7 @@ namespace MissionPlanner
         public static int servo7_func_auto;
         public static List<string> ignore_port = new List<string>();
         public static int ekf_status_flags;
+        public static int update_wp_delay = 0;
 
         public void updateLayout(object sender, EventArgs e)
         {
@@ -1030,6 +1031,7 @@ namespace MissionPlanner
             servo7_func_auto = Settings.Instance.GetInt32("servo7_func_auto");
             ignore_port = Settings.Instance.GetList("ignore_port").ToList();
             ekf_status_flags = Settings.Instance.GetInt32("ekf_status_flags");
+            update_wp_delay = Settings.Instance.GetInt32("dialog_delay");
 
             Application.DoEvents();
 
@@ -1800,8 +1802,16 @@ namespace MissionPlanner
             }
             else
             {
+                // @eams add
                 PopulateSerialportList();
-                _connectionControl.CMB_serialport.SelectedIndex = _connectionControl.CMB_serialport.Items.IndexOf(detect_com);  // @eams add
+                _connectionControl.CMB_serialport.SelectedIndex = _connectionControl.CMB_serialport.Items.IndexOf(detect_com);
+                // check for saved baud rate and restore @eamas add
+                if (Settings.Instance[_connectionControl.CMB_serialport.Text + "_BAUD"] != null)
+                {
+                    _connectionControl.CMB_baudrate.Text =
+                        Settings.Instance[_connectionControl.CMB_serialport.Text + "_BAUD"];
+                }
+
                 doConnect(comPort, _connectionControl.CMB_serialport.Text, _connectionControl.CMB_baudrate.Text);
             }
 
@@ -3431,6 +3441,7 @@ namespace MissionPlanner
 
         private void checkupdate(object stuff)
         {
+            return; // @eams added
             if (Program.WindowsStoreApp)
                 return;
 
@@ -4148,7 +4159,7 @@ namespace MissionPlanner
             MenuStartClick(sender);
         }
 
-        public void MenuStartClick(object sender)
+        public async void MenuStartClick(object sender)
         {
             Type sender_type = sender.GetType();
             if (sender_type.Equals(typeof(ToolStripButton)))
@@ -4188,6 +4199,10 @@ namespace MissionPlanner
                 MainV2.comPort.setMode("Loiter");
 
                 // force redraw map
+                await Task.Delay(update_wp_delay+200);
+//                GCSViews.FlightData.mymap.Refresh();
+                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("WPOverlay");
+//                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
                 GCSViews.FlightData.mymap.Refresh();
 
                 if (CustomMessageBox.Show("正しいミッションが表示されていますか？ 周囲の安全を確認してください。\n\n離陸してよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
@@ -4388,7 +4403,10 @@ namespace MissionPlanner
                 MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags== ekf_status_flags);
 
                 // update failsafe display
-                MainV2.instance.FlightData.ButtonStart_ChangeState(MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO");
+                MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
+
+                // update wpno display
+                MainV2.instance.FlightData.LabelWPno_ChangeNumber(Convert.ToInt32(MainV2.comPort.MAV.cs.wpno));
             }
             catch (Exception ex)
             {

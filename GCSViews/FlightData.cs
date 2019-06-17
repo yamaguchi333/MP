@@ -331,6 +331,7 @@ namespace MissionPlanner.GCSViews
 
             MainV2.comPort.ParamListChanged += FlightData_ParentChanged;
 
+            LabelWPno_ChangeNumber(0);
         }
 
         protected override void OnInvalidated(InvalidateEventArgs e)
@@ -1229,7 +1230,8 @@ namespace MissionPlanner.GCSViews
                         updateRoutePosition();
 
                         // update programed wp course
-                        if (waypoints.AddSeconds(5) < DateTime.Now)
+//                        if (waypoints.AddSeconds(5) < DateTime.Now)
+                        if (waypoints.AddSeconds(MainV2.update_wp_delay/1000) < DateTime.Now)
                         {
                             //Console.WriteLine("Doing FD WP's");
                             updateClearMissionRouteMarkers();
@@ -4943,6 +4945,23 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             {
                 LabelPreArm.Text = "飛行NG";
                 LabelPreArm.BackColor = Color.Red;
+            }
+        }
+
+        /// <summary>
+        /// WP番号表示の更新
+        /// <param name="wpno">ウェイポイント番号</param>
+        /// </summary>
+        public void LabelWPno_ChangeNumber(int wpno)
+        {
+            if (wpno>0)
+            {
+                LabelWPno.Text = wpno.ToString();
+
+            }
+            else
+            {
+                LabelWPno.Text = "";
             }
         }
     }
