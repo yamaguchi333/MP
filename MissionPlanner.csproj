@@ -1782,6 +1782,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\launchSettings.json" />
+    <None Include="Resources\EAMS_logo.jpg" />
+    <None Include="Resources\btn_zoomout.jpg" />
+    <None Include="Resources\btn_zoomin.jpg" />
+    <None Include="Resources\btn_stop.jpg" />
+    <None Include="Resources\btn_start.jpg" />
+    <None Include="Resources\btn_root_set.jpg" />
+    <None Include="Resources\btn_root_save.jpg" />
+    <None Include="Resources\btn_root_read.jpg" />
+    <None Include="Resources\btn_root_home.jpg" />
+    <None Include="Resources\btn_root_clear.jpg" />
+    <None Include="Resources\btn_return.jpg" />
+    <None Include="Resources\btn_restart.jpg" />
     <None Include="adb.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -213,16 +213,13 @@
   <data name="setROIToolStripMenuItem.Text" xml:space="preserve">
     <value>DO_SET_ROI</value>
   </data>
-  <data name="BUT_saveWPFile.Text" xml:space="preserve">
-    <value>ルート
-保存</value>
-  </data>
   <data name="dataGridViewImageColumn1.HeaderText" xml:space="preserve">
     <value>上</value>
   </data>
   <data name="CMB_altmode.Text" xml:space="preserve">
     <value>相対的</value>
   </data>
+  <!--
   <data name="label4.Text" xml:space="preserve">
     <value>ホームロケーション</value>
   </data>
@@ -230,6 +227,11 @@
     <value>ルート
 読込み</value>
   </data>
+  <data name="BUT_saveWPFile.Text" xml:space="preserve">
+    <value>ルート
+保存</value>
+  </data>
+  -->
   <data name="label5.Text" xml:space="preserve">
     <value>ロイター半径</value>
   </data>

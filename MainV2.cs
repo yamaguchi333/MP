@@ -1014,17 +1014,17 @@ namespace MissionPlanner
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
-//            MenuConfigTune.Visible = false;     // for users
+            MenuConfigTune.Visible = false;     // for users
             MenuStart.Visible = false;
             MenuStop.Visible = false;
             MenuReturn.Visible = false;
             MenuConnect.Visible = false;
+            toolStripConnectionControl.Visible = false; // for users
             toolStripTextBoxCom.Visible = false;
 #if false
             MenuInitConfig.Visible = false;
             MenuArduPilot.Visible = false;
             MenuSimulation.Visible = false;
-            toolStripConnectionControl.Visible = false;
 #endif
             // @eams add
             servo7_func_normal = Settings.Instance.GetInt32("servo7_func_normal");
@@ -4402,8 +4402,9 @@ namespace MissionPlanner
 //                MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
                 MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags== ekf_status_flags);
 
-                // update failsafe display
-                MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
+                // update flight start button state
+//                MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
+                MainV2.instance.FlightData.ButtonStart_ChangeState(!MainV2.comPort.MAV.cs.armed);
 
                 // update wpno display
                 MainV2.instance.FlightData.LabelWPno_ChangeNumber(Convert.ToInt32(MainV2.comPort.MAV.cs.wpno));

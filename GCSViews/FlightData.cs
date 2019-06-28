@@ -4809,11 +4809,34 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         public void ButtonStart_ChangeState(bool state)
         {
             ButtonStart.Enabled = state;
+
+            //描画先とするImageオブジェクトを作成する
+            Bitmap canvas = new Bitmap(ButtonStart.Width, ButtonStart.Height);
+            //ImageオブジェクトのGraphicsオブジェクトを作成する
+            Graphics g = Graphics.FromImage(canvas);
+
+            //画像を取得
+            Bitmap img = global::MissionPlanner.Properties.Resources.btn_start;
+
+            if (state)
+            {
+                //画像を普通に表示
+                g.DrawImage(img, 0, 0);
+            }
+            else
+            {
+                //画像を無効状態で表示
+                ControlPaint.DrawImageDisabled(g, img, 0, 0, ButtonStart.BackColor);
+            }
+
+            g.Dispose();    //リソースを解放する
+            ButtonStart.BackgroundImage = canvas; //表示する
         }
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
-            if (ButtonStop.Text == "飛行停止")
+//            if (ButtonStop.Text == "飛行停止")
+            if ((string)ButtonStop.BackgroundImage.Tag == "stop")
             {
                 MainV2.instance.MenuStopClick(sender);
             }
@@ -4870,13 +4893,19 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         {
             if (state)
             {
-                ButtonStop.Text = "飛行停止";
-                ButtonStop.BackColor = Color.DodgerBlue;
+//                ButtonStop.Text = "飛行停止";
+//                ButtonStop.BackColor = Color.DodgerBlue;
+                ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_stop;
+                ButtonStop.BackgroundImage.Tag = "stop";
+                toolTip1.SetToolTip(ButtonStop, "自動飛行停止");
             }
             else
             {
-                ButtonStop.Text = "飛行再開";
-                ButtonStop.BackColor = Color.DarkOrchid;
+//                ButtonStop.Text = "飛行再開";
+//                ButtonStop.BackColor = Color.DarkOrchid;
+                ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_restart;
+                ButtonStop.BackgroundImage.Tag = "restart";
+                toolTip1.SetToolTip(ButtonStop, "自動飛行再開");
             }
 
         }
