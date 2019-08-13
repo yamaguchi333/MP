@@ -173,6 +173,23 @@
             this.myButton1 = new MissionPlanner.Controls.MyButton();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.BUT_altminus = new System.Windows.Forms.Button();
+            this.BUT_altplus = new System.Windows.Forms.Button();
+            this.TXT_altitude = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.BUT_speedminus = new System.Windows.Forms.Button();
+            this.BUT_speedplus = new System.Windows.Forms.Button();
+            this.TXT_FlySpeed = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.BUT_distminus = new System.Windows.Forms.Button();
+            this.BUT_distplus = new System.Windows.Forms.Button();
+            this.TXT_Distance = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.BUT_shiftright = new System.Windows.Forms.Button();
+            this.BUT_shiftleft = new System.Windows.Forms.Button();
+            this.BUT_shiftup = new System.Windows.Forms.Button();
+            this.BUT_shiftdown = new System.Windows.Forms.Button();
+            this.label51 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1423,9 +1440,144 @@
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
+            // BUT_altminus
+            // 
+            resources.ApplyResources(this.BUT_altminus, "BUT_altminus");
+            this.BUT_altminus.Name = "BUT_altminus";
+            this.BUT_altminus.Tag = "custom";
+            this.BUT_altminus.UseVisualStyleBackColor = true;
+            this.BUT_altminus.Click += new System.EventHandler(this.BUT_altminus_Click);
+            // 
+            // BUT_altplus
+            // 
+            resources.ApplyResources(this.BUT_altplus, "BUT_altplus");
+            this.BUT_altplus.Name = "BUT_altplus";
+            this.BUT_altplus.Tag = "custom";
+            this.BUT_altplus.UseVisualStyleBackColor = true;
+            this.BUT_altplus.Click += new System.EventHandler(this.BUT_altplus_Click);
+            // 
+            // TXT_altitude
+            // 
+            resources.ApplyResources(this.TXT_altitude, "TXT_altitude");
+            this.TXT_altitude.Name = "TXT_altitude";
+            this.TXT_altitude.ReadOnly = true;
+            // 
+            // label48
+            // 
+            resources.ApplyResources(this.label48, "label48");
+            this.label48.Name = "label48";
+            // 
+            // BUT_speedminus
+            // 
+            resources.ApplyResources(this.BUT_speedminus, "BUT_speedminus");
+            this.BUT_speedminus.Name = "BUT_speedminus";
+            this.BUT_speedminus.Tag = "custom";
+            this.BUT_speedminus.UseVisualStyleBackColor = true;
+            this.BUT_speedminus.Click += new System.EventHandler(this.BUT_speedminus_Click);
+            // 
+            // BUT_speedplus
+            // 
+            resources.ApplyResources(this.BUT_speedplus, "BUT_speedplus");
+            this.BUT_speedplus.Name = "BUT_speedplus";
+            this.BUT_speedplus.Tag = "custom";
+            this.BUT_speedplus.UseVisualStyleBackColor = true;
+            this.BUT_speedplus.Click += new System.EventHandler(this.BUT_speedplus_Click);
+            // 
+            // TXT_FlySpeed
+            // 
+            resources.ApplyResources(this.TXT_FlySpeed, "TXT_FlySpeed");
+            this.TXT_FlySpeed.Name = "TXT_FlySpeed";
+            this.TXT_FlySpeed.ReadOnly = true;
+            // 
+            // label49
+            // 
+            resources.ApplyResources(this.label49, "label49");
+            this.label49.Name = "label49";
+            // 
+            // BUT_distminus
+            // 
+            resources.ApplyResources(this.BUT_distminus, "BUT_distminus");
+            this.BUT_distminus.Name = "BUT_distminus";
+            this.BUT_distminus.Tag = "custom";
+            this.BUT_distminus.UseVisualStyleBackColor = true;
+            this.BUT_distminus.Click += new System.EventHandler(this.BUT_distminus_Click);
+            // 
+            // BUT_distplus
+            // 
+            resources.ApplyResources(this.BUT_distplus, "BUT_distplus");
+            this.BUT_distplus.Name = "BUT_distplus";
+            this.BUT_distplus.Tag = "custom";
+            this.BUT_distplus.UseVisualStyleBackColor = true;
+            this.BUT_distplus.Click += new System.EventHandler(this.BUT_distplus_Click);
+            // 
+            // TXT_Distance
+            // 
+            resources.ApplyResources(this.TXT_Distance, "TXT_Distance");
+            this.TXT_Distance.Name = "TXT_Distance";
+            this.TXT_Distance.ReadOnly = true;
+            // 
+            // label50
+            // 
+            resources.ApplyResources(this.label50, "label50");
+            this.label50.Name = "label50";
+            // 
+            // BUT_shiftright
+            // 
+            resources.ApplyResources(this.BUT_shiftright, "BUT_shiftright");
+            this.BUT_shiftright.Name = "BUT_shiftright";
+            this.BUT_shiftright.Tag = "custom";
+            this.BUT_shiftright.UseVisualStyleBackColor = true;
+            this.BUT_shiftright.Click += new System.EventHandler(this.BUT_shiftright_Click);
+            // 
+            // BUT_shiftleft
+            // 
+            resources.ApplyResources(this.BUT_shiftleft, "BUT_shiftleft");
+            this.BUT_shiftleft.Name = "BUT_shiftleft";
+            this.BUT_shiftleft.Tag = "custom";
+            this.BUT_shiftleft.UseVisualStyleBackColor = true;
+            this.BUT_shiftleft.Click += new System.EventHandler(this.BUT_shiftleft_Click);
+            // 
+            // BUT_shiftup
+            // 
+            resources.ApplyResources(this.BUT_shiftup, "BUT_shiftup");
+            this.BUT_shiftup.Name = "BUT_shiftup";
+            this.BUT_shiftup.Tag = "custom";
+            this.BUT_shiftup.UseVisualStyleBackColor = true;
+            this.BUT_shiftup.Click += new System.EventHandler(this.BUT_shiftup_Click);
+            // 
+            // BUT_shiftdown
+            // 
+            resources.ApplyResources(this.BUT_shiftdown, "BUT_shiftdown");
+            this.BUT_shiftdown.Name = "BUT_shiftdown";
+            this.BUT_shiftdown.Tag = "custom";
+            this.BUT_shiftdown.UseVisualStyleBackColor = true;
+            this.BUT_shiftdown.Click += new System.EventHandler(this.BUT_shiftdown_Click);
+            // 
+            // label51
+            // 
+            resources.ApplyResources(this.label51, "label51");
+            this.label51.Name = "label51";
+            // 
             // GridUI
             // 
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.label51);
+            this.Controls.Add(this.BUT_shiftdown);
+            this.Controls.Add(this.BUT_shiftup);
+            this.Controls.Add(this.BUT_shiftright);
+            this.Controls.Add(this.BUT_shiftleft);
+            this.Controls.Add(this.BUT_distminus);
+            this.Controls.Add(this.BUT_distplus);
+            this.Controls.Add(this.TXT_Distance);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.BUT_speedminus);
+            this.Controls.Add(this.BUT_speedplus);
+            this.Controls.Add(this.TXT_FlySpeed);
+            this.Controls.Add(this.label49);
+            this.Controls.Add(this.BUT_altminus);
+            this.Controls.Add(this.BUT_altplus);
+            this.Controls.Add(this.TXT_altitude);
+            this.Controls.Add(this.label48);
             this.Controls.Add(this.BUT_offsetminus);
             this.Controls.Add(this.BUT_offsetplus);
             this.Controls.Add(this.TXT_offset);
@@ -1642,5 +1794,22 @@
         private System.Windows.Forms.TextBox TXT_offset;
         private System.Windows.Forms.Button BUT_offsetminus;
         private System.Windows.Forms.Button BUT_offsetplus;
+        private System.Windows.Forms.Button BUT_altminus;
+        private System.Windows.Forms.Button BUT_altplus;
+        private System.Windows.Forms.TextBox TXT_altitude;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Button BUT_speedminus;
+        private System.Windows.Forms.Button BUT_speedplus;
+        private System.Windows.Forms.TextBox TXT_FlySpeed;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Button BUT_distminus;
+        private System.Windows.Forms.Button BUT_distplus;
+        private System.Windows.Forms.TextBox TXT_Distance;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Button BUT_shiftright;
+        private System.Windows.Forms.Button BUT_shiftleft;
+        private System.Windows.Forms.Button BUT_shiftup;
+        private System.Windows.Forms.Button BUT_shiftdown;
+        private System.Windows.Forms.Label label51;
     }
 }

@@ -678,7 +678,11 @@ namespace MissionPlanner.GCSViews
             //setup drawnpolgon
             List<PointLatLng> polygonPoints2 = new List<PointLatLng>();
             drawnpolygon = new GMapPolygon(polygonPoints2, "drawnpoly");
-            drawnpolygon.Stroke = new Pen(Color.Red, 2);
+            // @eams add / read grid line color setting
+            Color grid_color = Color.Red;
+            if (Settings.Instance["grid_color"] != null)
+                grid_color = ColorTranslator.FromHtml(Settings.Instance["grid_color"]);
+            drawnpolygon.Stroke = new Pen(grid_color, 2);   // @eams change / original is red
             drawnpolygon.Fill = Brushes.Transparent;
 
             /*

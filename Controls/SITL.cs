@@ -89,6 +89,7 @@ namespace MissionPlanner.Controls
             if (!Directory.Exists(sitldirectory))
                 Directory.CreateDirectory(sitldirectory);
 
+            this.cmb_model.SelectedIndex = 9;
         }
 
         public void Activate()
@@ -159,9 +160,25 @@ namespace MissionPlanner.Controls
                 CustomMessageBox.Show(Strings.Invalid_home_location);
                 return;
             }
-            var exepath = CheckandGetSITLImage("ArduCopter.elf");
+            var exepath = Path.Combine(sitldirectory, "ArduCopter.exe"); // CheckandGetSITLImage("ArduCopter.elf");
 
             StartSITL(exepath, "+", BuildHomeLocation(markeroverlay.Markers[0].Position, (int)NUM_heading.Value), "", (int)num_simspeed.Value);
+
+            if (File.Exists(Path.Combine(Settings.GetUserDataDirectory(), "config", "sitl.py")))
+            {
+                Thread scriptthread = new Thread(run_selected_script)
+                {
+                    IsBackground = true,
+                    Name = "Script Thread (new)"
+                };
+                scriptthread.Start();
+            }
+        }
+
+        void run_selected_script()
+        {
+            Script script = new Script();
+            script.runScript(Path.Combine(Settings.GetUserDataDirectory(), "config", "sitl.py"));
         }
 
         private void pictureBoxheli_Click(object sender, EventArgs e)

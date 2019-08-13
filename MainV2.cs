@@ -1014,7 +1014,7 @@ namespace MissionPlanner
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
-            MenuConfigTune.Visible = false;     // for users
+            MenuConfigTune.Visible = true;     // for users
             MenuStart.Visible = false;
             MenuStop.Visible = false;
             MenuReturn.Visible = false;
@@ -1606,6 +1606,7 @@ namespace MissionPlanner
                 }
 
                 // check for newer firmware
+#if false   //@eams
                 var softwares = Firmware.LoadSoftwares();
 
                 if (softwares.Count > 0)
@@ -1641,7 +1642,7 @@ namespace MissionPlanner
                         log.Error(ex);
                     }
                 }
-
+#endif
                 FlightData.CheckBatteryShow();
                 /*
                 MissionPlanner.Utilities.Tracking.AddEvent("Connect", "Connect", comPort.MAV.cs.firmware.ToString(),

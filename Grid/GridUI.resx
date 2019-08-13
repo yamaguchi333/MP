@@ -970,7 +970,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>32</value>
   </data>
   <data name="lbl_area.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1003,7 +1003,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbl_area.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>34</value>
   </data>
   <data name="label42.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3677,7 +3677,7 @@ Control-O to load form file</value>
     <value>0</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>755, 0</value>
+    <value>1003, 0</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>253, 537</value>
@@ -3695,7 +3695,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>33</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -3710,7 +3710,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 469</value>
+    <value>815, 248</value>
   </data>
   <data name="label45.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 16</value>
@@ -3731,13 +3731,13 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label45.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>26</value>
   </data>
   <data name="TXT_angle.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_angle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 463</value>
+    <value>818, 273</value>
   </data>
   <data name="TXT_angle.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -3758,7 +3758,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_angle.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>27</value>
   </data>
   <data name="BUT_angleminus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
@@ -3767,7 +3767,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_angleminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 458</value>
+    <value>932, 269</value>
   </data>
   <data name="BUT_angleminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3788,7 +3788,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_angleminus.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>28</value>
   </data>
   <data name="BUT_angleplus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
@@ -3797,7 +3797,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_angleplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 458</value>
+    <value>884, 269</value>
   </data>
   <data name="BUT_angleplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3818,7 +3818,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_angleplus.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>29</value>
   </data>
   <data name="label46.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3851,7 +3851,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label46.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>21</value>
   </data>
   <data name="label47.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3863,16 +3863,16 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label47.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 508</value>
+    <value>815, 324</value>
   </data>
   <data name="label47.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 16</value>
+    <value>99, 16</value>
   </data>
   <data name="label47.TabIndex" type="System.Int32, mscorlib">
     <value>82</value>
   </data>
   <data name="label47.Text" xml:space="preserve">
-    <value>オフセット</value>
+    <value>ラインオフセット</value>
   </data>
   <data name="&gt;&gt;label47.Name" xml:space="preserve">
     <value>label47</value>
@@ -3884,13 +3884,13 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label47.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>20</value>
   </data>
   <data name="TXT_offset.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 504</value>
+    <value>818, 349</value>
   </data>
   <data name="TXT_offset.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -3911,7 +3911,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_offset.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>19</value>
   </data>
   <data name="BUT_offsetminus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
@@ -3920,7 +3920,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_offsetminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 500</value>
+    <value>932, 344</value>
   </data>
   <data name="BUT_offsetminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3941,7 +3941,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_offsetminus.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>17</value>
   </data>
   <data name="BUT_offsetplus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
@@ -3950,7 +3950,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_offsetplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 500</value>
+    <value>884, 344</value>
   </data>
   <data name="BUT_offsetplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3971,7 +3971,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_offsetplus.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>18</value>
   </data>
   <data name="BUT_zoomOut.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 9.75pt</value>
@@ -4001,7 +4001,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_zoomOut.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>22</value>
   </data>
   <data name="BUT_zoomIn.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 9.75pt</value>
@@ -4031,7 +4031,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_zoomIn.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>23</value>
   </data>
   <data name="BUT_Close.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
@@ -4040,7 +4040,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_Close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>667, 477</value>
+    <value>686, 476</value>
   </data>
   <data name="BUT_Close.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 49</value>
@@ -4061,7 +4061,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_Close.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>24</value>
   </data>
   <data name="myButton1.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
@@ -4070,7 +4070,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="myButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>577, 476</value>
+    <value>596, 475</value>
   </data>
   <data name="myButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 49</value>
@@ -4091,13 +4091,13 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;myButton1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>25</value>
   </data>
   <data name="TRK_zoom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="TRK_zoom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>710, 0</value>
+    <value>761, 0</value>
   </data>
   <data name="TRK_zoom.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Vertical</value>
@@ -4118,13 +4118,13 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TRK_zoom.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>30</value>
   </data>
   <data name="map.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="map.Size" type="System.Drawing.Size, System.Drawing">
-    <value>704, 451</value>
+    <value>755, 451</value>
   </data>
   <data name="map.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4139,13 +4139,526 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;map.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="BUT_altminus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_altminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_altminus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>932, 41</value>
+  </data>
+  <data name="BUT_altminus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_altminus.TabIndex" type="System.Int32, mscorlib">
+    <value>89</value>
+  </data>
+  <data name="BUT_altminus.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;BUT_altminus.Name" xml:space="preserve">
+    <value>BUT_altminus</value>
+  </data>
+  <data name="&gt;&gt;BUT_altminus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_altminus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_altminus.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="BUT_altplus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_altplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_altplus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>884, 41</value>
+  </data>
+  <data name="BUT_altplus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_altplus.TabIndex" type="System.Int32, mscorlib">
+    <value>88</value>
+  </data>
+  <data name="BUT_altplus.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="&gt;&gt;BUT_altplus.Name" xml:space="preserve">
+    <value>BUT_altplus</value>
+  </data>
+  <data name="&gt;&gt;BUT_altplus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_altplus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_altplus.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="TXT_altitude.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="TXT_altitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 45</value>
+  </data>
+  <data name="TXT_altitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 26</value>
+  </data>
+  <data name="TXT_altitude.TabIndex" type="System.Int32, mscorlib">
+    <value>87</value>
+  </data>
+  <data name="TXT_altitude.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TXT_altitude.Name" xml:space="preserve">
+    <value>TXT_altitude</value>
+  </data>
+  <data name="&gt;&gt;TXT_altitude.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TXT_altitude.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TXT_altitude.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="label48.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label48.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label48.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label48.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 20</value>
+  </data>
+  <data name="label48.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 16</value>
+  </data>
+  <data name="label48.TabIndex" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <data name="label48.Text" xml:space="preserve">
+    <value>飛行高度</value>
+  </data>
+  <data name="&gt;&gt;label48.Name" xml:space="preserve">
+    <value>label48</value>
+  </data>
+  <data name="&gt;&gt;label48.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label48.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label48.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="BUT_speedminus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_speedminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_speedminus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>932, 117</value>
+  </data>
+  <data name="BUT_speedminus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_speedminus.TabIndex" type="System.Int32, mscorlib">
+    <value>93</value>
+  </data>
+  <data name="BUT_speedminus.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedminus.Name" xml:space="preserve">
+    <value>BUT_speedminus</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedminus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedminus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedminus.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="BUT_speedplus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_speedplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_speedplus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>884, 117</value>
+  </data>
+  <data name="BUT_speedplus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_speedplus.TabIndex" type="System.Int32, mscorlib">
+    <value>92</value>
+  </data>
+  <data name="BUT_speedplus.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedplus.Name" xml:space="preserve">
+    <value>BUT_speedplus</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedplus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedplus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_speedplus.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="TXT_FlySpeed.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="TXT_FlySpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 121</value>
+  </data>
+  <data name="TXT_FlySpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 26</value>
+  </data>
+  <data name="TXT_FlySpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>91</value>
+  </data>
+  <data name="TXT_FlySpeed.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TXT_FlySpeed.Name" xml:space="preserve">
+    <value>TXT_FlySpeed</value>
+  </data>
+  <data name="&gt;&gt;TXT_FlySpeed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TXT_FlySpeed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TXT_FlySpeed.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="label49.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label49.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label49.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label49.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 96</value>
+  </data>
+  <data name="label49.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 16</value>
+  </data>
+  <data name="label49.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="label49.Text" xml:space="preserve">
+    <value>飛行速度</value>
+  </data>
+  <data name="&gt;&gt;label49.Name" xml:space="preserve">
+    <value>label49</value>
+  </data>
+  <data name="&gt;&gt;label49.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label49.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label49.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="BUT_distminus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_distminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_distminus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>932, 193</value>
+  </data>
+  <data name="BUT_distminus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_distminus.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
+  <data name="BUT_distminus.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;BUT_distminus.Name" xml:space="preserve">
+    <value>BUT_distminus</value>
+  </data>
+  <data name="&gt;&gt;BUT_distminus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_distminus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_distminus.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="BUT_distplus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_distplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_distplus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>884, 193</value>
+  </data>
+  <data name="BUT_distplus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_distplus.TabIndex" type="System.Int32, mscorlib">
+    <value>96</value>
+  </data>
+  <data name="BUT_distplus.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="&gt;&gt;BUT_distplus.Name" xml:space="preserve">
+    <value>BUT_distplus</value>
+  </data>
+  <data name="&gt;&gt;BUT_distplus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_distplus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_distplus.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="TXT_Distance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="TXT_Distance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 197</value>
+  </data>
+  <data name="TXT_Distance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 26</value>
+  </data>
+  <data name="TXT_Distance.TabIndex" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <data name="TXT_Distance.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TXT_Distance.Name" xml:space="preserve">
+    <value>TXT_Distance</value>
+  </data>
+  <data name="&gt;&gt;TXT_Distance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TXT_Distance.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TXT_Distance.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label50.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label50.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label50.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label50.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 172</value>
+  </data>
+  <data name="label50.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 16</value>
+  </data>
+  <data name="label50.TabIndex" type="System.Int32, mscorlib">
+    <value>94</value>
+  </data>
+  <data name="label50.Text" xml:space="preserve">
+    <value>ライン間距離</value>
+  </data>
+  <data name="&gt;&gt;label50.Name" xml:space="preserve">
+    <value>label50</value>
+  </data>
+  <data name="&gt;&gt;label50.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label50.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label50.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="BUT_shiftright.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="BUT_shiftright.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_shiftright.Location" type="System.Drawing.Point, System.Drawing">
+    <value>925, 463</value>
+  </data>
+  <data name="BUT_shiftright.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_shiftright.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="BUT_shiftright.Text" xml:space="preserve">
+    <value>→</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftright.Name" xml:space="preserve">
+    <value>BUT_shiftright</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftright.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftright.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="BUT_shiftleft.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="BUT_shiftleft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_shiftleft.Location" type="System.Drawing.Point, System.Drawing">
+    <value>846, 463</value>
+  </data>
+  <data name="BUT_shiftleft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_shiftleft.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
+  </data>
+  <data name="BUT_shiftleft.Text" xml:space="preserve">
+    <value>←</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftleft.Name" xml:space="preserve">
+    <value>BUT_shiftleft</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftleft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftleft.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftleft.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="BUT_shiftup.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="BUT_shiftup.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_shiftup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>885, 429</value>
+  </data>
+  <data name="BUT_shiftup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_shiftup.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="BUT_shiftup.Text" xml:space="preserve">
+    <value>↑</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftup.Name" xml:space="preserve">
+    <value>BUT_shiftup</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftup.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftup.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="BUT_shiftdown.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="BUT_shiftdown.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_shiftdown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>885, 497</value>
+  </data>
+  <data name="BUT_shiftdown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_shiftdown.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="BUT_shiftdown.Text" xml:space="preserve">
+    <value>↓</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftdown.Name" xml:space="preserve">
+    <value>BUT_shiftdown</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftdown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftdown.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_shiftdown.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label51.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label51.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label51.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label51.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 404</value>
+  </data>
+  <data name="label51.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 16</value>
+  </data>
+  <data name="label51.TabIndex" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
+  <data name="label51.Text" xml:space="preserve">
+    <value>グリッド位置調整</value>
+  </data>
+  <data name="&gt;&gt;label51.Name" xml:space="preserve">
+    <value>label51</value>
+  </data>
+  <data name="&gt;&gt;label51.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label51.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label51.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>755, 537</value>
+    <value>1259, 537</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>飛行ルート設定</value>
