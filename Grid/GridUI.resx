@@ -4658,7 +4658,7 @@ Control-O to load form file</value>
     <value>True</value>
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1259, 537</value>
+    <value>994, 537</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>飛行ルート設定</value>

@@ -62,6 +62,7 @@ namespace MissionPlanner.Grid
         bool isMouseDraging = false;
 
         Color grid_color = Color.Red;    // @eams add
+        int grid_type = 2;  // @eams add
 
         // GridUI
         public GridUI(GridPlugin plugin)
@@ -134,6 +135,10 @@ namespace MissionPlanner.Grid
             // @eams add / grid line color setting
             if (plugin.Host.config["grid_color"] != null)
                 grid_color = ColorTranslator.FromHtml(plugin.Host.config["grid_color"].ToString());
+
+            // @eams add / grid type
+            if (plugin.Host.config["grid_type"] != null)
+                grid_type = int.Parse(plugin.Host.config["grid_type"]);
         }
 
         bool deleteLastLAND = false;    // @eams add
@@ -172,7 +177,7 @@ namespace MissionPlanner.Grid
                 CHK_toandland.Checked = true;
             }
 
-            //            BUT_Accept_Click(this, null);   // @eams add
+//            BUT_Accept_Click(this, null);   // @eams add
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
@@ -623,11 +628,31 @@ namespace MissionPlanner.Grid
             {
 #if true
                 double angle = (double)NUM_angle.Value;
-                grid = Utilities.Grid.CreateGrid2(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
-                    (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
-                    (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
-                    (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
-                    (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
+
+                switch (grid_type)
+                {
+                    case 2:
+                        grid = Utilities.Grid.CreateGrid2(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
+                            (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
+                            (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
+                            (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
+                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
+                        break;
+                    case 3:
+                        grid = Utilities.Grid.CreateGrid3(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
+                            (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
+                            (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
+                            (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
+                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
+                        break;
+                    default:
+                        grid = Utilities.Grid.CreateGrid(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
+                            (double)NUM_Distance.Value, (double)NUM_spacing.Value, (double)NUM_angle.Value,
+                            (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
+                            (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
+                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation);
+                        break;
+                }
 
                 NUM_angle.Value = (decimal)angle;
                 TXT_headinghold.Text = (Math.Round(NUM_angle.Value)).ToString();
@@ -905,7 +930,10 @@ namespace MissionPlanner.Grid
         {
             if (CHK_copter_headinghold.Checked)
             {
-                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
+                if (grid_type != 3)
+                {
+                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
+                }
             }
 
             if (NUM_copter_delay.Value > 0)
@@ -1705,6 +1733,27 @@ namespace MissionPlanner.Grid
                                     plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_DIGICAM_CONTROL, 1, 0, 0, 0, 0, 1, 0,
                                         gridobject);
                                 }
+                                if (grid_type == 3)
+                                {
+                                    AddWP(plla.Lng, plla.Lat, plla.Alt);
+                                    // open
+                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                                        (float)num_setservono.Value,
+                                        (float)num_setservolow.Value, 0, 0, 0, 0, 0,
+                                        gridobject);
+
+                                    // turn
+                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                        (float)1,
+                                        0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                        gridobject);
+
+                                    // close
+                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                                        (float)num_setservono.Value,
+                                        (float)num_setservohigh.Value, 0, 0, 0, 0, 0,
+                                        gridobject);
+                                }
                             }
                             else
                             {
@@ -1791,15 +1840,46 @@ namespace MissionPlanner.Grid
                                             plla.Alt != lastplla.Alt)
                                             AddWP(plla.Lng, plla.Lat, plla.Alt);
 
+                                        // open
                                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                             (float)num_setservono.Value,
                                             (float)num_setservolow.Value, 0, 0, 0, 0, 0,
                                             gridobject);
+
+                                        if (grid_type == 3)
+                                        {
+                                            // turn
+                                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                                (float)1,
+                                                0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                                gridobject);
+
+                                            // close
+                                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                                                (float)num_setservono.Value,
+                                                (float)num_setservohigh.Value, 0, 0, 0, 0, 0,
+                                                gridobject);
+                                        }
                                     }
                                     else if (plla.Tag == "ME")
                                     {
                                         AddWP(plla.Lng, plla.Lat, plla.Alt);
 
+                                        if (grid_type == 3)
+                                        {
+                                            // open
+                                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                                                (float)num_setservono.Value,
+                                                (float)num_setservolow.Value, 0, 0, 0, 0, 0,
+                                                gridobject);
+
+                                            // turn
+                                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                                (float)1,
+                                                0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                                gridobject);
+
+                                        }
                                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                             (float)num_setservono.Value,
                                             (float)num_setservohigh.Value, 0, 0, 0, 0, 0,

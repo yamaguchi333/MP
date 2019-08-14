@@ -74,7 +74,7 @@ namespace MissionPlanner.Utilities
             List<utmpos> utmpositions = utmpos.ToList(PointLatLngAlt.ToUTM(utmzone, polygon), utmzone);
 
             var lanes = (width / distance);
-            var start = (int) ((lanes / 2) * -1);
+            var start = (int)((lanes / 2) * -1);
             var end = start * -1;
 
             for (int lane = start; lane <= end; lane++)
@@ -102,11 +102,11 @@ namespace MissionPlanner.Utilities
 
             utmpos oldpos = utmpos.Zero;
 
-            for (int a=0;a<utmpositions.Count-2;a++)
+            for (int a = 0; a < utmpositions.Count - 2; a++)
             {
                 var prevCenter = utmpositions[a];
-                var currCenter = utmpositions[a+1];
-                var nextCenter = utmpositions[a+2];
+                var currCenter = utmpositions[a + 1];
+                var nextCenter = utmpositions[a + 2];
 
                 var l1bearing = prevCenter.GetBearing(currCenter);
                 var l2bearing = currCenter.GetBearing(nextCenter);
@@ -198,7 +198,7 @@ namespace MissionPlanner.Utilities
                 startpos, shutter, minLaneSeparation, leadin, HomeLocation, 0, false);
         }
         public static List<PointLatLngAlt> CreateGrid2(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, ref double angle,
-            double overshoot1,double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation, double offset, bool first)
+            double overshoot1, double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation, double offset, bool first)
         {
             //DoDebug();
 
@@ -211,7 +211,6 @@ namespace MissionPlanner.Utilities
             if (polygon.Count == 0)
                 return new List<PointLatLngAlt>();
 
-            
             // Make a non round number in case of corner cases
             if (minLaneSeparation != 0)
                 minLaneSeparation += 0.5F;
@@ -247,7 +246,7 @@ namespace MissionPlanner.Utilities
             double x = area.MidWidth;
             double y = area.MidHeight;
 
-            addtomap(new utmpos(x, y, utmzone),"Base");
+            addtomap(new utmpos(x, y, utmzone), "Base");
 
             //重心方向へポリゴンを縮小する @eams
             utmpos gravity = new utmpos(x, y, utmzone);
@@ -257,7 +256,7 @@ namespace MissionPlanner.Utilities
                 double yp = utmpositions[i].y;
                 double deg = utmpositions[i].GetBearing(gravity);
                 newpos(ref xp, ref yp, deg, offset);
-                utmpositions[i] = new utmpos (xp, yp, utmzone);
+                utmpositions[i] = new utmpos(xp, yp, utmzone);
             }
 
             //初回のみポリゴンの最長辺に角度を自動的に合わせる @eams
@@ -303,7 +302,7 @@ namespace MissionPlanner.Utilities
 
             utmpos right = new utmpos(xb2, yb2, utmzone);
 
-            addtomap(right,"right");
+            addtomap(right, "right");
 
             // set start point to left hand side
             x = xb1;
@@ -316,7 +315,7 @@ namespace MissionPlanner.Utilities
                 // copy the start point to generate the end point
                 double nx = x;
                 double ny = y;
-                newpos(ref nx, ref ny, angle, diagdist + distance*2);
+                newpos(ref nx, ref ny, angle, diagdist + distance * 2);
 //                newpos(ref nx, ref ny, angle, diagdist);
 
                 linelatlng line = new linelatlng();
@@ -325,7 +324,7 @@ namespace MissionPlanner.Utilities
                 line.basepnt = new utmpos(x, y, utmzone);
                 grid.Add(line);
 
-               // addtomap(line);
+                // addtomap(line);
 
                 newpos(ref x, ref y, angle + 90, distance);
                 lines++;
@@ -518,7 +517,7 @@ namespace MissionPlanner.Utilities
                             double ay = closest.p1.y;
 
                             newpos(ref ax, ref ay, angle, d);
-                            var utmpos1 = new utmpos(ax, ay, utmzone) {Tag = "M"};
+                            var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "M" };
                             addtomap(utmpos1, "M");
                             ans.Add(utmpos1);
                         }
@@ -528,7 +527,7 @@ namespace MissionPlanner.Utilities
 
                     if (overshoot1 < 0)
                     {
-                        var p2 = new utmpos(newend) {Tag = "ME"};
+                        var p2 = new utmpos(newend) { Tag = "ME" };
                         addtomap(p2, "ME");
                         ans.Add(p2);
                     }
@@ -560,7 +559,7 @@ namespace MissionPlanner.Utilities
 
                     if (leadin < 0)
                     {
-                        var p2 = new utmpos(newstart) {Tag = "SM"};
+                        var p2 = new utmpos(newstart) { Tag = "SM" };
                         addtomap(p2, "SM");
                         ans.Add(p2);
                     }
@@ -581,7 +580,7 @@ namespace MissionPlanner.Utilities
                             double ay = closest.p2.y;
 
                             newpos(ref ax, ref ay, angle, -d);
-                            var utmpos2 = new utmpos(ax, ay, utmzone) {Tag = "M"};
+                            var utmpos2 = new utmpos(ax, ay, utmzone) { Tag = "M" };
                             addtomap(utmpos2, "M");
                             ans.Add(utmpos2);
                         }
@@ -601,7 +600,347 @@ namespace MissionPlanner.Utilities
                         addtomap(closest.p1, "ME");
                         ans.Add(closest.p1);
                     }
-            
+
+                    newend.Tag = "E";
+                    addtomap(newend, "E");
+                    ans.Add(newend);
+
+                    lastpnt = closest.p1;
+
+                    grid.Remove(closest);
+                    if (grid.Count == 0)
+                        break;
+                    closest = findClosestLine(newend, grid, minLaneSeparationINMeters, angle);
+                }
+            }
+
+            // set the altitude on all points
+            ans.ForEach(plla => { plla.Alt = altitude; });
+
+            return ans;
+        }
+
+        public static List<PointLatLngAlt> CreateGrid3(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, ref double angle,
+            double overshoot1, double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation, double offset, bool first)
+        {
+            //DoDebug();
+
+            if (spacing < 0.1 && spacing != 0)
+                spacing = 0.1;
+
+            if (distance < 0.1)
+                distance = 0.1;
+
+            if (polygon.Count == 0)
+                return new List<PointLatLngAlt>();
+
+
+            // Make a non round number in case of corner cases
+            if (minLaneSeparation != 0)
+                minLaneSeparation += 0.5F;
+            // Lane Separation in meters
+            double minLaneSeparationINMeters = minLaneSeparation * distance;
+
+            List<PointLatLngAlt> ans = new List<PointLatLngAlt>();
+
+            // utm zone distance calcs will be done in
+            int utmzone = polygon[0].GetUTMZone();
+
+            // utm position list
+            List<utmpos> utmpositions = utmpos.ToList(PointLatLngAlt.ToUTM(utmzone, polygon), utmzone);
+
+            // close the loop if its not already
+            if (utmpositions[0] != utmpositions[utmpositions.Count - 1])
+                utmpositions.Add(utmpositions[0]); // make a full loop
+
+            // get mins/maxs of coverage area
+            Rect area = getPolyMinMax(utmpositions);
+
+            // get initial grid
+
+            // used to determine the size of the outer grid area
+            double diagdist = area.DiagDistance();
+
+            // somewhere to store out generated lines
+            List<linelatlng> grid = new List<linelatlng>();
+            // number of lines we need
+            int lines = 0;
+
+            // get start point middle
+            double x = area.MidWidth;
+            double y = area.MidHeight;
+            utmpos pos_base = new utmpos(x, y, utmzone);
+
+            addtomap(new utmpos(x, y, utmzone), "Base");
+#if true
+            //重心方向へポリゴンを縮小する @eams
+            utmpos gravity = new utmpos(x, y, utmzone);
+            for (int i = 0; i < utmpositions.Count(); i++)
+            {
+                double xp = utmpositions[i].x;
+                double yp = utmpositions[i].y;
+                double deg = utmpositions[i].GetBearing(gravity);
+                newpos(ref xp, ref yp, deg, offset);
+                utmpositions[i] = new utmpos(xp, yp, utmzone);
+            }
+
+            //初回のみポリゴンの最長辺に角度を自動的に合わせる @eams
+            if (first)
+            {
+                double dist_max = 0.0;
+                int index = 0;
+                for (int i = 1; i < utmpositions.Count(); i++)
+                {
+                    double dist = utmpositions[i].GetDistance(utmpositions[i - 1]);
+                    if (dist > dist_max)
+                    {
+                        dist_max = dist;
+                        index = i - 1;
+                    }
+                    angle = utmpositions[index].GetBearing(utmpositions[index + 1]);
+                }
+            }
+#endif
+            // calc the number of lines
+            lines = CalcLineNumber(pos_base, utmpositions, angle - 90, distance/2);
+            if (lines == 0)
+            {
+                lines = 1;
+            }
+
+            // calc new base point
+            utmpos pos_base2 = newpos(pos_base, angle - 90, distance*((lines - 1)/2.0));
+
+            // calc all center pos
+            List<utmpos> pos_bases = new List<utmpos>();
+            for (int i = 0; i < lines; i++)
+            {
+                utmpos pos = newpos(pos_base2, angle + 90, distance*i);
+                pos_bases.Add(pos);
+            }
+
+            // calc points per line
+            foreach (var item in pos_bases)
+            {
+                // set temporary both edges position in line
+                utmpos edge_b = newpos(item, angle + 180, diagdist / 2 + distance);
+                utmpos edge_t = newpos(edge_b, angle, diagdist + distance * 2);
+                linelatlng line = new linelatlng();
+                line.p1 = edge_b;
+                line.p2 = edge_t;
+                line.basepnt = edge_b;
+
+                // find intersections with our polygon
+                double closestdistance = double.MaxValue;
+                double farestdistance = double.MinValue;
+
+                utmpos closestpoint = utmpos.Zero;
+                utmpos farestpoint = utmpos.Zero;
+
+                // somewhere to store our intersections
+                List<utmpos> matchs = new List<utmpos>();
+
+                // find grid lines
+                int b = -1;
+                int crosses = 0;
+                utmpos newutmpos = utmpos.Zero;
+                foreach (utmpos pnt in utmpositions)
+                {
+                    b++;
+                    if (b == 0)
+                    {
+                        continue;
+                    }
+                    newutmpos = FindLineIntersection(utmpositions[b - 1], utmpositions[b], line.p1, line.p2);
+                    if (!newutmpos.IsZero)
+                    {
+                        crosses++;
+                        matchs.Add(newutmpos);
+                        if (closestdistance > line.p1.GetDistance(newutmpos))
+                        {
+                            closestpoint.y = newutmpos.y;
+                            closestpoint.x = newutmpos.x;
+                            closestpoint.zone = newutmpos.zone;
+                            closestdistance = line.p1.GetDistance(newutmpos);
+                        }
+                        if (farestdistance < line.p1.GetDistance(newutmpos))
+                        {
+                            farestpoint.y = newutmpos.y;
+                            farestpoint.x = newutmpos.x;
+                            farestpoint.zone = newutmpos.zone;
+                            farestdistance = line.p1.GetDistance(newutmpos);
+                        }
+                    }
+                }
+                if (crosses == 2) // simple start and finish
+                {
+                    line.p1 = closestpoint;
+                    line.p2 = farestpoint;
+                }
+                else
+                {
+                    return ans;
+                }
+                grid.Add(line);
+#if false
+                // calc fixed center pos
+                var dist = line.p1.GetDistance(line.p2);
+                var pos_fix_center = newpos(line.p1, angle + 180, dist / 2);    // fixed center in this line
+                int points = CalcLineNumber(pos_fix_center, utmpositions, angle, distance/2);
+#endif
+            }
+
+            if (grid.Count == 0)
+                return ans;
+
+            // pick start positon based on initial point rectangle
+            utmpos startposutm;
+
+            switch (startpos)
+            {
+                default:
+                case StartPosition.Home:
+                    startposutm = new utmpos(HomeLocation);
+                    break;
+                case StartPosition.BottomLeft:
+                    startposutm = new utmpos(area.Left, area.Bottom, utmzone);
+                    break;
+                case StartPosition.BottomRight:
+                    startposutm = new utmpos(area.Right, area.Bottom, utmzone);
+                    break;
+                case StartPosition.TopLeft:
+                    startposutm = new utmpos(area.Left, area.Top, utmzone);
+                    break;
+                case StartPosition.TopRight:
+                    startposutm = new utmpos(area.Right, area.Top, utmzone);
+                    break;
+                case StartPosition.Point:
+                    startposutm = new utmpos(StartPointLatLngAlt);
+                    break;
+            }
+
+            // find the closes polygon point based from our startpos selection
+            startposutm = findClosestPoint(startposutm, utmpositions);
+
+            // find closest line point to startpos
+            linelatlng closest = findClosestLine(startposutm, grid, 0 /*Lane separation does not apply to starting point*/, angle);
+
+            utmpos lastpnt;
+
+            // get the closes point from the line we picked
+            if (closest.p1.GetDistance(startposutm) < closest.p2.GetDistance(startposutm))
+            {
+                lastpnt = closest.p1;
+            }
+            else
+            {
+                lastpnt = closest.p2;
+            }
+
+            // S =  start
+            // E = end
+            // ME = middle end
+            // SM = start middle
+
+            while (grid.Count > 0)
+            {
+                if (closest.p1.GetDistance(closest.p2) <= distance)
+                {
+                    grid.Remove(closest);
+                    if (grid.Count == 0)
+                        break;
+
+                    closest = findClosestLine(startposutm, grid, minLaneSeparationINMeters, angle);
+                    continue;
+                }
+                // calc offset per grid
+                double grid_len = closest.p1.GetDistance(closest.p2);
+                double inner = ((grid_len % distance) + distance) / 2;
+                spacing = distance;
+
+                // for each line, check which end of the line is the next closest
+                if (closest.p1.GetDistance(lastpnt) < closest.p2.GetDistance(lastpnt))
+                {
+                    utmpos newstart = newpos(closest.p1, angle, inner);
+                    utmpos newend = newpos(closest.p2, angle, -inner);
+                    double dist = Math.Round(newstart.GetDistance(newend), MidpointRounding.AwayFromZero);
+
+                    newstart.Tag = "S";
+                    addtomap(newstart, "S");
+                    ans.Add(newstart);
+
+                    newstart.Tag = "SM";
+                    addtomap(newstart, "SM");
+                    ans.Add(newstart);
+
+                    if (spacing > 0)
+                    {
+//                        for (double d = (spacing - ((newstart.GetDistance(newend)) % spacing));
+                        for (double d = spacing;
+                            d < dist;
+                            d += spacing)
+                        {
+                            double ax = newstart.x;
+                            double ay = newstart.y;
+
+                            newpos(ref ax, ref ay, angle, d);
+                            var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "M" };
+                            addtomap(utmpos1, "M");
+                            ans.Add(utmpos1);
+                        }
+                    }
+
+                    newend.Tag = "ME";
+                    addtomap(newend, "ME");
+                    ans.Add(newend);
+
+                    newend.Tag = "E";
+                    addtomap(newend, "E");
+                    ans.Add(newend);
+
+                    lastpnt = closest.p2;
+
+                    grid.Remove(closest);
+                    if (grid.Count == 0)
+                        break;
+
+                    closest = findClosestLine(newend, grid, minLaneSeparationINMeters, angle);
+                }
+                else
+                {
+                    utmpos newstart = newpos(closest.p2, angle, -inner);
+                    utmpos newend = newpos(closest.p1, angle, inner);
+                    double dist = Math.Round(newstart.GetDistance(newend), MidpointRounding.AwayFromZero);
+
+                    newstart.Tag = "S";
+                    addtomap(newstart, "S");
+                    ans.Add(newstart);
+
+                    newstart.Tag = "SM";
+                    addtomap(newstart, "SM");
+                    ans.Add(newstart);
+
+                    if (spacing > 0)
+                    {
+//                        for (double d = (spacing - ((newstart.GetDistance(newend)) % spacing));
+                        for (double d = spacing;
+                            d < dist;
+                            d += spacing)
+                        {
+                            double ax = newstart.x;
+                            double ay = newstart.y;
+
+                            newpos(ref ax, ref ay, angle, -d);
+                            var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "M" };
+                            addtomap(utmpos1, "M");
+                            ans.Add(utmpos1);
+                        }
+                    }
+
+                    newend.Tag = "ME";
+                    addtomap(newend, "ME");
+                    ans.Add(newend);
+
                     newend.Tag = "E";
                     addtomap(newend, "E");
                     ans.Add(newend);
@@ -640,7 +979,7 @@ namespace MissionPlanner.Utilities
                 maxy = Math.Max(maxy, pnt.y);
             }
 
-            return new Rect(minx, maxy, maxx - minx,miny - maxy);
+            return new Rect(minx, maxy, maxx - minx, miny - maxy);
         }
 
         // polar to rectangular
@@ -810,7 +1149,7 @@ namespace MissionPlanner.Utilities
             {
                 // Calculate intersection point
                 utmpos p = FindLineIntersectionExtension(line.p1, line.p2, start_perpendicular_line, stop_perpendicular_line);
-                
+
                 // Store it
                 intersectedPoints[p] = line;
 
@@ -820,7 +1159,7 @@ namespace MissionPlanner.Utilities
                 if (!ordered_min_to_max.ContainsKey(distance_p))
                     ordered_min_to_max.Add(distance_p, p);
             }
-     
+
             // Acquire keys and sort them.
             List<double> ordered_keys = ordered_min_to_max.Keys.ToList();
             ordered_keys.Sort();
@@ -838,7 +1177,7 @@ namespace MissionPlanner.Utilities
 
             // If no line is selected (because all of them are closer than minDistance, then get the farest one
             if (key == double.MaxValue)
-                key = ordered_keys[ordered_keys.Count-1];
+                key = ordered_keys[ordered_keys.Count - 1];
 
             var filteredlist = intersectedPoints.Where(a => a.Key.GetDistance(start) >= key);
 
@@ -883,5 +1222,20 @@ namespace MissionPlanner.Utilities
             return inside;
         }
 
+        static int CalcLineNumber(utmpos p, List<utmpos> poly, double angle, double distance)
+        {
+            int count = 0;
+            while (true)
+            {
+                utmpos left = newpos(p, angle, distance * (count + 1));
+                utmpos right = newpos(p, angle + 180, distance * (count + 1));
+                if (!PointInPolygon(left, poly) && !PointInPolygon(right, poly))
+                {
+                    break;
+                }
+                count++;
+            }
+            return count;
+        }
     }
 }

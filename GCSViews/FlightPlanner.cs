@@ -896,6 +896,8 @@ namespace MissionPlanner.GCSViews
             Visible = false;
 
             config(false);
+            TXT_loiterrad.Text = "" + (double.Parse(Settings.Instance["grid_dist"])/2).ToString();  // @eams add
+//            TXT_WPRad.Text = "0";   // @eams add
 
             quickadd = false;
 
