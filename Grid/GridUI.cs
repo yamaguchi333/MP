@@ -236,7 +236,7 @@ namespace MissionPlanner.Grid
 
             CMB_camera.Text = griddata.camera;
             NUM_altitude.Value = griddata.alt;
-            TXT_altitude.Text = Decimal.Round(NUM_altitude.Value, 0, MidpointRounding.AwayFromZero).ToString();   //@eams add
+            TXT_altitude.Text = Decimal.Round(NUM_altitude.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
             NUM_angle.Value = griddata.angle;
             CHK_camdirection.Checked = griddata.camdir;
             CHK_usespeed.Checked = griddata.usespeed;
@@ -348,7 +348,7 @@ namespace MissionPlanner.Grid
             if (plugin.Host.config.ContainsKey("grid_camera"))
             {
                 loadsetting("grid_alt", NUM_altitude);
-                TXT_altitude.Text = Decimal.Round(NUM_altitude.Value, 0, MidpointRounding.AwayFromZero).ToString();   //@eams add
+                TXT_altitude.Text = Decimal.Round(NUM_altitude.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
                 loadsetting("grid_angle", NUM_angle);       // @eams enabled
                 loadsetting("grid_camdir", CHK_camdirection);
                 loadsetting("grid_usespeed", CHK_usespeed);
@@ -645,6 +645,13 @@ namespace MissionPlanner.Grid
                             (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
                             (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
                         break;
+                    case 4:
+                        grid = Utilities.Grid.CreateGrid4(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
+                            (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
+                            (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
+                            (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
+                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
+                        break;
                     default:
                         grid = Utilities.Grid.CreateGrid(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
                             (double)NUM_Distance.Value, (double)NUM_spacing.Value, (double)NUM_angle.Value,
@@ -918,7 +925,7 @@ namespace MissionPlanner.Grid
             seconds = ((routetotal * 1000.0) / (flyspeedms));
             lbl_photoevery.Text = secondsToNice(((double)NUM_spacing.Value / flyspeedms));
             map.HoldInvalidation = false;
-            if (!isMouseDown && sender != NUM_angle)
+            if (!isMouseDown && sender != NUM_angle && sender != BUT_shiftup)    // @eams change
                 map.ZoomAndCenterMarkers("routes");
 
             //            CalcHeadingHold();    //@eams diabled
@@ -930,7 +937,7 @@ namespace MissionPlanner.Grid
         {
             if (CHK_copter_headinghold.Checked)
             {
-                if (grid_type != 3)
+                if (grid_type != 3 || grid_type != 4)
                 {
                     plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
                 }
@@ -1733,7 +1740,7 @@ namespace MissionPlanner.Grid
                                     plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_DIGICAM_CONTROL, 1, 0, 0, 0, 0, 1, 0,
                                         gridobject);
                                 }
-                                if (grid_type == 3)
+                                if (grid_type == 3 || grid_type == 4)
                                 {
                                     AddWP(plla.Lng, plla.Lat, plla.Alt);
                                     // open
@@ -1846,7 +1853,7 @@ namespace MissionPlanner.Grid
                                             (float)num_setservolow.Value, 0, 0, 0, 0, 0,
                                             gridobject);
 
-                                        if (grid_type == 3)
+                                        if (grid_type == 3 || grid_type == 4)
                                         {
                                             // turn
                                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
@@ -1865,7 +1872,7 @@ namespace MissionPlanner.Grid
                                     {
                                         AddWP(plla.Lng, plla.Lat, plla.Alt);
 
-                                        if (grid_type == 3)
+                                        if (grid_type == 3 || grid_type == 4)
                                         {
                                             // open
                                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
@@ -2067,30 +2074,57 @@ namespace MissionPlanner.Grid
             }
         }
 #endif
-        private int incrementValue = 1;
-        private static int def_increment = 1;
+        private double incrementValue = 0;
         private static int def_interval = 800;
+        TextBox target = null;
 
-        public int CurrentValue
+        public double CurrentValue
         {
             set
             {
-                if (value > 359)
+                if (target == null)
                 {
-                    value = 0;
+                    return;
                 }
-                if (value < 0)
+                if (target == TXT_angle)
                 {
-                    value = 359;
+                    if (value > 359)
+                    {
+                        value = 0;
+                    }
+                    if (value < 0)
+                    {
+                        value = 359;
+                    }
+                    TXT_angle.Text = ((int)value).ToString();
+//                    TXT_headinghold.Text = value.ToString();
+                    NUM_angle.Value = (decimal)value;
                 }
-                TXT_angle.Text = value.ToString();
-                //                TXT_headinghold.Text = value.ToString();
-                NUM_angle.Value = value;
+                else
+                {
+                    if (value < 0.0)
+                    {
+                        value = 0.0;
+                    }
+                    target.Text = value.ToString("f1");
+                    if (target == TXT_altitude)
+                    {
+                        NUM_altitude.Value = Convert.ToDecimal(value);
+                    }
+                    else if (target == TXT_FlySpeed)
+                    {
+                        NUM_UpDownFlySpeed.Value = Convert.ToDecimal(value);
+                    }
+                    else if (target == TXT_Distance)
+                    {
+                        NUM_Distance.Value = Convert.ToDecimal(value);
+                    }
+                }
             }
             get
             {
-                int ret;
-                int.TryParse(TXT_angle.Text, out ret);
+                double ret;
+                double.TryParse(target.Text, out ret);
                 return ret;
             }
         }
@@ -2114,20 +2148,24 @@ namespace MissionPlanner.Grid
                 counter = 10;
                 timer1.Interval = 55;
             }
+//            CurrentValueAngle += incrementValue;
             CurrentValue += incrementValue;
+
         }
 
         private void BUT_angle_Down(object sender, MouseEventArgs e)
         {
+            target = TXT_angle;
             CurrentValue += (sender == BUT_angleplus) ? 1 : -1;
             timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_angleplus) ? 1 : -1;
             timer1.Start();
-            incrementValue = (sender == BUT_angleplus) ? def_increment : -def_increment;
         }
 
         private void BUT_angle_Up(object sender, MouseEventArgs e)
         {
             incrementValue = 0;
+            target = null;
         }
 
         private void BUT_Close_Click(object sender, EventArgs e)
@@ -2170,16 +2208,16 @@ namespace MissionPlanner.Grid
             {
             }
         }
-
+#if false
         private void BUT_offsetplus_Click(object sender, EventArgs e)
         {
             double value;
             double.TryParse(TXT_offset.Text, out value);
             value += 0.1;
             TXT_offset.Text = value.ToString();
-        }
+    }
 
-        private void BUT_offsetminus_Click(object sender, EventArgs e)
+    private void BUT_offsetminus_Click(object sender, EventArgs e)
         {
             double value;
             double.TryParse(TXT_offset.Text, out value);
@@ -2190,29 +2228,60 @@ namespace MissionPlanner.Grid
             }
             TXT_offset.Text = value.ToString();
         }
+#endif
 
+        private void BUT_offset_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_offset;
+            CurrentValue += (sender == BUT_offsetplus) ? 0.1 : -0.1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_offsetplus) ? 0.1 : -0.1;
+            timer1.Start();
+        }
+
+        private void BUT_offset_MouseUp(object sender, MouseEventArgs e)
+        {
+            incrementValue = 0;
+            target = null;
+        }
+#if false
         private void BUT_altplus_Click(object sender, EventArgs e)
         {
-            int value;
-            int.TryParse(TXT_altitude.Text, out value);
-            value += 1;
-            TXT_altitude.Text = value.ToString();
+            double value;
+            double.TryParse(TXT_altitude.Text, out value);
+            value += 0.1;
+            TXT_altitude.Text = value.ToString("f1");
             NUM_altitude.Value = (Decimal)value;
         }
 
         private void BUT_altminus_Click(object sender, EventArgs e)
         {
-            int value;
-            int.TryParse(TXT_altitude.Text, out value);
-            value -= 1;
+            double value;
+            double.TryParse(TXT_altitude.Text, out value);
+            value -= 0.1;
             if (value < 0)
             {
                 value = 0;
             }
-            TXT_altitude.Text = value.ToString();
+            TXT_altitude.Text = value.ToString("f1");
             NUM_altitude.Value = (Decimal)value;
         }
+#endif
+        private void BUT_alt_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_altitude;
+            CurrentValue += (sender == BUT_altplus) ? 0.1 : -0.1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_altplus) ? 0.1 : -0.1;
+            timer1.Start();
+        }
 
+        private void BUT_alt_MouseUp(object sender, MouseEventArgs e)
+        {
+            incrementValue = 0;
+            target = null;
+        }
+#if false
         private void BUT_speedplus_Click(object sender, EventArgs e)
         {
             double value;
@@ -2234,7 +2303,22 @@ namespace MissionPlanner.Grid
             TXT_FlySpeed.Text = value.ToString();
             NUM_UpDownFlySpeed.Value = (Decimal)value;
         }
+#endif
+        private void BUT_speed_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_FlySpeed;
+            CurrentValue += (sender == BUT_speedplus) ? 0.1 : -0.1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_speedplus) ? 0.1 : -0.1;
+            timer1.Start();
+        }
 
+        private void BUT_speed_MouseUp(object sender, MouseEventArgs e)
+        {
+            incrementValue = 0;
+            target = null;
+        }
+#if false
         private void BUT_distplus_Click(object sender, EventArgs e)
         {
             double value;
@@ -2256,20 +2340,35 @@ namespace MissionPlanner.Grid
             TXT_Distance.Text = value.ToString();
             NUM_Distance.Value = (Decimal)value;
         }
+#endif
+        private void BUT_dist_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_Distance;
+            CurrentValue += (sender == BUT_distplus) ? 0.1 : -0.1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_distplus) ? 0.1 : -0.1;
+            timer1.Start();
+        }
+
+        private void BUT_dist_MouseUp(object sender, MouseEventArgs e)
+        {
+            incrementValue = 0;
+            target = null;
+        }
 
         private void grid_shift(int angle)
         {
             List<PointLatLngAlt> newgrid = new List<PointLatLngAlt>();
             foreach (var point in list)
             {
-                newgrid.Add(point.newpos(angle, 1));
+                newgrid.Add(point.newpos(angle, 0.5));
             }
             list.Clear();
             foreach (var point in newgrid)
             {
                 list.Add(point);
             }
-            domainUpDown1_ValueChanged(null, null);
+            domainUpDown1_ValueChanged(BUT_shiftup, null);
         }
 
         private void BUT_shiftup_Click(object sender, EventArgs e)

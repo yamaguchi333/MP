@@ -1782,6 +1782,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\launchSettings.json" />
+    <None Include="Resources\btn_flight_ng.jpg" />
+    <None Include="Resources\btn_flight_ok.jpg" />
+    <None Include="Resources\btn_sim.jpg" />
+    <None Include="Resources\btn_setting.jpg" />
+    <None Include="Resources\btn_plan.jpg" />
+    <None Include="Resources\btn_status.jpg" />
+    <None Include="Resources\btn_cancel.jpg" />
     <None Include="Resources\EAMS_logo.jpg" />
     <None Include="Resources\btn_zoomout.jpg" />
     <None Include="Resources\btn_zoomin.jpg" />

@@ -708,7 +708,7 @@ namespace MissionPlanner
 
             if (splash != null)
             {
-                this.Text = splash?.Text;
+                this.Text = splash?.Text + "  Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.";  //@eams change
                 titlebar = splash?.Text;
             }
 
@@ -1014,7 +1014,7 @@ namespace MissionPlanner
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
-            MenuConfigTune.Visible = true;     // for users
+            MenuConfigTune.Visible = false;     // for users
             MenuStart.Visible = false;
             MenuStop.Visible = false;
             MenuReturn.Visible = false;
@@ -1670,7 +1670,7 @@ namespace MissionPlanner
                 // save the baudrate for this port
                 Settings.Instance[_connectionControl.CMB_serialport.Text + "_BAUD"] = _connectionControl.CMB_baudrate.Text;
 
-                this.Text = titlebar + " " + comPort.MAV.VersionString;
+                this.Text = titlebar + " " + comPort.MAV.VersionString + "  Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.";    // @eams change
 
                 // refresh config window if needed
                 if (MyView.current != null)

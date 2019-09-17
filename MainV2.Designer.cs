@@ -110,7 +110,9 @@ namespace MissionPlanner
             // MenuFlightData
             // 
             resources.ApplyResources(this.MenuFlightData, "MenuFlightData");
+            this.MenuFlightData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.MenuFlightData.ForeColor = System.Drawing.Color.White;
+            this.MenuFlightData.Image = global::MissionPlanner.Properties.Resources.btn_status;
             this.MenuFlightData.Margin = new System.Windows.Forms.Padding(0);
             this.MenuFlightData.Name = "MenuFlightData";
             this.MenuFlightData.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
@@ -119,7 +121,9 @@ namespace MissionPlanner
             // MenuFlightPlanner
             // 
             resources.ApplyResources(this.MenuFlightPlanner, "MenuFlightPlanner");
+            this.MenuFlightPlanner.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.MenuFlightPlanner.ForeColor = System.Drawing.Color.White;
+            this.MenuFlightPlanner.Image = global::MissionPlanner.Properties.Resources.btn_plan;
             this.MenuFlightPlanner.Margin = new System.Windows.Forms.Padding(0);
             this.MenuFlightPlanner.Name = "MenuFlightPlanner";
             this.MenuFlightPlanner.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
@@ -128,7 +132,9 @@ namespace MissionPlanner
             // MenuInitConfig
             // 
             resources.ApplyResources(this.MenuInitConfig, "MenuInitConfig");
+            this.MenuInitConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.MenuInitConfig.ForeColor = System.Drawing.Color.White;
+            this.MenuInitConfig.Image = global::MissionPlanner.Properties.Resources.btn_setting;
             this.MenuInitConfig.Margin = new System.Windows.Forms.Padding(0);
             this.MenuInitConfig.Name = "MenuInitConfig";
             this.MenuInitConfig.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
@@ -146,7 +152,9 @@ namespace MissionPlanner
             // MenuSimulation
             // 
             resources.ApplyResources(this.MenuSimulation, "MenuSimulation");
+            this.MenuSimulation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.MenuSimulation.ForeColor = System.Drawing.Color.White;
+            this.MenuSimulation.Image = global::MissionPlanner.Properties.Resources.btn_sim;
             this.MenuSimulation.Margin = new System.Windows.Forms.Padding(0);
             this.MenuSimulation.Name = "MenuSimulation";
             this.MenuSimulation.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
@@ -245,10 +253,9 @@ namespace MissionPlanner
             // 
             this.MenuEams.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.MenuEams.BackColor = System.Drawing.Color.Transparent;
-            this.MenuEams.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.MenuEams.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.MenuEams, "MenuEams");
             this.MenuEams.ForeColor = System.Drawing.Color.White;
-            this.MenuEams.Image = global::MissionPlanner.Properties.Resources.EAMS_logo;
             this.MenuEams.Margin = new System.Windows.Forms.Padding(0);
             this.MenuEams.Name = "MenuEams";
             this.MenuEams.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;

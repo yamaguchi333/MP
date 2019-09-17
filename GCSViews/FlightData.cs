@@ -4967,13 +4967,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         {
             if (state)
             {
-                LabelPreArm.Text = "飛行OK";
-                LabelPreArm.BackColor = Color.Green;
+//                LabelPreArm.Text = "飛行OK";
+//                LabelPreArm.BackColor = Color.Green;
+                LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ok;
             }
             else
             {
-                LabelPreArm.Text = "飛行NG";
-                LabelPreArm.BackColor = Color.Red;
+//                LabelPreArm.Text = "飛行NG";
+//                LabelPreArm.BackColor = Color.Red;
+                LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ng;
             }
         }
 
