@@ -708,7 +708,7 @@ namespace MissionPlanner
 
             if (splash != null)
             {
-                this.Text = splash?.Text + "  Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.";  //@eams change
+                this.Text = splash?.Text;   // + "  Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.";  //@eams change
                 titlebar = splash?.Text;
             }
 

@@ -1037,6 +1037,9 @@ namespace MissionPlanner.GCSViews
                         case "RTL":
                             mode_jp = "帰還モード";
                             break;
+                        case "LAND":
+                            mode_jp = "自動着陸モード";
+                            break;
                         default:
                             mode_jp = "";
                             break;

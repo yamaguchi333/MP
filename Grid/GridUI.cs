@@ -63,6 +63,7 @@ namespace MissionPlanner.Grid
 
         Color grid_color = Color.Red;    // @eams add
         int grid_type = 2;  // @eams add
+        double area_unit = 5.0;  // @eams add
 
         // GridUI
         public GridUI(GridPlugin plugin)
@@ -139,6 +140,10 @@ namespace MissionPlanner.Grid
             // @eams add / grid type
             if (plugin.Host.config["grid_type"] != null)
                 grid_type = int.Parse(plugin.Host.config["grid_type"]);
+
+            // @eams add / area unit
+            if (plugin.Host.config["area_unit"] != null)
+                area_unit = double.Parse(plugin.Host.config["area_unit"]);
         }
 
         bool deleteLastLAND = false;    // @eams add
@@ -650,7 +655,7 @@ namespace MissionPlanner.Grid
                             (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
                             (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
                             (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
-                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
+                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate, area_unit);
                         break;
                     default:
                         grid = Utilities.Grid.CreateGrid(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
@@ -933,13 +938,23 @@ namespace MissionPlanner.Grid
             map.Invalidate();
         }
 
+        bool addwp_firsttime = true;
         private void AddWP(double Lng, double Lat, double Alt, object gridobject = null)
         {
             if (CHK_copter_headinghold.Checked)
             {
-                if (grid_type != 3 || grid_type != 4)
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
+                if (grid_type == 3 || grid_type == 4)
                 {
-                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
+                    if (addwp_firsttime)
+                    {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)3.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        addwp_firsttime = false;
+                    }
+                    else
+                    {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                    }
                 }
             }
 
@@ -1624,6 +1639,7 @@ namespace MissionPlanner.Grid
 
         private void BUT_Accept_Click(object sender, EventArgs e)
         {
+            addwp_firsttime = true;
             if (grid != null && grid.Count > 0)
             {
                 MainV2.instance.FlightPlanner.quickadd = true;

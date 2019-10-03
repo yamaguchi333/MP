@@ -471,6 +471,26 @@ namespace MissionPlanner.Utilities
             // find closest line point to startpos
             linelatlng closest = findClosestLine(startposutm, grid, 0 /*Lane separation does not apply to starting point*/, angle);
 
+            //startposからclosestのどちらのポイントが近いかで角度を反転する。@eams add
+            if (closest.p1.GetDistance(startposutm) > closest.p2.GetDistance(startposutm))
+            {
+                //p1のほうが遠かったら180度反転してp1とp2をすべて入れ替える。
+                angle = AddAngle(angle, 180);
+
+                linelatlng buf;
+                for (int i = 0; i < grid.Count(); i++)
+                {
+                    buf = grid[i];
+                    buf.p1 = grid[i].p2;
+                    buf.p2 = grid[i].p1;
+                    grid[i] = buf;
+                }
+                buf = closest;
+                buf.p1 = closest.p2;
+                buf.p2 = closest.p1;
+                closest = buf;
+            }
+
             utmpos lastpnt;
 
             // get the closes point from the line we picked
@@ -841,6 +861,26 @@ namespace MissionPlanner.Utilities
             // find closest line point to startpos
             linelatlng closest = findClosestLine(startposutm, grid, 0 /*Lane separation does not apply to starting point*/, angle);
 
+            //startposからclosestのどちらのポイントが近いかで角度を反転する。@eams add
+            if (closest.p1.GetDistance(startposutm) > closest.p2.GetDistance(startposutm))
+            {
+                //p1のほうが遠かったら180度反転してp1とp2をすべて入れ替える。
+                angle = AddAngle(angle, 180);
+
+                linelatlng buf;
+                for (int i = 0; i < grid.Count(); i++)
+                {
+                    buf = grid[i];
+                    buf.p1 = grid[i].p2;
+                    buf.p2 = grid[i].p1;
+                    grid[i] = buf;
+                }
+                buf = closest;
+                buf.p1 = closest.p2;
+                buf.p2 = closest.p1;
+                closest = buf;
+            }
+
             utmpos lastpnt;
 
             // get the closes point from the line we picked
@@ -977,7 +1017,7 @@ namespace MissionPlanner.Utilities
         }
 
         public static List<PointLatLngAlt> CreateGrid4(List<PointLatLngAlt> polygon, double altitude, double distance, double spacing, ref double angle,
-            double overshoot1, double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation, double offset, bool first)
+            double overshoot1, double overshoot2, StartPosition startpos, bool shutter, float minLaneSeparation, float leadin, PointLatLngAlt HomeLocation, double offset, bool first, double area_unit)
         {
             //DoDebug();
 
@@ -1068,8 +1108,9 @@ namespace MissionPlanner.Utilities
 
             //オフセットした後のポリゴンの面積を求める。
             var polygonarea = calcpolygonarea(utmpositions);
-            //面積を五捨六入し、理想のポイント数を求める。
-            int ideal_point_num = (int)Math.Floor(polygonarea / 1000 + 0.4);
+            //config指定面積から理想のポイント数を求める。
+//            int ideal_point_num = (int)Math.Floor(polygonarea / 1000 + 0.4);  //旧：10a固定で五捨六入
+            int ideal_point_num = (int)Math.Floor((polygonarea / (area_unit*100.0)) + 0.5);
             if (ideal_point_num <= 0)
             {
                 ideal_point_num = 1;
@@ -1225,12 +1266,12 @@ namespace MissionPlanner.Utilities
             // find closest line point to startpos
             linelatlng closest = findClosestLine(startposutm, grid, 0 /*Lane separation does not apply to starting point*/, angle);
 
-            //startposからclosestのどちらのポイントが近いかで角度を反転する。
+            //startposからclosestのどちらのポイントが近いかで角度を反転する。@eams add
             if (closest.p1.GetDistance(startposutm) > closest.p2.GetDistance(startposutm))
             {
                 //p1のほうが遠かったら180度反転してp1とp2をすべて入れ替える。
                 angle = AddAngle(angle, 180);
-#if true
+
                 linelatlng buf;
                 for (int i = 0; i < grid.Count(); i++)
                 {
@@ -1243,7 +1284,6 @@ namespace MissionPlanner.Utilities
                 buf.p1 = closest.p2;
                 buf.p2 = closest.p1;
                 closest = buf;
-#endif
             }
 
             utmpos lastpnt;
@@ -1370,6 +1410,10 @@ namespace MissionPlanner.Utilities
 
                                 newpos(ref ax, ref ay, angle, d);
                                 var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "SM" };
+                                if (utmpos1 == newend)
+                                {
+                                    break;
+                                }
                                 addtomap(utmpos1, "SM");
                                 ans.Add(utmpos1);
                             }
@@ -1418,6 +1462,10 @@ namespace MissionPlanner.Utilities
 
                                 newpos(ref ax, ref ay, angle, -d);
                                 var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "SM" };
+                                if (utmpos1 == newend)
+                                {
+                                    break;
+                                }
                                 addtomap(utmpos1, "SM");
                                 ans.Add(utmpos1);
                             }
