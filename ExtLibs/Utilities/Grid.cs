@@ -1400,15 +1400,18 @@ namespace MissionPlanner.Utilities
 
                         if (spacing > 0)
                         {
-                            //                        for (double d = (spacing - ((newstart.GetDistance(newend)) % spacing));
+#if false
                             for (double d = spacing;
                                 d < dist;
                                 d += spacing)
+#endif
+                            for (int d = 1; d <= point_num_per_line - 2; d++)
                             {
                                 double ax = newstart.x;
                                 double ay = newstart.y;
 
-                                newpos(ref ax, ref ay, angle, d);
+//                                newpos(ref ax, ref ay, angle, d);
+                                newpos(ref ax, ref ay, angle, d * spacing);
                                 var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "SM" };
                                 if (utmpos1 == newend)
                                 {
@@ -1418,7 +1421,7 @@ namespace MissionPlanner.Utilities
                                 ans.Add(utmpos1);
                             }
                         }
-#if true
+
                         newend.Tag = "ME";
                         addtomap(newend, "ME");
                         ans.Add(newend);
@@ -1426,7 +1429,7 @@ namespace MissionPlanner.Utilities
                         newend.Tag = "E";
                         addtomap(newend, "E");
                         ans.Add(newend);
-#endif
+
                         lastpnt = closest.p2;
 
                         grid.Remove(closest);
@@ -1452,15 +1455,18 @@ namespace MissionPlanner.Utilities
 
                         if (spacing > 0)
                         {
-                            //                        for (double d = (spacing - ((newstart.GetDistance(newend)) % spacing));
+#if false
                             for (double d = spacing;
                                 d < dist;
                                 d += spacing)
                             {
+#endif
+                            for (int d = 1; d <= point_num_per_line - 2; d++)
+                            {
                                 double ax = newstart.x;
                                 double ay = newstart.y;
 
-                                newpos(ref ax, ref ay, angle, -d);
+                                newpos(ref ax, ref ay, angle, -d * spacing);
                                 var utmpos1 = new utmpos(ax, ay, utmzone) { Tag = "SM" };
                                 if (utmpos1 == newend)
                                 {
@@ -1470,7 +1476,6 @@ namespace MissionPlanner.Utilities
                                 ans.Add(utmpos1);
                             }
                         }
-#if true
 
                         newend.Tag = "ME";
                         addtomap(newend, "ME");
@@ -1479,7 +1484,7 @@ namespace MissionPlanner.Utilities
                         newend.Tag = "E";
                         addtomap(newend, "E");
                         ans.Add(newend);
-#endif
+
                         lastpnt = closest.p1;
 
                         grid.Remove(closest);

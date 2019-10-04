@@ -431,10 +431,12 @@ namespace MissionPlanner
 
         public void updateLayout(object sender, EventArgs e)
         {
+#if false   //@eams
             MenuSimulation.Visible = DisplayConfiguration.displaySimulation;
             MenuTerminal.Visible = DisplayConfiguration.displayTerminal;
             MenuHelp.Visible = DisplayConfiguration.displayHelp;
             MenuDonate.Visible = DisplayConfiguration.displayDonate;
+#endif
             MissionPlanner.Controls.BackstageView.BackstageView.Advanced = DisplayConfiguration.isAdvancedMode;
 
             if (Settings.Instance.GetBoolean("menu_autohide") != DisplayConfiguration.autoHideMenuForce)
@@ -1014,7 +1016,7 @@ namespace MissionPlanner
             MenuDonate.Visible = false;
             MenuTerminal.Visible = false;
             MenuHelp.Visible = false;
-            MenuConfigTune.Visible = false;     // for users
+//            MenuConfigTune.Visible = false;     // for users
             MenuStart.Visible = false;
             MenuStop.Visible = false;
             MenuReturn.Visible = false;

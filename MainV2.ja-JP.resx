@@ -157,13 +157,13 @@
     <value>フライト・プランナー</value>
   </data>
   <data name="MenuConfigTune.Text" xml:space="preserve">
-    <value>設定/調整</value>
+    <value />
   </data>
   <data name="MenuFlightData.ToolTipText" xml:space="preserve">
     <value>フライト・データ</value>
   </data>
   <data name="MenuConfigTune.ToolTipText" xml:space="preserve">
-    <value>ソフトウェア設定</value>
+    <value />
   </data>
   <data name="MenuSimulation.Text" xml:space="preserve">
     <value>シミュレーション</value>
