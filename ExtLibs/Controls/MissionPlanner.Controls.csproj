@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +300,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\btn_ok.jpg" />
+    <None Include="Resources\btn_cancel.jpg" />
     <Content Include="Resources\guagebg.jpg" />
     <Content Include="Resources\iconWarning32.png" />
     <Content Include="Resources\iconWarning48.png" />
