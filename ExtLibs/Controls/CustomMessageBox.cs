@@ -241,13 +241,16 @@ namespace MissionPlanner.MsgBox
             switch (buttons)
             {
                 case MessageBoxButtons.OK:
-                    var but = new MyButton
-                                  {
-                                      Size = new Size(75, 23),
-                                      Text = "OK",
-                                      Left = msgBoxFrm.Width - 100 - FORM_X_MARGIN,
-                                      Top = msgBoxFrm.Height - 40 - FORM_Y_MARGIN - titleHeight
-                                  };
+//                    var but = new MyButton
+                    var but = new Button
+                    {
+//                        Size = new Size(75, 23),
+                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_ok,
+                        Size = new Size(75, 42),
+//                        Text = "OK",
+                        Left = msgBoxFrm.Width - 100 - FORM_X_MARGIN,
+                        Top = msgBoxFrm.Height - 40 - FORM_Y_MARGIN - titleHeight
+                    };
 
                     but.Click += delegate { _state = DialogResult.OK; msgBoxFrm.Close(); };
                     msgBoxFrm.Controls.Add(but);
@@ -259,24 +262,32 @@ namespace MissionPlanner.MsgBox
                     if (msgBoxFrm.Width < (75 * 2 + FORM_X_MARGIN * 3))
                         msgBoxFrm.Width = (75 * 2 + FORM_X_MARGIN * 3);
 
-                    var butyes = new MyButton
+//                    var butyes = new MyButton
+                    var butyes = new Button
                     {
-                        Size = new Size(75, 23),
-                        Text = "Yes",
+//                        Size = new Size(75, 23),
+                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_ok,
+                        Size = new Size(75, 42),
+//                        Text = "Yes",
                         Left = msgBoxFrm.Width - 75 * 2 - FORM_X_MARGIN * 2,
-                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+//                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butyes.Click += delegate { _state = DialogResult.Yes; msgBoxFrm.Close(); };
                     msgBoxFrm.Controls.Add(butyes);
                     msgBoxFrm.AcceptButton = butyes;
 
-                    var butno = new MyButton
+//                    var butno = new MyButton
+                    var butno = new Button
                     {
-                        Size = new Size(75, 23),
-                        Text = "No",
+//                        Size = new Size(75, 23),
+                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_cancel,
+                        Size = new Size(75, 42),
+//                        Text = "No",
                         Left = msgBoxFrm.Width - 75 - FORM_X_MARGIN,
-                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+//                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butno.Click += delegate { _state = DialogResult.No; msgBoxFrm.Close(); };
@@ -289,24 +300,32 @@ namespace MissionPlanner.MsgBox
                     if (msgBoxFrm.Width < (75 * 2 + FORM_X_MARGIN * 3))
                         msgBoxFrm.Width = (75 * 2 + FORM_X_MARGIN * 3);
 
-                    var butok = new MyButton
+//                    var butok = new MyButton
+                    var butok = new Button
                     {
-                        Size = new Size(75, 23),
-                        Text = "OK",
+//                        Size = new Size(75, 23),
+                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_ok,
+                        Size = new Size(75, 42),
+//                        Text = "OK",
                         Left = msgBoxFrm.Width - 75 * 2 - FORM_X_MARGIN * 2,
-                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+//                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butok.Click += delegate { _state = DialogResult.OK; msgBoxFrm.Close(); };
                     msgBoxFrm.Controls.Add(butok);
                     msgBoxFrm.AcceptButton = butok;
 
-                    var butcancel = new MyButton
+//                    var butcancel = new MyButton
+                    var butcancel = new Button
                     {
-                        Size = new Size(75, 23),
-                        Text = "Cancel",
+//                        Size = new Size(75, 23),
+                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_cancel,
+                        Size = new Size(75, 42),
+//                        Text = "Cancel",
                         Left = msgBoxFrm.Width - 75 - FORM_X_MARGIN,
-                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+//                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butcancel.Click += delegate { _state = DialogResult.Cancel; msgBoxFrm.Close(); };

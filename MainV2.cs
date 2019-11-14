@@ -1672,7 +1672,7 @@ namespace MissionPlanner
                 // save the baudrate for this port
                 Settings.Instance[_connectionControl.CMB_serialport.Text + "_BAUD"] = _connectionControl.CMB_baudrate.Text;
 
-                this.Text = titlebar + " " + comPort.MAV.VersionString + "  Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.";    // @eams change
+                this.Text = titlebar + " " + comPort.MAV.VersionString;     // + "  Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.";    // @eams change
 
                 // refresh config window if needed
                 if (MyView.current != null)
@@ -4199,7 +4199,16 @@ namespace MissionPlanner
                         return;
                     }
                 }
+#if false
+                if (MainV2.instance.FlightData.last_failsafe)
+                {
+                    MainV2.comPort.setMode("GUIDED");
+                }
+                else
+                {
+#endif
                 MainV2.comPort.setMode("Loiter");
+//                }
 
                 // force redraw map
                 await Task.Delay(update_wp_delay+200);
@@ -4208,9 +4217,19 @@ namespace MissionPlanner
 //                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
                 GCSViews.FlightData.mymap.Refresh();
 
-                if (CustomMessageBox.Show("正しいミッションが表示されていますか？ 周囲の安全を確認してください。\n\n離陸してよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (MainV2.instance.FlightData.last_failsafe)
                 {
-                    return;
+                    if (CustomMessageBox.Show("フェイルセーフからのレジューム飛行を行います。\n\n離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    if (CustomMessageBox.Show("正しいミッションが表示されていますか？ 周囲の安全を確認してください。\n\n離陸してよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                    {
+                        return;
+                    }
                 }
 
                 // arm the MAV
@@ -4232,6 +4251,13 @@ namespace MissionPlanner
                     return;
                 }
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
+
+                // branch resume on failsafe
+                if (MainV2.instance.FlightData.last_failsafe)
+                {
+                    MainV2.instance.FlightData.ResumeOnFailSafe();
+                    return;
+                }
 
                 // Mission Start
                 try
@@ -4266,6 +4292,7 @@ namespace MissionPlanner
             MenuReturnClick(sender);
         }
 
+
         public void MenuReturnClick(object sender)
         {
             Type sender_type = sender.GetType();
@@ -4292,6 +4319,9 @@ namespace MissionPlanner
                     return;
                 }
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+
+                // ignore failsafe resume process
+                MainV2.instance.FlightData.resume_flag = true;
 
                 // set mode RTL
                 MainV2.comPort.setMode("RTL");
@@ -4403,7 +4433,7 @@ namespace MissionPlanner
 
                 // update failsafe display
 //                MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
-                MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags== ekf_status_flags);
+                MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags == ekf_status_flags);
 
                 // update flight start button state
 //                MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
@@ -4411,6 +4441,22 @@ namespace MissionPlanner
 
                 // update wpno display
                 MainV2.instance.FlightData.LabelWPno_ChangeNumber(Convert.ToInt32(MainV2.comPort.MAV.cs.wpno));
+
+                // update total flight time display
+                if (MainV2.comPort.BaseStream.IsOpen)
+                {
+                    if (MainV2.comPort.MAV.param.ContainsKey("STAT_FLTTIME"))
+                    {
+                        int time = int.Parse(MainV2.comPort.MAV.param["STAT_FLTTIME"].ToString());
+                        MainV2.instance.FlightData.LabelTime_ChangeTime(time);
+                    }
+                }
+
+                // update next WP distance display
+                if (MainV2.comPort.MAV.cs.armed)
+                {
+                    MainV2.instance.FlightData.LabelNextWPdist_ChangeDist(MainV2.comPort.MAV.cs.wp_dist);
+                }
             }
             catch (Exception ex)
             {

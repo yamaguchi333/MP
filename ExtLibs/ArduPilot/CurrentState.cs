@@ -1507,7 +1507,7 @@ namespace MissionPlanner
         private DateTime lastupdate = DateTime.Now;
 
         private DateTime lastsecondcounter = DateTime.Now;
-        private PointLatLngAlt lastpos = new PointLatLngAlt();
+        public PointLatLngAlt lastpos = new PointLatLngAlt();
 
         DateTime lastdata = DateTime.MinValue;
 

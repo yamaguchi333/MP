@@ -26,6 +26,7 @@ using WebCamService;
 using ZedGraph;
 using LogAnalyzer = MissionPlanner.Utilities.LogAnalyzer;
 using MissionPlanner.Maps;
+using System.Threading.Tasks;
 
 // written by michael oborne
 
@@ -1105,6 +1106,39 @@ namespace MissionPlanner.GCSViews
                     else
                     {
                         labelMessage.Text = mes;
+                    }
+
+                    // @eams check resume point and failsafe
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
+                    {
+                        // force servo to close
+                        float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
+                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+                        MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
+
+                        if (!resume_flag)
+                        {
+                            var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
+                            if (MainV2.comPort.MAV.cs.alt >= rtl_alt*0.95)
+                            {
+                                resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
+                                resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
+                                resume_pos.Alt = MainV2.comPort.MAV.cs.alt;
+                                resume_flag = true;
+                            }
+
+                            string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
+                            if (lastwp == "-1")
+                                lastwp = "1";
+
+                            lastwpno = int.Parse(lastwp);
+
+                            last_failsafe = MainV2.comPort.MAV.cs.failsafe;
+                        }
+                    }
+                    else
+                    {
+                        resume_flag = false;
                     }
 
                     CheckAndBindPreFlightData();
@@ -4274,7 +4308,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                             }
 
                             timeout = 0;
-                            while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt - 2))
+                            while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt*0.95))
                             {
                                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, lastwpdata.alt);
                                 Thread.Sleep(1000);
@@ -4996,6 +5030,228 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             else
             {
                 LabelWPno.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// 積算飛行時間表示の更新
+        /// <param name="time">積算飛行時間</param>
+        /// </summary>
+        public void LabelTime_ChangeTime(int time)
+        {
+            LabelTime.Text = time.ToString() + " (sec)";
+        }
+
+        /// <summary>
+        /// 次WP距離表示の更新
+        /// <param name="time">積算飛行時間</param>
+        /// </summary>
+        public void LabelNextWPdist_ChangeDist(float dist)
+        {
+            LabelNextWPdist.Text = dist.ToString("F1") + " (m)";
+        }
+
+        private int lastwpno = 0;
+        private PointLatLngAlt resume_pos = new PointLatLngAlt();
+        public bool resume_flag = false;
+        public bool last_failsafe = false;
+
+        /// <summary>
+        /// フェイルセーフからのレジューム
+        /// </summary>
+        public async void ResumeOnFailSafe()
+        {
+            if (!last_failsafe)
+            {
+                return;
+            }
+
+            try
+            {
+#if false
+                // connect MUAV
+                if (!MainV2.comPort.BaseStream.IsOpen)
+                {
+                    MainV2.instance.Connect();
+                }
+
+                string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
+                if (lastwp == "-1")
+                    lastwp = "1";
+
+                int lastwpno = int.Parse(lastwp);
+#endif
+                // get parameters
+#if false
+                float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
+                float grid_speed = Settings.Instance.GetFloat("grid_speed");
+                int grid_startup_delay = Settings.Instance.GetInt32("grid_startup_delay");
+                float grid_angle = Settings.Instance.GetFloat("grid_angle");
+#endif
+                // get our target wp
+                var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
+
+                Locationwp gotohere = new Locationwp();
+
+                //Guidedモード直後にWP表示を正しく表示させるため
+                gotohere.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
+                gotohere.alt = lastwpdata.alt;
+                gotohere.lat = resume_pos.Lat;
+                gotohere.lng = resume_pos.Lng;
+                MainV2.comPort.setGuidedModeWP(gotohere);
+
+                MainV2.comPort.setMode("GUIDED");
+                await Task.Delay(1000);
+                Application.DoEvents();
+#if false
+                // force redraw map
+                await Task.Delay(MainV2.update_wp_delay+200);
+//                GCSViews.FlightData.mymap.Refresh();
+                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("WPOverlay");
+//                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
+                GCSViews.FlightData.mymap.Refresh();
+
+                // arm the MAV
+                try
+                {
+                    bool ans = MainV2.comPort.doARM(true);
+                    if (ans == false)
+                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.ErrorNoResponce, Strings.ERROR);
+                }
+
+                if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+                {
+                    CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
+                    return;
+                }
+
+                // set SERVO7_FUNCTION auto @eams
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
+#endif
+                // take off
+                int timeout = 0;
+                while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt * 0.95))
+                {
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, lastwpdata.alt);
+                    await Task.Delay(1000);
+                    Application.DoEvents();
+                    timeout++;
+
+                    if (timeout > 40)
+                    {
+                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        return;
+                    }
+                }
+
+                // get wp data
+                List<Locationwp> cmds = new List<Locationwp>();
+                var wpcount = MainV2.comPort.getWPCount();
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    var wpdata = MainV2.comPort.getWP(a);
+                    cmds.Add(wpdata);
+                }
+
+                // DO_SET_SERVO
+                float servohigh = 1000;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                    {
+                        servohigh = cmds[a].p2;
+                        break;
+                    }
+                }
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+
+                // DO_CHANGE_SPEED
+                float grid_speed = 5;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_CHANGE_SPEED)
+                    {
+                        grid_speed = cmds[a].p2;
+                        break;
+                    }
+                }
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed, 0, 0, 0, 0, 0);
+
+                // startup delay
+                int grid_startup_delay = 0;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DELAY)
+                    {
+                        grid_startup_delay = (int)cmds[a].p1;
+                        break;
+                    }
+                }
+                await Task.Delay(grid_startup_delay * 1000);
+
+                // CONDTION_YAW
+                float grid_angle = 0;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
+                    {
+                        grid_angle = cmds[a].p1;
+                        break;
+                    }
+                }
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
+
+                // 3sec delay
+                await Task.Delay(3000);
+
+                // re-set guided WP
+                MainV2.comPort.setGuidedModeWP(gotohere);
+                await Task.Delay(1000);
+                Application.DoEvents();
+
+                // check reaching to guided WP
+                timeout = 0;
+                while (MainV2.comPort.MAV.cs.wp_dist > 0)
+                {
+                    await Task.Delay(1000);
+                    Application.DoEvents();
+                    timeout++;
+
+                    if (timeout > 40)
+                    {
+                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        return;
+                    }
+                }
+
+                // set resume point wp
+                MainV2.comPort.setWPCurrent((ushort)lastwpno);
+
+                // auto 
+                timeout = 0;
+                while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
+                {
+                    MainV2.comPort.setMode("AUTO");
+                    await Task.Delay(1000);
+                    Application.DoEvents();
+                    timeout++;
+
+                    if (timeout > 30)
+                    {
+                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        return;
+                    }
+                }
+                last_failsafe = false;
+                lastwpno = 0;
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show(Strings.CommandFailed + "\n" + ex.ToString(), Strings.ERROR);
             }
         }
     }
