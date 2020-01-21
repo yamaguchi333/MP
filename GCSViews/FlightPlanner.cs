@@ -1819,7 +1819,7 @@ namespace MissionPlanner.GCSViews
             return GetCommandList().AsReadOnly();
         }
 
-        List<Locationwp> GetCommandList()
+        public List<Locationwp> GetCommandList()    //@eams change to public
         {
             List<Locationwp> commands = new List<Locationwp>();
 

@@ -4217,7 +4217,8 @@ namespace MissionPlanner
 //                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
                 GCSViews.FlightData.mymap.Refresh();
 
-                if (MainV2.instance.FlightData.last_failsafe)
+//                if (MainV2.instance.FlightData.last_failsafe)
+                if (MainV2.instance.FlightData.resume_flag)
                 {
                     if (CustomMessageBox.Show("フェイルセーフからのレジューム飛行を行います。\n\n離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                     {
@@ -4253,7 +4254,8 @@ namespace MissionPlanner
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
 
                 // branch resume on failsafe
-                if (MainV2.instance.FlightData.last_failsafe)
+//                if (MainV2.instance.FlightData.last_failsafe)
+                if (MainV2.instance.FlightData.resume_flag)
                 {
                     MainV2.instance.FlightData.ResumeOnFailSafe();
                     return;
@@ -4321,7 +4323,7 @@ namespace MissionPlanner
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
 
                 // ignore failsafe resume process
-                MainV2.instance.FlightData.resume_flag = true;
+//                MainV2.instance.FlightData.resume_flag = true;
 
                 // set mode RTL
                 MainV2.comPort.setMode("RTL");

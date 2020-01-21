@@ -1018,57 +1018,70 @@ namespace MissionPlanner.GCSViews
                 {
                     // @eams update mode display
                     string mode_jp = "";
-                    switch (MainV2.comPort.MAV.cs.mode.ToUpper())
+                    string mode_jp_resume = "";
+                    if (resume_flag)
                     {
-                        case "LOITER":
-                            mode_jp = "GPSモード";
-                            break;
-                        case "ALTHOLD":
-                            mode_jp = "高度維持モード";
-                            break;
-                        case "STABILIZE":
-                            mode_jp = "マニュアルモード";
-                            break;
-                        case "AUTO":
-                            mode_jp = "自動飛行モード";
-                            break;
-                        case "ZIGZAG":
-                            mode_jp = "2点間飛行モード";
-                            break;
-                        case "RTL":
-                            mode_jp = "帰還モード";
-                            break;
-                        case "LAND":
-                            mode_jp = "自動着陸モード";
-                            break;
-                        default:
-                            mode_jp = "";
-                            break;
+                        mode_jp = "レジューム飛行中";
+                        mode_jp_resume = "レジューム飛行中";
+                    }
+                    else
+                    {
+                        mode_jp_resume = "";
+                        switch (MainV2.comPort.MAV.cs.mode.ToUpper())
+                        {
+                            case "LOITER":
+                                mode_jp = "GPSモード";
+                                break;
+                            case "ALTHOLD":
+                                mode_jp = "高度維持モード";
+                                break;
+                            case "STABILIZE":
+                                mode_jp = "マニュアルモード";
+                                break;
+                            case "AUTO":
+                                mode_jp = "自動飛行モード";
+                                break;
+                            case "ZIGZAG":
+                                mode_jp = "2点間飛行モード";
+                                break;
+                            case "RTL":
+                                mode_jp = "帰還モード";
+                                break;
+                            case "LAND":
+                                mode_jp = "自動着陸モード";
+                                break;
+                            default:
+                                mode_jp = "";
+                                break;
+                        }
                     }
                     if (labelMode.InvokeRequired)
                     {
                         Invoke((MethodInvoker)(() => labelMode.Text = mode_jp));
+                        Invoke((MethodInvoker)(() => labelResume.Text = mode_jp_resume));
                     }
                     else
                     {
                         labelMode.Text = mode_jp;
+                        labelResume.Text = mode_jp_resume;
                     }
 
                     // @eams update arming display
-                    if (labelArm.InvokeRequired)
+                    if (MainV2.comPort.MAV.cs.armed)
                     {
-                        if (MainV2.comPort.MAV.cs.armed)
-                        {
-                            Invoke((MethodInvoker)(() => labelArm.Text = "プロペラ回転中"));
-                        }
-                        else
-                        {
-                            Invoke((MethodInvoker)(() => labelArm.Text = "プロペラ停止中"));
-                        }
+                        mode_jp = "プロペラ回転中";
                     }
                     else
                     {
-                        labelMode.Text = MainV2.comPort.MAV.cs.mode;
+                        mode_jp = "プロペラ停止中";
+                    }
+                    if (labelArm.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() => labelArm.Text = mode_jp));
+                    }
+                    else
+                    {
+                        labelArm.Text = mode_jp;
                     }
 
                     // @eams update message high display
@@ -1109,7 +1122,16 @@ namespace MissionPlanner.GCSViews
                     }
 
                     // @eams check resume point and failsafe
-                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
+                    // search first & end waypoint no in current mission
+                    var commands = MainV2.instance.FlightPlanner.GetCommandList();
+                    int firstwpno = commands.FindIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT);
+                    int endwpno = commands.FindLastIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT);
+                    string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
+                    if (lastwp == "-1")
+                        lastwp = "1";
+                    var curwpno = int.Parse(lastwp);
+
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL" && curwpno >= firstwpno && curwpno <= endwpno)
                     {
                         // force servo to close
                         float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
@@ -1127,13 +1149,8 @@ namespace MissionPlanner.GCSViews
                                 resume_flag = true;
                             }
 
-                            string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
-                            if (lastwp == "-1")
-                                lastwp = "1";
-
-                            lastwpno = int.Parse(lastwp);
-
-                            last_failsafe = MainV2.comPort.MAV.cs.failsafe;
+                            lastwpno = curwpno;
+//                            last_failsafe = MainV2.comPort.MAV.cs.failsafe;
                         }
                     }
                     else
@@ -1537,9 +1554,15 @@ namespace MissionPlanner.GCSViews
                             // draw guide mode point for only main mav
                             if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided" && MainV2.comPort.MAV.GuidedMode.x != 0)
                             {
+#if true    // @eams change
+                                addpolygonmarker("自動飛行再開ポイント", MainV2.comPort.MAV.GuidedMode.y,
+                                    MainV2.comPort.MAV.GuidedMode.x, (int)MainV2.comPort.MAV.GuidedMode.z, Color.Blue,
+                                    routes);
+#else
                                 addpolygonmarker("Guided Mode", MainV2.comPort.MAV.GuidedMode.y,
                                     MainV2.comPort.MAV.GuidedMode.x, (int)MainV2.comPort.MAV.GuidedMode.z, Color.Blue,
                                     routes);
+#endif
                             }
 
                             // draw all icons for all connected mavs
@@ -5039,12 +5062,12 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         /// </summary>
         public void LabelTime_ChangeTime(int time)
         {
-            LabelTime.Text = time.ToString() + " (sec)";
+            LabelTime.Text = (time/3600).ToString("F2") + " (h)";
         }
 
         /// <summary>
         /// 次WP距離表示の更新
-        /// <param name="time">積算飛行時間</param>
+        /// <param name="dist">次WP距離</param>
         /// </summary>
         public void LabelNextWPdist_ChangeDist(float dist)
         {
@@ -5054,18 +5077,19 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         private int lastwpno = 0;
         private PointLatLngAlt resume_pos = new PointLatLngAlt();
         public bool resume_flag = false;
-        public bool last_failsafe = false;
+//        public bool last_failsafe = false;
 
         /// <summary>
         /// フェイルセーフからのレジューム
         /// </summary>
         public async void ResumeOnFailSafe()
         {
+#if false
             if (!last_failsafe)
             {
                 return;
             }
-
+#endif
             try
             {
 #if false
@@ -5246,7 +5270,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         return;
                     }
                 }
-                last_failsafe = false;
+//                last_failsafe = false;
                 lastwpno = 0;
             }
             catch (Exception ex)
