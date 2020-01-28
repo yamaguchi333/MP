@@ -1019,41 +1019,47 @@ namespace MissionPlanner.GCSViews
                     // @eams update mode display
                     string mode_jp = "";
                     string mode_jp_resume = "";
-                    if (resume_flag)
+                    if (resume_flag >= 1)
                     {
-                        mode_jp = "レジューム飛行中";
-                        mode_jp_resume = "レジューム飛行中";
+                        mode_jp_resume = "レジューム中";
                     }
                     else
                     {
                         mode_jp_resume = "";
-                        switch (MainV2.comPort.MAV.cs.mode.ToUpper())
-                        {
-                            case "LOITER":
-                                mode_jp = "GPSモード";
-                                break;
-                            case "ALTHOLD":
-                                mode_jp = "高度維持モード";
-                                break;
-                            case "STABILIZE":
-                                mode_jp = "マニュアルモード";
-                                break;
-                            case "AUTO":
-                                mode_jp = "自動飛行モード";
-                                break;
-                            case "ZIGZAG":
-                                mode_jp = "2点間飛行モード";
-                                break;
-                            case "RTL":
-                                mode_jp = "帰還モード";
-                                break;
-                            case "LAND":
-                                mode_jp = "自動着陸モード";
-                                break;
-                            default:
+                    }
+                    switch (MainV2.comPort.MAV.cs.mode.ToUpper())
+                    {
+                        case "LOITER":
+                            mode_jp = "GPSモード";
+                            break;
+                        case "ALTHOLD":
+                            mode_jp = "高度維持モード";
+                            break;
+                        case "STABILIZE":
+                            mode_jp = "マニュアルモード";
+                            break;
+                        case "AUTO":
+                            mode_jp = "自動飛行モード";
+                            break;
+                        case "ZIGZAG":
+                            mode_jp = "2点間飛行モード";
+                            break;
+                        case "RTL":
+                            mode_jp = "帰還モード";
+                            break;
+                        case "LAND":
+                            mode_jp = "自動着陸モード";
+                            break;
+                        default:
+                            if (resume_flag >= 2)
+                            {
+                                mode_jp = "レジュームモード";
+                            }
+                            else
+                            {
                                 mode_jp = "";
-                                break;
-                        }
+                            }
+                            break;
                     }
                     if (labelMode.InvokeRequired)
                     {
@@ -1124,38 +1130,45 @@ namespace MissionPlanner.GCSViews
                     // @eams check resume point and failsafe
                     // search first & end waypoint no in current mission
                     var commands = MainV2.instance.FlightPlanner.GetCommandList();
-                    int firstwpno = commands.FindIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT);
-                    int endwpno = commands.FindLastIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT);
+                    int firstwpno = commands.FindIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) + 1;
+                    int endwpno = commands.FindLastIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) + 1;
                     string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
                     if (lastwp == "-1")
                         lastwp = "1";
                     var curwpno = int.Parse(lastwp);
 
-                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL" && curwpno >= firstwpno && curwpno <= endwpno)
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
                     {
-                        // force servo to close
-                        float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
-                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
-                        MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
-
-                        if (!resume_flag)
+                        if (resume_flag == 0 || resume_flag == 2)
                         {
-                            var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
-                            if (MainV2.comPort.MAV.cs.alt >= rtl_alt*0.95)
+                            if (curwpno >= firstwpno + 1 && curwpno <= endwpno)
                             {
-                                resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
-                                resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
-                                resume_pos.Alt = MainV2.comPort.MAV.cs.alt;
-                                resume_flag = true;
-                            }
+                                // force servo to close
+                                float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
+                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+                                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
 
-                            lastwpno = curwpno;
+                                var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
+                                if (MainV2.comPort.MAV.cs.alt >= rtl_alt * 0.95)
+                                {
+                                    resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
+                                    resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
+                                    resume_pos.Alt = MainV2.comPort.MAV.cs.alt;
+                                    resume_flag = 1;
+                                }
+
+                                lastwpno = curwpno;
 //                            last_failsafe = MainV2.comPort.MAV.cs.failsafe;
+                            }
                         }
                     }
-                    else
+
+                    if (resume_flag >= 2)
                     {
-                        resume_flag = false;
+                        if (curwpno >= commands.Count && !MainV2.comPort.MAV.cs.armed)
+                        {
+                            resume_flag = 0;
+                        }
                     }
 
                     CheckAndBindPreFlightData();
@@ -5062,7 +5075,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         /// </summary>
         public void LabelTime_ChangeTime(int time)
         {
-            LabelTime.Text = (time/3600).ToString("F2") + " (h)";
+            LabelTime.Text = (time/3600.0).ToString("F2") + " (h)";
         }
 
         /// <summary>
@@ -5076,7 +5089,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
         private int lastwpno = 0;
         private PointLatLngAlt resume_pos = new PointLatLngAlt();
-        public bool resume_flag = false;
+        public int resume_flag = 0;
 //        public bool last_failsafe = false;
 
         /// <summary>
@@ -5105,7 +5118,10 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 int lastwpno = int.Parse(lastwp);
 #endif
+                resume_flag = 2;
+
                 // get parameters
+                int grid_type = Settings.Instance.GetInt32("grid_type");
 #if false
                 float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
                 float grid_speed = Settings.Instance.GetFloat("grid_speed");
@@ -5161,11 +5177,11 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt * 0.95))
                 {
                     MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, lastwpdata.alt);
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                     Application.DoEvents();
                     timeout++;
 
-                    if (timeout > 40)
+                    if (timeout > 400)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
@@ -5181,7 +5197,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     cmds.Add(wpdata);
                 }
 
-                // DO_SET_SERVO
+                // DO_SET_SERVO high (close)
                 float servohigh = 1000;
                 for (ushort a = 0; a < wpcount; a++)
                 {
@@ -5229,8 +5245,8 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 }
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
-                // 3sec delay
-                await Task.Delay(3000);
+                // 1sec delay
+                await Task.Delay(1000);
 
                 // re-set guided WP
                 MainV2.comPort.setGuidedModeWP(gotohere);
@@ -5241,11 +5257,11 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.wp_dist > 0)
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                     Application.DoEvents();
                     timeout++;
 
-                    if (timeout > 40)
+                    if (timeout > 1200)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
@@ -5260,16 +5276,31 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
                 {
                     MainV2.comPort.setMode("AUTO");
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                     Application.DoEvents();
                     timeout++;
 
-                    if (timeout > 30)
+                    if (timeout > 300)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
                     }
                 }
+
+                // servo operation in mode2
+                if (grid_type == 2)
+                {
+                    for (int a = lastwpno; a >= 0; a--)
+                    {
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                        {
+                            var servo = cmds[a].p2;
+                            MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servo, 0, 0, 0, 0, 0);
+                            break;
+                        }
+                    }
+                }
+
 //                last_failsafe = false;
                 lastwpno = 0;
             }

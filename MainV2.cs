@@ -4175,21 +4175,25 @@ namespace MissionPlanner
             }
             try
             {
-                if (CustomMessageBox.Show("機体に接続しミッションを書き込んでもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                if (MainV2.instance.FlightData.resume_flag == 0)
                 {
-                    return;
-                }
+                    if (CustomMessageBox.Show("機体に接続しミッションを書き込んでもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                    {
+                        return;
+                    }
 
-                // connect MUAV
-                if (!MainV2.comPort.BaseStream.IsOpen)
-                {
-                    Connect();
-//                    CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
-//                    return;
-                }
+                    // connect MUAV
+                    if (!MainV2.comPort.BaseStream.IsOpen)
+                    {
+                        Connect();
+                        //                    CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
+                        //                    return;
+                    }
 
-                // write mission to UAV
-                MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
+                    // write mission to UAV
+                    MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
+
+                }
 
                 // change mode STABILIZE/Loiter
                 if (MainV2.comPort.MAV.cs.failsafe)
@@ -4218,7 +4222,7 @@ namespace MissionPlanner
                 GCSViews.FlightData.mymap.Refresh();
 
 //                if (MainV2.instance.FlightData.last_failsafe)
-                if (MainV2.instance.FlightData.resume_flag)
+                if (MainV2.instance.FlightData.resume_flag > 0)
                 {
                     if (CustomMessageBox.Show("フェイルセーフからのレジューム飛行を行います。\n\n離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                     {
@@ -4255,7 +4259,7 @@ namespace MissionPlanner
 
                 // branch resume on failsafe
 //                if (MainV2.instance.FlightData.last_failsafe)
-                if (MainV2.instance.FlightData.resume_flag)
+                if (MainV2.instance.FlightData.resume_flag > 0)
                 {
                     MainV2.instance.FlightData.ResumeOnFailSafe();
                     return;

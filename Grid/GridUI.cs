@@ -933,7 +933,7 @@ namespace MissionPlanner.Grid
             if (!isMouseDown && sender != NUM_angle && sender != BUT_shiftup)    // @eams change
                 map.ZoomAndCenterMarkers("routes");
 
-            //            CalcHeadingHold();    //@eams diabled
+//            CalcHeadingHold();    // @eams diabled
 
             map.Invalidate();
         }
@@ -944,14 +944,23 @@ namespace MissionPlanner.Grid
             if (CHK_copter_headinghold.Checked)
             {
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
-                if (grid_type == 3 || grid_type == 4)
+                if (grid_type == 3 || grid_type == 4)   // @eams add
                 {
+#if false
                     if (addwp_firsttime)
                     {
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)3.0, 0, 0, 0, 0, 0, 0, gridobject);
                         addwp_firsttime = false;
                     }
                     else
+                    {
+#endif
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+//                    }
+                }
+                else if (grid_type == 2)
+                {
+                    if (addwp_firsttime)
                     {
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
                     }
@@ -960,12 +969,20 @@ namespace MissionPlanner.Grid
 
             if (NUM_copter_delay.Value > 0)
             {
-                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (double)NUM_copter_delay.Value, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
+                if (grid_type == 2 && addwp_firsttime)
+                {
+                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)3.0, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
+                }
+                else
+                {
+                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (double)NUM_copter_delay.Value, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
+                }
             }
             else
             {
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
             }
+            addwp_firsttime = false;
         }
 
         string secondsToNice(double seconds)
