@@ -64,7 +64,7 @@ namespace MissionPlanner.GCSViews
         public List<PointLatLngAlt> pointlist { get; set; } = new List<PointLatLngAlt>();
 
         static public Object thisLock = new Object();
-        private ComponentResourceManager rm = new ComponentResourceManager(typeof (FlightPlanner));
+        private ComponentResourceManager rm = new ComponentResourceManager(typeof(FlightPlanner));
 
         private Dictionary<string, string[]> cmdParamNames = new Dictionary<string, string[]>();
 
@@ -89,7 +89,7 @@ namespace MissionPlanner.GCSViews
 
         private void poideleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CurrentPOIMarker  == null)
+            if (CurrentPOIMarker == null)
                 return;
 
             POI.POIDelete(CurrentPOIMarker);
@@ -191,7 +191,7 @@ namespace MissionPlanner.GCSViews
                     float ans;
                     if (float.TryParse(cell.Value.ToString(), out ans))
                     {
-                        ans = (int) ans;
+                        ans = (int)ans;
 
                         DataGridViewTextBoxCell celllat =
                             Commands.Rows[selectedrow].Cells[Lat.Index] as DataGridViewTextBoxCell;
@@ -200,9 +200,9 @@ namespace MissionPlanner.GCSViews
                         int oldsrtm =
                             (int)
                                 ((srtm.getAltitude(double.Parse(celllat.Value.ToString()),
-                                    double.Parse(celllon.Value.ToString())).alt)*CurrentState.multiplieralt);
-                        int newsrtm = (int) ((srtm.getAltitude(lat, lng).alt)*CurrentState.multiplieralt);
-                        int newh = (int) (ans + newsrtm - oldsrtm);
+                                    double.Parse(celllon.Value.ToString())).alt) * CurrentState.multiplieralt);
+                        int newsrtm = (int)((srtm.getAltitude(lat, lng).alt) * CurrentState.multiplieralt);
+                        int newh = (int)(ans + newsrtm - oldsrtm);
 
                         cell.Value = newh;
 
@@ -260,7 +260,7 @@ namespace MissionPlanner.GCSViews
                 float ans;
                 if (float.TryParse(cell.Value.ToString(), out ans))
                 {
-                    ans = (int) ans;
+                    ans = (int)ans;
                     if (alt != 0) // use passed in value;
                         cell.Value = alt.ToString();
                     if (ans == 0) // default
@@ -272,14 +272,14 @@ namespace MissionPlanner.GCSViews
                     if (CHK_verifyheight.Checked) // use srtm data
                     {
                         // is absolute but no verify
-                        if ((altmode) CMB_altmode.SelectedValue == altmode.Absolute)
+                        if ((altmode)CMB_altmode.SelectedValue == altmode.Absolute)
                         {
                             //abs
                             cell.Value =
-                                ((srtm.getAltitude(lat, lng).alt)*CurrentState.multiplieralt +
+                                ((srtm.getAltitude(lat, lng).alt) * CurrentState.multiplieralt +
                                  int.Parse(TXT_DefaultAlt.Text)).ToString();
                         }
-                        else if ((altmode) CMB_altmode.SelectedValue == altmode.Terrain)
+                        else if ((altmode)CMB_altmode.SelectedValue == altmode.Terrain)
                         {
                             cell.Value = int.Parse(TXT_DefaultAlt.Text);
                         }
@@ -287,11 +287,11 @@ namespace MissionPlanner.GCSViews
                         {
                             //relative and verify
                             cell.Value =
-                                ((int) (srtm.getAltitude(lat, lng).alt)*CurrentState.multiplieralt +
+                                ((int)(srtm.getAltitude(lat, lng).alt) * CurrentState.multiplieralt +
                                  int.Parse(TXT_DefaultAlt.Text) -
                                  (int)
                                      srtm.getAltitude(MainV2.comPort.MAV.cs.HomeLocation.Lat,
-                                         MainV2.comPort.MAV.cs.HomeLocation.Lng).alt*CurrentState.multiplieralt)
+                                         MainV2.comPort.MAV.cs.HomeLocation.Lng).alt * CurrentState.multiplieralt)
                                     .ToString();
                         }
                     }
@@ -345,7 +345,7 @@ namespace MissionPlanner.GCSViews
             try
             {
                 //MGRS
-                Commands[MGRS.Index, selectedrow].Value = ((MGRS) new Geographic(lng, lat)).ToString();
+                Commands[MGRS.Index, selectedrow].Value = ((MGRS)new Geographic(lng, lat)).ToString();
             }
             catch (Exception ex)
             {
@@ -538,7 +538,7 @@ namespace MissionPlanner.GCSViews
                 int a = 1;
                 commandlist.ForEach(i =>
                 {
-                    MAVLink.mavlink_mission_item_t item = (MAVLink.mavlink_mission_item_t) i;
+                    MAVLink.mavlink_mission_item_t item = (MAVLink.mavlink_mission_item_t)i;
                     item.seq = (ushort)a;
                     MainV2.comPort.MAV.wps[a] = item;
                     a++;
@@ -598,6 +598,9 @@ namespace MissionPlanner.GCSViews
             MainMap.MaxZoom = 24;
 
             // draw this layer first
+            meshoverlay = new GMapOverlay("mesh");
+            MainMap.Overlays.Add(meshoverlay);
+
             kmlpolygonsoverlay = new GMapOverlay("kmlpolygons");
             MainMap.Overlays.Add(kmlpolygonsoverlay);
 
@@ -646,13 +649,13 @@ namespace MissionPlanner.GCSViews
             //set default
             CMB_altmode.SelectedItem = altmode.Relative;
 
-//            RegeneratePolygon();
+            //            RegeneratePolygon();
 
             updateCMDParams();
 
             foreach (DataGridViewColumn commandsColumn in Commands.Columns)
             {
-                if(commandsColumn is DataGridViewTextBoxColumn)
+                if (commandsColumn is DataGridViewTextBoxColumn)
                     commandsColumn.CellTemplate.Value = "0";
             }
 
@@ -896,7 +899,7 @@ namespace MissionPlanner.GCSViews
             Visible = false;
 
             config(false);
-            TXT_loiterrad.Text = "" + (double.Parse(Settings.Instance["grid_dist"])/2).ToString();  // @eams add
+            TXT_loiterrad.Text = "" + (double.Parse(Settings.Instance["grid_dist"]) / 2).ToString();  // @eams add
 //            TXT_WPRad.Text = "0";   // @eams add
 
             quickadd = false;
@@ -906,7 +909,7 @@ namespace MissionPlanner.GCSViews
             if (Settings.Instance["WMSserver"] != null)
                 WMSProvider.CustomWMSURL = Settings.Instance["WMSserver"];
 
-            trackBar1.Value = (int) MainMap.Zoom;
+            trackBar1.Value = (int)MainMap.Zoom;
 
             updateCMDParams();
 
@@ -951,11 +954,24 @@ namespace MissionPlanner.GCSViews
 #endif
             // seto the action and wp table @eams add
             panelAction.Dock = DockStyle.Left;
-//            panelAction.Height = 120;
+            //            panelAction.Height = 120;
             panelWaypoints.Dock = DockStyle.Right;
             panelWaypoints.Width = Width / 2;
 
             panelWaypoints.Expand = false;  // @eams add
+
+            // @eams add
+            if (int.Parse(Settings.Instance["overlay_mesh"]) > 0)
+            {
+                panel8.Visible = true;
+                chk_ndvimesh.Checked = true;
+                chk_ndvigrid.Checked = true;
+                loadMesh();
+            }
+            else
+            {
+                panel8.Visible = false;
+            }
 
             Visible = true;
             updateDisplayView();
@@ -1121,7 +1137,7 @@ namespace MissionPlanner.GCSViews
             for (int i = 0; i < Commands.ColumnCount; i++)
             {
                 DataGridViewCell tcell = Commands.Rows[e.RowIndex].Cells[i];
-                if (tcell.GetType() == typeof (DataGridViewTextBoxCell))
+                if (tcell.GetType() == typeof(DataGridViewTextBoxCell))
                 {
                     if (tcell.Value == null)
                         tcell.Value = "0";
@@ -1138,7 +1154,7 @@ namespace MissionPlanner.GCSViews
                 {
                     Commands_RowEnter(sender, new DataGridViewCellEventArgs(0, e.RowIndex - 0)); // do header labels
                     Commands_RowValidating(sender, new DataGridViewCellCancelEventArgs(0, e.RowIndex));
-                        // do default values
+                    // do default values
                 }
             }
 
@@ -1172,7 +1188,7 @@ namespace MissionPlanner.GCSViews
         {
             selectedrow = e.RowIndex;
             Commands_RowEnter(sender, new DataGridViewCellEventArgs(0, e.RowIndex - 0));
-                // do header labels - encure we dont 0 out valid colums
+            // do header labels - encure we dont 0 out valid colums
             int cols = Commands.Columns.Count;
             for (int a = 1; a < cols; a++)
             {
@@ -1223,7 +1239,7 @@ namespace MissionPlanner.GCSViews
                 {
                     mBorders.InnerMarker = m;
                     mBorders.Tag = tag;
-                    mBorders.wprad = (int) (float.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist);
+                    mBorders.wprad = (int)(float.Parse(TXT_WPRad.Text) / CurrentState.multiplierdist);
                     if (color.HasValue)
                     {
                         mBorders.Color = color.Value;
@@ -1269,33 +1285,33 @@ namespace MissionPlanner.GCSViews
                 return;
 
             // number rows 
-            this.BeginInvoke((MethodInvoker) delegate
-            {
+            this.BeginInvoke((MethodInvoker)delegate
+           {
                 // thread for updateing row numbers
                 for (int a = 0; a < Commands.Rows.Count - 0; a++)
-                {
-                    if (this.IsDisposed || this.Disposing)
-                        return;
-                    try
-                    {
-                        if (Commands.Rows[a].HeaderCell.Value == null)
-                        {
+               {
+                   if (this.IsDisposed || this.Disposing)
+                       return;
+                   try
+                   {
+                       if (Commands.Rows[a].HeaderCell.Value == null)
+                       {
                             //Commands.Rows[a].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                             Commands.Rows[a].HeaderCell.Value = (a + 1).ToString();
-                        }
+                       }
                         // skip rows with the correct number
                         string rowno = Commands.Rows[a].HeaderCell.Value.ToString();
-                        if (!rowno.Equals((a + 1).ToString()))
-                        {
+                       if (!rowno.Equals((a + 1).ToString()))
+                       {
                             // this code is where the delay is when deleting.
                             Commands.Rows[a].HeaderCell.Value = (a + 1).ToString();
-                        }
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-            });
+                       }
+                   }
+                   catch (Exception)
+                   {
+                   }
+               }
+           });
         }
 
         /// <summary>
@@ -1337,13 +1353,13 @@ namespace MissionPlanner.GCSViews
 
                 try
                 {
-                    overlay.CreateOverlay((MAVLink.MAV_FRAME) (altmode) CMB_altmode.SelectedValue, home, commandlist,
+                    overlay.CreateOverlay((MAVLink.MAV_FRAME)(altmode)CMB_altmode.SelectedValue, home, commandlist,
                         double.Parse(TXT_WPRad.Text) / CurrentState.multiplieralt,
                         double.Parse(TXT_loiterrad.Text) / CurrentState.multiplieralt);
                 }
                 catch (FormatException ex)
                 {
-                    CustomMessageBox.Show(Strings.ERROR, Strings.InvalidNumberEntered + "\n" +"WP Radius or Loiter Radius");
+                    CustomMessageBox.Show(Strings.ERROR, Strings.InvalidNumberEntered + "\n" + "WP Radius or Loiter Radius");
                 }
 
                 MainMap.HoldInvalidation = true;
@@ -1360,9 +1376,9 @@ namespace MissionPlanner.GCSViews
 
                 lbl_distance.Text = rm.GetString("lbl_distance.Text") + ": " +
                                     FormatDistance((
-                                                       overlay.route.Points.Select(a => (PointLatLngAlt) a)
+                                                       overlay.route.Points.Select(a => (PointLatLngAlt)a)
                                                            .Aggregate(0.0, (d, p1, p2) => d + p1.GetDistance(p2)) +
-                                                       overlay.homeroute.Points.Select(a => (PointLatLngAlt) a)
+                                                       overlay.homeroute.Points.Select(a => (PointLatLngAlt)a)
                                                            .Aggregate(0.0, (d, p1, p2) => d + p1.GetDistance(p2))) /
                                                    1000.0, false);
 
@@ -1412,10 +1428,10 @@ namespace MissionPlanner.GCSViews
                             ((180.0 / Math.PI) * Math.Atan(grad)).ToString("0.0");
 
                         Commands.Rows[int.Parse(lla.Tag) - 1].Cells[Dist.Index].Value =
-                            (Math.Sqrt(Math.Pow(distance,2) + Math.Pow(height,2))).ToString("0.0");
+                            (Math.Sqrt(Math.Pow(distance, 2) + Math.Pow(height, 2))).ToString("0.0");
 
                         Commands.Rows[int.Parse(lla.Tag) - 1].Cells[AZ.Index].Value =
-                            ((lla.GetBearing(last) + 180)%360).ToString("0");
+                            ((lla.GetBearing(last) + 180) % 360).ToString("0");
                     }
                 }
                 catch (Exception ex)
@@ -1520,7 +1536,7 @@ namespace MissionPlanner.GCSViews
                                      double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString())
                                          .ToString("0.00000000", new CultureInfo("en-US")));
                             sw.Write("\t" +
-                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString())/
+                                     (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) /
                                       CurrentState.multiplieralt).ToString("0.000000", new CultureInfo("en-US")));
                             sw.Write("\t" + 1);
                             sw.WriteLine("");
@@ -1599,7 +1615,7 @@ namespace MissionPlanner.GCSViews
 
                 log.Info("Getting Home");
 
-                ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(0, "Getting WP count");
+                ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(0, "Getting WP count");
 
                 if (port.MAV.apname == MAVLink.MAV_AUTOPILOT.PX4)
                 {
@@ -1620,20 +1636,20 @@ namespace MissionPlanner.GCSViews
 
                 for (ushort a = 0; a < cmdcount; a++)
                 {
-                    if (((ProgressReporterDialogue) sender).doWorkArgs.CancelRequested)
+                    if (((ProgressReporterDialogue)sender).doWorkArgs.CancelRequested)
                     {
-                        ((ProgressReporterDialogue) sender).doWorkArgs.CancelAcknowledged = true;
+                        ((ProgressReporterDialogue)sender).doWorkArgs.CancelAcknowledged = true;
                         throw new Exception("Cancel Requested");
                     }
 
                     log.Info("Getting WP" + a);
-                    ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(a*100/cmdcount, "Getting WP " + a);
+                    ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(a * 100 / cmdcount, "Getting WP " + a);
                     cmds.Add(port.getWP(a));
                 }
 
                 port.setWPACK();
 
-                ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(100, "Done");
+                ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(100, "Done");
 
                 log.Info("Done");
             }
@@ -1649,34 +1665,34 @@ namespace MissionPlanner.GCSViews
         {
             try
             {
-                Invoke((MethodInvoker) delegate
-                {
-                    try
-                    {
-                        log.Info("Process " + cmds.Count);
-                        processToScreen(cmds);
-                    }
-                    catch (Exception exx)
-                    {
-                        log.Info(exx.ToString());
-                    }
+                Invoke((MethodInvoker)delegate
+               {
+                   try
+                   {
+                       log.Info("Process " + cmds.Count);
+                       processToScreen(cmds);
+                   }
+                   catch (Exception exx)
+                   {
+                       log.Info(exx.ToString());
+                   }
 
-                    try
-                    {
-                        if (withrally && MainV2.comPort.MAV.param.ContainsKey("RALLY_TOTAL") &&
-                            int.Parse(MainV2.comPort.MAV.param["RALLY_TOTAL"].ToString()) >= 1)
-                            getRallyPointsToolStripMenuItem_Click(null, null);
-                    }
-                    catch
-                    {
-                    }
+                   try
+                   {
+                       if (withrally && MainV2.comPort.MAV.param.ContainsKey("RALLY_TOTAL") &&
+                           int.Parse(MainV2.comPort.MAV.param["RALLY_TOTAL"].ToString()) >= 1)
+                           getRallyPointsToolStripMenuItem_Click(null, null);
+                   }
+                   catch
+                   {
+                   }
 
-                    MainV2.comPort.giveComport = false;
+                   MainV2.comPort.giveComport = false;
 
-                    BUT_read.Enabled = true;
+                   BUT_read.Enabled = true;
 
-                    writeKML();
-                });
+                   writeKML();
+               });
             }
             catch (Exception exx)
             {
@@ -1691,12 +1707,12 @@ namespace MissionPlanner.GCSViews
         /// <param name="e"></param>
         public void BUT_write_Click(object sender, EventArgs e)
         {
-            if ((altmode) CMB_altmode.SelectedValue == altmode.Absolute)
+            if ((altmode)CMB_altmode.SelectedValue == altmode.Absolute)
             {
                 if ((int)DialogResult.No ==
                     CustomMessageBox.Show("Absolute Alt is selected are you sure?", "Alt Mode", MessageBoxButtons.YesNo))
                 {
-                    CMB_altmode.SelectedValue = (int) altmode.Relative;
+                    CMB_altmode.SelectedValue = (int)altmode.Relative;
                 }
             }
 
@@ -1738,15 +1754,15 @@ namespace MissionPlanner.GCSViews
 
                     ushort cmd =
                         (ushort)
-                                Enum.Parse(typeof (MAVLink.MAV_CMD),
+                                Enum.Parse(typeof(MAVLink.MAV_CMD),
                                     Commands.Rows[a].Cells[Command.Index].Value.ToString(), false);
 
-                    if (cmd < (ushort) MAVLink.MAV_CMD.LAST &&
+                    if (cmd < (ushort)MAVLink.MAV_CMD.LAST &&
                         double.Parse(Commands[Alt.Index, a].Value.ToString()) < double.Parse(TXT_altwarn.Text))
                     {
-                        if (cmd != (ushort) MAVLink.MAV_CMD.TAKEOFF &&
-                            cmd != (ushort) MAVLink.MAV_CMD.LAND &&
-                            cmd != (ushort) MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
+                        if (cmd != (ushort)MAVLink.MAV_CMD.TAKEOFF &&
+                            cmd != (ushort)MAVLink.MAV_CMD.LAND &&
+                            cmd != (ushort)MAVLink.MAV_CMD.RETURN_TO_LAUNCH)
                         {
                             CustomMessageBox.Show("Low alt on WP#" + (a + 1) +
                                                   "\nPlease reduce the alt warning, or increase the altitude");
@@ -1787,8 +1803,8 @@ namespace MissionPlanner.GCSViews
                 else
                 {
                     temp.id =
-                        (ushort) 
-                                Enum.Parse(typeof (MAVLink.MAV_CMD),
+                        (ushort)
+                                Enum.Parse(typeof(MAVLink.MAV_CMD),
                                     Commands.Rows[a].Cells[Command.Index].Value.ToString(),
                                     false);
                 }
@@ -1796,13 +1812,13 @@ namespace MissionPlanner.GCSViews
 
                 temp.alt =
                     (float)
-                        (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString())/CurrentState.multiplieralt);
+                        (double.Parse(Commands.Rows[a].Cells[Alt.Index].Value.ToString()) / CurrentState.multiplieralt);
                 temp.lat = (double.Parse(Commands.Rows[a].Cells[Lat.Index].Value.ToString()));
                 temp.lng = (double.Parse(Commands.Rows[a].Cells[Lon.Index].Value.ToString()));
 
-                temp.p2 = (float) (double.Parse(Commands.Rows[a].Cells[Param2.Index].Value.ToString()));
-                temp.p3 = (float) (double.Parse(Commands.Rows[a].Cells[Param3.Index].Value.ToString()));
-                temp.p4 = (float) (double.Parse(Commands.Rows[a].Cells[Param4.Index].Value.ToString()));
+                temp.p2 = (float)(double.Parse(Commands.Rows[a].Cells[Param2.Index].Value.ToString()));
+                temp.p3 = (float)(double.Parse(Commands.Rows[a].Cells[Param3.Index].Value.ToString()));
+                temp.p4 = (float)(double.Parse(Commands.Rows[a].Cells[Param4.Index].Value.ToString()));
 
                 temp.Tag = Commands.Rows[a].Cells[TagData.Index].Value;
 
@@ -1835,15 +1851,15 @@ namespace MissionPlanner.GCSViews
 
         void saveWPsFast(IProgressReporterDialogue sender)
         {
-            var totalwpcountforupload = (ushort) (Commands.RowCount + 1);
+            var totalwpcountforupload = (ushort)(Commands.RowCount + 1);
             var reqno = 0;
             MAVLink.MAV_MISSION_RESULT result = MAVLink.MAV_MISSION_RESULT.MAV_MISSION_ACCEPTED;
 
             var sub1 = MainV2.comPort.SubscribeToPacketType(MAVLink.MAVLINK_MSG_ID.MISSION_ACK,
                 message =>
                 {
-                    var data = ((MAVLink.mavlink_mission_ack_t) message.data);
-                    var ans = (MAVLink.MAV_MISSION_RESULT) data.type;
+                    var data = ((MAVLink.mavlink_mission_ack_t)message.data);
+                    var ans = (MAVLink.MAV_MISSION_RESULT)data.type;
                     if (MainV2.comPort.MAV.sysid != message.sysid &&
                         MainV2.comPort.MAV.compid != message.compid)
                         return true;
@@ -1862,7 +1878,7 @@ namespace MissionPlanner.GCSViews
                         return true;
                     // check this gcs sent it
                     if (data.target_system != MAVLinkInterface.gcssysid ||
-                        data.target_component != (byte) MAVLink.MAV_COMPONENT.MAV_COMP_ID_MISSIONPLANNER)
+                        data.target_component != (byte)MAVLink.MAV_COMPONENT.MAV_COMP_ID_MISSIONPLANNER)
                         return true;
                     reqno = data.seq;
                     Console.WriteLine("MISSION_REQUEST " + reqno);
@@ -1931,7 +1947,7 @@ namespace MissionPlanner.GCSViews
                         if (result == MAVLink.MAV_MISSION_RESULT.MAV_MISSION_ERROR)
                         {
                             // resend for partial upload
-                            MainV2.comPort.setWPPartialUpdate((ushort) (reqno), totalwpcountforupload);
+                            MainV2.comPort.setWPPartialUpdate((ushort)(reqno), totalwpcountforupload);
                             a = reqno;
                             break;
                         }
@@ -2016,7 +2032,7 @@ namespace MissionPlanner.GCSViews
 
                 req.seq = (ushort)a;
 
-                ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(a * 100 / Commands.Rows.Count,
+                ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(a * 100 / Commands.Rows.Count,
                     "Setting WP " + a);
                 Console.WriteLine("WP no " + a);
 
@@ -2050,7 +2066,7 @@ namespace MissionPlanner.GCSViews
                     home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
                     home.lat = (double.Parse(TXT_homelat.Text));
                     home.lng = (double.Parse(TXT_homelng.Text));
-                    home.alt = (float.Parse(TXT_homealt.Text)/CurrentState.multiplieralt); // use saved home
+                    home.alt = (float.Parse(TXT_homealt.Text) / CurrentState.multiplieralt); // use saved home
                 }
                 catch
                 {
@@ -2166,9 +2182,9 @@ namespace MissionPlanner.GCSViews
                 // process commandlist to the mav
                 for (a = 1; a <= commandlist.Count; a++)
                 {
-                    var temp = commandlist[a-1];
+                    var temp = commandlist[a - 1];
 
-                    ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(a*100/Commands.Rows.Count,
+                    ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(a * 100 / Commands.Rows.Count,
                         "Setting WP " + a);
 
                     // make sure we are using the correct frame for these commands
@@ -2202,9 +2218,9 @@ namespace MissionPlanner.GCSViews
                     if (ans == MAVLink.MAV_MISSION_RESULT.MAV_MISSION_ERROR)
                     {
                         // resend for partial upload
-                        port.setWPPartialUpdate((ushort) (uploadwpno), totalwpcountforupload);
+                        port.setWPPartialUpdate((ushort)(uploadwpno), totalwpcountforupload);
                         // reupload this point.
-                        ans = port.setWP(temp, (ushort) (uploadwpno), frame, 0, 1, use_int);
+                        ans = port.setWP(temp, (ushort)(uploadwpno), frame, 0, 1, use_int);
                     }
 
                     if (ans == MAVLink.MAV_MISSION_RESULT.MAV_MISSION_NO_SPACE)
@@ -2223,7 +2239,7 @@ namespace MissionPlanner.GCSViews
                     {
                         // invalid sequence can only occur if we failed to see a response from the apm when we sent the request.
                         // or there is io lag and we send 2 mission_items and get 2 responces, one valid, one a ack of the second send
-                        
+
                         // the ans is received via mission_ack, so we dont know for certain what our current request is for. as we may have lost the mission_request
 
                         // get requested wp no - 1;
@@ -2233,32 +2249,32 @@ namespace MissionPlanner.GCSViews
                     }
                     if (ans != MAVLink.MAV_MISSION_RESULT.MAV_MISSION_ACCEPTED)
                     {
-                        sender.doWorkArgs.ErrorMessage = "Upload wps failed " + Enum.Parse(typeof (MAVLink.MAV_CMD), temp.id.ToString()) +
-                                         " " + Enum.Parse(typeof (MAVLink.MAV_MISSION_RESULT), ans.ToString());
+                        sender.doWorkArgs.ErrorMessage = "Upload wps failed " + Enum.Parse(typeof(MAVLink.MAV_CMD), temp.id.ToString()) +
+                                         " " + Enum.Parse(typeof(MAVLink.MAV_MISSION_RESULT), ans.ToString());
                         return;
                     }
                 }
 
                 port.setWPACK();
 
-                ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(95, "Setting params");
+                ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(95, "Setting params");
 
                 // m
-                port.setParam("WP_RADIUS", float.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist);
+                port.setParam("WP_RADIUS", float.Parse(TXT_WPRad.Text) / CurrentState.multiplierdist);
 
                 // cm's
-                port.setParam("WPNAV_RADIUS", float.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist*100.0);
+                port.setParam("WPNAV_RADIUS", float.Parse(TXT_WPRad.Text) / CurrentState.multiplierdist * 100.0);
 
                 try
                 {
-                    port.setParam(new[] {"LOITER_RAD", "WP_LOITER_RAD"},
-                        float.Parse(TXT_loiterrad.Text)/CurrentState.multiplierdist);
+                    port.setParam(new[] { "LOITER_RAD", "WP_LOITER_RAD" },
+                        float.Parse(TXT_loiterrad.Text) / CurrentState.multiplierdist);
                 }
                 catch
                 {
                 }
 
-                ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(100, "Done.");
+                ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(100, "Done.");
             }
             catch (Exception ex)
             {
@@ -2322,9 +2338,9 @@ namespace MissionPlanner.GCSViews
                 cellcmd.Value = "UNKNOWN";
                 cellcmd.Tag = temp.id;
 
-                foreach (object value in Enum.GetValues(typeof (MAVLink.MAV_CMD)))
+                foreach (object value in Enum.GetValues(typeof(MAVLink.MAV_CMD)))
                 {
-                    if ((ushort) value == temp.id)
+                    if ((ushort)value == temp.id)
                     {
                         cellcmd.Value = value.ToString();
                         break;
@@ -2333,7 +2349,7 @@ namespace MissionPlanner.GCSViews
 
                 // from ap_common.h
                 if (temp.id == (ushort)MAVLink.MAV_CMD.WAYPOINT || temp.id == (ushort)MAVLink.MAV_CMD.SPLINE_WAYPOINT ||
-                    temp.id == (ushort)MAVLink.MAV_CMD.TAKEOFF || temp.id == (ushort) MAVLink.MAV_CMD.DO_SET_HOME)
+                    temp.id == (ushort)MAVLink.MAV_CMD.TAKEOFF || temp.id == (ushort)MAVLink.MAV_CMD.DO_SET_HOME)
                 {
                     // not home
                     if (i != 0)
@@ -2341,21 +2357,21 @@ namespace MissionPlanner.GCSViews
                         // check relative and terrain flags
                         if ((temp.options & 0x9) == 0)
                         {
-                            CMB_altmode.SelectedValue = (int) altmode.Absolute;
+                            CMB_altmode.SelectedValue = (int)altmode.Absolute;
                         } // check terrain flag
                         else if ((temp.options & 0x8) != 0)
                         {
-                            CMB_altmode.SelectedValue = (int) altmode.Terrain;
+                            CMB_altmode.SelectedValue = (int)altmode.Terrain;
                         } // check relative flag
-                        else if ((temp.options & 0x1) != 0 )
+                        else if ((temp.options & 0x1) != 0)
                         {
-                            CMB_altmode.SelectedValue = (int) altmode.Relative;
+                            CMB_altmode.SelectedValue = (int)altmode.Relative;
                         }
                     }
                 }
 
                 cell = Commands.Rows[i].Cells[Alt.Index] as DataGridViewTextBoxCell;
-                cell.Value = temp.alt*CurrentState.multiplieralt;
+                cell.Value = temp.alt * CurrentState.multiplieralt;
                 cell = Commands.Rows[i].Cells[Lat.Index] as DataGridViewTextBoxCell;
                 cell.Value = temp.lat;
                 cell = Commands.Rows[i].Cells[Lon.Index] as DataGridViewTextBoxCell;
@@ -2403,7 +2419,7 @@ namespace MissionPlanner.GCSViews
                                 TXT_homelng.Text = (double.Parse(cellhome.Value.ToString())).ToString();
                                 cellhome = Commands.Rows[0].Cells[Alt.Index] as DataGridViewTextBoxCell;
                                 TXT_homealt.Text =
-                                    (double.Parse(cellhome.Value.ToString())*CurrentState.multiplieralt).ToString();
+                                    (double.Parse(cellhome.Value.ToString()) * CurrentState.multiplieralt).ToString();
                             }
                         }
                     }
@@ -2435,15 +2451,15 @@ namespace MissionPlanner.GCSViews
             {
                 log.Info("Loading wp params");
 
-                Dictionary<string, double> param = new Dictionary<string, double>((Dictionary<string, double>) MainV2.comPort.MAV.param);
+                Dictionary<string, double> param = new Dictionary<string, double>((Dictionary<string, double>)MainV2.comPort.MAV.param);
 
                 if (param.ContainsKey("WP_RADIUS"))
                 {
-                    TXT_WPRad.Text = (((double) param["WP_RADIUS"]*CurrentState.multiplierdist)).ToString();
+                    TXT_WPRad.Text = (((double)param["WP_RADIUS"] * CurrentState.multiplierdist)).ToString();
                 }
-                if (param.ContainsKey("WPNAV_RADIUS") )
+                if (param.ContainsKey("WPNAV_RADIUS"))
                 {
-                    TXT_WPRad.Text = (((double) param["WPNAV_RADIUS"]*CurrentState.multiplierdist/100.0)).ToString();
+                    TXT_WPRad.Text = (((double)param["WPNAV_RADIUS"] * CurrentState.multiplierdist / 100.0)).ToString();
                 }
 
                 log.Info("param WP_RADIUS " + TXT_WPRad.Text);
@@ -2453,12 +2469,12 @@ namespace MissionPlanner.GCSViews
                     TXT_loiterrad.Enabled = false;
                     if (param.ContainsKey("LOITER_RADIUS"))
                     {
-                        TXT_loiterrad.Text = (((double) param["LOITER_RADIUS"]*CurrentState.multiplierdist)).ToString();
+                        TXT_loiterrad.Text = (((double)param["LOITER_RADIUS"] * CurrentState.multiplierdist)).ToString();
                         TXT_loiterrad.Enabled = true;
                     }
                     else if (param.ContainsKey("WP_LOITER_RAD"))
                     {
-                        TXT_loiterrad.Text = (((double) param["WP_LOITER_RAD"]*CurrentState.multiplierdist)).ToString();
+                        TXT_loiterrad.Text = (((double)param["WP_LOITER_RAD"] * CurrentState.multiplierdist)).ToString();
                         TXT_loiterrad.Enabled = true;
                     }
 
@@ -2546,7 +2562,7 @@ namespace MissionPlanner.GCSViews
             {
                 TXT_WPRad.Text = "30";
             }
-            if (isNumber > (127*CurrentState.multiplierdist))
+            if (isNumber > (127 * CurrentState.multiplierdist))
             {
                 //CustomMessageBox.Show("The value can only be between 0 and 127 m");
                 //TXT_WPRad.Text = (127 * CurrentState.multiplierdist).ToString();
@@ -2754,7 +2770,7 @@ namespace MissionPlanner.GCSViews
                         continue;
 
                     //seq/cur/frame/mode
-                    string[] items = line.Split(new[] {'\t', ' ', ','}, StringSplitOptions.RemoveEmptyEntries);
+                    string[] items = line.Split(new[] { '\t', ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (items.Length <= 9)
                         continue;
@@ -2782,19 +2798,19 @@ namespace MissionPlanner.GCSViews
                         {
                             temp.options = 0;
                         }
-                        temp.id = (ushort)Enum.Parse(typeof (MAVLink.MAV_CMD), items[3], false);
+                        temp.id = (ushort)Enum.Parse(typeof(MAVLink.MAV_CMD), items[3], false);
                         temp.p1 = float.Parse(items[4], new CultureInfo("en-US"));
 
                         if (temp.id == 99)
                             temp.id = 0;
 
-                        temp.alt = (float) (double.Parse(items[10], new CultureInfo("en-US")));
+                        temp.alt = (float)(double.Parse(items[10], new CultureInfo("en-US")));
                         temp.lat = (double.Parse(items[8], new CultureInfo("en-US")));
                         temp.lng = (double.Parse(items[9], new CultureInfo("en-US")));
 
-                        temp.p2 = (float) (double.Parse(items[5], new CultureInfo("en-US")));
-                        temp.p3 = (float) (double.Parse(items[6], new CultureInfo("en-US")));
-                        temp.p4 = (float) (double.Parse(items[7], new CultureInfo("en-US")));
+                        temp.p2 = (float)(double.Parse(items[5], new CultureInfo("en-US")));
+                        temp.p3 = (float)(double.Parse(items[6], new CultureInfo("en-US")));
+                        temp.p4 = (float)(double.Parse(items[7], new CultureInfo("en-US")));
 
                         cmds.Add(temp);
 
@@ -2856,7 +2872,7 @@ namespace MissionPlanner.GCSViews
 
             IGeographicCoordinateSystem wgs84 = GeographicCoordinateSystem.WGS84;
 
-            int utmzone = (int) ((polygon[0].Lng - -186.0)/6.0);
+            int utmzone = (int)((polygon[0].Lng - -186.0) / 6.0);
 
             IProjectedCoordinateSystem utm = ProjectedCoordinateSystem.WGS84_UTM(utmzone,
                 polygon[0].Lat < 0 ? false : true);
@@ -2868,17 +2884,17 @@ namespace MissionPlanner.GCSViews
 
             for (int a = 0; a < (polygon.Count - 1); a++)
             {
-                double[] pll1 = {polygon[a].Lng, polygon[a].Lat};
-                double[] pll2 = {polygon[a + 1].Lng, polygon[a + 1].Lat};
+                double[] pll1 = { polygon[a].Lng, polygon[a].Lat };
+                double[] pll2 = { polygon[a + 1].Lng, polygon[a + 1].Lat };
 
                 double[] p1 = trans.MathTransform.Transform(pll1);
                 double[] p2 = trans.MathTransform.Transform(pll2);
 
-                prod1 += p1[0]*p2[1];
-                prod2 += p1[1]*p2[0];
+                prod1 += p1[0] * p2[1];
+                prod2 += p1[1] * p2[0];
             }
 
-            double answer = (prod1 - prod2)/2;
+            double answer = (prod1 - prod2) / 2;
 
             if (polygon[0] == polygon[polygon.Count - 1])
                 polygon.RemoveAt(polygon.Count - 1); // unmake a full loop
@@ -2907,6 +2923,7 @@ namespace MissionPlanner.GCSViews
         GMapOverlay kmlpolygonsoverlay;
         GMapOverlay geofenceoverlay;
         static GMapOverlay rallypointoverlay;
+        GMapOverlay meshoverlay;    // @eams add for NDVI mesh
 
         // etc
         readonly Random rnd = new Random();
@@ -2923,7 +2940,7 @@ namespace MissionPlanner.GCSViews
 
         //public long ElapsedMilliseconds;
 
-#region -- map events --
+        #region -- map events --
 
         void MainMap_OnMarkerLeave(GMapMarker item)
         {
@@ -3221,7 +3238,7 @@ namespace MissionPlanner.GCSViews
                     iSelect++;
                 }
             }
-           
+
             //only select layer if there is one
             if (szListLayerName.Count != 0)
             {
@@ -3253,11 +3270,11 @@ namespace MissionPlanner.GCSViews
             groupmarkers.Add(int.Parse(marker.Tag.ToString()));
             if (marker is GMapMarkerWP)
             {
-                ((GMapMarkerWP) marker).selected = true;
+                ((GMapMarkerWP)marker).selected = true;
             }
             if (marker is GMapMarkerRect)
             {
-                ((GMapMarkerWP) ((GMapMarkerRect) marker).InnerMarker).selected = true;
+                ((GMapMarkerWP)((GMapMarkerRect)marker).InnerMarker).selected = true;
             }
         }
 
@@ -3368,7 +3385,7 @@ namespace MissionPlanner.GCSViews
                         Dictionary<string, PointLatLng> dest = new Dictionary<string, PointLatLng>();
 
                         var markers = MainMap.Overlays.First(a => a.Id == "WPOverlay");
-                        
+
                         foreach (var markerid in groupmarkers.Distinct())
                         {
                             for (int a = 0; a < markers.Markers.Count; a++)
@@ -3504,7 +3521,7 @@ namespace MissionPlanner.GCSViews
                     {
                         if (seen.ContainsKey(markerid))
                             continue;
-                      
+
                         seen[markerid] = 1;
                         for (int a = 0; a < markers.Markers.Count; a++)
                         {
@@ -3545,7 +3562,7 @@ namespace MissionPlanner.GCSViews
                     {
                         if (CurrentGMapMarker != null && CurrentGMapMarker.Tag is int)
                         {
-                            int? pIndex = (int?) CurentRectMarker.Tag;
+                            int? pIndex = (int?)CurentRectMarker.Tag;
                             if (pIndex.HasValue)
                             {
                                 if (pIndex < wppolygon.Points.Count)
@@ -3630,8 +3647,7 @@ namespace MissionPlanner.GCSViews
             {
                 try
                 {
-//                    trackBar1.Value = (int) (MainMap.Zoom);   // @eams diabled
-                    trackBar1.Value = (float)(MainMap.Zoom);
+                    trackBar1.Value = (float)(MainMap.Zoom);    // @eams change int->float
                 }
                 catch (Exception ex)
                 {
@@ -3728,7 +3744,7 @@ namespace MissionPlanner.GCSViews
             {
                 MainMap.ZoomAndCenterMarkers(null);
             }
-            trackBar1.Value = (int) MainMap.Zoom;
+            trackBar1.Value = (int)MainMap.Zoom;
         }
 
         // ensure focus on map, trackbar can have it too
@@ -3737,14 +3753,14 @@ namespace MissionPlanner.GCSViews
             // MainMap.Focus();
         }
 
-#endregion
+        #endregion
 
         private void comboBoxMapType_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
-                MainMap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
-                FlightData.mymap.MapProvider = (GMapProvider) comboBoxMapType.SelectedItem;
+                MainMap.MapProvider = (GMapProvider)comboBoxMapType.SelectedItem;
+                FlightData.mymap.MapProvider = (GMapProvider)comboBoxMapType.SelectedItem;
                 Settings.Instance["MapType"] = comboBoxMapType.Text;
             }
             catch (Exception ex)
@@ -3756,13 +3772,13 @@ namespace MissionPlanner.GCSViews
 
         private void Commands_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (e.Control.GetType() == typeof (DataGridViewComboBoxEditingControl))
+            if (e.Control.GetType() == typeof(DataGridViewComboBoxEditingControl))
             {
-                var temp = ((ComboBox) e.Control);
-                ((ComboBox) e.Control).SelectionChangeCommitted -= Commands_SelectionChangeCommitted;
-                ((ComboBox) e.Control).SelectionChangeCommitted += Commands_SelectionChangeCommitted;
-                ((ComboBox) e.Control).ForeColor = Color.White;
-                ((ComboBox) e.Control).BackColor = Color.FromArgb(0x43, 0x44, 0x45);
+                var temp = ((ComboBox)e.Control);
+                ((ComboBox)e.Control).SelectionChangeCommitted -= Commands_SelectionChangeCommitted;
+                ((ComboBox)e.Control).SelectionChangeCommitted += Commands_SelectionChangeCommitted;
+                ((ComboBox)e.Control).ForeColor = Color.White;
+                ((ComboBox)e.Control).BackColor = Color.FromArgb(0x43, 0x44, 0x45);
                 Debug.WriteLine("Setting event handle");
             }
         }
@@ -3770,12 +3786,12 @@ namespace MissionPlanner.GCSViews
         void Commands_SelectionChangeCommitted(object sender, EventArgs e)
         {
             // update row headers
-            ((ComboBox) sender).ForeColor = Color.White;
-            ChangeColumnHeader(((ComboBox) sender).Text);
+            ((ComboBox)sender).ForeColor = Color.White;
+            ChangeColumnHeader(((ComboBox)sender).Text);
             try
             {
                 // default takeoff to non 0 alt
-                if (((ComboBox) sender).Text == "TAKEOFF")
+                if (((ComboBox)sender).Text == "TAKEOFF")
                 {
                     if (Commands.Rows[selectedrow].Cells[Alt.Index].Value != null &&
                         Commands.Rows[selectedrow].Cells[Alt.Index].Value.ToString() == "0")
@@ -3783,7 +3799,7 @@ namespace MissionPlanner.GCSViews
                 }
 
                 // default to take shot
-                if (((ComboBox) sender).Text == "DO_DIGICAM_CONTROL")
+                if (((ComboBox)sender).Text == "DO_DIGICAM_CONTROL")
                 {
                     if (Commands.Rows[selectedrow].Cells[Lat.Index].Value != null &&
                         Commands.Rows[selectedrow].Cells[Lat.Index].Value.ToString() == "0")
@@ -3805,7 +3821,7 @@ namespace MissionPlanner.GCSViews
                 for (int i = 0; i < Commands.ColumnCount; i++)
                 {
                     DataGridViewCell tcell = Commands.Rows[selectedrow].Cells[i];
-                    if (tcell.GetType() == typeof (DataGridViewTextBoxCell))
+                    if (tcell.GetType() == typeof(DataGridViewTextBoxCell))
                     {
                         if (tcell.Value.ToString() == "?")
                             tcell.Value = "0";
@@ -3856,7 +3872,7 @@ namespace MissionPlanner.GCSViews
                 log.Error(ex);
             }
 
-            return alt*CurrentState.multiplieralt;
+            return alt * CurrentState.multiplieralt;
         }
 
         private void TXT_homelat_Enter(object sender, EventArgs e)
@@ -3864,7 +3880,7 @@ namespace MissionPlanner.GCSViews
             if (!sethome)
                 CustomMessageBox.Show("Click on the Map to set Home ");
             sethome = true;
-            
+
         }
 
         private void Planner_Resize(object sender, EventArgs e)
@@ -3893,7 +3909,7 @@ namespace MissionPlanner.GCSViews
                 convertFromUTM(e.RowIndex);
             }
 
-            if(e.ColumnIndex == MGRS.Index)
+            if (e.ColumnIndex == MGRS.Index)
             {
                 convertFromMGRS(e.RowIndex);
             }
@@ -3907,10 +3923,11 @@ namespace MissionPlanner.GCSViews
                     var lat = double.Parse(Commands.Rows[e.RowIndex].Cells[Lat.Index].Value.ToString());
                     var lng = double.Parse(Commands.Rows[e.RowIndex].Cells[Lon.Index].Value.ToString());
                     convertFromGeographic(lat, lng);
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     log.Error(ex);
-                    CustomMessageBox.Show("Invalid Lat/Long, please fix",Strings.ERROR);
+                    CustomMessageBox.Show("Invalid Lat/Long, please fix", Strings.ERROR);
                 }
             }
 
@@ -3963,23 +3980,23 @@ namespace MissionPlanner.GCSViews
         public PointLatLng FindLineIntersection(PointLatLng start1, PointLatLng end1, PointLatLng start2,
             PointLatLng end2)
         {
-            double denom = ((end1.Lng - start1.Lng)*(end2.Lat - start2.Lat)) -
-                           ((end1.Lat - start1.Lat)*(end2.Lng - start2.Lng));
+            double denom = ((end1.Lng - start1.Lng) * (end2.Lat - start2.Lat)) -
+                           ((end1.Lat - start1.Lat) * (end2.Lng - start2.Lng));
             //  AB & CD are parallel         
             if (denom == 0)
                 return PointLatLng.Empty;
-            double numer = ((start1.Lat - start2.Lat)*(end2.Lng - start2.Lng)) -
-                           ((start1.Lng - start2.Lng)*(end2.Lat - start2.Lat));
-            double r = numer/denom;
-            double numer2 = ((start1.Lat - start2.Lat)*(end1.Lng - start1.Lng)) -
-                            ((start1.Lng - start2.Lng)*(end1.Lat - start1.Lat));
-            double s = numer2/denom;
+            double numer = ((start1.Lat - start2.Lat) * (end2.Lng - start2.Lng)) -
+                           ((start1.Lng - start2.Lng) * (end2.Lat - start2.Lat));
+            double r = numer / denom;
+            double numer2 = ((start1.Lat - start2.Lat) * (end1.Lng - start1.Lng)) -
+                            ((start1.Lng - start2.Lng) * (end1.Lat - start1.Lat));
+            double s = numer2 / denom;
             if ((r < 0 || r > 1) || (s < 0 || s > 1))
                 return PointLatLng.Empty;
             // Find intersection point      
             PointLatLng result = new PointLatLng();
-            result.Lng = start1.Lng + (r*(end1.Lng - start1.Lng));
-            result.Lat = start1.Lat + (r*(end1.Lat - start1.Lat));
+            result.Lng = start1.Lng + (r * (end1.Lng - start1.Lng));
+            result.Lat = start1.Lat + (r * (end1.Lat - start1.Lat));
             return result;
         }
 
@@ -4040,7 +4057,7 @@ namespace MissionPlanner.GCSViews
             if (sunits != null)
                 try
                 {
-                    units = (distances) Enum.Parse(typeof (distances), sunits);
+                    units = (distances)Enum.Parse(typeof(distances), sunits);
                 }
                 catch (Exception)
                 {
@@ -4050,12 +4067,12 @@ namespace MissionPlanner.GCSViews
             {
                 case distances.Feet:
                     return toMeterOrFeet
-                        ? string.Format((distInKM*3280.8399).ToString("0.00 ft"))
-                        : string.Format((distInKM*0.621371).ToString("0.0000 miles"));
+                        ? string.Format((distInKM * 3280.8399).ToString("0.00 ft"))
+                        : string.Format((distInKM * 0.621371).ToString("0.0000 miles"));
                 case distances.Meters:
                 default:
                     return toMeterOrFeet
-                        ? string.Format((distInKM*1000).ToString("0.00 m"))
+                        ? string.Format((distInKM * 1000).ToString("0.00 m"))
                         : string.Format(distInKM.ToString("0.0000 km"));
             }
         }
@@ -4180,7 +4197,8 @@ namespace MissionPlanner.GCSViews
             try
             {
                 Commands.CurrentCell = null;
-            } catch { }
+            }
+            catch { }
 
             Commands.Rows.Clear();
 
@@ -4197,7 +4215,7 @@ namespace MissionPlanner.GCSViews
 
             ChangeColumnHeader(MAVLink.MAV_CMD.LOITER_UNLIM.ToString());
 
-            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
 
             writeKML();
         }
@@ -4328,7 +4346,7 @@ namespace MissionPlanner.GCSViews
 
             ChangeColumnHeader(MAVLink.MAV_CMD.LOITER_TIME.ToString());
 
-            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
 
             writeKML();
         }
@@ -4347,7 +4365,7 @@ namespace MissionPlanner.GCSViews
 
             ChangeColumnHeader(MAVLink.MAV_CMD.LOITER_TURNS.ToString());
 
-            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
 
             writeKML();
         }
@@ -4382,7 +4400,7 @@ namespace MissionPlanner.GCSViews
                     MainV2.comPort.MAV.cs.TrackerLocation.Lng != 0)
                 {
                     addpolygonmarker("Tracker Home", MainV2.comPort.MAV.cs.TrackerLocation.Lng,
-                        MainV2.comPort.MAV.cs.TrackerLocation.Lat, (int) MainV2.comPort.MAV.cs.TrackerLocation.Alt,
+                        MainV2.comPort.MAV.cs.TrackerLocation.Lat, (int)MainV2.comPort.MAV.cs.TrackerLocation.Alt,
                         Color.Blue, routesoverlay);
                 }
 
@@ -4396,7 +4414,7 @@ namespace MissionPlanner.GCSViews
                 if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided" && MainV2.comPort.MAV.GuidedMode.x != 0)
                 {
                     addpolygonmarker("Guided Mode", MainV2.comPort.MAV.GuidedMode.y, MainV2.comPort.MAV.GuidedMode.x,
-                        (int) MainV2.comPort.MAV.GuidedMode.z, Color.Blue, routesoverlay);
+                        (int)MainV2.comPort.MAV.GuidedMode.z, Color.Blue, routesoverlay);
                 }
             }
             catch (Exception ex)
@@ -4412,21 +4430,21 @@ namespace MissionPlanner.GCSViews
 
         private void updateMapPosition(PointLatLng currentloc)
         {
-            BeginInvoke((MethodInvoker) delegate
-            {
-                try
-                {
-                    if (lastmapposchange.Second != DateTime.Now.Second)
-                    {
-                        MainMap.Position = currentloc;
-                        lastmapposchange = DateTime.Now;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    log.Error(ex);
-                }
-            });
+            BeginInvoke((MethodInvoker)delegate
+           {
+               try
+               {
+                   if (lastmapposchange.Second != DateTime.Now.Second)
+                   {
+                       MainMap.Position = currentloc;
+                       lastmapposchange = DateTime.Now;
+                   }
+               }
+               catch (Exception ex)
+               {
+                   log.Error(ex);
+               }
+           });
         }
 
         private void addpolygonmarker(string tag, double lng, double lat, int alt, Color? color, GMapOverlay overlay)
@@ -4445,7 +4463,7 @@ namespace MissionPlanner.GCSViews
                     try
                     {
                         mBorders.wprad =
-                            (int) (Settings.Instance.GetFloat("TXT_WPRad")/CurrentState.multiplieralt);
+                            (int)(Settings.Instance.GetFloat("TXT_WPRad") / CurrentState.multiplieralt);
                     }
                     catch (Exception ex)
                     {
@@ -4512,7 +4530,7 @@ namespace MissionPlanner.GCSViews
             if (MainV2.comPort.MAV.param.ContainsKey("FENCE_MINALT"))
             {
                 string minalts =
-                    (int.Parse(MainV2.comPort.MAV.param["FENCE_MINALT"].ToString())*CurrentState.multiplieralt)
+                    (int.Parse(MainV2.comPort.MAV.param["FENCE_MINALT"].ToString()) * CurrentState.multiplieralt)
                         .ToString(
                             "0");
                 if (DialogResult.Cancel == InputBox.Show("Min Alt", "Box Minimum Altitude?", ref minalts))
@@ -4528,7 +4546,7 @@ namespace MissionPlanner.GCSViews
             if (MainV2.comPort.MAV.param.ContainsKey("FENCE_MAXALT"))
             {
                 string maxalts =
-                    (int.Parse(MainV2.comPort.MAV.param["FENCE_MAXALT"].ToString())*CurrentState.multiplieralt)
+                    (int.Parse(MainV2.comPort.MAV.param["FENCE_MAXALT"].ToString()) * CurrentState.multiplieralt)
                         .ToString(
                             "0");
                 if (DialogResult.Cancel == InputBox.Show("Max Alt", "Box Maximum Altitude?", ref maxalts))
@@ -4555,7 +4573,7 @@ namespace MissionPlanner.GCSViews
                 return;
             }
 
-            float oldaction = (float) MainV2.comPort.MAV.param["FENCE_ACTION"];
+            float oldaction = (float)MainV2.comPort.MAV.param["FENCE_ACTION"];
 
             try
             {
@@ -4568,7 +4586,7 @@ namespace MissionPlanner.GCSViews
             }
 
             // points + return + close
-            byte pointcount = (byte) (drawnpolygon.Points.Count + 2);
+            byte pointcount = (byte)(drawnpolygon.Points.Count + 2);
 
 
             try
@@ -4719,7 +4737,8 @@ namespace MissionPlanner.GCSViews
         {
             geofenceoverlay.Markers.Clear();
             geofenceoverlay.Markers.Add(new GMarkerGoogle(new PointLatLng(MouseDownStart.Lat, MouseDownStart.Lng),
-                GMarkerGoogleType.red) {ToolTipMode = MarkerTooltipMode.OnMouseOver, ToolTipText = "GeoFence Return"});
+                GMarkerGoogleType.red)
+            { ToolTipMode = MarkerTooltipMode.OnMouseOver, ToolTipText = "GeoFence Return" });
 
             MainMap.Invalidate();
         }
@@ -4740,7 +4759,7 @@ namespace MissionPlanner.GCSViews
             {
                 if (((array[i].Lng > testy) != (array[j].Lng > testy)) &&
                     (testx <
-                     (array[j].Lat - array[i].Lat)*(testy - array[i].Lng)/(array[j].Lng - array[i].Lng) + array[i].Lat))
+                     (array[j].Lat - array[i].Lat) * (testy - array[i].Lng) / (array[j].Lng - array[i].Lng) + array[i].Lat))
                     c = !c;
             }
             return c;
@@ -4770,7 +4789,7 @@ namespace MissionPlanner.GCSViews
                         }
                         else
                         {
-                            string[] items = line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+                            string[] items = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
                             if (a == 0)
                             {
@@ -4879,7 +4898,7 @@ namespace MissionPlanner.GCSViews
 
                 ms.Position = 0;
 
-                return (T) formatter.Deserialize(ms);
+                return (T)formatter.Deserialize(ms);
             }
         }
 
@@ -4933,7 +4952,7 @@ namespace MissionPlanner.GCSViews
             }
 
             double a = startangle;
-            double step = 360.0f/Points;
+            double step = 360.0f / Points;
             if (Direction == -1)
             {
                 a += 360;
@@ -4953,15 +4972,15 @@ namespace MissionPlanner.GCSViews
                 float d = Radius;
                 float R = 6371000;
 
-                var lat2 = Math.Asin(Math.Sin(MouseDownEnd.Lat*MathHelper.deg2rad)*Math.Cos(d/R) +
-                                     Math.Cos(MouseDownEnd.Lat*MathHelper.deg2rad)*Math.Sin(d/R)*Math.Cos(a*MathHelper.deg2rad));
-                var lon2 = MouseDownEnd.Lng*MathHelper.deg2rad +
-                           Math.Atan2(Math.Sin(a*MathHelper.deg2rad)*Math.Sin(d/R)*Math.Cos(MouseDownEnd.Lat*MathHelper.deg2rad),
-                               Math.Cos(d/R) - Math.Sin(MouseDownEnd.Lat*MathHelper.deg2rad)*Math.Sin(lat2));
+                var lat2 = Math.Asin(Math.Sin(MouseDownEnd.Lat * MathHelper.deg2rad) * Math.Cos(d / R) +
+                                     Math.Cos(MouseDownEnd.Lat * MathHelper.deg2rad) * Math.Sin(d / R) * Math.Cos(a * MathHelper.deg2rad));
+                var lon2 = MouseDownEnd.Lng * MathHelper.deg2rad +
+                           Math.Atan2(Math.Sin(a * MathHelper.deg2rad) * Math.Sin(d / R) * Math.Cos(MouseDownEnd.Lat * MathHelper.deg2rad),
+                               Math.Cos(d / R) - Math.Sin(MouseDownEnd.Lat * MathHelper.deg2rad) * Math.Sin(lat2));
 
-                PointLatLng pll = new PointLatLng(lat2*MathHelper.rad2deg, lon2*MathHelper.rad2deg);
+                PointLatLng pll = new PointLatLng(lat2 * MathHelper.rad2deg, lon2 * MathHelper.rad2deg);
 
-                setfromMap(pll.Lat, pll.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+                setfromMap(pll.Lat, pll.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
             }
 
             quickadd = false;
@@ -4975,7 +4994,7 @@ namespace MissionPlanner.GCSViews
             // set the firmware type if we are not connected. this allows overrideing
             if (!MainV2.comPort.BaseStream.IsOpen)
             {
-                MainV2.comPort.MAV.cs.firmware = (Firmwares) MainV2._connectionControl.TOOL_APMFirmware.SelectedItem;
+                MainV2.comPort.MAV.cs.firmware = (Firmwares)MainV2._connectionControl.TOOL_APMFirmware.SelectedItem;
             }
 
             // hide altmode if old copter version
@@ -5008,7 +5027,7 @@ namespace MissionPlanner.GCSViews
             catch
             {
                 CustomMessageBox.Show("Please fix your default alt value");
-                TXT_DefaultAlt.Text = (50*CurrentState.multiplieralt).ToString("0");
+                TXT_DefaultAlt.Text = (50 * CurrentState.multiplieralt).ToString("0");
             }
         }
 
@@ -5061,7 +5080,7 @@ namespace MissionPlanner.GCSViews
 
             ChangeColumnHeader(MAVLink.MAV_CMD.DO_SET_ROI.ToString());
 
-            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+            setfromMap(MouseDownEnd.Lat, MouseDownEnd.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
 
             writeKML();
         }
@@ -5091,7 +5110,7 @@ namespace MissionPlanner.GCSViews
             PointLatLngAlt lastpnt = null;
 
             string maxzoomstring = "20";
-            if(InputBox.Show("max zoom", "Enter the max zoom to prefetch to.", ref maxzoomstring) != DialogResult.OK)
+            if (InputBox.Show("max zoom", "Enter the max zoom to prefetch to.", ref maxzoomstring) != DialogResult.OK)
                 return;
 
             int maxzoom = 20;
@@ -5406,7 +5425,7 @@ namespace MissionPlanner.GCSViews
         private void Dxf_newLine(dxf sender, netDxf.Entities.Line line)
         {
             var route = new GMapRoute(line.Handle);
-            route.Points.Add(new PointLatLng(line.StartPoint.Y,line.StartPoint.X));
+            route.Points.Add(new PointLatLng(line.StartPoint.Y, line.StartPoint.X));
             route.Points.Add(new PointLatLng(line.EndPoint.Y, line.EndPoint.X));
 
             route.Stroke = new Pen(Color.FromArgb(line.Color.R, line.Color.G, line.Color.B));
@@ -5419,7 +5438,7 @@ namespace MissionPlanner.GCSViews
 
         void ConvertUTMCoords(GMapRoute route, int zone = -9999)
         {
-            for (int i =0;i < route.Points.Count;i++)
+            for (int i = 0; i < route.Points.Count; i++)
             {
                 var pnt = route.Points[i];
                 // load input
@@ -5551,7 +5570,7 @@ namespace MissionPlanner.GCSViews
         {
             writeKML();
             double homealt = MainV2.comPort.MAV.cs.HomeAlt;
-            Form temp = new ElevationProfile(pointlist, homealt, (altmode) CMB_altmode.SelectedValue);
+            Form temp = new ElevationProfile(pointlist, homealt, (altmode)CMB_altmode.SelectedValue);
             ThemeManager.ApplyThemeTo(temp);
             temp.ShowDialog();
         }
@@ -5851,7 +5870,7 @@ namespace MissionPlanner.GCSViews
                         }
                         else
                         {
-                            string[] items = line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+                            string[] items = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
                             if (items.Length < 2)
                                 continue;
@@ -5934,11 +5953,11 @@ namespace MissionPlanner.GCSViews
         {
             double aream2 = Math.Abs(calcpolygonarea(drawnpolygon.Points));
 
-            double areaa = aream2*0.000247105;
+            double areaa = aream2 * 0.000247105;
 
-            double areaha = aream2*1e-4;
+            double areaha = aream2 * 1e-4;
 
-            double areasqf = aream2*10.7639;
+            double areasqf = aream2 * 10.7639;
 
             CustomMessageBox.Show(
                 "Area: " + aream2.ToString("0") + " m2\n\t" + areaa.ToString("0.00") + " Acre\n\t" +
@@ -5973,16 +5992,16 @@ namespace MissionPlanner.GCSViews
                 var gridsize = 1000.0;
 
 
-                if (Math.Abs(deltax)/100000 < 40)
+                if (Math.Abs(deltax) / 100000 < 40)
                     gridsize = 100000;
 
-                if (Math.Abs(deltax)/10000 < 40)
+                if (Math.Abs(deltax) / 10000 < 40)
                     gridsize = 10000;
 
-                if (Math.Abs(deltax)/1000 < 40)
+                if (Math.Abs(deltax) / 1000 < 40)
                     gridsize = 1000;
 
-                if (Math.Abs(deltax)/100 < 40)
+                if (Math.Abs(deltax) / 100 < 40)
                     gridsize = 100;
 
                 if (Math.Abs(deltax) / 10 < 40)
@@ -5992,9 +6011,9 @@ namespace MissionPlanner.GCSViews
                     gridsize = 1;
 
                 // round it - x
-                utm1[0] = utm1[0] - (utm1[0]%gridsize);
+                utm1[0] = utm1[0] - (utm1[0] % gridsize);
                 // y
-                utm2[1] = utm2[1] - (utm2[1]%gridsize);
+                utm2[1] = utm2[1] - (utm2[1] % gridsize);
 
                 // x's
                 for (double x = utm1[0]; x < utm2[0]; x += gridsize)
@@ -6002,10 +6021,10 @@ namespace MissionPlanner.GCSViews
                     var p1 = MainMap.FromLatLngToLocal(PointLatLngAlt.FromUTM(zone, x, utm1[1]));
                     var p2 = MainMap.FromLatLngToLocal(PointLatLngAlt.FromUTM(zone, x, utm2[1]));
 
-                    int x1 = (int) p1.X;
-                    int y1 = (int) p1.Y;
-                    int x2 = (int) p2.X;
-                    int y2 = (int) p2.Y;
+                    int x1 = (int)p1.X;
+                    int y1 = (int)p1.Y;
+                    int x2 = (int)p2.X;
+                    int y2 = (int)p2.Y;
 
                     e.Graphics.DrawLine(new Pen(MainMap.SelectionPen.Color, 1), x1, y1, x2, y2);
                 }
@@ -6016,10 +6035,10 @@ namespace MissionPlanner.GCSViews
                     var p1 = MainMap.FromLatLngToLocal(PointLatLngAlt.FromUTM(zone, utm1[0], y));
                     var p2 = MainMap.FromLatLngToLocal(PointLatLngAlt.FromUTM(zone, utm2[0], y));
 
-                    int x1 = (int) p1.X;
-                    int y1 = (int) p1.Y;
-                    int x2 = (int) p2.X;
-                    int y2 = (int) p2.Y;
+                    int x1 = (int)p1.X;
+                    int y1 = (int)p1.Y;
+                    int x2 = (int)p2.X;
+                    int y2 = (int)p2.Y;
 
                     e.Graphics.DrawLine(new Pen(MainMap.SelectionPen.Color, 1), x1, y1, x2, y2);
                 }
@@ -6027,10 +6046,13 @@ namespace MissionPlanner.GCSViews
 
             e.Graphics.ResetTransform();
 
-            polyicon.Location = new Point(10,100);
-            polyicon.Width = 45;    // @eams add
-            polyicon.Height = 45;   // @eams add
-            polyicon.Paint(e.Graphics);
+            if (int.Parse(Settings.Instance["overlay_mesh"]) == 0)
+            {
+                polyicon.Location = new Point(10, 100);
+                polyicon.Width = 45;    // @eams add
+                polyicon.Height = 45;   // @eams add
+                polyicon.Paint(e.Graphics);
+            }
         }
 
         MissionPlanner.Controls.Icon.Polygon polyicon = new MissionPlanner.Controls.Icon.Polygon();
@@ -6059,7 +6081,7 @@ namespace MissionPlanner.GCSViews
 
                 ChangeColumnHeader(MAVLink.MAV_CMD.WAYPOINT.ToString());
 
-                setfromMap(MouseDownStart.Lat, MouseDownStart.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+                setfromMap(MouseDownStart.Lat, MouseDownStart.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
             }
         }
 
@@ -6088,9 +6110,9 @@ namespace MissionPlanner.GCSViews
                     PointLatLngAlt plla = MainV2.comPort.getRallyPoint(a, ref count);
                     rallypointoverlay.Markers.Add(new GMapMarkerRallyPt(new PointLatLng(plla.Lat, plla.Lng))
                     {
-                        Alt = (int) plla.Alt,
+                        Alt = (int)plla.Alt,
                         ToolTipMode = MarkerTooltipMode.OnMouseOver,
-                        ToolTipText = "Rally Point" + "\nAlt: " + (plla.Alt*CurrentState.multiplieralt)
+                        ToolTipText = "Rally Point" + "\nAlt: " + (plla.Alt * CurrentState.multiplieralt)
                     });
                 }
                 catch
@@ -6115,8 +6137,8 @@ namespace MissionPlanner.GCSViews
             {
                 try
                 {
-                    MainV2.comPort.setRallyPoint(count, new PointLatLngAlt(pnt.Position) {Alt = pnt.Alt}, 0, 0, 0,
-                        (byte) (float) MainV2.comPort.MAV.param["RALLY_TOTAL"]);
+                    MainV2.comPort.setRallyPoint(count, new PointLatLngAlt(pnt.Position) { Alt = pnt.Alt }, 0, 0, 0,
+                        (byte)(float)MainV2.comPort.MAV.param["RALLY_TOTAL"]);
                     count++;
                 }
                 catch
@@ -6139,14 +6161,14 @@ namespace MissionPlanner.GCSViews
             if (int.TryParse(altstring, out alt))
             {
                 PointLatLngAlt rallypt = new PointLatLngAlt(MouseDownStart.Lat, MouseDownStart.Lng,
-                    alt/CurrentState.multiplieralt, "Rally Point");
+                    alt / CurrentState.multiplieralt, "Rally Point");
                 rallypointoverlay.Markers.Add(
                     new GMapMarkerRallyPt(rallypt)
                     {
                         ToolTipMode = MarkerTooltipMode.OnMouseOver,
                         ToolTipText = "Rally Point" + "\nAlt: " + alt,
                         Tag = rallypointoverlay.Markers.Count,
-                        Alt = (int) rallypt.Alt
+                        Alt = (int)rallypt.Alt
                     }
                     );
             }
@@ -6280,7 +6302,7 @@ namespace MissionPlanner.GCSViews
                 foreach (var loc in ls.Coordinates)
                 {
                     selectedrow = Commands.Rows.Add();
-                    setfromMap(loc.Latitude, loc.Longitude, (int) loc.Altitude);
+                    setfromMap(loc.Latitude, loc.Longitude, (int)loc.Altitude);
                 }
             }
         }
@@ -6327,7 +6349,7 @@ namespace MissionPlanner.GCSViews
             foreach (DataGridViewRow line in Commands.Rows)
             {
                 line.Cells[Alt.Index].Value =
-                    (int) (float.Parse(line.Cells[Alt.Index].Value.ToString())*multiplyer + altchange);
+                    (int)(float.Parse(line.Cells[Alt.Index].Value.ToString()) * multiplyer + altchange);
             }
         }
 
@@ -6395,15 +6417,15 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         }
                         else
                         {
-                            string[] items = line.Split(new[] {' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+                            string[] items = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
                             MAVLink.mavlink_rally_point_t rally = new MAVLink.mavlink_rally_point_t();
 
-                            rally.lat = (int) (float.Parse(items[1],CultureInfo.InvariantCulture)*1e7);
-                            rally.lng = (int) (float.Parse(items[2], CultureInfo.InvariantCulture) *1e7);
-                            rally.alt = (short) float.Parse(items[3], CultureInfo.InvariantCulture);
-                            rally.break_alt = (short) float.Parse(items[4], CultureInfo.InvariantCulture);
-                            rally.land_dir = (ushort) float.Parse(items[5], CultureInfo.InvariantCulture);
+                            rally.lat = (int)(float.Parse(items[1], CultureInfo.InvariantCulture) * 1e7);
+                            rally.lng = (int)(float.Parse(items[2], CultureInfo.InvariantCulture) * 1e7);
+                            rally.alt = (short)float.Parse(items[3], CultureInfo.InvariantCulture);
+                            rally.break_alt = (short)float.Parse(items[4], CultureInfo.InvariantCulture);
+                            rally.land_dir = (ushort)float.Parse(items[5], CultureInfo.InvariantCulture);
                             rally.flags = byte.Parse(items[6], CultureInfo.InvariantCulture);
 
                             if (a == 0)
@@ -6451,13 +6473,13 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             UTM utm = new UTM(zoneint, double.Parse(easting), double.Parse(northing),
                 zone.ToLower().Contains("N") ? Geocentric.Hemisphere.North : Geocentric.Hemisphere.South);
 
-            PointLatLngAlt ans = ((Geographic) utm);
+            PointLatLngAlt ans = ((Geographic)utm);
 
             selectedrow = Commands.Rows.Add();
 
             ChangeColumnHeader(MAVLink.MAV_CMD.WAYPOINT.ToString());
 
-            setfromMap(ans.Lat, ans.Lng, (int) ans.Alt);
+            setfromMap(ans.Lat, ans.Lng, (int)ans.Alt);
         }
 
         private void loadSHPFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6520,8 +6542,8 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
                 for (int row = 0; row < dtOriginal.Rows.Count; row++)
                 {
-                    double x = fs.Vertex[row*2];
-                    double y = fs.Vertex[row*2 + 1];
+                    double x = fs.Vertex[row * 2];
+                    double y = fs.Vertex[row * 2 + 1];
 
                     double z = -1;
                     float wp = 0;
@@ -6529,7 +6551,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     try
                     {
                         if (dtOriginal.Columns.Contains("ELEVATION"))
-                            z = (float) Convert.ChangeType(dtOriginal.Rows[row]["ELEVATION"], TypeCode.Single);
+                            z = (float)Convert.ChangeType(dtOriginal.Rows[row]["ELEVATION"], TypeCode.Single);
                     }
                     catch (Exception ex)
                     {
@@ -6539,7 +6561,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     try
                     {
                         if (z == -1 && dtOriginal.Columns.Contains("alt"))
-                            z = (float) Convert.ChangeType(dtOriginal.Rows[row]["alt"], TypeCode.Single);
+                            z = (float)Convert.ChangeType(dtOriginal.Rows[row]["alt"], TypeCode.Single);
                     }
                     catch (Exception ex)
                     {
@@ -6561,7 +6583,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     {
                         if (dtOriginal.Columns.Contains("wp"))
                         {
-                            wp = (float) Convert.ChangeType(dtOriginal.Rows[row]["wp"], TypeCode.Single);
+                            wp = (float)Convert.ChangeType(dtOriginal.Rows[row]["wp"], TypeCode.Single);
                             dosort = true;
                         }
                     }
@@ -6572,8 +6594,8 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
                     if (reproject)
                     {
-                        double[] xyarray = {x, y};
-                        double[] zarray = {z};
+                        double[] xyarray = { x, y };
+                        double[] zarray = { z };
 
                         Reproject.ReprojectPoints(xyarray, zarray, pStart, pESRIEnd, 0, 1);
 
@@ -6621,7 +6643,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 panelAction.Dock = DockStyle.Bottom;
                 panelAction.Height = 120;
                 panelWaypoints.Dock = DockStyle.Right;
-                panelWaypoints.Width = Width/2;
+                panelWaypoints.Width = Width / 2;
             }
 
             Settings.Instance["FP_docking"] = panelAction.Dock.ToString();
@@ -6657,7 +6679,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
                 ChangeColumnHeader(MAVLink.MAV_CMD.SPLINE_WAYPOINT.ToString());
 
-                setfromMap(MouseDownStart.Lat, MouseDownStart.Lng, (int) float.Parse(TXT_DefaultAlt.Text));
+                setfromMap(MouseDownStart.Lat, MouseDownStart.Lng, (int)float.Parse(TXT_DefaultAlt.Text));
             }
         }
 
@@ -6718,7 +6740,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
 
             double a = startangle;
-            double step = 360.0f/Points;
+            double step = 360.0f / Points;
 
             quickadd = true;
 
@@ -6739,18 +6761,18 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                     float d = Radius;
                     float R = 6371000;
 
-                    var lat2 = Math.Asin(Math.Sin(MouseDownEnd.Lat*MathHelper.deg2rad)*Math.Cos(d/R) +
-                                         Math.Cos(MouseDownEnd.Lat*MathHelper.deg2rad)*Math.Sin(d/R)*Math.Cos(a*MathHelper.deg2rad));
-                    var lon2 = MouseDownEnd.Lng*MathHelper.deg2rad +
-                               Math.Atan2(Math.Sin(a*MathHelper.deg2rad)*Math.Sin(d/R)*Math.Cos(MouseDownEnd.Lat*MathHelper.deg2rad),
-                                   Math.Cos(d/R) - Math.Sin(MouseDownEnd.Lat*MathHelper.deg2rad)*Math.Sin(lat2));
+                    var lat2 = Math.Asin(Math.Sin(MouseDownEnd.Lat * MathHelper.deg2rad) * Math.Cos(d / R) +
+                                         Math.Cos(MouseDownEnd.Lat * MathHelper.deg2rad) * Math.Sin(d / R) * Math.Cos(a * MathHelper.deg2rad));
+                    var lon2 = MouseDownEnd.Lng * MathHelper.deg2rad +
+                               Math.Atan2(Math.Sin(a * MathHelper.deg2rad) * Math.Sin(d / R) * Math.Cos(MouseDownEnd.Lat * MathHelper.deg2rad),
+                                   Math.Cos(d / R) - Math.Sin(MouseDownEnd.Lat * MathHelper.deg2rad) * Math.Sin(lat2));
 
-                    PointLatLng pll = new PointLatLng(lat2*MathHelper.rad2deg, lon2*MathHelper.rad2deg);
+                    PointLatLng pll = new PointLatLng(lat2 * MathHelper.rad2deg, lon2 * MathHelper.rad2deg);
 
                     setfromMap(pll.Lat, pll.Lng, stepalt);
 
                     if (!startup)
-                        stepalt += altstep/Points;
+                        stepalt += altstep / Points;
                 }
 
                 // reset back to the start
@@ -6773,7 +6795,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             }
             else
             {
-                currentaltmode = (altmode) CMB_altmode.SelectedValue;
+                currentaltmode = (altmode)CMB_altmode.SelectedValue;
             }
         }
 
@@ -6823,8 +6845,8 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                             {
                                 if (reproject)
                                 {
-                                    double[] xyarray = {point.X, point.Y};
-                                    double[] zarray = {point.Z};
+                                    double[] xyarray = { point.X, point.Y };
+                                    double[] zarray = { point.Z };
                                     Reproject.ReprojectPoints(xyarray, zarray, pStart, pESRIEnd, 0, 1);
                                     point.X = xyarray[0];
                                     point.Y = xyarray[1];
@@ -6871,7 +6893,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 sf.Alignment = StringAlignment.Near;
                 sf.LineAlignment = StringAlignment.Near;
-                gp.AddString(text, font.FontFamily, (int) font.Style, font.Size, new PointF(0, 0), sf);
+                gp.AddString(text, font.FontFamily, (int)font.Style, font.Size, new PointF(0, 0), sf);
 
                 utmpos basepos = new utmpos(MouseDownStart);
 
@@ -6991,16 +7013,35 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void currentPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddWPToMap(MainV2.comPort.MAV.cs.lat, MainV2.comPort.MAV.cs.lng, (int) MainV2.comPort.MAV.cs.alt);
+            AddWPToMap(MainV2.comPort.MAV.cs.lat, MainV2.comPort.MAV.cs.lng, (int)MainV2.comPort.MAV.cs.alt);
         }
 
         private void surveyGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GridPlugin grid = new GridPlugin();
-            grid.Host = new PluginHost();
-            grid.but_Click(sender, e);
+            if (int.Parse(Settings.Instance["overlay_mesh"]) > 0)
+            {
+                //GridUIで順次処理
+                IProgressReporterDialogue frmProgressReporter = new ProgressReporterDialogue
+                {
+                    StartPosition = FormStartPosition.CenterScreen,
+                    Text = "フライトプラン自動生成中"
+                };
+                frmProgressReporter.DoWork += autoGrid;
+                frmProgressReporter.UpdateProgressAndStatus(-1, "グリッド生成開始");
+                ThemeManager.ApplyThemeTo(frmProgressReporter);
+                frmProgressReporter.RunBackgroundOperationAsync();
+                frmProgressReporter.Dispose();
+
+                drawnpolygonsoverlay.Clear();
+            }
+            else
+            {
+                GridPlugin grid = new GridPlugin();
+                grid.Host = new PluginHost();
+                grid.but_Click(sender, e);
+            }
         }
-        
+
         private void Commands_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             writeKML();
@@ -7138,6 +7179,495 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 CustomMessageBox.Show(
                     "If you're at the field, connect to your APM and wait for GPS lock. Then click 'Home Location' link to set home to your location");
             }
+        }
+
+        // @eams add
+        private void loadMesh()
+        {
+            try
+            {
+                //read ndvi file
+                var fn_ndvi = Settings.GetUserDataDirectory() + "ndvi.csv";
+                if (!File.Exists(fn_ndvi))
+                {
+                    return;
+                }
+                var ndvis = new List<double>();
+                StreamReader sr_ndvi = new StreamReader(fn_ndvi);
+                while (!sr_ndvi.EndOfStream)
+                {
+                    string line = sr_ndvi.ReadLine();
+                    if (line.StartsWith("#"))
+                    {
+                    }
+                    else if (line.StartsWith("mesh_id"))
+                    {
+                    }
+                    else
+                    {
+                        string[] items = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        if (items.Length < 2)
+                        {
+                            ndvis.Add(-1.0);
+                        }
+                        else
+                        {
+                            ndvis.Add(double.Parse(items[1], CultureInfo.InvariantCulture));
+                        }
+                    }
+                }
+                sr_ndvi.Close();
+
+                //read mesh file
+                var fn_mesh = Settings.GetUserDataDirectory() + "mesh.csv";
+                if (!File.Exists(fn_mesh))
+                {
+                    return;
+                }
+
+                StreamReader sr_mesh = new StreamReader(fn_mesh);
+
+                meshoverlay.Markers.Clear();
+                meshoverlay.Polygons.Clear();
+
+                int a = 0;
+
+                while (!sr_mesh.EndOfStream)
+                {
+                    string line = sr_mesh.ReadLine();
+                    if (line.StartsWith("#"))
+                    {
+                    }
+                    else if (line.StartsWith("mesh_id"))
+                    {
+                    }
+                    else
+                    {
+                        GMapPolygonMesh poly = new GMapPolygonMesh(new List<PointLatLng>(), "mesh")
+                        {
+                            //Fill = Brushes.Transparent,
+                            Ndvi = ndvis[a]
+                        };
+                        string[] items = line.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        if (items.Length < 12)
+                            continue;
+
+                        //mesh_id,lat_left_top,lat_right_top,lat_left_bottom,lat_right_bottom,lon_left_top,lon_right_top,lon_left_bottom,lon_right_bottom,row,column,is_field
+                        //0      ,1           ,2            ,3              ,4               ,5           ,6            ,7              ,8               ,9  ,10    ,11
+                        if (items[11] == "1")
+                        {
+
+                            poly.Points.Add(new PointLatLng(
+                                double.Parse(items[1], CultureInfo.InvariantCulture),
+                                double.Parse(items[5], CultureInfo.InvariantCulture)));
+                            poly.Points.Add(new PointLatLng(
+                                double.Parse(items[3], CultureInfo.InvariantCulture),
+                                double.Parse(items[7], CultureInfo.InvariantCulture)));
+                            poly.Points.Add(new PointLatLng(
+                                double.Parse(items[4], CultureInfo.InvariantCulture),
+                                double.Parse(items[8], CultureInfo.InvariantCulture)));
+                            poly.Points.Add(new PointLatLng(
+                                double.Parse(items[2], CultureInfo.InvariantCulture),
+                                double.Parse(items[6], CultureInfo.InvariantCulture)));
+                            meshoverlay.Polygons.Add(poly);
+
+                            //ズームのためにマーカーを仮置き
+                            meshoverlay.Markers.Add(new GMarkerGoogle(
+                                new PointLatLng(
+                                    double.Parse(items[1], CultureInfo.InvariantCulture),
+                                    double.Parse(items[5], CultureInfo.InvariantCulture))
+                                , GMarkerGoogleType.orange_small));
+                            meshoverlay.Markers.Add(new GMarkerGoogle(
+                                new PointLatLng(
+                                    double.Parse(items[3], CultureInfo.InvariantCulture),
+                                    double.Parse(items[7], CultureInfo.InvariantCulture))
+                                , GMarkerGoogleType.orange_small));
+                            meshoverlay.Markers.Add(new GMarkerGoogle(
+                                new PointLatLng(
+                                    double.Parse(items[4], CultureInfo.InvariantCulture),
+                                    double.Parse(items[8], CultureInfo.InvariantCulture))
+                                , GMarkerGoogleType.orange_small));
+                            meshoverlay.Markers.Add(new GMarkerGoogle(
+                                new PointLatLng(
+                                    double.Parse(items[2], CultureInfo.InvariantCulture),
+                                    double.Parse(items[6], CultureInfo.InvariantCulture))
+                                , GMarkerGoogleType.orange_small));
+
+                            a++;
+                        }
+                    }
+                }
+                sr_mesh.Close();
+            }
+            catch (Exception)
+            {
+                CustomMessageBox.Show(Strings.ERROR, "NDVIメッシュ表示処理でエラーが発生しました。");
+                return;
+            }
+#if true
+            try
+            {
+                //NDVI閾値による対象メッシュの抽出（非対象の排除）
+                var grid_ndvi_low = double.Parse(Settings.Instance["grid_ndvi_low"]);
+                var grid_ndvi_high = double.Parse(Settings.Instance["grid_ndvi_high"]);
+                foreach (GMapPolygonMesh item in meshoverlay.Polygons)
+                {
+                    if (item.Ndvi >= grid_ndvi_low && item.Ndvi <= grid_ndvi_high)
+                    {
+                        //item.Fill = drawnpolygon.Fill;
+                        GMapPolygonMesh poly = new GMapPolygonMesh(item.Points, "mesh");
+                        poly.Fill = Brushes.Transparent;
+                        poly.Stroke = drawnpolygon.Stroke;
+                        polygonsoverlay.Polygons.Add(poly);
+                    }
+                }
+#if true
+                //隣接ポリゴンの結合処理
+                for (int i=0; i<polygonsoverlay.Polygons.Count()-1; i++)    //最後のメッシュは処理が不要なのでカウンタは-1
+                {
+                    var poly_base = (GMapPolygonMesh)polygonsoverlay.Polygons[i];
+                    for (int j = i+1; j < polygonsoverlay.Polygons.Count(); j++)
+                    {
+                        var poly_target = (GMapPolygonMesh)polygonsoverlay.Polygons[j];
+                        //隣接チェック
+                        int count_inside = 0;
+                        for (int k = 0; k < poly_target.Points.Count(); k++)
+                        {
+                            if (poly_base.IsInside(poly_target.Points[k]))  //T字型の隣接ポイントも走査
+                            {
+                                count_inside++;
+                            }
+                        }
+                        //隣接ポイントが2以上だったら結合処理
+                        if (count_inside >= 2)
+                        {
+                            var point_base = poly_base.Points;
+                            var point_target = poly_target.Points;
+                            bool flag_proc = false;
+                            //ベースのポイントを順に走査し、ターゲットと重複するポイントを見つける
+                            for (int bp = 0; bp < point_base.Count(); bp++)
+                            {
+                                for (int tp = 0; tp < point_target.Count(); tp++)
+                                {
+                                    if (point_base[bp] == point_target[tp])
+                                    {
+                                        //重複ポイントをベースとターゲット両者から削除する
+                                        point_base.RemoveAt(bp);
+                                        point_target.RemoveAt(tp);
+                                        //削除したベースのポイントに、ターゲットの残りのポイントを削除ポイントの次番から挿入する
+                                        for (int m = 0; m < tp; m++)    //ターゲットのローテーション
+                                        {
+                                            point_target.Add(point_target[0]);
+                                            point_target.RemoveAt(0);
+                                        }
+                                        point_base.InsertRange(bp, point_target);
+                                        flag_proc = true;
+                                        break;
+                                    }
+                                }
+                                if (flag_proc)
+                                {
+                                    break;
+                                }
+                            }
+#if true
+                            //残りの重複ポイント（残数最大1）を削除
+                            for (int bp = 0; bp < point_base.Count(); bp++)
+                            {
+                                var p = point_base.LastIndexOf(point_base[bp]);
+                                if ( bp != p)
+                                {
+                                    point_base.RemoveAt(p);
+                                    point_base.RemoveAt(bp);
+                                    break;
+                                }
+                            }
+#endif
+#if false   //NGロジック
+                            //ポイント結合（排他的論理和）
+                            var intersect = poly_base.Points.Intersect(poly_target.Points); //積集合
+                            var union = poly_base.Points.Union(poly_target.Points); //和集合
+                            var merge = union.Except(intersect).ToList<PointLatLng>(); //和集合と積集合の差集合＝排他的論理和
+
+                            //ポイントのリナンバリング
+                            List<PointLatLng> renum = new List<PointLatLng>();
+                            var p1 = merge.OrderBy(a => a.Lat).ThenBy(a => a.Lng).ToList()[0];  //起点決定
+                            renum.Add(p1);
+//                            var p2 = merge.Find(a => a.Lng == p1.Lng && a.Lat > p1.Lat);        //二番目決定(下方のみなる)
+                            int direction = 1;  //下方：0、右方：1、上方：2、左方：3
+                            PointLatLng p = p1;
+                            PointLatLng next = new PointLatLng();
+
+                            for (i = 0; i < merge.Count() - 1; i++)
+                            {
+                                switch (direction)
+                                {
+                                    case 0: //下方後
+                                            //左方サーチ
+                                        next = merge.Find(a => a.Lat == p.Lat && a.Lng < p.Lng);
+                                        if (next == null)
+                                        {
+                                            //右方サーチ
+                                            next = merge.Find(a => a.Lat == p.Lat && a.Lng > p.Lng);
+                                            direction = 1;
+                                        }
+                                        else
+                                        {
+                                            direction = 3;
+                                        }
+                                        break;
+                                    case 1: //右方後
+                                            //下方サーチ
+                                        next = merge.Find(a => a.Lng == p.Lng && a.Lat > p.Lat);
+                                        if (next == null)
+                                        {
+                                            //上方サーチ
+                                            next = merge.Find(a => a.Lng == p.Lng && a.Lat < p.Lat);
+                                            direction = 2;
+                                        }
+                                        else
+                                        {
+                                            direction = 0;
+                                        }
+                                        break;
+                                    case 2: //上方後
+                                            //右方サーチ
+                                        next = merge.Find(a => a.Lat == p.Lat && a.Lng > p.Lng);
+                                        if (next == null)
+                                        {
+                                            //左方サーチ
+                                            next = merge.Find(a => a.Lat == p.Lat && a.Lng < p.Lng);
+                                            direction = 3;
+                                        }
+                                        else
+                                        {
+                                            direction = 1;
+                                        }
+                                        break;
+                                    case 3: //左方後
+                                            //上方サーチ
+                                        next = merge.Find(a => a.Lng == p.Lng && a.Lat < p.Lat);
+                                        if (next == null)
+                                        {
+                                            //下方サーチ
+                                            next = merge.Find(a => a.Lng == p.Lng && a.Lat > p.Lat);
+                                            direction = 0;
+                                        }
+                                        else
+                                        {
+                                            direction = 2;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                renum.Add(next);
+                                next = p;
+                            }
+                            //ポイントの適用
+                            poly_base.Points.Clear();
+                            //poly_base.Points.AddRange(merge);
+                            poly_base.Points.AddRange(renum);
+#endif
+                            //重複被対象ポリゴン削除
+                            polygonsoverlay.Polygons.RemoveAt(j);
+                            i--;
+                            break;
+                        }
+                    }
+                }
+#endif
+            }
+            catch (Exception)
+            {
+                CustomMessageBox.Show(Strings.ERROR, "NDVI飛行プラン自動生成でエラーが発生しました。");
+                return;
+            }
+#endif
+            //MainMap.UpdatePolygonLocalPosition(drawnpolygon);
+            MainMap.ZoomAndCenterMarkers(meshoverlay.Id);
+            meshoverlay.Markers.Clear();    //仮置きマーカー削除
+            //MainMap_OnMapZoomChanged();
+            //MainMap.Invalidate();
+            //MainMap.Focus();
+        }
+
+        void autoGrid(IProgressReporterDialogue sender)
+        {
+            try
+            {
+                //ホームポジション取得
+                PointLatLngAlt home = new PointLatLngAlt();
+                Invoke((MethodInvoker)delegate
+                {
+                    if (TXT_homealt.Text != "" && TXT_homelat.Text != "" && TXT_homelng.Text != "")
+                    {
+                        try
+                        {
+                            home = new PointLatLngAlt(
+                                double.Parse(TXT_homelat.Text), double.Parse(TXT_homelng.Text),
+                                double.Parse(TXT_homealt.Text) / CurrentState.multiplieralt, "H")
+                            { Tag2 = CMB_altmode.SelectedValue.ToString() };
+                        }
+                        catch (Exception ex)
+                        {
+                            CustomMessageBox.Show(Strings.ERROR, Strings.Invalid_home_location);
+                            log.Error(ex);
+                        }
+                    }
+                });
+
+                //ホームから近い順にソート
+                var polys = polygonsoverlay.Polygons.OrderBy(a => Math.Pow((a.Points[0].Lat - home.Lat), 2) + Math.Pow((a.Points[0].Lng - home.Lng), 2));
+
+                //グリッド生成
+                for (int i = 0; i < polys.Count(); i++)
+                {
+                    drawnpolygon = polys.ElementAt(i);
+                    Invoke((MethodInvoker)delegate
+                    {
+                        GridPlugin grid = new GridPlugin();
+                        grid.Host = new PluginHost();
+                        grid.but_Click(sender, null);
+                        ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(i * 100 / polys.Count(), "グリッド生成 " + (i + 1));
+                        ((ProgressReporterDialogue)sender).Refresh();
+                        Application.DoEvents();
+                    });
+                }
+                ((ProgressReporterDialogue)sender).UpdateProgressAndStatus(100, "グリッド生成完了");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                return;
+            }
+        }
+
+        private void chk_ndvimesh_CheckedChanged(object sender, EventArgs e)
+        {
+            meshoverlay.IsVisibile = chk_ndvimesh.Checked;
+        }
+
+        private void chk_ndvigrid_CheckedChanged(object sender, EventArgs e)
+        {
+            polygonsoverlay.IsVisibile = chk_ndvigrid.Checked;
+        }
+    }
+
+    public class GMapPolygonMesh : GMapPolygon
+    {
+        private double ndvi = 0.0;
+
+        public double Ndvi
+        {
+            get
+            {
+                return ndvi;
+            }
+
+            set
+            {
+                int alpha = 160;
+                ndvi = value;
+
+                if (ndvi < 0.00)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#ffffff")));
+                }
+                else if (ndvi < 0.05)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#2b83ba")));
+                }
+                else if (ndvi < 0.1)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#4595b5")));
+                }
+                else if (ndvi < 0.15)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#60a8b0")));
+                }
+                else if (ndvi < 0.2)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#7bbbac")));
+                }
+                else if (ndvi < 0.25)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#96cea7")));
+                }
+                else if (ndvi < 0.3)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#afdea5")));
+                }
+                else if (ndvi < 0.35)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#c1e5ab")));
+                }
+                else if (ndvi < 0.4)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#d2edb0")));
+                }
+                else if (ndvi < 0.45)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#e4f4b6")));
+                }
+                else if (ndvi < 0.5)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#f6fbbc")));
+                }
+                else if (ndvi < 0.55)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#fef6b5")));
+                }
+                else if (ndvi < 0.6)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#fee5a1")));
+                }
+                else if (ndvi < 0.65)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#fdd48d")));
+                }
+                else if (ndvi < 0.7)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#fdc379")));
+                }
+                else if (ndvi < 0.75)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#fdb265")));
+                }
+                else if (ndvi < 0.8)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#f79656")));
+                }
+                else if (ndvi < 0.85)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#ef7747")));
+                }
+                else if (ndvi < 0.9)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#e75739")));
+                }
+                else if (ndvi < 0.95)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#df382a")));
+                }
+                else if (ndvi <= 1)
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#d7191c")));
+                }
+                else
+                {
+                    Fill = new SolidBrush(Color.FromArgb(alpha, ColorTranslator.FromHtml("#000000")));
+                }
+            }
+        }
+
+        public GMapPolygonMesh(List<PointLatLng> points, string name)
+           : base(points, name)
+        {
+            Stroke = new Pen(Color.FromArgb(100, Color.Black));
+            Stroke.Width = 2;
         }
     }
 }

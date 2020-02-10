@@ -64,6 +64,7 @@ namespace MissionPlanner.Grid
         Color grid_color = Color.Red;    // @eams add
         int grid_type = 2;  // @eams add
         double area_unit = 5.0;  // @eams add
+        int mesh_type = 0;  // @eams add
 
         // GridUI
         public GridUI(GridPlugin plugin)
@@ -128,7 +129,6 @@ namespace MissionPlanner.Grid
 
             loading = false;
 
-
             // @eams add / form max/min button are invisible
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -144,6 +144,16 @@ namespace MissionPlanner.Grid
             // @eams add / area unit
             if (plugin.Host.config["area_unit"] != null)
                 area_unit = double.Parse(plugin.Host.config["area_unit"]);
+
+            // @eams add / ndvi mesh
+            if (plugin.Host.config["overlay_mesh"] != null)
+                mesh_type = int.Parse(plugin.Host.config["overlay_mesh"]);
+
+            // @eams add
+            if (mesh_type > 0)
+            {
+                map.Visible = false;
+            }
         }
 
         bool deleteLastLAND = false;    // @eams add
@@ -182,7 +192,11 @@ namespace MissionPlanner.Grid
                 CHK_toandland.Checked = true;
             }
 
-//            BUT_Accept_Click(this, null);   // @eams add
+            // @eams add
+            if (mesh_type > 0)
+            {
+                BUT_Accept_Click(this, null);
+            }
         }
 
         private void GridUI_Resize(object sender, EventArgs e)
