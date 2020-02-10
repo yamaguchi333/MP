@@ -4936,6 +4936,23 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 // Mission Restart
                 try
                 {
+                    // get our target wp
+                    string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
+                    if (lastwp == "-1")
+                        lastwp = "1";
+                    var curwpno = int.Parse(lastwp);
+
+                    // get wp data
+                    Locationwp home = new Locationwp();
+                    home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
+                    home.lat = MainV2.comPort.MAV.cs.HomeLocation.Lat;
+                    home.lng = MainV2.comPort.MAV.cs.HomeLocation.Lng;
+                    home.alt = (float)MainV2.comPort.MAV.cs.HomeLocation.Alt / CurrentState.multiplieralt;
+                    List<Locationwp> cmds = new List<Locationwp>();
+                    cmds = MainV2.instance.FlightPlanner.GetCommandList();
+                    cmds.Insert(0, home);
+                    var wpcount = cmds.Count;
+
 #if true
                     MainV2.comPort.setMode("AUTO");
 #else
@@ -4946,13 +4963,30 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
                         param1, 0, param3, 0, 0, 0, 0);
 #endif
+                    // set SERVO7_FUNCTION auto @eams
+                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
+
+                    // get parameters
+                    int grid_type = Settings.Instance.GetInt32("grid_type");
+
+                    // servo operation in mode2
+                    if (grid_type == 2)
+                    {
+                        for (int a = curwpno; a >= 0; a--)
+                        {
+                            if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                            {
+                                var servo = cmds[a].p2;
+                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servo, 0, 0, 0, 0, 0);
+                                break;
+                            }
+                        }
+                    }
                 }
                 catch
                 {
                     CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
                 }
-                // set SERVO7_FUNCTION auto @eams
-                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
 
                 ButtonStop_ChangeState(true);
             }
@@ -5190,13 +5224,23 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 // get wp data
                 List<Locationwp> cmds = new List<Locationwp>();
+#if true
+                Locationwp home = new Locationwp();
+                home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
+                home.lat = MainV2.comPort.MAV.cs.HomeLocation.Lat;
+                home.lng = MainV2.comPort.MAV.cs.HomeLocation.Lng;
+                home.alt = (float)MainV2.comPort.MAV.cs.HomeLocation.Alt / CurrentState.multiplieralt;
+                cmds = MainV2.instance.FlightPlanner.GetCommandList();
+                cmds.Insert(0, home);
+                var wpcount = cmds.Count;
+#else
                 var wpcount = MainV2.comPort.getWPCount();
                 for (ushort a = 0; a < wpcount; a++)
                 {
                     var wpdata = MainV2.comPort.getWP(a);
                     cmds.Add(wpdata);
                 }
-
+#endif
                 // DO_SET_SERVO high (close)
                 float servohigh = 1000;
                 for (ushort a = 0; a < wpcount; a++)

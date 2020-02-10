@@ -955,14 +955,16 @@ namespace MissionPlanner.Grid
                     else
                     {
 #endif
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
-//                    }
+                        //plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                    //}
                 }
                 else if (grid_type == 2)
                 {
                     if (addwp_firsttime)
                     {
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        //plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
                     }
                 }
             }
