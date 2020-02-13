@@ -956,7 +956,7 @@ namespace MissionPlanner.Grid
                     {
 #endif
                         //plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, Alt, gridobject);
                     //}
                 }
                 else if (grid_type == 2)
@@ -964,7 +964,7 @@ namespace MissionPlanner.Grid
                     if (addwp_firsttime)
                     {
                         //plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, Alt, gridobject);
                     }
                 }
             }

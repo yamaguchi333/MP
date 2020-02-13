@@ -1793,7 +1793,7 @@ Please check the following
                         continue;
                     }
                     giveComport = false;
-                    throw new TimeoutException("Timeout on read - doCommand");
+                    throw new TimeoutException("Timeout on read - doCommand(" + actionid.ToString() + ")");
                 }
 
                 buffer = readPacket();

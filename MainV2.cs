@@ -4240,9 +4240,12 @@ namespace MissionPlanner
                 // arm the MAV
                 try
                 {
-                    bool ans = MainV2.comPort.doARM(true);
-                    if (ans == false)
-                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                    if (MainV2.instance.FlightData.resume_flag == 0)
+                    {
+                        bool ans = MainV2.comPort.doARM(true);
+                        if (ans == false)
+                            CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                    }
                 }
                 catch
                 {

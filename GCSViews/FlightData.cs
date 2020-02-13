@@ -5169,13 +5169,18 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 //Guidedモード直後にWP表示を正しく表示させるため
                 gotohere.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
-                gotohere.alt = lastwpdata.alt;
+                gotohere.alt = 3;
                 gotohere.lat = resume_pos.Lat;
                 gotohere.lng = resume_pos.Lng;
                 MainV2.comPort.setGuidedModeWP(gotohere);
+                log.Info("FlightData gotohere alt: " + gotohere.alt);
+
+                bool ans = MainV2.comPort.doARM(true);
+                if (ans == false)
+                    CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
 
                 MainV2.comPort.setMode("GUIDED");
-                await Task.Delay(1000);
+                await Task.Delay(500);
                 Application.DoEvents();
 #if false
                 // force redraw map
@@ -5208,14 +5213,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 #endif
                 // take off
                 int timeout = 0;
-                while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt * 0.95))
+                while (MainV2.comPort.MAV.cs.alt < (gotohere.alt * 0.8))
                 {
-                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, lastwpdata.alt);
-                    await Task.Delay(100);
+                    await Task.Delay(1000);
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
                     Application.DoEvents();
                     timeout++;
+                    log.Info("FlightData Takeoff timeout: " + timeout);
 
-                    if (timeout > 400)
+                    if (timeout > 20)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
@@ -5241,17 +5247,6 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     cmds.Add(wpdata);
                 }
 #endif
-                // DO_SET_SERVO high (close)
-                float servohigh = 1000;
-                for (ushort a = 0; a < wpcount; a++)
-                {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
-                    {
-                        servohigh = cmds[a].p2;
-                        break;
-                    }
-                }
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
 
                 // DO_CHANGE_SPEED
                 float grid_speed = 5;
@@ -5297,20 +5292,34 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 await Task.Delay(1000);
                 Application.DoEvents();
 
+                await Task.Delay(1000);
                 // check reaching to guided WP
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.wp_dist > 0)
                 {
-                    await Task.Delay(100);
                     Application.DoEvents();
+                    await Task.Delay(1000);
                     timeout++;
+                    log.Info("FlightData guided wp timeout: " + timeout);
 
-                    if (timeout > 1200)
+                    if (timeout > 120)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
                     }
                 }
+
+                // DO_SET_SERVO high (close)
+                float servohigh = 1000;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                    {
+                        servohigh = cmds[a].p2;
+                        break;
+                    }
+                }
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
 
                 // set resume point wp
                 MainV2.comPort.setWPCurrent((ushort)lastwpno);
@@ -5320,11 +5329,12 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
                 {
                     MainV2.comPort.setMode("AUTO");
-                    await Task.Delay(100);
+                    await Task.Delay(1000);
                     Application.DoEvents();
                     timeout++;
+                    log.Info("FlightData auto timeout: " + timeout);
 
-                    if (timeout > 300)
+                    if (timeout > 30)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
