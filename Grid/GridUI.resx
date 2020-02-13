@@ -387,39 +387,6 @@
   <data name="&gt;&gt;label35.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="lbl_flighttime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbl_flighttime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lbl_flighttime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 20</value>
-  </data>
-  <data name="lbl_flighttime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 12</value>
-  </data>
-  <data name="lbl_flighttime.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="lbl_flighttime.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lbl_flighttime.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lbl_flighttime.Name" xml:space="preserve">
-    <value>lbl_flighttime</value>
-  </data>
-  <data name="&gt;&gt;lbl_flighttime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_flighttime.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;lbl_flighttime.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="label31.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -451,40 +418,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="lbl_distbetweenlines.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbl_distbetweenlines.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lbl_distbetweenlines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 59</value>
-  </data>
-  <data name="lbl_distbetweenlines.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 12</value>
-  </data>
-  <data name="lbl_distbetweenlines.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="lbl_distbetweenlines.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lbl_distbetweenlines.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lbl_distbetweenlines.Name" xml:space="preserve">
-    <value>lbl_distbetweenlines</value>
-  </data>
-  <data name="&gt;&gt;lbl_distbetweenlines.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_distbetweenlines.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;lbl_distbetweenlines.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="label25.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -517,7 +451,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="lbl_footprint.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -550,7 +484,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lbl_footprint.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -583,7 +517,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="lbl_strips.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -616,7 +550,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lbl_strips.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="lbl_pictures.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -649,7 +583,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lbl_pictures.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="label33.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -682,7 +616,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label33.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="label34.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -715,7 +649,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label34.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="lbl_grndres.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -748,7 +682,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lbl_grndres.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="label29.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -781,7 +715,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>17</value>
   </data>
   <data name="lbl_spacing.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -814,7 +748,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lbl_spacing.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>18</value>
   </data>
   <data name="label27.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -847,40 +781,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="lbl_distance.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbl_distance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lbl_distance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 33</value>
-  </data>
-  <data name="lbl_distance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 12</value>
-  </data>
-  <data name="lbl_distance.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lbl_distance.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lbl_distance.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lbl_distance.Name" xml:space="preserve">
-    <value>lbl_distance</value>
-  </data>
-  <data name="&gt;&gt;lbl_distance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_distance.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;lbl_distance.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>19</value>
   </data>
   <data name="label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -913,7 +814,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>20</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -946,13 +847,13 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>21</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 457</value>
+    <value>326, 653</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 24</value>
+    <value>67, 20</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -973,7 +874,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>41</value>
   </data>
   <data name="lbl_area.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -982,16 +883,16 @@
     <value>True</value>
   </data>
   <data name="lbl_area.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 11.25pt</value>
+    <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="lbl_area.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lbl_area.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 469</value>
+    <value>90, 606</value>
   </data>
   <data name="lbl_area.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 15</value>
+    <value>35, 16</value>
   </data>
   <data name="lbl_area.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1009,7 +910,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbl_area.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>42</value>
   </data>
   <data name="label42.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2190,156 +2091,6 @@
   <data name="groupBox_copter.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="TXT_headinghold.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TXT_headinghold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 48</value>
-  </data>
-  <data name="TXT_headinghold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 19</value>
-  </data>
-  <data name="TXT_headinghold.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="TXT_headinghold.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TXT_headinghold.Name" xml:space="preserve">
-    <value>TXT_headinghold</value>
-  </data>
-  <data name="&gt;&gt;TXT_headinghold.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TXT_headinghold.Parent" xml:space="preserve">
-    <value>groupBox_copter</value>
-  </data>
-  <data name="&gt;&gt;TXT_headinghold.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="BUT_headingholdminus.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BUT_headingholdminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="BUT_headingholdminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 46</value>
-  </data>
-  <data name="BUT_headingholdminus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
-  </data>
-  <data name="BUT_headingholdminus.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="BUT_headingholdminus.Text" xml:space="preserve">
-    <value>--</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdminus.Name" xml:space="preserve">
-    <value>BUT_headingholdminus</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdminus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdminus.Parent" xml:space="preserve">
-    <value>groupBox_copter</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdminus.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="BUT_headingholdplus.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BUT_headingholdplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="BUT_headingholdplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 46</value>
-  </data>
-  <data name="BUT_headingholdplus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
-  </data>
-  <data name="BUT_headingholdplus.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="BUT_headingholdplus.Text" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdplus.Name" xml:space="preserve">
-    <value>BUT_headingholdplus</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdplus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdplus.Parent" xml:space="preserve">
-    <value>groupBox_copter</value>
-  </data>
-  <data name="&gt;&gt;BUT_headingholdplus.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 73</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 16</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="CHK_copter_headingholdlock.Text" xml:space="preserve">
-    <value>Unlock from grid</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headingholdlock.Name" xml:space="preserve">
-    <value>CHK_copter_headingholdlock</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headingholdlock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headingholdlock.Parent" xml:space="preserve">
-    <value>groupBox_copter</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headingholdlock.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="CHK_copter_headinghold.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CHK_copter_headinghold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="CHK_copter_headinghold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 50</value>
-  </data>
-  <data name="CHK_copter_headinghold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 16</value>
-  </data>
-  <data name="CHK_copter_headinghold.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="CHK_copter_headinghold.Text" xml:space="preserve">
-    <value>Heading Hold</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headinghold.Name" xml:space="preserve">
-    <value>CHK_copter_headinghold</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headinghold.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headinghold.Parent" xml:space="preserve">
-    <value>groupBox_copter</value>
-  </data>
-  <data name="&gt;&gt;CHK_copter_headinghold.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="LBL_copter_delay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2368,7 +2119,7 @@
     <value>groupBox_copter</value>
   </data>
   <data name="&gt;&gt;LBL_copter_delay.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="NUM_copter_delay.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 21</value>
@@ -2389,7 +2140,7 @@
     <value>groupBox_copter</value>
   </data>
   <data name="&gt;&gt;NUM_copter_delay.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="groupBox_copter.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 259</value>
@@ -2721,27 +2472,6 @@
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="CMB_startfrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 118</value>
-  </data>
-  <data name="CMB_startfrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 20</value>
-  </data>
-  <data name="CMB_startfrom.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;CMB_startfrom.Name" xml:space="preserve">
-    <value>CMB_startfrom</value>
-  </data>
-  <data name="&gt;&gt;CMB_startfrom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CMB_startfrom.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;CMB_startfrom.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="num_overlap.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 145</value>
   </data>
@@ -2761,7 +2491,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;num_overlap.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="num_sidelap.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 171</value>
@@ -2782,7 +2512,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;num_sidelap.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2812,7 +2542,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="NUM_overshoot.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 40</value>
@@ -2833,7 +2563,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;NUM_overshoot.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2863,7 +2593,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="NUM_Distance.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 14</value>
@@ -2884,7 +2614,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;NUM_Distance.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -3704,7 +3434,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>1</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -3722,7 +3452,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 248</value>
+    <value>815, 290</value>
   </data>
   <data name="label45.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 16</value>
@@ -3743,7 +3473,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label45.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>35</value>
   </data>
   <data name="TXT_angle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3752,7 +3482,7 @@ Control-O to load form file</value>
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_angle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>818, 273</value>
+    <value>818, 315</value>
   </data>
   <data name="TXT_angle.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -3773,7 +3503,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_angle.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>36</value>
   </data>
   <data name="BUT_angleminus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3785,7 +3515,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_angleminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>932, 269</value>
+    <value>932, 311</value>
   </data>
   <data name="BUT_angleminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3806,7 +3536,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_angleminus.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>37</value>
   </data>
   <data name="BUT_angleplus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3818,7 +3548,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_angleplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>884, 269</value>
+    <value>884, 311</value>
   </data>
   <data name="BUT_angleplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3839,7 +3569,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_angleplus.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>38</value>
   </data>
   <data name="label46.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3848,16 +3578,16 @@ Control-O to load form file</value>
     <value>True</value>
   </data>
   <data name="label46.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 11.25pt</value>
+    <value>MS UI Gothic, 12pt</value>
   </data>
   <data name="label46.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 469</value>
+    <value>44, 606</value>
   </data>
   <data name="label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 15</value>
+    <value>48, 16</value>
   </data>
   <data name="label46.TabIndex" type="System.Int32, mscorlib">
     <value>81</value>
@@ -3875,43 +3605,43 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label46.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>34</value>
   </data>
-  <data name="label47.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="labelLineOffset.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="label47.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelLineOffset.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label47.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelLineOffset.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 12pt</value>
   </data>
-  <data name="label47.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="labelLineOffset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label47.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 324</value>
+  <data name="labelLineOffset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 469</value>
   </data>
-  <data name="label47.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="labelLineOffset.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 16</value>
   </data>
-  <data name="label47.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelLineOffset.TabIndex" type="System.Int32, mscorlib">
     <value>82</value>
   </data>
-  <data name="label47.Text" xml:space="preserve">
+  <data name="labelLineOffset.Text" xml:space="preserve">
     <value>ラインオフセット</value>
   </data>
-  <data name="&gt;&gt;label47.Name" xml:space="preserve">
-    <value>label47</value>
+  <data name="&gt;&gt;labelLineOffset.Name" xml:space="preserve">
+    <value>labelLineOffset</value>
   </data>
-  <data name="&gt;&gt;label47.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelLineOffset.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label47.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelLineOffset.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label47.ZOrder" xml:space="preserve">
-    <value>24</value>
+  <data name="&gt;&gt;labelLineOffset.ZOrder" xml:space="preserve">
+    <value>33</value>
   </data>
   <data name="TXT_offset.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3920,7 +3650,7 @@ Control-O to load form file</value>
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_offset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>818, 349</value>
+    <value>818, 494</value>
   </data>
   <data name="TXT_offset.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -3941,7 +3671,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_offset.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>32</value>
   </data>
   <data name="BUT_offsetminus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3953,7 +3683,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_offsetminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>932, 344</value>
+    <value>932, 489</value>
   </data>
   <data name="BUT_offsetminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -3974,7 +3704,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_offsetminus.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>30</value>
   </data>
   <data name="BUT_offsetplus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3986,7 +3716,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_offsetplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>884, 344</value>
+    <value>884, 489</value>
   </data>
   <data name="BUT_offsetplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4007,60 +3737,6 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_offsetplus.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="TRK_zoom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
-  </data>
-  <data name="TRK_zoom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="TRK_zoom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>761, 0</value>
-  </data>
-  <data name="TRK_zoom.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="TRK_zoom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 457</value>
-  </data>
-  <data name="TRK_zoom.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;TRK_zoom.Name" xml:space="preserve">
-    <value>TRK_zoom</value>
-  </data>
-  <data name="&gt;&gt;TRK_zoom.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;TRK_zoom.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TRK_zoom.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="map.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="map.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="map.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 451</value>
-  </data>
-  <data name="map.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;map.Name" xml:space="preserve">
-    <value>map</value>
-  </data>
-  <data name="&gt;&gt;map.Type" xml:space="preserve">
-    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;map.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;map.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
   <data name="BUT_altminus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -4073,7 +3749,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_altminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>932, 41</value>
+    <value>932, 31</value>
   </data>
   <data name="BUT_altminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4094,7 +3770,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_altminus.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>26</value>
   </data>
   <data name="BUT_altplus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4106,7 +3782,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_altplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>884, 41</value>
+    <value>884, 31</value>
   </data>
   <data name="BUT_altplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4127,7 +3803,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_altplus.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>27</value>
   </data>
   <data name="TXT_altitude.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4136,7 +3812,7 @@ Control-O to load form file</value>
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_altitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>818, 45</value>
+    <value>818, 35</value>
   </data>
   <data name="TXT_altitude.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -4157,7 +3833,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_altitude.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>28</value>
   </data>
   <data name="label48.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4172,16 +3848,16 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label48.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 20</value>
+    <value>815, 10</value>
   </data>
   <data name="label48.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 16</value>
+    <value>100, 16</value>
   </data>
   <data name="label48.TabIndex" type="System.Int32, mscorlib">
     <value>86</value>
   </data>
   <data name="label48.Text" xml:space="preserve">
-    <value>飛行高度</value>
+    <value>飛行高度（m）</value>
   </data>
   <data name="&gt;&gt;label48.Name" xml:space="preserve">
     <value>label48</value>
@@ -4193,7 +3869,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label48.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>29</value>
   </data>
   <data name="BUT_speedminus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4205,7 +3881,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_speedminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>932, 117</value>
+    <value>932, 102</value>
   </data>
   <data name="BUT_speedminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4226,7 +3902,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_speedminus.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>22</value>
   </data>
   <data name="BUT_speedplus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4238,7 +3914,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_speedplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>884, 117</value>
+    <value>884, 102</value>
   </data>
   <data name="BUT_speedplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4259,7 +3935,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_speedplus.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>23</value>
   </data>
   <data name="TXT_FlySpeed.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4268,7 +3944,7 @@ Control-O to load form file</value>
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_FlySpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>818, 121</value>
+    <value>818, 106</value>
   </data>
   <data name="TXT_FlySpeed.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -4289,7 +3965,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_FlySpeed.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>24</value>
   </data>
   <data name="label49.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4304,16 +3980,16 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label49.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 96</value>
+    <value>815, 81</value>
   </data>
   <data name="label49.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 16</value>
+    <value>115, 16</value>
   </data>
   <data name="label49.TabIndex" type="System.Int32, mscorlib">
     <value>90</value>
   </data>
   <data name="label49.Text" xml:space="preserve">
-    <value>飛行速度</value>
+    <value>飛行速度（m/s）</value>
   </data>
   <data name="&gt;&gt;label49.Name" xml:space="preserve">
     <value>label49</value>
@@ -4325,7 +4001,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label49.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>25</value>
   </data>
   <data name="BUT_distminus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4337,7 +4013,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_distminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>932, 193</value>
+    <value>932, 173</value>
   </data>
   <data name="BUT_distminus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4358,7 +4034,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_distminus.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>18</value>
   </data>
   <data name="BUT_distplus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4370,7 +4046,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_distplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>884, 193</value>
+    <value>884, 173</value>
   </data>
   <data name="BUT_distplus.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4391,7 +4067,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_distplus.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>19</value>
   </data>
   <data name="TXT_Distance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4400,7 +4076,7 @@ Control-O to load form file</value>
     <value>MS UI Gothic, 14.25pt</value>
   </data>
   <data name="TXT_Distance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>818, 197</value>
+    <value>818, 177</value>
   </data>
   <data name="TXT_Distance.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 26</value>
@@ -4421,7 +4097,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TXT_Distance.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>20</value>
   </data>
   <data name="label50.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4436,16 +4112,16 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label50.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 172</value>
+    <value>815, 152</value>
   </data>
   <data name="label50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 16</value>
+    <value>119, 16</value>
   </data>
   <data name="label50.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
   </data>
   <data name="label50.Text" xml:space="preserve">
-    <value>ライン間距離</value>
+    <value>ライン間距離（m）</value>
   </data>
   <data name="&gt;&gt;label50.Name" xml:space="preserve">
     <value>label50</value>
@@ -4457,7 +4133,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label50.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>21</value>
   </data>
   <data name="BUT_shiftright.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4469,7 +4145,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_shiftright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 463</value>
+    <value>925, 601</value>
   </data>
   <data name="BUT_shiftright.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4490,7 +4166,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_shiftright.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>16</value>
   </data>
   <data name="BUT_shiftleft.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4502,7 +4178,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_shiftleft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>846, 463</value>
+    <value>846, 601</value>
   </data>
   <data name="BUT_shiftleft.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4523,7 +4199,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_shiftleft.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>17</value>
   </data>
   <data name="BUT_shiftup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4535,7 +4211,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_shiftup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>885, 429</value>
+    <value>885, 567</value>
   </data>
   <data name="BUT_shiftup.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4556,7 +4232,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_shiftup.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>15</value>
   </data>
   <data name="BUT_shiftdown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4568,7 +4244,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_shiftdown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>885, 497</value>
+    <value>885, 635</value>
   </data>
   <data name="BUT_shiftdown.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 35</value>
@@ -4589,7 +4265,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_shiftdown.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>14</value>
   </data>
   <data name="label51.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -4604,7 +4280,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label51.Location" type="System.Drawing.Point, System.Drawing">
-    <value>815, 404</value>
+    <value>815, 542</value>
   </data>
   <data name="label51.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 16</value>
@@ -4625,7 +4301,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label51.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>13</value>
   </data>
   <data name="BUT_Ok.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -4636,8 +4312,11 @@ Control-O to load form file</value>
   <data name="BUT_Ok.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="BUT_Ok.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="BUT_Ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 479</value>
+    <value>596, 624</value>
   </data>
   <data name="BUT_Ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 42</value>
@@ -4655,7 +4334,7 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_Ok.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>12</value>
   </data>
   <data name="BUT_Close.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -4670,7 +4349,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_Close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>688, 479</value>
+    <value>688, 624</value>
   </data>
   <data name="BUT_Close.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 42</value>
@@ -4688,10 +4367,10 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_Close.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>11</value>
   </data>
   <data name="BUT_zoomIn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="BUT_zoomIn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Center</value>
@@ -4703,7 +4382,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_zoomIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 469</value>
+    <value>410, 612</value>
   </data>
   <data name="BUT_zoomIn.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 61</value>
@@ -4721,10 +4400,10 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_zoomIn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>10</value>
   </data>
   <data name="BUT_zoomOut.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="BUT_zoomOut.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Center</value>
@@ -4736,7 +4415,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_zoomOut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 469</value>
+    <value>499, 612</value>
   </data>
   <data name="BUT_zoomOut.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 61</value>
@@ -4754,7 +4433,520 @@ Control-O to load form file</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BUT_zoomOut.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lbl_distbetweenlines.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lbl_distbetweenlines.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbl_distbetweenlines.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="lbl_distbetweenlines.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_distbetweenlines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 660</value>
+  </data>
+  <data name="lbl_distbetweenlines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 16</value>
+  </data>
+  <data name="lbl_distbetweenlines.TabIndex" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <data name="lbl_distbetweenlines.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lbl_distbetweenlines.Name" xml:space="preserve">
+    <value>lbl_distbetweenlines</value>
+  </data>
+  <data name="&gt;&gt;lbl_distbetweenlines.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_distbetweenlines.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbl_distbetweenlines.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="label52.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label52.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label52.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label52.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label52.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 660</value>
+  </data>
+  <data name="label52.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 16</value>
+  </data>
+  <data name="label52.TabIndex" type="System.Int32, mscorlib">
+    <value>108</value>
+  </data>
+  <data name="label52.Text" xml:space="preserve">
+    <value>ライン間隔：</value>
+  </data>
+  <data name="&gt;&gt;label52.Name" xml:space="preserve">
+    <value>label52</value>
+  </data>
+  <data name="&gt;&gt;label52.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label52.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label52.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label53.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label53.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label53.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label53.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label53.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 633</value>
+  </data>
+  <data name="label53.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 16</value>
+  </data>
+  <data name="label53.TabIndex" type="System.Int32, mscorlib">
+    <value>109</value>
+  </data>
+  <data name="label53.Text" xml:space="preserve">
+    <value>飛行距離：</value>
+  </data>
+  <data name="&gt;&gt;label53.Name" xml:space="preserve">
+    <value>label53</value>
+  </data>
+  <data name="&gt;&gt;label53.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label53.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label53.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lbl_distance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lbl_distance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbl_distance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="lbl_distance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_distance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 633</value>
+  </data>
+  <data name="lbl_distance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 16</value>
+  </data>
+  <data name="lbl_distance.TabIndex" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="lbl_distance.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lbl_distance.Name" xml:space="preserve">
+    <value>lbl_distance</value>
+  </data>
+  <data name="&gt;&gt;lbl_distance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_distance.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbl_distance.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label54.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="label54.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label54.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label54.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label54.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 606</value>
+  </data>
+  <data name="label54.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 16</value>
+  </data>
+  <data name="label54.TabIndex" type="System.Int32, mscorlib">
+    <value>111</value>
+  </data>
+  <data name="label54.Text" xml:space="preserve">
+    <value>飛行時間：</value>
+  </data>
+  <data name="&gt;&gt;label54.Name" xml:space="preserve">
+    <value>label54</value>
+  </data>
+  <data name="&gt;&gt;label54.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label54.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label54.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lbl_flighttime.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lbl_flighttime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbl_flighttime.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="lbl_flighttime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_flighttime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 606</value>
+  </data>
+  <data name="lbl_flighttime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 16</value>
+  </data>
+  <data name="lbl_flighttime.TabIndex" type="System.Int32, mscorlib">
+    <value>112</value>
+  </data>
+  <data name="lbl_flighttime.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;lbl_flighttime.Name" xml:space="preserve">
+    <value>lbl_flighttime</value>
+  </data>
+  <data name="&gt;&gt;lbl_flighttime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_flighttime.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbl_flighttime.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label55.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label55.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label55.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label55.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label55.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 223</value>
+  </data>
+  <data name="label55.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 16</value>
+  </data>
+  <data name="label55.TabIndex" type="System.Int32, mscorlib">
+    <value>113</value>
+  </data>
+  <data name="label55.Text" xml:space="preserve">
+    <value>飛行開始ポイント</value>
+  </data>
+  <data name="&gt;&gt;label55.Name" xml:space="preserve">
+    <value>label55</value>
+  </data>
+  <data name="&gt;&gt;label55.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label55.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label55.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="CMB_startfrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="CMB_startfrom.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="CMB_startfrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 248</value>
+  </data>
+  <data name="CMB_startfrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 27</value>
+  </data>
+  <data name="CMB_startfrom.TabIndex" type="System.Int32, mscorlib">
+    <value>114</value>
+  </data>
+  <data name="&gt;&gt;CMB_startfrom.Name" xml:space="preserve">
+    <value>CMB_startfrom</value>
+  </data>
+  <data name="&gt;&gt;CMB_startfrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CMB_startfrom.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CMB_startfrom.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="TRK_zoom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="TRK_zoom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TRK_zoom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>761, 1</value>
+  </data>
+  <data name="TRK_zoom.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="TRK_zoom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 602</value>
+  </data>
+  <data name="TRK_zoom.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;TRK_zoom.Name" xml:space="preserve">
+    <value>TRK_zoom</value>
+  </data>
+  <data name="&gt;&gt;TRK_zoom.Type" xml:space="preserve">
+    <value>MissionPlanner.Controls.MyTrackBar, MissionPlanner.Controls, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TRK_zoom.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TRK_zoom.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="map.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="map.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="map.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 596</value>
+  </data>
+  <data name="map.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;map.Name" xml:space="preserve">
+    <value>map</value>
+  </data>
+  <data name="&gt;&gt;map.Type" xml:space="preserve">
+    <value>MissionPlanner.Controls.myGMAP, MissionPlanner.Controls, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;map.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;map.ZOrder" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="TXT_headinghold.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="TXT_headinghold.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TXT_headinghold.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="TXT_headinghold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 386</value>
+  </data>
+  <data name="TXT_headinghold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 26</value>
+  </data>
+  <data name="TXT_headinghold.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
+  <data name="TXT_headinghold.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TXT_headinghold.Name" xml:space="preserve">
+    <value>TXT_headinghold</value>
+  </data>
+  <data name="&gt;&gt;TXT_headinghold.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TXT_headinghold.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TXT_headinghold.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="BUT_headingholdminus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="BUT_headingholdminus.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BUT_headingholdminus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_headingholdminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_headingholdminus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>932, 383</value>
+  </data>
+  <data name="BUT_headingholdminus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_headingholdminus.TabIndex" type="System.Int32, mscorlib">
+    <value>118</value>
+  </data>
+  <data name="BUT_headingholdminus.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdminus.Name" xml:space="preserve">
+    <value>BUT_headingholdminus</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdminus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdminus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdminus.ZOrder" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="BUT_headingholdplus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="BUT_headingholdplus.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BUT_headingholdplus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_headingholdplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_headingholdplus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>884, 383</value>
+  </data>
+  <data name="BUT_headingholdplus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_headingholdplus.TabIndex" type="System.Int32, mscorlib">
+    <value>117</value>
+  </data>
+  <data name="BUT_headingholdplus.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdplus.Name" xml:space="preserve">
+    <value>BUT_headingholdplus</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdplus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdplus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BUT_headingholdplus.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 11.25pt</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>832, 427</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 19</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.TabIndex" type="System.Int32, mscorlib">
+    <value>116</value>
+  </data>
+  <data name="CHK_copter_headingholdlock.Text" xml:space="preserve">
+    <value>任意角度設定</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headingholdlock.Name" xml:space="preserve">
+    <value>CHK_copter_headingholdlock</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headingholdlock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headingholdlock.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headingholdlock.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="CHK_copter_headinghold.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="CHK_copter_headinghold.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CHK_copter_headinghold.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="CHK_copter_headinghold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CHK_copter_headinghold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>815, 360</value>
+  </data>
+  <data name="CHK_copter_headinghold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 20</value>
+  </data>
+  <data name="CHK_copter_headinghold.TabIndex" type="System.Int32, mscorlib">
+    <value>115</value>
+  </data>
+  <data name="CHK_copter_headinghold.Text" xml:space="preserve">
+    <value>機体前方角度固定</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headinghold.Name" xml:space="preserve">
+    <value>CHK_copter_headinghold</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headinghold.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headinghold.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CHK_copter_headinghold.ZOrder" xml:space="preserve">
+    <value>47</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4763,10 +4955,7 @@ Control-O to load form file</value>
     <value>Center</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>984, 537</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>984, 682</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>飛行ルート設定</value>

@@ -39,9 +39,7 @@
             this.label36 = new System.Windows.Forms.Label();
             this.lbl_photoevery = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
-            this.lbl_flighttime = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.lbl_distbetweenlines = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.lbl_footprint = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
@@ -53,7 +51,6 @@
             this.label29 = new System.Windows.Forms.Label();
             this.lbl_spacing = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.lbl_distance = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.lbl_area = new System.Windows.Forms.Label();
@@ -103,11 +100,6 @@
             this.NUM_Lane_Dist = new System.Windows.Forms.NumericUpDown();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox_copter = new System.Windows.Forms.GroupBox();
-            this.TXT_headinghold = new System.Windows.Forms.TextBox();
-            this.BUT_headingholdminus = new System.Windows.Forms.Button();
-            this.BUT_headingholdplus = new System.Windows.Forms.Button();
-            this.CHK_copter_headingholdlock = new System.Windows.Forms.CheckBox();
-            this.CHK_copter_headinghold = new System.Windows.Forms.CheckBox();
             this.LBL_copter_delay = new System.Windows.Forms.Label();
             this.NUM_copter_delay = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -122,7 +114,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.CMB_startfrom = new System.Windows.Forms.ComboBox();
             this.num_overlap = new System.Windows.Forms.NumericUpDown();
             this.num_sidelap = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -163,12 +154,10 @@
             this.BUT_angleminus = new System.Windows.Forms.Button();
             this.BUT_angleplus = new System.Windows.Forms.Button();
             this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
+            this.labelLineOffset = new System.Windows.Forms.Label();
             this.TXT_offset = new System.Windows.Forms.TextBox();
             this.BUT_offsetminus = new System.Windows.Forms.Button();
             this.BUT_offsetplus = new System.Windows.Forms.Button();
-            this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
-            this.map = new MissionPlanner.Controls.myGMAP();
             this.BUT_altminus = new System.Windows.Forms.Button();
             this.BUT_altplus = new System.Windows.Forms.Button();
             this.TXT_altitude = new System.Windows.Forms.TextBox();
@@ -190,6 +179,21 @@
             this.BUT_Close = new System.Windows.Forms.Button();
             this.BUT_zoomIn = new System.Windows.Forms.Button();
             this.BUT_zoomOut = new System.Windows.Forms.Button();
+            this.lbl_distbetweenlines = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.lbl_distance = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.lbl_flighttime = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.CMB_startfrom = new System.Windows.Forms.ComboBox();
+            this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
+            this.map = new MissionPlanner.Controls.myGMAP();
+            this.TXT_headinghold = new System.Windows.Forms.TextBox();
+            this.BUT_headingholdminus = new System.Windows.Forms.Button();
+            this.BUT_headingholdplus = new System.Windows.Forms.Button();
+            this.CHK_copter_headingholdlock = new System.Windows.Forms.CheckBox();
+            this.CHK_copter_headinghold = new System.Windows.Forms.CheckBox();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -237,9 +241,7 @@
             this.groupBox5.Controls.Add(this.label36);
             this.groupBox5.Controls.Add(this.lbl_photoevery);
             this.groupBox5.Controls.Add(this.label35);
-            this.groupBox5.Controls.Add(this.lbl_flighttime);
             this.groupBox5.Controls.Add(this.label31);
-            this.groupBox5.Controls.Add(this.lbl_distbetweenlines);
             this.groupBox5.Controls.Add(this.label25);
             this.groupBox5.Controls.Add(this.lbl_footprint);
             this.groupBox5.Controls.Add(this.label30);
@@ -251,7 +253,6 @@
             this.groupBox5.Controls.Add(this.label29);
             this.groupBox5.Controls.Add(this.lbl_spacing);
             this.groupBox5.Controls.Add(this.label27);
-            this.groupBox5.Controls.Add(this.lbl_distance);
             this.groupBox5.Controls.Add(this.label23);
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Name = "groupBox5";
@@ -297,20 +298,10 @@
             resources.ApplyResources(this.label35, "label35");
             this.label35.Name = "label35";
             // 
-            // lbl_flighttime
-            // 
-            resources.ApplyResources(this.lbl_flighttime, "lbl_flighttime");
-            this.lbl_flighttime.Name = "lbl_flighttime";
-            // 
             // label31
             // 
             resources.ApplyResources(this.label31, "label31");
             this.label31.Name = "label31";
-            // 
-            // lbl_distbetweenlines
-            // 
-            resources.ApplyResources(this.lbl_distbetweenlines, "lbl_distbetweenlines");
-            this.lbl_distbetweenlines.Name = "lbl_distbetweenlines";
             // 
             // label25
             // 
@@ -366,11 +357,6 @@
             // 
             resources.ApplyResources(this.label27, "label27");
             this.label27.Name = "label27";
-            // 
-            // lbl_distance
-            // 
-            resources.ApplyResources(this.lbl_distance, "lbl_distance");
-            this.lbl_distance.Name = "lbl_distance";
             // 
             // label23
             // 
@@ -791,49 +777,10 @@
             // groupBox_copter
             // 
             resources.ApplyResources(this.groupBox_copter, "groupBox_copter");
-            this.groupBox_copter.Controls.Add(this.TXT_headinghold);
-            this.groupBox_copter.Controls.Add(this.BUT_headingholdminus);
-            this.groupBox_copter.Controls.Add(this.BUT_headingholdplus);
-            this.groupBox_copter.Controls.Add(this.CHK_copter_headingholdlock);
-            this.groupBox_copter.Controls.Add(this.CHK_copter_headinghold);
             this.groupBox_copter.Controls.Add(this.LBL_copter_delay);
             this.groupBox_copter.Controls.Add(this.NUM_copter_delay);
             this.groupBox_copter.Name = "groupBox_copter";
             this.groupBox_copter.TabStop = false;
-            // 
-            // TXT_headinghold
-            // 
-            resources.ApplyResources(this.TXT_headinghold, "TXT_headinghold");
-            this.TXT_headinghold.Name = "TXT_headinghold";
-            this.TXT_headinghold.ReadOnly = true;
-            // 
-            // BUT_headingholdminus
-            // 
-            resources.ApplyResources(this.BUT_headingholdminus, "BUT_headingholdminus");
-            this.BUT_headingholdminus.Name = "BUT_headingholdminus";
-            this.BUT_headingholdminus.UseVisualStyleBackColor = true;
-            this.BUT_headingholdminus.Click += new System.EventHandler(this.BUT_headingholdminus_Click);
-            // 
-            // BUT_headingholdplus
-            // 
-            resources.ApplyResources(this.BUT_headingholdplus, "BUT_headingholdplus");
-            this.BUT_headingholdplus.Name = "BUT_headingholdplus";
-            this.BUT_headingholdplus.UseVisualStyleBackColor = true;
-            this.BUT_headingholdplus.Click += new System.EventHandler(this.BUT_headingholdplus_Click);
-            // 
-            // CHK_copter_headingholdlock
-            // 
-            resources.ApplyResources(this.CHK_copter_headingholdlock, "CHK_copter_headingholdlock");
-            this.CHK_copter_headingholdlock.Name = "CHK_copter_headingholdlock";
-            this.CHK_copter_headingholdlock.UseVisualStyleBackColor = true;
-            this.CHK_copter_headingholdlock.CheckedChanged += new System.EventHandler(this.CHK_copter_headingholdlock_CheckedChanged);
-            // 
-            // CHK_copter_headinghold
-            // 
-            resources.ApplyResources(this.CHK_copter_headinghold, "CHK_copter_headinghold");
-            this.CHK_copter_headinghold.Name = "CHK_copter_headinghold";
-            this.CHK_copter_headinghold.UseVisualStyleBackColor = true;
-            this.CHK_copter_headinghold.CheckedChanged += new System.EventHandler(this.CHK_copter_headinghold_CheckedChanged);
             // 
             // LBL_copter_delay
             // 
@@ -870,7 +817,6 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.CMB_startfrom);
             this.groupBox1.Controls.Add(this.num_overlap);
             this.groupBox1.Controls.Add(this.num_sidelap);
             this.groupBox1.Controls.Add(this.label5);
@@ -967,13 +913,6 @@
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
-            // 
-            // CMB_startfrom
-            // 
-            this.CMB_startfrom.FormattingEnabled = true;
-            resources.ApplyResources(this.CMB_startfrom, "CMB_startfrom");
-            this.CMB_startfrom.Name = "CMB_startfrom";
-            this.CMB_startfrom.SelectedIndexChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
             // 
             // num_overlap
             // 
@@ -1332,7 +1271,7 @@
             // 
             resources.ApplyResources(this.TXT_angle, "TXT_angle");
             this.TXT_angle.Name = "TXT_angle";
-            this.TXT_angle.ReadOnly = true;
+            this.TXT_angle.TextChanged += new System.EventHandler(this.TXT_angle_TextChanged);
             // 
             // BUT_angleminus
             // 
@@ -1357,16 +1296,15 @@
             resources.ApplyResources(this.label46, "label46");
             this.label46.Name = "label46";
             // 
-            // label47
+            // labelLineOffset
             // 
-            resources.ApplyResources(this.label47, "label47");
-            this.label47.Name = "label47";
+            resources.ApplyResources(this.labelLineOffset, "labelLineOffset");
+            this.labelLineOffset.Name = "labelLineOffset";
             // 
             // TXT_offset
             // 
             resources.ApplyResources(this.TXT_offset, "TXT_offset");
             this.TXT_offset.Name = "TXT_offset";
-            this.TXT_offset.ReadOnly = true;
             this.TXT_offset.TextChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
             // 
             // BUT_offsetminus
@@ -1386,45 +1324,6 @@
             this.BUT_offsetplus.UseVisualStyleBackColor = false;
             this.BUT_offsetplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseDown);
             this.BUT_offsetplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseUp);
-            // 
-            // TRK_zoom
-            // 
-            resources.ApplyResources(this.TRK_zoom, "TRK_zoom");
-            this.TRK_zoom.LargeChange = 0.005F;
-            this.TRK_zoom.Maximum = 22F;
-            this.TRK_zoom.Minimum = 2F;
-            this.TRK_zoom.Name = "TRK_zoom";
-            this.TRK_zoom.SmallChange = 0.001F;
-            this.TRK_zoom.TickFrequency = 1F;
-            this.TRK_zoom.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.TRK_zoom.Value = 2F;
-            this.TRK_zoom.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // map
-            // 
-            resources.ApplyResources(this.map, "map");
-            this.map.Bearing = 0F;
-            this.map.CanDragMap = true;
-            this.map.EmptyTileColor = System.Drawing.Color.Gray;
-            this.map.GrayScaleMode = false;
-            this.map.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            this.map.HoldInvalidation = false;
-            this.map.LevelsKeepInMemmory = 5;
-            this.map.MarkersEnabled = true;
-            this.map.MaxZoom = 19;
-            this.map.MinZoom = 2;
-            this.map.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
-            this.map.Name = "map";
-            this.map.NegativeMode = false;
-            this.map.PolygonsEnabled = true;
-            this.map.RetryLoadTile = 0;
-            this.map.RoutesEnabled = true;
-            this.map.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Fractional;
-            this.map.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.map.ShowTileGridLines = false;
-            this.map.Zoom = 3D;
-            this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
-            this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
             // 
             // BUT_altminus
             // 
@@ -1448,7 +1347,7 @@
             // 
             resources.ApplyResources(this.TXT_altitude, "TXT_altitude");
             this.TXT_altitude.Name = "TXT_altitude";
-            this.TXT_altitude.ReadOnly = true;
+            this.TXT_altitude.TextChanged += new System.EventHandler(this.TXT_altitude_TextChanged);
             // 
             // label48
             // 
@@ -1477,7 +1376,7 @@
             // 
             resources.ApplyResources(this.TXT_FlySpeed, "TXT_FlySpeed");
             this.TXT_FlySpeed.Name = "TXT_FlySpeed";
-            this.TXT_FlySpeed.ReadOnly = true;
+            this.TXT_FlySpeed.TextChanged += new System.EventHandler(this.TXT_FlySpeed_TextChanged);
             // 
             // label49
             // 
@@ -1506,7 +1405,7 @@
             // 
             resources.ApplyResources(this.TXT_Distance, "TXT_Distance");
             this.TXT_Distance.Name = "TXT_Distance";
-            this.TXT_Distance.ReadOnly = true;
+            this.TXT_Distance.TextChanged += new System.EventHandler(this.TXT_Distance_TextChanged);
             // 
             // label50
             // 
@@ -1592,9 +1491,137 @@
             this.BUT_zoomOut.UseVisualStyleBackColor = false;
             this.BUT_zoomOut.Click += new System.EventHandler(this.BUT_zoomOut_Click);
             // 
+            // lbl_distbetweenlines
+            // 
+            resources.ApplyResources(this.lbl_distbetweenlines, "lbl_distbetweenlines");
+            this.lbl_distbetweenlines.Name = "lbl_distbetweenlines";
+            // 
+            // label52
+            // 
+            resources.ApplyResources(this.label52, "label52");
+            this.label52.Name = "label52";
+            // 
+            // label53
+            // 
+            resources.ApplyResources(this.label53, "label53");
+            this.label53.Name = "label53";
+            // 
+            // lbl_distance
+            // 
+            resources.ApplyResources(this.lbl_distance, "lbl_distance");
+            this.lbl_distance.Name = "lbl_distance";
+            // 
+            // label54
+            // 
+            resources.ApplyResources(this.label54, "label54");
+            this.label54.Name = "label54";
+            // 
+            // lbl_flighttime
+            // 
+            resources.ApplyResources(this.lbl_flighttime, "lbl_flighttime");
+            this.lbl_flighttime.Name = "lbl_flighttime";
+            // 
+            // label55
+            // 
+            resources.ApplyResources(this.label55, "label55");
+            this.label55.Name = "label55";
+            // 
+            // CMB_startfrom
+            // 
+            resources.ApplyResources(this.CMB_startfrom, "CMB_startfrom");
+            this.CMB_startfrom.BackColor = System.Drawing.SystemColors.Control;
+            this.CMB_startfrom.FormattingEnabled = true;
+            this.CMB_startfrom.Name = "CMB_startfrom";
+            this.CMB_startfrom.SelectedIndexChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // TRK_zoom
+            // 
+            resources.ApplyResources(this.TRK_zoom, "TRK_zoom");
+            this.TRK_zoom.LargeChange = 0.005F;
+            this.TRK_zoom.Maximum = 22F;
+            this.TRK_zoom.Minimum = 2F;
+            this.TRK_zoom.Name = "TRK_zoom";
+            this.TRK_zoom.SmallChange = 0.001F;
+            this.TRK_zoom.TickFrequency = 1F;
+            this.TRK_zoom.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.TRK_zoom.Value = 2F;
+            this.TRK_zoom.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // map
+            // 
+            resources.ApplyResources(this.map, "map");
+            this.map.Bearing = 0F;
+            this.map.CanDragMap = true;
+            this.map.EmptyTileColor = System.Drawing.Color.Gray;
+            this.map.GrayScaleMode = false;
+            this.map.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.map.HoldInvalidation = false;
+            this.map.LevelsKeepInMemmory = 5;
+            this.map.MarkersEnabled = true;
+            this.map.MaxZoom = 19;
+            this.map.MinZoom = 2;
+            this.map.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
+            this.map.Name = "map";
+            this.map.NegativeMode = false;
+            this.map.PolygonsEnabled = true;
+            this.map.RetryLoadTile = 0;
+            this.map.RoutesEnabled = true;
+            this.map.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Fractional;
+            this.map.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.map.ShowTileGridLines = false;
+            this.map.Zoom = 3D;
+            this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
+            this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
+            // 
+            // TXT_headinghold
+            // 
+            resources.ApplyResources(this.TXT_headinghold, "TXT_headinghold");
+            this.TXT_headinghold.Name = "TXT_headinghold";
+            this.TXT_headinghold.ReadOnly = true;
+            this.TXT_headinghold.TextChanged += new System.EventHandler(this.TXT_headinghold_TextChanged);
+            // 
+            // BUT_headingholdminus
+            // 
+            resources.ApplyResources(this.BUT_headingholdminus, "BUT_headingholdminus");
+            this.BUT_headingholdminus.Name = "BUT_headingholdminus";
+            this.BUT_headingholdminus.Tag = "custom";
+            this.BUT_headingholdminus.UseVisualStyleBackColor = false;
+            this.BUT_headingholdminus.Click += new System.EventHandler(this.BUT_headingholdminus_Click);
+            // 
+            // BUT_headingholdplus
+            // 
+            resources.ApplyResources(this.BUT_headingholdplus, "BUT_headingholdplus");
+            this.BUT_headingholdplus.Name = "BUT_headingholdplus";
+            this.BUT_headingholdplus.Tag = "custom";
+            this.BUT_headingholdplus.UseVisualStyleBackColor = false;
+            this.BUT_headingholdplus.Click += new System.EventHandler(this.BUT_headingholdplus_Click);
+            // 
+            // CHK_copter_headingholdlock
+            // 
+            resources.ApplyResources(this.CHK_copter_headingholdlock, "CHK_copter_headingholdlock");
+            this.CHK_copter_headingholdlock.Name = "CHK_copter_headingholdlock";
+            this.CHK_copter_headingholdlock.UseVisualStyleBackColor = true;
+            this.CHK_copter_headingholdlock.CheckedChanged += new System.EventHandler(this.CHK_copter_headingholdlock_CheckedChanged);
+            // 
+            // CHK_copter_headinghold
+            // 
+            resources.ApplyResources(this.CHK_copter_headinghold, "CHK_copter_headinghold");
+            this.CHK_copter_headinghold.Name = "CHK_copter_headinghold";
+            this.CHK_copter_headinghold.UseVisualStyleBackColor = true;
+            this.CHK_copter_headinghold.CheckedChanged += new System.EventHandler(this.CHK_copter_headinghold_CheckedChanged);
+            // 
             // GridUI
             // 
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.CMB_startfrom);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.label55);
+            this.Controls.Add(this.lbl_flighttime);
+            this.Controls.Add(this.label54);
+            this.Controls.Add(this.lbl_distance);
+            this.Controls.Add(this.label53);
+            this.Controls.Add(this.label52);
+            this.Controls.Add(this.lbl_distbetweenlines);
             this.Controls.Add(this.BUT_zoomOut);
             this.Controls.Add(this.BUT_zoomIn);
             this.Controls.Add(this.BUT_Close);
@@ -1619,7 +1646,7 @@
             this.Controls.Add(this.BUT_offsetminus);
             this.Controls.Add(this.BUT_offsetplus);
             this.Controls.Add(this.TXT_offset);
-            this.Controls.Add(this.label47);
+            this.Controls.Add(this.labelLineOffset);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.label45);
             this.Controls.Add(this.TXT_angle);
@@ -1628,8 +1655,12 @@
             this.Controls.Add(this.TRK_zoom);
             this.Controls.Add(this.map);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lbl_area);
+            this.Controls.Add(this.TXT_headinghold);
+            this.Controls.Add(this.BUT_headingholdminus);
+            this.Controls.Add(this.BUT_headingholdplus);
+            this.Controls.Add(this.CHK_copter_headingholdlock);
+            this.Controls.Add(this.CHK_copter_headinghold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GridUI";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -1690,13 +1721,11 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label lbl_distance;
         private System.Windows.Forms.Label lbl_area;
         private System.Windows.Forms.Label lbl_spacing;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label lbl_grndres;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label lbl_distbetweenlines;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lbl_footprint;
         private System.Windows.Forms.Label label30;
@@ -1704,7 +1733,6 @@
         private System.Windows.Forms.Label lbl_pictures;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label lbl_flighttime;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label lbl_photoevery;
         private System.Windows.Forms.Label label35;
@@ -1741,7 +1769,6 @@
         private Controls.MyButton BUT_save;
         private System.Windows.Forms.TabPage tabGrid;
         private System.Windows.Forms.GroupBox groupBox_copter;
-        private System.Windows.Forms.CheckBox CHK_copter_headinghold;
         private System.Windows.Forms.Label LBL_copter_delay;
         private System.Windows.Forms.NumericUpDown NUM_copter_delay;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1752,7 +1779,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox CMB_startfrom;
         private System.Windows.Forms.NumericUpDown num_overlap;
         private System.Windows.Forms.NumericUpDown num_sidelap;
         private System.Windows.Forms.Label label5;
@@ -1783,10 +1809,6 @@
         private Controls.MyButton BUT_Accept;
         private System.Windows.Forms.TabControl tabControl1;
         private Controls.MyTrackBar TRK_zoom;
-        private System.Windows.Forms.CheckBox CHK_copter_headingholdlock;
-        private System.Windows.Forms.TextBox TXT_headinghold;
-        private System.Windows.Forms.Button BUT_headingholdminus;
-        private System.Windows.Forms.Button BUT_headingholdplus;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label LBL_Lane_Dist;
@@ -1821,7 +1843,7 @@
         private System.Windows.Forms.Button BUT_angleminus;
         private System.Windows.Forms.Button BUT_angleplus;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label labelLineOffset;
         private System.Windows.Forms.TextBox TXT_offset;
         private System.Windows.Forms.Button BUT_offsetminus;
         private System.Windows.Forms.Button BUT_offsetplus;
@@ -1846,5 +1868,18 @@
         private System.Windows.Forms.Button BUT_Close;
         private System.Windows.Forms.Button BUT_zoomIn;
         private System.Windows.Forms.Button BUT_zoomOut;
+        private System.Windows.Forms.Label lbl_distbetweenlines;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label lbl_distance;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label lbl_flighttime;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.ComboBox CMB_startfrom;
+        private System.Windows.Forms.TextBox TXT_headinghold;
+        private System.Windows.Forms.Button BUT_headingholdminus;
+        private System.Windows.Forms.Button BUT_headingholdplus;
+        private System.Windows.Forms.CheckBox CHK_copter_headingholdlock;
+        private System.Windows.Forms.CheckBox CHK_copter_headinghold;
     }
 }

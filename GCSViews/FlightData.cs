@@ -1143,10 +1143,14 @@ namespace MissionPlanner.GCSViews
                         {
                             if (curwpno >= firstwpno + 1 && curwpno <= endwpno)
                             {
-                                // force servo to close
-                                float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
-                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
-                                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
+                                int grid_type = Settings.Instance.GetInt32("grid_type");
+                                if (grid_type >= 2 && grid_type <= 4)
+                                {
+                                    // force servo to close
+                                    float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
+                                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+                                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
+                                }
 
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
                                 if (MainV2.comPort.MAV.cs.alt >= rtl_alt * 0.95)
@@ -4906,7 +4910,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             ButtonStart.BackgroundImage = canvas; //表示する
         }
 
-        private void ButtonStop_Click(object sender, EventArgs e)
+        async private void ButtonStop_Click(object sender, EventArgs e)
         {
 //            if (ButtonStop.Text == "飛行停止")
             if ((string)ButtonStop.BackgroundImage.Tag == "stop")
@@ -4952,7 +4956,6 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     cmds = MainV2.instance.FlightPlanner.GetCommandList();
                     cmds.Insert(0, home);
                     var wpcount = cmds.Count;
-
 #if true
                     MainV2.comPort.setMode("AUTO");
 #else
@@ -4963,11 +4966,26 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
                         param1, 0, param3, 0, 0, 0, 0);
 #endif
-                    // set SERVO7_FUNCTION auto @eams
-                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
+                    // CONDTION_YAW
+                    float grid_angle = 0;
+                    for (ushort a = 0; a < wpcount; a++)
+                    {
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
+                        {
+                            grid_angle = cmds[a].p1;
+                            break;
+                        }
+                    }
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
                     // get parameters
                     int grid_type = Settings.Instance.GetInt32("grid_type");
+
+                    if (grid_type >= 2 && grid_type <= 4)
+                    {
+                        // set SERVO7_FUNCTION auto @eams
+                        MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
+                    }
 
                     // servo operation in mode2
                     if (grid_type == 2)
@@ -5242,16 +5260,19 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 }
 #endif
                 // DO_SET_SERVO high (close)
-                float servohigh = 1000;
-                for (ushort a = 0; a < wpcount; a++)
+                if (grid_type >= 2 && grid_type <= 4)
                 {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                    float servohigh = 1000;
+                    for (ushort a = 0; a < wpcount; a++)
                     {
-                        servohigh = cmds[a].p2;
-                        break;
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                        {
+                            servohigh = cmds[a].p2;
+                            break;
+                        }
                     }
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
                 }
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
 
                 // DO_CHANGE_SPEED
                 float grid_speed = 5;
@@ -5277,7 +5298,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 }
                 await Task.Delay(grid_startup_delay * 1000);
 
-                // CONDTION_YAW
+                // CONDTION_YAW for GUIDED
                 float grid_angle = 0;
                 for (ushort a = 0; a < wpcount; a++)
                 {
@@ -5330,6 +5351,9 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         return;
                     }
                 }
+
+                // CONDTION_YAW for AUTO
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
                 // servo operation in mode2
                 if (grid_type == 2)
