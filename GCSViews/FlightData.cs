@@ -5288,7 +5288,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 await Task.Delay(1000);
 
                 // re-set guided WP
-                MainV2.comPort.setGuidedModeWP(gotohere);
+                MainV2.comPort.setGuidedModeWP(gotohere, true, true);
                 await Task.Delay(1000);
                 Application.DoEvents();
 
