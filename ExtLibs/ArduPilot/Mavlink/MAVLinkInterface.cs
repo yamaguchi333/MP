@@ -3035,12 +3035,12 @@ Please check the following
             setWPCurrent(wpno);
         }
 
-        public void setGuidedModeWP(Locationwp gotohere, bool setguidedmode = true)
+        public void setGuidedModeWP(Locationwp gotohere, bool setguidedmode = true, bool useterrain = false)
         {
-            setGuidedModeWP(MAV.sysid, MAV.compid, gotohere, setguidedmode);
+            setGuidedModeWP(MAV.sysid, MAV.compid, gotohere, setguidedmode, useterrain);
         }
 
-        public void setGuidedModeWP(byte sysid, byte compid, Locationwp gotohere, bool setguidedmode = true)
+        public void setGuidedModeWP(byte sysid, byte compid, Locationwp gotohere, bool setguidedmode = true, bool useterrain = false)
         {
             if (gotohere.alt == 0 || gotohere.lat == 0 || gotohere.lng == 0)
                 return;
@@ -3069,9 +3069,18 @@ Please check the following
                 }
                 else
                 {
-                    setPositionTargetGlobalInt((byte)sysid, (byte)compid,
+                    if (useterrain)
+                    {
+                        setPositionTargetGlobalInt((byte)sysid, (byte)compid,
+                        true, false, false, false, MAVLink.MAV_FRAME.GLOBAL_TERRAIN_ALT_INT,
+                        gotohere.lat, gotohere.lng, gotohere.alt, 0, 0, 0, 0, 0);
+                    }
+                    else
+                    {
+                        setPositionTargetGlobalInt((byte)sysid, (byte)compid,
                         true, false, false, false, MAVLink.MAV_FRAME.GLOBAL_RELATIVE_ALT_INT,
                         gotohere.lat, gotohere.lng, gotohere.alt, 0, 0, 0, 0, 0);
+                    }
                 }
             }
             catch (Exception ex)

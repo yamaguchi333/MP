@@ -837,6 +837,7 @@ namespace MissionPlanner.GCSViews
             while (!IsHandleCreated)
                 Thread.Sleep(1000);
 
+            bool first_RTL = true;
             while (threadrun)
             {
                 if (MainV2.comPort.giveComport)
@@ -1139,28 +1140,34 @@ namespace MissionPlanner.GCSViews
 
                     if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
                     {
+                        if (first_RTL)
+                        {
+                            // force close servo 7 and change function
+                            float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
+                            MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+                            MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
+                            first_RTL =  false;
+                        }
                         if (resume_flag == 0 || resume_flag == 2)
                         {
                             if (curwpno >= firstwpno + 1 && curwpno <= endwpno)
                             {
-                                // force servo to close
-                                float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
-                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
-                                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
-
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
                                 if (MainV2.comPort.MAV.cs.alt >= rtl_alt * 0.95)
                                 {
+                                    // save resume point
                                     resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
                                     resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
                                     resume_pos.Alt = MainV2.comPort.MAV.cs.alt;
                                     resume_flag = 1;
+                                    lastwpno = curwpno;
                                 }
-
-                                lastwpno = curwpno;
-//                            last_failsafe = MainV2.comPort.MAV.cs.failsafe;
                             }
                         }
+                    }
+                    else
+                    {
+                        first_RTL = true;
                     }
 
                     if (resume_flag >= 2)
@@ -5124,19 +5131,12 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         private int lastwpno = 0;
         private PointLatLngAlt resume_pos = new PointLatLngAlt();
         public int resume_flag = 0;
-//        public bool last_failsafe = false;
 
         /// <summary>
         /// フェイルセーフからのレジューム
         /// </summary>
         public async void ResumeOnFailSafe()
         {
-#if false
-            if (!last_failsafe)
-            {
-                return;
-            }
-#endif
             try
             {
 #if false
@@ -5156,12 +5156,8 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 // get parameters
                 int grid_type = Settings.Instance.GetInt32("grid_type");
-#if false
-                float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
-                float grid_speed = Settings.Instance.GetFloat("grid_speed");
-                int grid_startup_delay = Settings.Instance.GetInt32("grid_startup_delay");
-                float grid_angle = Settings.Instance.GetFloat("grid_angle");
-#endif
+                float grid_alt = Settings.Instance.GetFloat("grid_alt");
+
                 // get our target wp
                 var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
 
@@ -5169,13 +5165,18 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 //Guidedモード直後にWP表示を正しく表示させるため
                 gotohere.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
-                gotohere.alt = lastwpdata.alt;
+                gotohere.alt = grid_alt;
                 gotohere.lat = resume_pos.Lat;
                 gotohere.lng = resume_pos.Lng;
                 MainV2.comPort.setGuidedModeWP(gotohere);
+                log.Info("FlightData gotohere alt: " + gotohere.alt);
+
+                bool ans = MainV2.comPort.doARM(true);
+                if (ans == false)
+                    CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
 
                 MainV2.comPort.setMode("GUIDED");
-                await Task.Delay(1000);
+                await Task.Delay(500);
                 Application.DoEvents();
 #if false
                 // force redraw map
@@ -5208,14 +5209,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 #endif
                 // take off
                 int timeout = 0;
-                while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt * 0.95))
+                while (MainV2.comPort.MAV.cs.alt < (gotohere.alt * 0.95))
                 {
-                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, lastwpdata.alt);
-                    await Task.Delay(100);
+                    await Task.Delay(1000);
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
                     Application.DoEvents();
                     timeout++;
+                    //log.Info("FlightData Takeoff timeout: " + timeout);
 
-                    if (timeout > 400)
+                    if (timeout > 40)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
@@ -5241,18 +5243,6 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     cmds.Add(wpdata);
                 }
 #endif
-                // DO_SET_SERVO high (close)
-                float servohigh = 1000;
-                for (ushort a = 0; a < wpcount; a++)
-                {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
-                    {
-                        servohigh = cmds[a].p2;
-                        break;
-                    }
-                }
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
-
                 // DO_CHANGE_SPEED
                 float grid_speed = 5;
                 for (ushort a = 0; a < wpcount; a++)
@@ -5293,24 +5283,52 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 await Task.Delay(1000);
 
                 // re-set guided WP
-                MainV2.comPort.setGuidedModeWP(gotohere);
+                MainV2.comPort.setGuidedModeWP(gotohere, true, true);
                 await Task.Delay(1000);
                 Application.DoEvents();
 
-                // check reaching to guided WP
+                // check wp_dist value is not 0
                 timeout = 0;
-                while (MainV2.comPort.MAV.cs.wp_dist > 0)
+                while (MainV2.comPort.MAV.cs.wp_dist == 0)
                 {
-                    await Task.Delay(100);
+                    await Task.Delay(1000);
                     Application.DoEvents();
                     timeout++;
+                    log.Info("FlightData check wp_dist value timeout: " + timeout);
 
-                    if (timeout > 1200)
+                    if (timeout > 20)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
                     }
                 }
+                // check reaching to guided WP
+                timeout = 0;
+                while (MainV2.comPort.MAV.cs.wp_dist > 0)
+                {
+                    Application.DoEvents();
+                    await Task.Delay(1000);
+                    timeout++;
+                    //log.Info("FlightData guided wp timeout: " + timeout);
+
+                    if (timeout > 120)
+                    {
+                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        return;
+                    }
+                }
+
+                // DO_SET_SERVO high(close)
+                float servohigh = 1000;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                    {
+                        servohigh = cmds[a].p2;
+                        break;
+                    }
+                }
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
 
                 // set resume point wp
                 MainV2.comPort.setWPCurrent((ushort)lastwpno);
@@ -5331,6 +5349,9 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     }
                 }
 
+                // reset CONDITION_YAW for AUTO mode restart
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
+
                 // servo operation in mode2
                 if (grid_type == 2)
                 {
@@ -5344,8 +5365,6 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         }
                     }
                 }
-
-//                last_failsafe = false;
                 lastwpno = 0;
             }
             catch (Exception ex)
@@ -5353,6 +5372,43 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 CustomMessageBox.Show(Strings.CommandFailed + "\n" + ex.ToString(), Strings.ERROR);
             }
         }
+
+        private void ButtonResumeClear_Click(object sender, EventArgs e)
+        {
+            resume_flag = 0;
+        }
+
+        /// <summary>
+        /// レジュームクリアボタンの更新
+        /// <param name="state">true:enabled、false:disabled</param>
+        /// </summary>
+        public void ButtonResumeClear_ChangeState(bool state)
+        {
+            ButtonResumeClear.Enabled = state;
+
+            //描画先とするImageオブジェクトを作成する
+            Bitmap canvas = new Bitmap(ButtonResumeClear.Width, ButtonResumeClear.Height);
+            //ImageオブジェクトのGraphicsオブジェクトを作成する
+            Graphics g = Graphics.FromImage(canvas);
+
+            //画像を取得
+            Bitmap img = global::MissionPlanner.Properties.Resources.btn_resume_clear;
+
+            if (state)
+            {
+                //画像を普通に表示
+                g.DrawImage(img, 0, 0);
+            }
+            else
+            {
+                //画像を無効状態で表示
+                ControlPaint.DrawImageDisabled(g, img, 0, 0, ButtonResumeClear.BackColor);
+            }
+
+            g.Dispose();    //リソースを解放する
+            ButtonResumeClear.BackgroundImage = canvas; //表示する
+        }
+
     }
 }
  

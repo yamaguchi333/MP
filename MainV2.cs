@@ -4240,9 +4240,12 @@ namespace MissionPlanner
                 // arm the MAV
                 try
                 {
-                    bool ans = MainV2.comPort.doARM(true);
-                    if (ans == false)
-                        CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                    if (MainV2.instance.FlightData.resume_flag == 0)
+                    {
+                        bool ans = MainV2.comPort.doARM(true);
+                        if (ans == false)
+                            CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+                    }
                 }
                 catch
                 {
@@ -4324,7 +4327,7 @@ namespace MissionPlanner
                     CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
                     return;
                 }
-                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+                //MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
 
                 // ignore failsafe resume process
 //                MainV2.instance.FlightData.resume_flag = true;
@@ -4444,6 +4447,9 @@ namespace MissionPlanner
                 // update flight start button state
 //                MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
                 MainV2.instance.FlightData.ButtonStart_ChangeState(!MainV2.comPort.MAV.cs.armed);
+
+                // update flight start button state
+                MainV2.instance.FlightData.ButtonResumeClear_ChangeState(MainV2.instance.FlightData.resume_flag > 0 && !MainV2.comPort.MAV.cs.armed);
 
                 // update wpno display
                 MainV2.instance.FlightData.LabelWPno_ChangeNumber(Convert.ToInt32(MainV2.comPort.MAV.cs.wpno));

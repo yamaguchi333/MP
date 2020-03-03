@@ -946,25 +946,14 @@ namespace MissionPlanner.Grid
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
                 if (grid_type == 3 || grid_type == 4)   // @eams add
                 {
-#if false
-                    if (addwp_firsttime)
-                    {
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)3.0, 0, 0, 0, 0, 0, 0, gridobject);
-                        addwp_firsttime = false;
-                    }
-                    else
-                    {
-#endif
-                        //plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
-                    //}
+                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
                 }
                 else if (grid_type == 2)
                 {
                     if (addwp_firsttime)
                     {
-                        //plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
-                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, 0, gridobject);
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1.0, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
                     }
                 }
             }
