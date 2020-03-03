@@ -1012,7 +1012,11 @@ namespace MissionPlanner
             }
         }
 
+#if true    // @eams changed
+        [DisplayText("ホームからの距離 (m)")]
+#else
         [DisplayText("Dist to Home (dist)")]
+#endif
         public float DistToHome
         {
             get
