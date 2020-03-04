@@ -5338,11 +5338,11 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
                 {
                     MainV2.comPort.setMode("AUTO");
-                    await Task.Delay(100);
+                    await Task.Delay(500);
                     Application.DoEvents();
                     timeout++;
 
-                    if (timeout > 300)
+                    if (timeout > 60)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
