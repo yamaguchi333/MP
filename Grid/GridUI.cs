@@ -65,6 +65,12 @@ namespace MissionPlanner.Grid
         int grid_type = 2;  // @eams add
         double area_unit = 5.0;  // @eams add
 
+        // @eams add for inpeller
+        bool use_impeller = false;
+        int impeller_no = 8;
+        int impeller_pwm_on = 2000;
+        int impeller_pwm_off = 1000;
+
         // GridUI
         public GridUI(GridPlugin plugin)
         {
@@ -144,6 +150,16 @@ namespace MissionPlanner.Grid
             // @eams add / area unit
             if (plugin.Host.config["area_unit"] != null)
                 area_unit = double.Parse(plugin.Host.config["area_unit"]);
+
+            // @eams add / inpeller
+            if (plugin.Host.config["use_impeller"] != null)
+                use_impeller = bool.Parse(plugin.Host.config["use_impeller"]);
+            if (plugin.Host.config["impeller_no"] != null)
+                impeller_no = int.Parse(plugin.Host.config["impeller_no"]);
+            if (plugin.Host.config["impeller_pwm_on"] != null)
+                impeller_pwm_on = int.Parse(plugin.Host.config["impeller_pwm_on"]);
+            if (plugin.Host.config["impeller_pwm_off"] != null)
+                impeller_pwm_off = int.Parse(plugin.Host.config["impeller_pwm_off"]);
         }
 
         bool deleteLastLAND = false;    // @eams add
@@ -1728,6 +1744,16 @@ namespace MissionPlanner.Grid
 
                     }
 
+                    // @eams add to use impeller
+                    if (use_impeller)
+                    {
+                        // turn on
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                            (float)impeller_no,
+                            (float)impeller_pwm_on, 0, 0, 0, 0, 0,
+                            gridobject);
+                    }
+
                     int i = 0;
                     bool startedtrigdist = false;
                     PointLatLngAlt lastplla = PointLatLngAlt.Zero;
@@ -1764,6 +1790,7 @@ namespace MissionPlanner.Grid
                                     plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_DIGICAM_CONTROL, 1, 0, 0, 0, 0, 1, 0,
                                         gridobject);
                                 }
+#if false
                                 if (grid_type == 3 || grid_type == 4)
                                 {
                                     AddWP(plla.Lng, plla.Lat, plla.Alt);
@@ -1785,6 +1812,7 @@ namespace MissionPlanner.Grid
                                         (float)num_setservohigh.Value, 0, 0, 0, 0, 0,
                                         gridobject);
                                 }
+#endif
                             }
                             else
                             {
@@ -1847,19 +1875,53 @@ namespace MissionPlanner.Grid
                                                 plla.Alt != lastplla.Alt)
                                                 AddWP(plla.Lng, plla.Lat, plla.Alt);
 
-                                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
-                                                (float)NUM_reptservo.Value,
-                                                (float)num_reptpwm.Value, 999, (float)NUM_repttime.Value, 0, 0, 0,
-                                                gridobject);
+                                            if (grid_type == 3 || grid_type == 4)
+                                            {
+                                                // open (specified time)
+                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
+                                                    (float)NUM_reptservo.Value,
+                                                    (float)num_reptpwm.Value, 1, (float)NUM_repttime.Value, 0, 0, 0,
+                                                    gridobject);
+
+                                                // turn
+                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                                    (float)1,
+                                                    0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                                    gridobject);
+                                            }
+                                            else
+                                            {
+                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
+                                                    (float)NUM_reptservo.Value,
+                                                    (float)num_reptpwm.Value, 999, (float)NUM_repttime.Value, 0, 0, 0,
+                                                    gridobject);
+                                            }
                                         }
                                         else if (plla.Tag == "ME")
                                         {
                                             AddWP(plla.Lng, plla.Lat, plla.Alt);
 
-                                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
+                                            if (grid_type == 3 || grid_type == 4)
+                                            {
+                                                // open (specified time)
+                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
+                                                    (float)NUM_reptservo.Value,
+                                                    (float)num_reptpwm.Value, 1, (float)NUM_repttime.Value, 0, 0, 0,
+                                                    gridobject);
+
+                                                // turn
+                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                                    (float)1,
+                                                    0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                                    gridobject);
+                                            }
+                                            else
+                                            {
+                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
                                                 (float)NUM_reptservo.Value,
                                                 (float)num_reptpwm.Value, 0, (float)NUM_repttime.Value, 0, 0, 0,
                                                 gridobject);
+                                            }
                                         }
                                     }
                                 }
@@ -1909,7 +1971,6 @@ namespace MissionPlanner.Grid
                                                 (float)1,
                                                 0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
                                                 gridobject);
-
                                         }
                                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                             (float)num_setservono.Value,
@@ -1933,6 +1994,16 @@ namespace MissionPlanner.Grid
                     plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_PARAMETER,
                         703, MainV2.servo7_func_normal, 0, 0, 0, 0, 0, gridobject);
 #endif
+                    // @eams add to use impeller
+                    if (use_impeller)
+                    {
+                        // turn on
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                            (float)impeller_no,
+                            (float)impeller_pwm_off, 0, 0, 0, 0, 0,
+                            gridobject);
+                    }
+
                     if (rad_trigdist.Checked)
                     {
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_CAM_TRIGG_DIST, 0, 0, 0, 0, 0, 0, 0, gridobject);
