@@ -1153,12 +1153,12 @@ namespace MissionPlanner.GCSViews
                             if (curwpno >= firstwpno + 1 && curwpno <= endwpno)
                             {
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
-                                if (MainV2.comPort.MAV.cs.alt >= rtl_alt * 0.95)
+                                if (MainV2.comPort.MAV.cs.sonarrange >= rtl_alt * 0.95)
                                 {
                                     // save resume point
                                     resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
                                     resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
-                                    resume_pos.Alt = MainV2.comPort.MAV.cs.alt;
+                                    resume_pos.Alt = MainV2.comPort.MAV.cs.sonarrange;
                                     resume_flag = 1;
                                     lastwpno = curwpno;
                                 }
@@ -5209,17 +5209,26 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 #endif
                 // take off
                 int timeout = 0;
-                while (MainV2.comPort.MAV.cs.alt < (gotohere.alt * 0.95))
+                bool result_takeoff = false;
+                while (MainV2.comPort.MAV.cs.sonarrange < (gotohere.alt * 0.95))
                 {
                     await Task.Delay(1000);
-                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
-                    Application.DoEvents();
+                    if (!result_takeoff)
+                    {
+                        result_takeoff = MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
+                        Application.DoEvents();
+                    }
                     timeout++;
-                    //log.Info("FlightData Takeoff timeout: " + timeout);
+                    log.Info("FlightData Takeoff alt: " + MainV2.comPort.MAV.cs.alt + ", sonar: " + MainV2.comPort.MAV.cs.sonarrange + ", timeout: " + timeout);
 
                     if (timeout > 40)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        return;
+                    }
+                    if (MainV2.comPort.MAV.cs.mode.ToLower() != "guided")
+                    {
+                        log.Info("FlightData: resume cancel");
                         return;
                     }
                 }
@@ -5282,15 +5291,21 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 // 1sec delay
                 await Task.Delay(1000);
 
-                // re-set guided WP
-                MainV2.comPort.setGuidedModeWP(gotohere, true, true);
-                await Task.Delay(1000);
-                Application.DoEvents();
-
                 // check wp_dist value is not 0
                 timeout = 0;
-                while (MainV2.comPort.MAV.cs.wp_dist == 0)
+                do
                 {
+
+                    if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
+                    {
+                        // re-set guided WP
+                        MainV2.comPort.setGuidedModeWP(gotohere, true, true);
+                    }
+                    else
+                    {
+                        log.Info("FlightData: resume cancel");
+                        return;
+                    }
                     await Task.Delay(1000);
                     Application.DoEvents();
                     timeout++;
@@ -5301,7 +5316,8 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
                     }
-                }
+                } while (MainV2.comPort.MAV.cs.wp_dist == 0);
+
                 // check reaching to guided WP
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.wp_dist > 0)
@@ -5337,7 +5353,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
                 {
-                    MainV2.comPort.setMode("AUTO");
+                    if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
+                    {
+                        MainV2.comPort.setMode("AUTO");
+                    }
+                    else
+                    {
+                        log.Info("FlightData: resume cancel");
+                        return;
+                    }
                     await Task.Delay(500);
                     Application.DoEvents();
                     timeout++;
