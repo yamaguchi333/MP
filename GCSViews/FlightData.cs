@@ -354,7 +354,7 @@ namespace MissionPlanner.GCSViews
 
         void mymap_Paint(object sender, PaintEventArgs e)
         {
-            distanceBar1.DoPaintRemote(e);
+            //distanceBar1.DoPaintRemote(e);    //@eams disabled
         }
 
         internal GMapMarker CurrentGMapMarker;
@@ -1153,12 +1153,12 @@ namespace MissionPlanner.GCSViews
                             if (curwpno >= firstwpno + 1 && curwpno <= endwpno)
                             {
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
-                                if (MainV2.comPort.MAV.cs.alt >= rtl_alt * 0.95)
+                                if (MainV2.comPort.MAV.cs.sonarrange >= rtl_alt * 0.95)
                                 {
                                     // save resume point
                                     resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
                                     resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
-                                    resume_pos.Alt = MainV2.comPort.MAV.cs.alt;
+                                    resume_pos.Alt = MainV2.comPort.MAV.cs.sonarrange;
                                     resume_flag = 1;
                                     lastwpno = curwpno;
                                 }
@@ -5161,9 +5161,27 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 // get our target wp
                 var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
 
-                Locationwp gotohere = new Locationwp();
-
+                // get wp data
+                List<Locationwp> cmds = new List<Locationwp>();
+#if true
+                Locationwp home = new Locationwp();
+                home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
+                home.lat = MainV2.comPort.MAV.cs.HomeLocation.Lat;
+                home.lng = MainV2.comPort.MAV.cs.HomeLocation.Lng;
+                home.alt = (float)MainV2.comPort.MAV.cs.HomeLocation.Alt / CurrentState.multiplieralt;
+                cmds = MainV2.instance.FlightPlanner.GetCommandList();
+                cmds.Insert(0, home);
+                var wpcount = cmds.Count;
+#else
+                var wpcount = MainV2.comPort.getWPCount();
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    var wpdata = MainV2.comPort.getWP(a);
+                    cmds.Add(wpdata);
+                }
+#endif
                 //Guidedモード直後にWP表示を正しく表示させるため
+                Locationwp gotohere = new Locationwp();
                 gotohere.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
                 gotohere.alt = grid_alt;
                 gotohere.lat = resume_pos.Lat;
@@ -5171,10 +5189,36 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 MainV2.comPort.setGuidedModeWP(gotohere);
                 log.Info("FlightData gotohere alt: " + gotohere.alt);
 
+                // arming
                 bool ans = MainV2.comPort.doARM(true);
                 if (ans == false)
                     CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
 
+                // set Loiter mode for WPNAV_SPEED
+                MainV2.comPort.setMode("Loiter");
+                await Task.Delay(500);
+
+                // get grid_speed for WPNAV_SPEED
+                float grid_speed = 5;
+                for (ushort a = 0; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_CHANGE_SPEED)
+                    {
+                        grid_speed = cmds[a].p2;
+                        break;
+                    }
+                }
+
+                // get/set WPNAV_SPEED
+                double wpnav_speed = 0;   //The unit of WPNAV_SPEED is cm/sec.
+                if (MainV2.comPort.MAV.param["WPNAV_SPEED"] != null)
+                {
+                    wpnav_speed = MainV2.comPort.MAV.param["WPNAV_SPEED"].Value;
+                }
+                MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
+                var debug_temp = MainV2.comPort.MAV.param["WPNAV_SPEED"].Value;
+
+                // guided
                 MainV2.comPort.setMode("GUIDED");
                 await Task.Delay(500);
                 Application.DoEvents();
@@ -5209,11 +5253,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 #endif
                 // take off
                 int timeout = 0;
-                while (MainV2.comPort.MAV.cs.alt < (gotohere.alt * 0.95))
+                bool result_takeoff = false;
+                while (MainV2.comPort.MAV.cs.sonarrange < (gotohere.alt * 0.95))
                 {
                     await Task.Delay(1000);
-                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
-                    Application.DoEvents();
+                    if (!result_takeoff)
+                    {
+                        result_takeoff = MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
+                        Application.DoEvents();
+                    }
                     timeout++;
                     //log.Info("FlightData Takeoff timeout: " + timeout);
 
@@ -5222,37 +5270,15 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
                     }
-                }
 
-                // get wp data
-                List<Locationwp> cmds = new List<Locationwp>();
-#if true
-                Locationwp home = new Locationwp();
-                home.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
-                home.lat = MainV2.comPort.MAV.cs.HomeLocation.Lat;
-                home.lng = MainV2.comPort.MAV.cs.HomeLocation.Lng;
-                home.alt = (float)MainV2.comPort.MAV.cs.HomeLocation.Alt / CurrentState.multiplieralt;
-                cmds = MainV2.instance.FlightPlanner.GetCommandList();
-                cmds.Insert(0, home);
-                var wpcount = cmds.Count;
-#else
-                var wpcount = MainV2.comPort.getWPCount();
-                for (ushort a = 0; a < wpcount; a++)
-                {
-                    var wpdata = MainV2.comPort.getWP(a);
-                    cmds.Add(wpdata);
-                }
-#endif
-                // DO_CHANGE_SPEED
-                float grid_speed = 5;
-                for (ushort a = 0; a < wpcount; a++)
-                {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_CHANGE_SPEED)
+                    if (MainV2.comPort.MAV.cs.mode.ToLower() != "guided")
                     {
-                        grid_speed = cmds[a].p2;
-                        break;
+                        log.Info("FlightData: resume cancel");
+                        return;
                     }
                 }
+
+                // DO_CHANGE_SPEED
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed, 0, 0, 0, 0, 0);
 
                 // startup delay
@@ -5279,8 +5305,17 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 }
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
-                // 1sec delay
-                await Task.Delay(1000);
+                // startup delay after CONDITION_YAW
+                // ホーム用のWAYPOINTコマンド無視、その後最初にあったWAYPOINTコマンドがセカンドディレイ用
+                for (ushort a = 1; a < wpcount; a++)
+                {
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.WAYPOINT)
+                    {
+                        grid_startup_delay = (int)cmds[a].p1;
+                        break;
+                    }
+                }
+                await Task.Delay(grid_startup_delay * 1000);
 
                 // re-set guided WP
                 MainV2.comPort.setGuidedModeWP(gotohere, true, true);
@@ -5289,8 +5324,18 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 // check wp_dist value is not 0
                 timeout = 0;
-                while (MainV2.comPort.MAV.cs.wp_dist == 0)
+                do
                 {
+                    if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
+                    {
+                        // re-set guided WP
+                        MainV2.comPort.setGuidedModeWP(gotohere, true, true);
+                    }
+                    else
+                    {
+                        log.Info("FlightData: resume cancel");
+                        return;
+                    }
                     await Task.Delay(1000);
                     Application.DoEvents();
                     timeout++;
@@ -5301,7 +5346,8 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
                         return;
                     }
-                }
+                } while (MainV2.comPort.MAV.cs.wp_dist == 0);
+
                 // check reaching to guided WP
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.wp_dist > 0)
@@ -5333,11 +5379,22 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 // set resume point wp
                 MainV2.comPort.setWPCurrent((ushort)lastwpno);
 
+                // set WPNAV_SPEED original value
+                MainV2.comPort.setParam("WPNAV_SPEED", wpnav_speed);
+
                 // auto 
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
                 {
-                    MainV2.comPort.setMode("AUTO");
+                    if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
+                    {
+                        MainV2.comPort.setMode("AUTO");
+                    }
+                    else
+                    {
+                        log.Info("FlightData: resume cancel");
+                        return;
+                    }
                     await Task.Delay(500);
                     Application.DoEvents();
                     timeout++;
@@ -5365,6 +5422,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         }
                     }
                 }
+
                 lastwpno = 0;
             }
             catch (Exception ex)
