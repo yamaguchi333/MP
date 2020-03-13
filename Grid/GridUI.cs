@@ -968,20 +968,14 @@ namespace MissionPlanner.Grid
                 }
             }
 
-            if (NUM_copter_delay.Value > 0)
+            if (addwp_firsttime)
             {
-                if (grid_type == 2 && addwp_firsttime)
-                {
-                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)3.0, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
-                }
-                else
-                {
-                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (double)NUM_copter_delay.Value, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
-                }
+                int grid_firstwp_delay = Settings.Instance.GetInt32("grid_firstwp_delay");
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)grid_firstwp_delay, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
             }
             else
             {
-                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, 0, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (double)NUM_copter_delay.Value, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
             }
             addwp_firsttime = false;
         }

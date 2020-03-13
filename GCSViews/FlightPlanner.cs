@@ -2244,10 +2244,14 @@ namespace MissionPlanner.GCSViews
                 ((ProgressReporterDialogue) sender).UpdateProgressAndStatus(95, "Setting params");
 
                 // m
-                port.setParam("WP_RADIUS", float.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist);
+                port.setParam("WP_RADIUS", double.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist);
 
                 // cm's
-                port.setParam("WPNAV_RADIUS", float.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist*100.0);
+                port.setParam("WPNAV_RADIUS", double.Parse(TXT_WPRad.Text)/CurrentState.multiplierdist*100.0);
+
+                // set WPNAV_SPEED @eams add
+                float grid_speed = Settings.Instance.GetFloat("grid_speed");
+                port.setParam("WPNAV_SPEED", grid_speed * 100);
 
                 try
                 {
@@ -2533,10 +2537,12 @@ namespace MissionPlanner.GCSViews
 
         private void TXT_WPRad_KeyPress(object sender, KeyPressEventArgs e)
         {
+#if false   // @eams
             float isNumber = 0;
             if (e.KeyChar.ToString() == "\b")
                 return;
             e.Handled = !float.TryParse(e.KeyChar.ToString(), out isNumber);
+#endif
         }
 
         private void TXT_WPRad_Leave(object sender, EventArgs e)

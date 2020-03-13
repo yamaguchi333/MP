@@ -5193,7 +5193,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 bool ans = MainV2.comPort.doARM(true);
                 if (ans == false)
                     CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
-
+#if false
                 // set Loiter mode for WPNAV_SPEED
                 MainV2.comPort.setMode("Loiter");
                 await Task.Delay(500);
@@ -5217,7 +5217,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 }
                 MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
                 var debug_temp = MainV2.comPort.MAV.param["WPNAV_SPEED"].Value;
-
+#endif
                 // guided
                 MainV2.comPort.setMode("GUIDED");
                 await Task.Delay(500);
@@ -5277,10 +5277,10 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                         return;
                     }
                 }
-
+#if false
                 // DO_CHANGE_SPEED
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed, 0, 0, 0, 0, 0);
-
+#endif
                 // startup delay
                 int grid_startup_delay = 0;
                 for (ushort a = 0; a < wpcount; a++)
@@ -5378,10 +5378,10 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
                 // set resume point wp
                 MainV2.comPort.setWPCurrent((ushort)lastwpno);
-
+#if false
                 // set WPNAV_SPEED original value
                 MainV2.comPort.setParam("WPNAV_SPEED", wpnav_speed);
-
+#endif
                 // auto 
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
