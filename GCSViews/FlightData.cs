@@ -5157,6 +5157,10 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                 // get parameters
                 int grid_type = Settings.Instance.GetInt32("grid_type");
                 float grid_alt = Settings.Instance.GetFloat("grid_alt");
+                bool use_impeller = Settings.Instance.GetBoolean("use_impeller");
+                int impeller_no = Settings.Instance.GetInt32("impeller_no");
+                int impeller_pwm_on = Settings.Instance.GetInt32("impeller_pwm_on");
+                int impeller_pwm_off = Settings.Instance.GetInt32("impeller_pwm_off");
 
                 // get our target wp
                 var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
@@ -5364,17 +5368,25 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     }
                 }
 
-                // DO_SET_SERVO high(close)
-                float servohigh = 1000;
+                // use impeller
+                if (use_impeller)
+                {
+                    // turn on
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, impeller_no, impeller_pwm_on, 0, 0, 0, 0, 0);
+                    await Task.Delay(1000);
+                }
+
+                // DO_SET_SERVO(open)
+                float servo = 1000;
                 for (ushort a = 0; a < wpcount; a++)
                 {
                     if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
                     {
-                        servohigh = cmds[a].p2;
+                        servo = cmds[a].p2;
                         break;
                     }
                 }
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servo, 0, 0, 0, 0, 0);
 
                 // set resume point wp
                 MainV2.comPort.setWPCurrent((ushort)lastwpno);
@@ -5416,7 +5428,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                     {
                         if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
                         {
-                            var servo = cmds[a].p2;
+                            servo = cmds[a].p2;
                             MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servo, 0, 0, 0, 0, 0);
                             break;
                         }
