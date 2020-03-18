@@ -70,6 +70,7 @@ namespace MissionPlanner.Grid
         int impeller_no = 8;
         int impeller_pwm_on = 2000;
         int impeller_pwm_off = 1000;
+        double impeller_on_delay = 1.0;
 
         // @eams add for CONDITION_DELAY
         bool addconditiondelay_firsttime = false;
@@ -167,6 +168,8 @@ namespace MissionPlanner.Grid
                 impeller_pwm_on = int.Parse(plugin.Host.config["impeller_pwm_on"]);
             if (plugin.Host.config["impeller_pwm_off"] != null)
                 impeller_pwm_off = int.Parse(plugin.Host.config["impeller_pwm_off"]);
+            if (plugin.Host.config["impeller_on_delay"] != null)
+                impeller_on_delay = double.Parse(plugin.Host.config["impeller_on_delay"]);
 
             // @eams add / CONDITION_DELAY
             if (plugin.Host.config["grid_condition_delay"] != null)
@@ -1021,7 +1024,7 @@ namespace MissionPlanner.Grid
             {
                 // turn on
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO, (float)impeller_no, (float)impeller_pwm_on, 0, 0, 0, 0, 0, gridobject);
-                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)1, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, impeller_on_delay, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
             }
             addwp_firsttime = false;
         }
@@ -1063,7 +1066,8 @@ namespace MissionPlanner.Grid
 
             foreach (var item in list)
             {
-                routesOverlay.Markers.Add(new GMarkerGoogle(item, GMarkerGoogleType.red));
+                //routesOverlay.Markers.Add(new GMarkerGoogle(item, GMarkerGoogleType.red));
+                routesOverlay.Markers.Add(new GMarkerGoogle(item, GMarkerGoogleType.red_big_stop));
             }
         }
 

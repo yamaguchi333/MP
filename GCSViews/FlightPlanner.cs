@@ -518,14 +518,16 @@ namespace MissionPlanner.GCSViews
             // open wp file
             if (keyData == (Keys.Control | Keys.O))
             {
-                loadWPFileToolStripMenuItem_Click(null, null);
+                //loadWPFileToolStripMenuItem_Click(null, null);
+                loadPolygonToolStripMenuItem_Click(null, null);
                 return true;
             }
 
             // save wp file
             if (keyData == (Keys.Control | Keys.S))
             {
-                saveWPFileToolStripMenuItem_Click(null, null);
+                //saveWPFileToolStripMenuItem_Click(null, null);
+                savePolygonToolStripMenuItem_Click(null, null);
                 return true;
             }
 
