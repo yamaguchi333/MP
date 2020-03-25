@@ -1146,7 +1146,7 @@ namespace MissionPlanner.GCSViews
                             float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
                             MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
                             MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
-                            first_RTL =  false;
+                            first_RTL = false;
                         }
                         if (resume_flag == 0 || resume_flag == 2)
                         {
@@ -1278,7 +1278,10 @@ namespace MissionPlanner.GCSViews
                         if (route == null)
                         {
                             route = new GMapRoute(trackPoints, "track");
-                            routes.Routes.Add(route);
+                            if (Settings.Instance.GetBoolean("track_line"))
+                            {
+                                routes.Routes.Add(route);
+                            }
                         }
 
                         PointLatLng currentloc = new PointLatLng(MainV2.comPort.MAV.cs.lat, MainV2.comPort.MAV.cs.lng);
@@ -1304,8 +1307,8 @@ namespace MissionPlanner.GCSViews
                         updateRoutePosition();
 
                         // update programed wp course
-//                        if (waypoints.AddSeconds(5) < DateTime.Now)
-                        if (waypoints.AddSeconds(MainV2.update_wp_delay/1000) < DateTime.Now)
+                        //                        if (waypoints.AddSeconds(5) < DateTime.Now)
+                        if (waypoints.AddSeconds(MainV2.update_wp_delay / 1000) < DateTime.Now)
                         {
                             //Console.WriteLine("Doing FD WP's");
                             updateClearMissionRouteMarkers();
@@ -1901,8 +1904,8 @@ namespace MissionPlanner.GCSViews
                        }
                        lastmapposchange = DateTime.Now;
                    }
-                    //hud1.Refresh();
-                }
+                   //hud1.Refresh();
+               }
                catch
                {
                }
@@ -3550,8 +3553,8 @@ namespace MissionPlanner.GCSViews
             {
                 selectform.Controls.ForEach(a =>
 {
-if (a is CheckBox && ((CheckBox)a).Checked)
-((CheckBox)a).BackColor = Color.Green;
+    if (a is CheckBox && ((CheckBox)a).Checked)
+        ((CheckBox)a).BackColor = Color.Green;
 });
             };
 
@@ -3721,7 +3724,8 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             try
             {
                 if (MainV2.comPort.MAV.cs.armed)
-                    if (CustomMessageBox.Show("Are you sure you want to Disarm?", "Disarm?", MessageBoxButtons.YesNo) !=
+                    //if (CustomMessageBox.Show("Are you sure you want to Disarm?", "Disarm?", MessageBoxButtons.YesNo) !=
+                    if (CustomMessageBox.Show("プロペラを回転停止してもよろしいですか？", "プロペラ回転停止", MessageBoxButtons.YesNo) !=
                         (int)DialogResult.Yes)
                         return;
 
@@ -4351,7 +4355,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
                             }
 
                             timeout = 0;
-                            while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt*0.95))
+                            while (MainV2.comPort.MAV.cs.alt < (lastwpdata.alt * 0.95))
                             {
                                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, lastwpdata.alt);
                                 Thread.Sleep(1000);
@@ -4915,7 +4919,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
-//            if (ButtonStop.Text == "飛行停止")
+            //            if (ButtonStop.Text == "飛行停止")
             if ((string)ButtonStop.BackgroundImage.Tag == "stop")
             {
                 MainV2.instance.MenuStopClick(sender);
@@ -5007,16 +5011,16 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         {
             if (state)
             {
-//                ButtonStop.Text = "飛行停止";
-//                ButtonStop.BackColor = Color.DodgerBlue;
+                //                ButtonStop.Text = "飛行停止";
+                //                ButtonStop.BackColor = Color.DodgerBlue;
                 ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_stop;
                 ButtonStop.BackgroundImage.Tag = "stop";
                 toolTip1.SetToolTip(ButtonStop, "自動飛行停止");
             }
             else
             {
-//                ButtonStop.Text = "飛行再開";
-//                ButtonStop.BackColor = Color.DarkOrchid;
+                //                ButtonStop.Text = "飛行再開";
+                //                ButtonStop.BackColor = Color.DarkOrchid;
                 ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_restart;
                 ButtonStop.BackgroundImage.Tag = "restart";
                 toolTip1.SetToolTip(ButtonStop, "自動飛行再開");
@@ -5045,13 +5049,13 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             {
                 this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
                 this.ButtonConnect.Image.Tag = "Disconnect";
-//                this.ButtonConnect.Text = "切断";
+                //                this.ButtonConnect.Text = "切断";
             }
             else
             {
                 this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
                 this.ButtonConnect.Image.Tag = "Connect";
-//                this.ButtonConnect.Text = "接続";
+                //                this.ButtonConnect.Text = "接続";
             }
 
         }
@@ -5081,14 +5085,14 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         {
             if (state)
             {
-//                LabelPreArm.Text = "飛行OK";
-//                LabelPreArm.BackColor = Color.Green;
+                //                LabelPreArm.Text = "飛行OK";
+                //                LabelPreArm.BackColor = Color.Green;
                 LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ok;
             }
             else
             {
-//                LabelPreArm.Text = "飛行NG";
-//                LabelPreArm.BackColor = Color.Red;
+                //                LabelPreArm.Text = "飛行NG";
+                //                LabelPreArm.BackColor = Color.Red;
                 LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ng;
             }
         }
@@ -5099,7 +5103,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         /// </summary>
         public void LabelWPno_ChangeNumber(int wpno)
         {
-            if (wpno>0)
+            if (wpno > 0)
             {
                 LabelWPno.Text = wpno.ToString();
 
@@ -5116,7 +5120,7 @@ if (a is CheckBox && ((CheckBox)a).Checked)
         /// </summary>
         public void LabelTime_ChangeTime(int time)
         {
-            LabelTime.Text = (time/3600.0).ToString("F2") + " (h)";
+            LabelTime.Text = (time / 3600.0).ToString("F2") + " (h)";
         }
 
         /// <summary>
@@ -5479,6 +5483,101 @@ if (a is CheckBox && ((CheckBox)a).Checked)
             ButtonResumeClear.BackgroundImage = canvas; //表示する
         }
 
+        private void BtnAltHold_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setMode("ALTHOLD");
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+            ((Button)sender).Enabled = true;
+        }
+
+        private void BtnActStab_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setMode("STABILIZE");
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+            ((Button)sender).Enabled = true;
+        }
+
+        private void BtnActLand_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setMode("LAND");
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+            ((Button)sender).Enabled = true;
+        }
+
+        private void BtnActReboot_Click(object sender, EventArgs e)
+        {
+            if (
+                CustomMessageBox.Show("再起動してもよろしいですか？", "再起動", MessageBoxButtons.YesNo) == (int)DialogResult.Yes)
+            {
+                try
+                {
+                    ((Button)sender).Enabled = false;
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                }
+                ((Button)sender).Enabled = true;
+            }
+        }
+
+        private void BtnActWPset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((Button)sender).Enabled = false;
+                MainV2.comPort.setWPCurrent(ushort.Parse(LblWPno.Text)); // set nav to
+            }
+            catch
+            {
+                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+            }
+            ((Button)sender).Enabled = true;
+        }
+
+        private void BtnActKey_Click(object sender, EventArgs e)
+        {
+            if (LblWPno.Text.Length >= 4)
+            {
+                return;
+            }
+            string key = ((Button)sender).Tag.ToString();
+            if (LblWPno.Text == "0")
+            {
+                LblWPno.Text = key;
+            }
+            else
+            {
+                LblWPno.Text += key;
+            }
+        }
+
+        private void BtnActKeyClear_Click(object sender, EventArgs e)
+        {
+            LblWPno.Text = "0";
+        }
     }
 }
  

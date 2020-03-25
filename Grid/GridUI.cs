@@ -79,6 +79,12 @@ namespace MissionPlanner.Grid
         double grid_condition_delay_open = 1.0;
         double grid_condition_delay_close = 1.0;
 
+        // @eams add for DO_REPEATE_SERVO
+        double grid_repeatservo_cycle_last = 2;
+
+        // @eams add for grid end turn
+        bool grid_endturn = false;
+
         // GridUI
         public GridUI(GridPlugin plugin)
         {
@@ -180,6 +186,14 @@ namespace MissionPlanner.Grid
                 grid_condition_delay_open = double.Parse(plugin.Host.config["grid_condition_delay_open"]);
             if (plugin.Host.config["grid_condition_delay_close"] != null)
                 grid_condition_delay_close = double.Parse(plugin.Host.config["grid_condition_delay_close"]);
+
+            // @eams add for DO_REPEATE_SERVO
+            if (plugin.Host.config["grid_repeatservo_cycle_last"] != null)
+                grid_repeatservo_cycle_last = double.Parse(plugin.Host.config["grid_repeatservo_cycle_last"]);
+
+            // @eams add for grid end turn
+            if (plugin.Host.config["grid_endturn"] != null)
+                grid_endturn = bool.Parse(plugin.Host.config["grid_endturn"]);
         }
 
         bool deleteLastLAND = false;    // @eams add
@@ -680,12 +694,6 @@ namespace MissionPlanner.Grid
                             (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
                         break;
                     case 3:
-                        grid = Utilities.Grid.CreateGrid3(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
-                            (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
-                            (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
-                            (Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), CMB_startfrom.Text), false,
-                            (float)NUM_Lane_Dist.Value, (float)NUM_leadin.Value, MainV2.comPort.MAV.cs.HomeLocation, double.Parse(TXT_offset.Text), first_validate);
-                        break;
                     case 4:
                         grid = Utilities.Grid.CreateGrid4(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
                             (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
@@ -984,7 +992,7 @@ namespace MissionPlanner.Grid
 
                 // dummy DELAY
                 int grid_startup_delay2 = Settings.Instance.GetInt32("grid_startup_delay2");
-                if (grid_type == 3 || grid_type == 4)   // @eams add
+                if (grid_type == 4)   // @eams add
                 {
                     if (addwp_firsttime)
                     {
@@ -1932,11 +1940,15 @@ namespace MissionPlanner.Grid
                                                     (float)num_reptpwm.Value, 1, (float)NUM_repttime.Value, 0, 0, 0,
                                                     gridobject);
 
-                                                // turn
-                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
-                                                    (float)1,
-                                                    0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
-                                                    gridobject);
+                                                if (grid_type == 4)
+                                                {
+                                                    // turn
+                                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                                        (float)1,
+                                                        0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                                        gridobject);
+
+                                                }
                                             }
                                             else
                                             {
@@ -1950,19 +1962,36 @@ namespace MissionPlanner.Grid
                                         {
                                             AddWP(plla.Lng, plla.Lat, plla.Alt);
 
+                                            if (i >= grid.Count() - 2)
+                                            {
+                                                addwp_lasttime = true;
+                                            }
+
                                             if (grid_type == 3 || grid_type == 4)
                                             {
                                                 // open (specified time)
+                                                double time = 0.0;
+                                                if (addwp_lasttime)
+                                                {
+                                                    time = grid_repeatservo_cycle_last;
+                                                }
+                                                else
+                                                {
+                                                    time = (float)NUM_repttime.Value;
+                                                }
                                                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
                                                     (float)NUM_reptservo.Value,
-                                                    (float)num_reptpwm.Value, 1, (float)NUM_repttime.Value, 0, 0, 0,
+                                                    (float)num_reptpwm.Value, 1, time, 0, 0, 0,
                                                     gridobject);
 
-                                                // turn
-                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
-                                                    (float)1,
-                                                    0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
-                                                    gridobject);
+                                                if ((grid_type == 3 && (addwp_lasttime || grid_endturn)) || grid_type == 4)
+                                                {
+                                                    // turn
+                                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.LOITER_TURNS,
+                                                        (float)1,
+                                                        0, 0, 0, (double)plla.Lng, (double)plla.Lat, plla.Alt,
+                                                        gridobject);
+                                                }
                                             }
                                             else
                                             {

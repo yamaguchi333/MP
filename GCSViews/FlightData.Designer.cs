@@ -121,6 +121,28 @@
             this.groupBoxPitch = new System.Windows.Forms.GroupBox();
             this.trackBarPitch = new System.Windows.Forms.TrackBar();
             this.TXT_gimbalPitchPos = new System.Windows.Forms.TextBox();
+            this.tabActionsNew = new System.Windows.Forms.TabPage();
+            this.LblWPno = new System.Windows.Forms.Label();
+            this.BtnActKeyClear = new System.Windows.Forms.Button();
+            this.BtnActKey0 = new System.Windows.Forms.Button();
+            this.BtnActKey3 = new System.Windows.Forms.Button();
+            this.BtnActKey2 = new System.Windows.Forms.Button();
+            this.BtnActKey1 = new System.Windows.Forms.Button();
+            this.BtnActKey6 = new System.Windows.Forms.Button();
+            this.BtnActKey5 = new System.Windows.Forms.Button();
+            this.BtnActKey4 = new System.Windows.Forms.Button();
+            this.BtnActKey9 = new System.Windows.Forms.Button();
+            this.BtnActKey8 = new System.Windows.Forms.Button();
+            this.BtnActKey7 = new System.Windows.Forms.Button();
+            this.BtnActWPset = new System.Windows.Forms.Button();
+            this.BtnActReboot = new System.Windows.Forms.Button();
+            this.BtnActArm = new System.Windows.Forms.Button();
+            this.BtnActLand = new System.Windows.Forms.Button();
+            this.BtnActStab = new System.Windows.Forms.Button();
+            this.BtnActLoiter = new System.Windows.Forms.Button();
+            this.BtnActRtl = new System.Windows.Forms.Button();
+            this.BtnAltHold = new System.Windows.Forms.Button();
+            this.BtnActAuto = new System.Windows.Forms.Button();
             this.tableMap = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.ButtonResumeClear = new System.Windows.Forms.Button();
@@ -252,6 +274,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarYaw)).BeginInit();
             this.groupBoxPitch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPitch)).BeginInit();
+            this.tabActionsNew.SuspendLayout();
             this.tableMap.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -535,6 +558,7 @@
             this.tabControlactions.Controls.Add(this.tabScripts);
             this.tabControlactions.Controls.Add(this.tabPagemessages);
             this.tabControlactions.Controls.Add(this.tabPayload);
+            this.tabControlactions.Controls.Add(this.tabActionsNew);
             resources.ApplyResources(this.tabControlactions, "tabControlactions");
             this.tabControlactions.Multiline = true;
             this.tabControlactions.Name = "tabControlactions";
@@ -1841,6 +1865,260 @@
             resources.ApplyResources(this.TXT_gimbalPitchPos, "TXT_gimbalPitchPos");
             this.TXT_gimbalPitchPos.Name = "TXT_gimbalPitchPos";
             // 
+            // tabActionsNew
+            // 
+            this.tabActionsNew.Controls.Add(this.LblWPno);
+            this.tabActionsNew.Controls.Add(this.BtnActKeyClear);
+            this.tabActionsNew.Controls.Add(this.BtnActKey0);
+            this.tabActionsNew.Controls.Add(this.BtnActKey3);
+            this.tabActionsNew.Controls.Add(this.BtnActKey2);
+            this.tabActionsNew.Controls.Add(this.BtnActKey1);
+            this.tabActionsNew.Controls.Add(this.BtnActKey6);
+            this.tabActionsNew.Controls.Add(this.BtnActKey5);
+            this.tabActionsNew.Controls.Add(this.BtnActKey4);
+            this.tabActionsNew.Controls.Add(this.BtnActKey9);
+            this.tabActionsNew.Controls.Add(this.BtnActKey8);
+            this.tabActionsNew.Controls.Add(this.BtnActKey7);
+            this.tabActionsNew.Controls.Add(this.BtnActWPset);
+            this.tabActionsNew.Controls.Add(this.BtnActReboot);
+            this.tabActionsNew.Controls.Add(this.BtnActArm);
+            this.tabActionsNew.Controls.Add(this.BtnActLand);
+            this.tabActionsNew.Controls.Add(this.BtnActStab);
+            this.tabActionsNew.Controls.Add(this.BtnActLoiter);
+            this.tabActionsNew.Controls.Add(this.BtnActRtl);
+            this.tabActionsNew.Controls.Add(this.BtnAltHold);
+            this.tabActionsNew.Controls.Add(this.BtnActAuto);
+            resources.ApplyResources(this.tabActionsNew, "tabActionsNew");
+            this.tabActionsNew.Name = "tabActionsNew";
+            this.tabActionsNew.UseVisualStyleBackColor = true;
+            // 
+            // LblWPno
+            // 
+            this.LblWPno.BackColor = System.Drawing.SystemColors.Control;
+            this.LblWPno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.LblWPno, "LblWPno");
+            this.LblWPno.Name = "LblWPno";
+            // 
+            // BtnActKeyClear
+            // 
+            this.BtnActKeyClear.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKeyClear, "BtnActKeyClear");
+            this.BtnActKeyClear.FlatAppearance.BorderSize = 0;
+            this.BtnActKeyClear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKeyClear.Name = "BtnActKeyClear";
+            this.BtnActKeyClear.UseVisualStyleBackColor = false;
+            this.BtnActKeyClear.Click += new System.EventHandler(this.BtnActKeyClear_Click);
+            // 
+            // BtnActKey0
+            // 
+            this.BtnActKey0.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey0, "BtnActKey0");
+            this.BtnActKey0.FlatAppearance.BorderSize = 0;
+            this.BtnActKey0.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey0.Name = "BtnActKey0";
+            this.BtnActKey0.Tag = "0";
+            this.BtnActKey0.UseVisualStyleBackColor = false;
+            this.BtnActKey0.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey3
+            // 
+            this.BtnActKey3.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey3, "BtnActKey3");
+            this.BtnActKey3.FlatAppearance.BorderSize = 0;
+            this.BtnActKey3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey3.Name = "BtnActKey3";
+            this.BtnActKey3.Tag = "3";
+            this.BtnActKey3.UseVisualStyleBackColor = false;
+            this.BtnActKey3.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey2
+            // 
+            this.BtnActKey2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey2, "BtnActKey2");
+            this.BtnActKey2.FlatAppearance.BorderSize = 0;
+            this.BtnActKey2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey2.Name = "BtnActKey2";
+            this.BtnActKey2.Tag = "2";
+            this.BtnActKey2.UseVisualStyleBackColor = false;
+            this.BtnActKey2.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey1
+            // 
+            this.BtnActKey1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey1, "BtnActKey1");
+            this.BtnActKey1.FlatAppearance.BorderSize = 0;
+            this.BtnActKey1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey1.Name = "BtnActKey1";
+            this.BtnActKey1.Tag = "1";
+            this.BtnActKey1.UseVisualStyleBackColor = false;
+            this.BtnActKey1.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey6
+            // 
+            this.BtnActKey6.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey6, "BtnActKey6");
+            this.BtnActKey6.FlatAppearance.BorderSize = 0;
+            this.BtnActKey6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey6.Name = "BtnActKey6";
+            this.BtnActKey6.Tag = "6";
+            this.BtnActKey6.UseVisualStyleBackColor = false;
+            this.BtnActKey6.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey5
+            // 
+            this.BtnActKey5.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey5, "BtnActKey5");
+            this.BtnActKey5.FlatAppearance.BorderSize = 0;
+            this.BtnActKey5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey5.Name = "BtnActKey5";
+            this.BtnActKey5.Tag = "5";
+            this.BtnActKey5.UseVisualStyleBackColor = false;
+            this.BtnActKey5.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey4
+            // 
+            this.BtnActKey4.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey4, "BtnActKey4");
+            this.BtnActKey4.FlatAppearance.BorderSize = 0;
+            this.BtnActKey4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey4.Name = "BtnActKey4";
+            this.BtnActKey4.Tag = "4";
+            this.BtnActKey4.UseVisualStyleBackColor = false;
+            this.BtnActKey4.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey9
+            // 
+            this.BtnActKey9.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey9, "BtnActKey9");
+            this.BtnActKey9.FlatAppearance.BorderSize = 0;
+            this.BtnActKey9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey9.Name = "BtnActKey9";
+            this.BtnActKey9.Tag = "9";
+            this.BtnActKey9.UseVisualStyleBackColor = false;
+            this.BtnActKey9.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey8
+            // 
+            this.BtnActKey8.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey8, "BtnActKey8");
+            this.BtnActKey8.FlatAppearance.BorderSize = 0;
+            this.BtnActKey8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey8.Name = "BtnActKey8";
+            this.BtnActKey8.Tag = "8";
+            this.BtnActKey8.UseVisualStyleBackColor = false;
+            this.BtnActKey8.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActKey7
+            // 
+            this.BtnActKey7.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.BtnActKey7, "BtnActKey7");
+            this.BtnActKey7.FlatAppearance.BorderSize = 0;
+            this.BtnActKey7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BtnActKey7.Name = "BtnActKey7";
+            this.BtnActKey7.Tag = "7";
+            this.BtnActKey7.UseVisualStyleBackColor = false;
+            this.BtnActKey7.Click += new System.EventHandler(this.BtnActKey_Click);
+            // 
+            // BtnActWPset
+            // 
+            this.BtnActWPset.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActWPset, "BtnActWPset");
+            this.BtnActWPset.FlatAppearance.BorderSize = 0;
+            this.BtnActWPset.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActWPset.Name = "BtnActWPset";
+            this.toolTip1.SetToolTip(this.BtnActWPset, resources.GetString("BtnActWPset.ToolTip"));
+            this.BtnActWPset.UseVisualStyleBackColor = false;
+            this.BtnActWPset.Click += new System.EventHandler(this.BtnActWPset_Click);
+            // 
+            // BtnActReboot
+            // 
+            this.BtnActReboot.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActReboot, "BtnActReboot");
+            this.BtnActReboot.FlatAppearance.BorderSize = 0;
+            this.BtnActReboot.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActReboot.Name = "BtnActReboot";
+            this.toolTip1.SetToolTip(this.BtnActReboot, resources.GetString("BtnActReboot.ToolTip"));
+            this.BtnActReboot.UseVisualStyleBackColor = false;
+            this.BtnActReboot.Click += new System.EventHandler(this.BtnActReboot_Click);
+            // 
+            // BtnActArm
+            // 
+            this.BtnActArm.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActArm, "BtnActArm");
+            this.BtnActArm.FlatAppearance.BorderSize = 0;
+            this.BtnActArm.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActArm.Name = "BtnActArm";
+            this.toolTip1.SetToolTip(this.BtnActArm, resources.GetString("BtnActArm.ToolTip"));
+            this.BtnActArm.UseVisualStyleBackColor = false;
+            this.BtnActArm.Click += new System.EventHandler(this.BUT_ARM_Click);
+            // 
+            // BtnActLand
+            // 
+            this.BtnActLand.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActLand, "BtnActLand");
+            this.BtnActLand.FlatAppearance.BorderSize = 0;
+            this.BtnActLand.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActLand.Name = "BtnActLand";
+            this.toolTip1.SetToolTip(this.BtnActLand, resources.GetString("BtnActLand.ToolTip"));
+            this.BtnActLand.UseVisualStyleBackColor = false;
+            this.BtnActLand.Click += new System.EventHandler(this.BtnActLand_Click);
+            // 
+            // BtnActStab
+            // 
+            this.BtnActStab.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActStab, "BtnActStab");
+            this.BtnActStab.FlatAppearance.BorderSize = 0;
+            this.BtnActStab.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActStab.Name = "BtnActStab";
+            this.toolTip1.SetToolTip(this.BtnActStab, resources.GetString("BtnActStab.ToolTip"));
+            this.BtnActStab.UseVisualStyleBackColor = false;
+            this.BtnActStab.Click += new System.EventHandler(this.BtnActStab_Click);
+            // 
+            // BtnActLoiter
+            // 
+            this.BtnActLoiter.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActLoiter, "BtnActLoiter");
+            this.BtnActLoiter.FlatAppearance.BorderSize = 0;
+            this.BtnActLoiter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActLoiter.Name = "BtnActLoiter";
+            this.toolTip1.SetToolTip(this.BtnActLoiter, resources.GetString("BtnActLoiter.ToolTip"));
+            this.BtnActLoiter.UseVisualStyleBackColor = false;
+            this.BtnActLoiter.Click += new System.EventHandler(this.BUT_quickmanual_Click);
+            // 
+            // BtnActRtl
+            // 
+            this.BtnActRtl.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnActRtl, "BtnActRtl");
+            this.BtnActRtl.FlatAppearance.BorderSize = 0;
+            this.BtnActRtl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActRtl.Name = "BtnActRtl";
+            this.toolTip1.SetToolTip(this.BtnActRtl, resources.GetString("BtnActRtl.ToolTip"));
+            this.BtnActRtl.UseVisualStyleBackColor = false;
+            this.BtnActRtl.Click += new System.EventHandler(this.BUT_quickrtl_Click);
+            // 
+            // BtnAltHold
+            // 
+            this.BtnAltHold.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.BtnAltHold, "BtnAltHold");
+            this.BtnAltHold.FlatAppearance.BorderSize = 0;
+            this.BtnAltHold.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnAltHold.Name = "BtnAltHold";
+            this.toolTip1.SetToolTip(this.BtnAltHold, resources.GetString("BtnAltHold.ToolTip"));
+            this.BtnAltHold.UseVisualStyleBackColor = false;
+            this.BtnAltHold.Click += new System.EventHandler(this.BtnAltHold_Click);
+            // 
+            // BtnActAuto
+            // 
+            this.BtnActAuto.BackColor = System.Drawing.Color.Transparent;
+            this.BtnActAuto.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_act_auto;
+            resources.ApplyResources(this.BtnActAuto, "BtnActAuto");
+            this.BtnActAuto.FlatAppearance.BorderSize = 0;
+            this.BtnActAuto.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BtnActAuto.Name = "BtnActAuto";
+            this.toolTip1.SetToolTip(this.BtnActAuto, resources.GetString("BtnActAuto.ToolTip"));
+            this.BtnActAuto.UseVisualStyleBackColor = false;
+            this.BtnActAuto.Click += new System.EventHandler(this.BUT_quickauto_Click);
+            // 
             // tableMap
             // 
             resources.ApplyResources(this.tableMap, "tableMap");
@@ -2001,7 +2279,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
@@ -2693,6 +2971,7 @@
             this.groupBoxPitch.ResumeLayout(false);
             this.groupBoxPitch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPitch)).EndInit();
+            this.tabActionsNew.ResumeLayout(false);
             this.tableMap.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -2922,5 +3201,27 @@
         private System.Windows.Forms.Label LabelNextWPdist;
         private System.Windows.Forms.Label labelResume;
         private System.Windows.Forms.Button ButtonResumeClear;
+        public System.Windows.Forms.TabPage tabActionsNew;
+        private System.Windows.Forms.Button BtnActAuto;
+        private System.Windows.Forms.Button BtnActKeyClear;
+        private System.Windows.Forms.Button BtnActKey0;
+        private System.Windows.Forms.Button BtnActKey3;
+        private System.Windows.Forms.Button BtnActKey2;
+        private System.Windows.Forms.Button BtnActKey1;
+        private System.Windows.Forms.Button BtnActKey6;
+        private System.Windows.Forms.Button BtnActKey5;
+        private System.Windows.Forms.Button BtnActKey4;
+        private System.Windows.Forms.Button BtnActKey9;
+        private System.Windows.Forms.Button BtnActKey8;
+        private System.Windows.Forms.Button BtnActKey7;
+        private System.Windows.Forms.Button BtnActWPset;
+        private System.Windows.Forms.Button BtnActReboot;
+        private System.Windows.Forms.Button BtnActArm;
+        private System.Windows.Forms.Button BtnActLand;
+        private System.Windows.Forms.Button BtnActStab;
+        private System.Windows.Forms.Button BtnActLoiter;
+        private System.Windows.Forms.Button BtnActRtl;
+        private System.Windows.Forms.Button BtnAltHold;
+        private System.Windows.Forms.Label LblWPno;
     }
 }
