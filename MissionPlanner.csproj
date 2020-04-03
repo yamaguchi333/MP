@@ -1782,6 +1782,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\launchSettings.json" />
+    <None Include="Resources\btn_return_stop.jpg" />
     <None Include="Resources\btn_act_auto.jpg" />
     <None Include="Resources\btn_resume_clear.png" />
     <None Include="Resources\btn_flight_ng.jpg" />

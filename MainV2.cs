@@ -4339,6 +4339,7 @@ namespace MissionPlanner
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
                     (float)(cs.HomeLocation.Lng), 0);
 #endif
+                MainV2.instance.FlightData.ButtonReturn_ChangeState(false);
             }
             catch
             {

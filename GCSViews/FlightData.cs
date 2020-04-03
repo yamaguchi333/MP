@@ -1575,19 +1575,19 @@ namespace MissionPlanner.GCSViews
                             // add primary route icon
 
                             // draw guide mode point for only main mav
+#if true    //@eams change
+                            if (resume_flag > 0)
+                            {
+                                addpolygonmarker("自動飛行再開ポイント", resume_pos.Lng, resume_pos.Lat, (int)resume_pos.Alt, Color.Blue, routes);
+                            }
+#else
                             if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided" && MainV2.comPort.MAV.GuidedMode.x != 0)
                             {
-#if true    // @eams change
-                                addpolygonmarker("自動飛行再開ポイント", MainV2.comPort.MAV.GuidedMode.y,
-                                    MainV2.comPort.MAV.GuidedMode.x, (int)MainV2.comPort.MAV.GuidedMode.z, Color.Blue,
-                                    routes);
-#else
                                 addpolygonmarker("Guided Mode", MainV2.comPort.MAV.GuidedMode.y,
                                     MainV2.comPort.MAV.GuidedMode.x, (int)MainV2.comPort.MAV.GuidedMode.z, Color.Blue,
                                     routes);
-#endif
                             }
-
+#endif
                             // draw all icons for all connected mavs
                             foreach (var port in MainV2.Comports.ToArray())
                             {
@@ -4884,6 +4884,7 @@ namespace MissionPlanner.GCSViews
         {
             MainV2.instance.MenuStartClick(sender);
             ButtonStop_ChangeState(true);
+            ButtonReturn_ChangeState(true);
         }
 
         /// <summary>
@@ -4919,7 +4920,6 @@ namespace MissionPlanner.GCSViews
 
         private void ButtonStop_Click(object sender, EventArgs e)
         {
-            //            if (ButtonStop.Text == "飛行停止")
             if ((string)ButtonStop.BackgroundImage.Tag == "stop")
             {
                 MainV2.instance.MenuStopClick(sender);
@@ -5011,16 +5011,12 @@ namespace MissionPlanner.GCSViews
         {
             if (state)
             {
-                //                ButtonStop.Text = "飛行停止";
-                //                ButtonStop.BackColor = Color.DodgerBlue;
                 ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_stop;
                 ButtonStop.BackgroundImage.Tag = "stop";
                 toolTip1.SetToolTip(ButtonStop, "自動飛行停止");
             }
             else
             {
-                //                ButtonStop.Text = "飛行再開";
-                //                ButtonStop.BackColor = Color.DarkOrchid;
                 ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_restart;
                 ButtonStop.BackgroundImage.Tag = "restart";
                 toolTip1.SetToolTip(ButtonStop, "自動飛行再開");
@@ -5030,8 +5026,50 @@ namespace MissionPlanner.GCSViews
 
         private void ButtonReturn_Click(object sender, EventArgs e)
         {
-            MainV2.instance.MenuReturnClick(sender);
+            if ((string)ButtonReturn.BackgroundImage.Tag == "return")
+            {
+                MainV2.instance.MenuReturnClick(sender);
+            }
+            else
+            {
+                // set mode Loiter
+                try
+                {
+                    if (MainV2.comPort.BaseStream == null || !MainV2.comPort.BaseStream.IsOpen)
+                    {
+                        CustomMessageBox.Show("機体に接続していません。", Strings.ERROR);
+                        return;
+                    }
+                    MainV2.comPort.setMode("Loiter");
+                }
+                catch
+                {
+                    CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                }
+                ButtonReturn_ChangeState(true);
+            }
             ButtonStop_ChangeState(true);
+        }
+
+        /// <summary>
+        /// 強制帰還ボタンの更新
+        /// <param name="state">true:強制帰還、false:帰還停止</param>
+        /// </summary>
+        public void ButtonReturn_ChangeState(bool state)
+        {
+            if (state)
+            {
+                ButtonReturn.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_return;
+                ButtonReturn.BackgroundImage.Tag = "return";
+                toolTip1.SetToolTip(ButtonReturn, "強制帰還");
+            }
+            else
+            {
+                ButtonReturn.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_return_stop;
+                ButtonReturn.BackgroundImage.Tag = "return_stop";
+                toolTip1.SetToolTip(ButtonReturn, "帰還停止");
+            }
+
         }
 
         private void ButtonConnect_Click(object sender, EventArgs e)
@@ -5085,14 +5123,14 @@ namespace MissionPlanner.GCSViews
         {
             if (state)
             {
-                //                LabelPreArm.Text = "飛行OK";
-                //                LabelPreArm.BackColor = Color.Green;
+                //LabelPreArm.Text = "飛行OK";
+                //LabelPreArm.BackColor = Color.Green;
                 LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ok;
             }
             else
             {
-                //                LabelPreArm.Text = "飛行NG";
-                //                LabelPreArm.BackColor = Color.Red;
+                //LabelPreArm.Text = "飛行NG";
+                //LabelPreArm.BackColor = Color.Red;
                 LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ng;
             }
         }
@@ -5324,11 +5362,6 @@ namespace MissionPlanner.GCSViews
                     }
                 }
                 await Task.Delay(grid_startup_delay * 1000);
-
-                // re-set guided WP
-                MainV2.comPort.setGuidedModeWP(gotohere, true, true);
-                await Task.Delay(1000);
-                Application.DoEvents();
 
                 // check wp_dist value is not 0
                 timeout = 0;

@@ -423,6 +423,16 @@ namespace MissionPlanner.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap btn_return_stop {
+            get {
+                object obj = ResourceManager.GetObject("btn_return_stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap btn_root_clear {
             get {
                 object obj = ResourceManager.GetObject("btn_root_clear", resourceCulture);
