@@ -1142,10 +1142,14 @@ namespace MissionPlanner.GCSViews
                     {
                         if (first_RTL)
                         {
-                            // force close servo 7 and change function
-                            float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
-                            MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
-                            MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
+                            int grid_type = Settings.Instance.GetInt32("grid_type");
+                            if (grid_type >= 2 && grid_type <= 4)
+                            {
+                                // force close servo 7 and change function
+                                float servohigh = Settings.Instance.GetFloat("grid_dosetservo_PWMH");
+                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
+                                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
+                            }
                             first_RTL = false;
                         }
                         if (resume_flag == 0 || resume_flag == 2)
@@ -1307,7 +1311,7 @@ namespace MissionPlanner.GCSViews
                         updateRoutePosition();
 
                         // update programed wp course
-                        //                        if (waypoints.AddSeconds(5) < DateTime.Now)
+                        //if (waypoints.AddSeconds(5) < DateTime.Now)
                         if (waypoints.AddSeconds(MainV2.update_wp_delay / 1000) < DateTime.Now)
                         {
                             //Console.WriteLine("Doing FD WP's");
@@ -4918,7 +4922,7 @@ namespace MissionPlanner.GCSViews
             ButtonStart.BackgroundImage = canvas; //表示する
         }
 
-        private void ButtonStop_Click(object sender, EventArgs e)
+        async private void ButtonStop_Click(object sender, EventArgs e)
         {
             if ((string)ButtonStop.BackgroundImage.Tag == "stop")
             {
@@ -4963,7 +4967,6 @@ namespace MissionPlanner.GCSViews
                     cmds = MainV2.instance.FlightPlanner.GetCommandList();
                     cmds.Insert(0, home);
                     var wpcount = cmds.Count;
-
 #if true
                     MainV2.comPort.setMode("AUTO");
 #else
@@ -4974,11 +4977,23 @@ namespace MissionPlanner.GCSViews
                     MainV2.comPort.doCommand((MAVLink.MAV_CMD)Enum.Parse(typeof(MAVLink.MAV_CMD), "MISSION_START"),
                         param1, 0, param3, 0, 0, 0, 0);
 #endif
-                    // set SERVO7_FUNCTION auto @eams
-                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
+                    // CONDTION_YAW
+                    float grid_angle = 0;
+                    for (ushort a = 0; a < wpcount; a++)
+                    {
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
+                        {
+                            grid_angle = cmds[a].p1;
+                            break;
+                        }
+                    }
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
                     // get parameters
                     int grid_type = Settings.Instance.GetInt32("grid_type");
+
+                    // set SERVO7_FUNCTION auto @eams
+                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_auto);
 
                     // servo operation in mode2
                     if (grid_type == 2)
@@ -5087,13 +5102,13 @@ namespace MissionPlanner.GCSViews
             {
                 this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
                 this.ButtonConnect.Image.Tag = "Disconnect";
-                //                this.ButtonConnect.Text = "切断";
             }
             else
             {
                 this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
                 this.ButtonConnect.Image.Tag = "Connect";
-                //                this.ButtonConnect.Text = "接続";
+                ButtonReturn_ChangeState(true);
+                ButtonStop_ChangeState(true);
             }
 
         }
@@ -5123,14 +5138,10 @@ namespace MissionPlanner.GCSViews
         {
             if (state)
             {
-                //LabelPreArm.Text = "飛行OK";
-                //LabelPreArm.BackColor = Color.Green;
                 LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ok;
             }
             else
             {
-                //LabelPreArm.Text = "飛行NG";
-                //LabelPreArm.BackColor = Color.Red;
                 LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ng;
             }
         }
@@ -5339,7 +5350,7 @@ namespace MissionPlanner.GCSViews
                 }
                 await Task.Delay(grid_startup_delay * 1000);
 
-                // CONDTION_YAW
+                // CONDTION_YAW for GUIDED
                 float grid_angle = 0;
                 for (ushort a = 0; a < wpcount; a++)
                 {
@@ -5405,25 +5416,28 @@ namespace MissionPlanner.GCSViews
                     }
                 }
 
-                // use impeller
-                if (use_impeller)
-                {
-                    // turn on
-                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, impeller_no, impeller_pwm_on, 0, 0, 0, 0, 0);
-                    await Task.Delay(1000);
-                }
-
-                // DO_SET_SERVO(open)
                 float servo = 1000;
-                for (ushort a = 0; a < wpcount; a++)
+                if (grid_type >= 2 && grid_type <= 4)
                 {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                    // use impeller
+                    if (use_impeller)
                     {
-                        servo = cmds[a].p2;
-                        break;
+                        // turn on
+                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, impeller_no, impeller_pwm_on, 0, 0, 0, 0, 0);
+                        await Task.Delay(1000);
                     }
+
+                    // DO_SET_SERVO(close)
+                    for (ushort a = 0; a < wpcount; a++)
+                    {
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DO_SET_SERVO)
+                        {
+                            servo = cmds[a].p2;
+                            break;
+                        }
+                    }
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servo, 0, 0, 0, 0, 0);
                 }
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servo, 0, 0, 0, 0, 0);
 
                 // set resume point wp
                 MainV2.comPort.setWPCurrent((ushort)lastwpno);

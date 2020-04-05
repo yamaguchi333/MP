@@ -4334,11 +4334,6 @@ namespace MissionPlanner
 
                 // set mode RTL
                 MainV2.comPort.setMode("RTL");
-#if false
-                CurrentState cs = MainV2.comPort.MAV.cs;
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
-                    (float)(cs.HomeLocation.Lng), 0);
-#endif
                 MainV2.instance.FlightData.ButtonReturn_ChangeState(false);
             }
             catch
@@ -4388,11 +4383,6 @@ namespace MissionPlanner
 
                 // set mode Loiter
                 MainV2.comPort.setMode("Loiter");
-#if false
-                CurrentState cs = MainV2.comPort.MAV.cs;
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.LAND, 0, 0, 0, 0, (float)(cs.HomeLocation.Lat),
-                    (float)(cs.HomeLocation.Lng), 0);
-#endif
                 MainV2.instance.FlightData.ButtonStop_ChangeState(false);
             }
             catch
@@ -4442,15 +4432,21 @@ namespace MissionPlanner
                 }
 
                 // update failsafe display
-//                MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
+                //MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
                 MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags == ekf_status_flags);
 
                 // update flight start button state
-//                MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
+                //MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
                 MainV2.instance.FlightData.ButtonStart_ChangeState(!MainV2.comPort.MAV.cs.armed);
 
-                // update flight start button state
+                // update resume clear button state
                 MainV2.instance.FlightData.ButtonResumeClear_ChangeState(MainV2.instance.FlightData.resume_flag > 0 && !MainV2.comPort.MAV.cs.armed);
+
+                // update forced return button state
+                if ((int)MainV2.comPort.MAV.cs.DistToHome == 0 && !MainV2.comPort.MAV.cs.armed)
+                {
+                    MainV2.instance.FlightData.ButtonReturn_ChangeState(true);
+                }
 
                 // update wpno display
                 MainV2.instance.FlightData.LabelWPno_ChangeNumber(Convert.ToInt32(MainV2.comPort.MAV.cs.wpno));
