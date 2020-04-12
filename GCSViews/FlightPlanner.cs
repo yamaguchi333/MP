@@ -72,6 +72,8 @@ namespace MissionPlanner.GCSViews
 
         List<int> groupmarkers = new List<int>();
 
+        int mesh_type = 0;  // @eams add
+
         public enum altmode
         {
             Relative = MAVLink.MAV_FRAME.GLOBAL_RELATIVE_ALT,
@@ -690,6 +692,10 @@ namespace MissionPlanner.GCSViews
             drawnpolygon.Stroke = new Pen(grid_color, 2);   // @eams change / original is red
             drawnpolygon.Fill = Brushes.Transparent;
 
+            // @eams add / ndvi mesh
+            if (Settings.Instance["overlay_mesh"] != null)
+                mesh_type = int.Parse(Settings.Instance["overlay_mesh"]);
+
             /*
             var timer = new System.Timers.Timer();
 
@@ -963,7 +969,7 @@ namespace MissionPlanner.GCSViews
             panelWaypoints.Expand = false;  // @eams add
 
             // @eams add
-            if (int.Parse(Settings.Instance["overlay_mesh"]) > 0)
+            if (mesh_type > 0)
             {
                 panel8.Visible = true;
                 chk_ndvimesh.Checked = true;
@@ -6054,13 +6060,13 @@ namespace MissionPlanner.GCSViews
 
             e.Graphics.ResetTransform();
 
-            if (int.Parse(Settings.Instance["overlay_mesh"]) == 0)
+            if (mesh_type == 0)
             {
-            polyicon.Location = new Point(10,100);
-            polyicon.Width = 45;    // @eams add
-            polyicon.Height = 45;   // @eams add
-            polyicon.Paint(e.Graphics);
-        }
+                polyicon.Location = new Point(10,100);
+                polyicon.Width = 45;    // @eams add
+                polyicon.Height = 45;   // @eams add
+                polyicon.Paint(e.Graphics);
+            }
         }
 
         MissionPlanner.Controls.Icon.Polygon polyicon = new MissionPlanner.Controls.Icon.Polygon();
@@ -7026,7 +7032,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void surveyGridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (int.Parse(Settings.Instance["overlay_mesh"]) > 0)
+            if (mesh_type > 0)
             {
                 //GridUIで順次処理
                 IProgressReporterDialogue frmProgressReporter = new ProgressReporterDialogue

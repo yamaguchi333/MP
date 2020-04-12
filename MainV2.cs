@@ -428,6 +428,8 @@ namespace MissionPlanner
         public static List<string> ignore_port = new List<string>();
         public static int ekf_status_flags;
         public static int update_wp_delay = 0;
+        public static int grid_dosetservo_PWML;
+        public static int grid_dosetservo_PWMH;
 
         public void updateLayout(object sender, EventArgs e)
         {
@@ -1034,8 +1036,10 @@ namespace MissionPlanner
             ignore_port = Settings.Instance.GetList("ignore_port").ToList();
             ekf_status_flags = Settings.Instance.GetInt32("ekf_status_flags");
             update_wp_delay = Settings.Instance.GetInt32("dialog_delay");
+            grid_dosetservo_PWML = Settings.Instance.GetInt32("grid_dosetservo_PWML");
+            grid_dosetservo_PWMH = Settings.Instance.GetInt32("grid_dosetservo_PWMH");
 
-            Application.DoEvents();
+        Application.DoEvents();
 
             Comports.Add(comPort);
 
@@ -1577,6 +1581,9 @@ namespace MissionPlanner
 
                 // set SERVO7_FUNCTION normal @eams
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+                // set SERVO7 value @eams
+                MainV2.comPort.setParam("SERVO7_MAX", (float)grid_dosetservo_PWML);
+                MainV2.comPort.setParam("SERVO7_MIN", (float)grid_dosetservo_PWMH);
 
                 _connectionControl.UpdateSysIDS();
 
@@ -2832,7 +2839,7 @@ namespace MissionPlanner
                                 MAV.cs.UpdateCurrentSettings(null, false, port, MAV);
                                 if(MAV.cs.armed != old_armed && MAV.cs.armed == false)
                                 {
-                                    MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+                                    comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
                                 }
                             }
                             catch (Exception ex)
