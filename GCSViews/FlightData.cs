@@ -1129,10 +1129,7 @@ namespace MissionPlanner.GCSViews
                     }
 
                     // @eams check resume point and failsafe
-                    // search first & end waypoint no in current mission
                     var commands = MainV2.instance.FlightPlanner.GetCommandList();
-                    int firstwpno = commands.FindIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) + 1;
-                    int endwpno = commands.FindLastIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) + 1;
                     string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();
                     if (lastwp == "-1")
                         lastwp = "1";
@@ -1152,17 +1149,29 @@ namespace MissionPlanner.GCSViews
                             }
                             first_RTL = false;
                         }
-                        if (resume_flag == 0 || resume_flag == 2)
+                        if (resume_flag == 0 || resume_flag == 3)
                         {
-                            if (curwpno >= firstwpno + 1 && curwpno <= endwpno)
+                            // search first & end waypoint no in current mission
+                            int firstwpno = commands.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT)&&(x.lat != 0)) + 1;
+                            int endwpno = commands.FindLastIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) + 1;
+                            if (curwpno > firstwpno && curwpno <= endwpno)
                             {
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
-                                if (MainV2.comPort.MAV.cs.sonarrange >= rtl_alt * 0.95)
+                                float alt;
+                                if (MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString() == "0")
+                                {
+                                    alt = MainV2.comPort.MAV.cs.alt;
+                                }
+                                else
+                                {
+                                    alt = MainV2.comPort.MAV.cs.sonarrange;
+                                }
+                                if (alt >= rtl_alt * 0.95)
                                 {
                                     // save resume point
                                     resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
                                     resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
-                                    resume_pos.Alt = MainV2.comPort.MAV.cs.sonarrange;
+                                    resume_pos.Alt = alt;
                                     resume_flag = 1;
                                     lastwpno = curwpno;
                                 }
@@ -5311,7 +5320,8 @@ namespace MissionPlanner.GCSViews
                 // take off
                 int timeout = 0;
                 bool result_takeoff = false;
-                while (MainV2.comPort.MAV.cs.sonarrange < (gotohere.alt * 0.95))
+                float alt = 0;
+                while (alt < (gotohere.alt * 0.95))
                 {
                     await Task.Delay(1000);
                     if (!result_takeoff)
@@ -5319,18 +5329,28 @@ namespace MissionPlanner.GCSViews
                         result_takeoff = MainV2.comPort.doCommand(MAVLink.MAV_CMD.TAKEOFF, 0, 0, 0, 0, 0, 0, gotohere.alt);
                         Application.DoEvents();
                     }
-                    timeout++;
                     //log.Info("FlightData Takeoff timeout: " + timeout);
+                    if (MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString() == "0")
+                    {
+                        alt = MainV2.comPort.MAV.cs.alt;
+                    }
+                    else
+                    {
+                        alt = MainV2.comPort.MAV.cs.sonarrange;
+                    }
+                    timeout++;
 
                     if (timeout > 40)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        resume_flag = 1;
                         return;
                     }
 
                     if (MainV2.comPort.MAV.cs.mode.ToLower() != "guided")
                     {
                         log.Info("FlightData: resume cancel");
+                        resume_flag = 1;
                         return;
                     }
                 }
@@ -5381,11 +5401,19 @@ namespace MissionPlanner.GCSViews
                     if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
                     {
                         // re-set guided WP
-                        MainV2.comPort.setGuidedModeWP(gotohere, true, true);
+                        if (MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString() == "0")
+                        {
+                            MainV2.comPort.setGuidedModeWP(gotohere, true, false);
+                        }
+                        else
+                        {
+                            MainV2.comPort.setGuidedModeWP(gotohere, true, true);
+                        }
                     }
                     else
                     {
                         log.Info("FlightData: resume cancel");
+                        resume_flag = 1;
                         return;
                     }
                     await Task.Delay(1000);
@@ -5396,6 +5424,7 @@ namespace MissionPlanner.GCSViews
                     if (timeout > 20)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        resume_flag = 1;
                         return;
                     }
                 } while (MainV2.comPort.MAV.cs.wp_dist == 0);
@@ -5412,6 +5441,7 @@ namespace MissionPlanner.GCSViews
                     if (timeout > 120)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        resume_flag = 1;
                         return;
                     }
                 }
@@ -5456,6 +5486,7 @@ namespace MissionPlanner.GCSViews
                     else
                     {
                         log.Info("FlightData: resume cancel");
+                        resume_flag = 1;
                         return;
                     }
                     await Task.Delay(500);
@@ -5465,6 +5496,7 @@ namespace MissionPlanner.GCSViews
                     if (timeout > 60)
                     {
                         CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        resume_flag = 1;
                         return;
                     }
                 }
@@ -5492,6 +5524,7 @@ namespace MissionPlanner.GCSViews
             {
                 CustomMessageBox.Show(Strings.CommandFailed + "\n" + ex.ToString(), Strings.ERROR);
             }
+            resume_flag = 3;
         }
 
         private void ButtonResumeClear_Click(object sender, EventArgs e)
