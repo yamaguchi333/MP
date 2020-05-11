@@ -1157,8 +1157,17 @@ namespace MissionPlanner.GCSViews
                             if (curwpno > firstwpno && curwpno <= endwpno)
                             {
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
+                                string rngfnd_type = "0";
+                                try
+                                {
+                                    rngfnd_type = MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString();
+                                }
+                                catch (Exception)
+                                {
+                                    rngfnd_type = MainV2.comPort.MAV.param["RNGFND_TYPE"].ToString();
+                                }
                                 float alt;
-                                if (MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString() == "0")
+                                if (rngfnd_type == "0")
                                 {
                                     alt = MainV2.comPort.MAV.cs.alt;
                                 }
@@ -5223,6 +5232,15 @@ namespace MissionPlanner.GCSViews
                 int impeller_no = Settings.Instance.GetInt32("impeller_no");
                 int impeller_pwm_on = Settings.Instance.GetInt32("impeller_pwm_on");
                 int impeller_pwm_off = Settings.Instance.GetInt32("impeller_pwm_off");
+                string rngfnd_type = "0";
+                try
+                {
+                    rngfnd_type = MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString();
+                }
+                catch (Exception)
+                {
+                    rngfnd_type = MainV2.comPort.MAV.param["RNGFND_TYPE"].ToString();
+                }
 
                 // get our target wp
                 var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
@@ -5330,7 +5348,7 @@ namespace MissionPlanner.GCSViews
                         Application.DoEvents();
                     }
                     //log.Info("FlightData Takeoff timeout: " + timeout);
-                    if (MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString() == "0")
+                    if (rngfnd_type == "0")
                     {
                         alt = MainV2.comPort.MAV.cs.alt;
                     }
@@ -5401,7 +5419,7 @@ namespace MissionPlanner.GCSViews
                     if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
                     {
                         // re-set guided WP
-                        if (MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString() == "0")
+                        if (rngfnd_type == "0")
                         {
                             MainV2.comPort.setGuidedModeWP(gotohere, true, false);
                         }
