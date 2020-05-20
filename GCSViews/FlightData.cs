@@ -5227,7 +5227,6 @@ namespace MissionPlanner.GCSViews
 
                 // get parameters
                 int grid_type = Settings.Instance.GetInt32("grid_type");
-                float grid_alt = Settings.Instance.GetFloat("grid_alt");
                 bool use_impeller = Settings.Instance.GetBoolean("use_impeller");
                 int impeller_no = Settings.Instance.GetInt32("impeller_no");
                 int impeller_pwm_on = Settings.Instance.GetInt32("impeller_pwm_on");
@@ -5265,9 +5264,10 @@ namespace MissionPlanner.GCSViews
                 }
 #endif
                 //Guidedモード直後にWP表示を正しく表示させるため
+                int takeoffwpno = cmds.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.TAKEOFF));
                 Locationwp gotohere = new Locationwp();
                 gotohere.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
-                gotohere.alt = grid_alt;
+                gotohere.alt = cmds[takeoffwpno].alt;
                 gotohere.lat = resume_pos.Lat;
                 gotohere.lng = resume_pos.Lng;
                 MainV2.comPort.setGuidedModeWP(gotohere);
