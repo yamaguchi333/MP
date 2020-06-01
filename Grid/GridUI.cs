@@ -1983,12 +1983,12 @@ namespace MissionPlanner.Grid
                                         }
                                         else if (plla.Tag == "ME")
                                         {
-                                            AddWP(plla.Lng, plla.Lat, plla.Alt);
-
                                             if (i >= grid.Count() - 2)
                                             {
                                                 addwp_lasttime = true;
                                             }
+
+                                            AddWP(plla.Lng, plla.Lat, plla.Alt);
 
                                             if (grid_type == 3 || grid_type == 4)
                                             {
