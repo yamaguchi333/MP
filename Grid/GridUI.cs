@@ -86,6 +86,9 @@ namespace MissionPlanner.Grid
         // @eams add for grid end turn
         bool grid_endturn = false;
 
+        // @eams add for camera easy mode
+        bool grid_camera_easy_mode = false;
+
         // GridUI
         public GridUI(GridPlugin plugin)
         {
@@ -158,7 +161,7 @@ namespace MissionPlanner.Grid
                 kmlpolygonsoverlay.Routes.Add(new GMapRoute(temp.Points, ""));
             }
 
-            xmlcamera(false, Settings.GetRunningDirectory() + "camerasBuiltin.xml");
+            //xmlcamera(false, Settings.GetRunningDirectory() + "camerasBuiltin.xml");  // @eams disabled
 
             xmlcamera(false, Settings.GetUserDataDirectory() + "cameras.xml");
 
@@ -214,6 +217,10 @@ namespace MissionPlanner.Grid
             if (plugin.Host.config["overlay_mesh"] != null)
                 mesh_type = int.Parse(plugin.Host.config["overlay_mesh"]);
 
+            // @eams add / ndvi mesh
+            if (plugin.Host.config["grid_camera_easy_mode"] != null)
+                grid_camera_easy_mode = bool.Parse(plugin.Host.config["grid_camera_easy_mode"]);
+
             // @eams add
             if (mesh_type > 0)
             {
@@ -221,12 +228,34 @@ namespace MissionPlanner.Grid
             }
 
             // @eams add
-            if (grid_type == 5)
+            if (grid_type <= 5)
             {
-                labelLineOffset.Enabled = false;
-                TXT_offset.Enabled = false;
-                BUT_offsetplus.Enabled = false;
-                BUT_offsetminus.Enabled = false;
+                panel1.Visible = false;
+                panel3.Visible = false;
+                panel5.Visible = false;
+                if (grid_type == 5)
+                {
+                    panel7.Visible = false;
+                }
+
+                panelMode6.Visible = false;
+                panelMode6Easy.Visible = false;
+            }
+            else if (grid_type == 6)
+            {
+                if (grid_camera_easy_mode)
+                {
+                    panel2.Visible = false;
+                    panelMode6Easy.Location = panelMode6.Location;
+                    panelMode6.Visible = false;
+                }
+                else
+                {
+                    panel3.Visible = false;
+                    panelMode6Easy.Visible = false;
+                }
+                panel4.Visible = false;
+                panel7.Visible = false;
             }
         }
 
@@ -251,6 +280,16 @@ namespace MissionPlanner.Grid
 
             first_validate = true;
             domainUpDown1_ValueChanged(this, null);
+
+            // @eams add for mode6 easy
+            if (grid_type == 6 && grid_camera_easy_mode)
+            {
+                NUM_altitude.ValueChanged -= domainUpDown1_ValueChanged;
+                NUM_UpDownFlySpeed.ValueChanged -= domainUpDown1_ValueChanged;
+                TXT_GrandRes.Text= TXT_cmpixel.Text.TrimEnd(new[] { 'c', 'm', ' ' });
+                double flyspeedms = CurrentState.fromSpeedDisplayUnit((double)NUM_UpDownFlySpeed.Value);
+                TXT_PhotoEvery.Text = ((double)NUM_spacing.Value / flyspeedms).ToString("F1");
+            }
 
             // @eams add
             int wpcount = plugin.Host.WPCount();
@@ -348,7 +387,9 @@ namespace MissionPlanner.Grid
             //CMB_startfrom.Text = griddata.startfrom;
             CMB_startfrom.SelectedIndex = (int)(Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), griddata.startfrom);
             num_overlap.Value = griddata.overlap;
+            TXT_Overlap.Text = Decimal.Round(num_overlap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
             num_sidelap.Value = griddata.sidelap;
+            TXT_Sidelap.Text = Decimal.Round(num_sidelap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
             NUM_spacing.Value = griddata.spacing;
             chk_crossgrid.Checked = griddata.crossgrid;
 
@@ -464,7 +505,9 @@ namespace MissionPlanner.Grid
                 loadsetting("grid_startfrom", CMB_startfrom);
 #endif
                 loadsetting("grid_overlap", num_overlap);
+                TXT_Overlap.Text = Decimal.Round(num_overlap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
                 loadsetting("grid_sidelap", num_sidelap);
+                TXT_Sidelap.Text = Decimal.Round(num_sidelap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
                 loadsetting("grid_spacing", NUM_spacing);
                 loadsetting("grid_crossgrid", chk_crossgrid);
 
@@ -735,6 +778,7 @@ namespace MissionPlanner.Grid
                 {
                     case 2:
                     case 5:
+                    case 6:
                         grid = Utilities.Grid.CreateGrid2(list, CurrentState.fromDistDisplayUnit((double)NUM_altitude.Value),
                             (double)NUM_Distance.Value, (double)NUM_spacing.Value, ref angle,
                             (double)NUM_overshoot.Value, (double)NUM_overshoot2.Value,
@@ -999,7 +1043,8 @@ namespace MissionPlanner.Grid
                 lbl_footprint.Text = TXT_fovH.Text + " x " + TXT_fovV.Text + " m";
                 lbl_turnrad.Text = (turnrad * 2).ToString("0") + " m";
                 lbl_gndelev.Text = mingroundelevation.ToString("0") + "-" + maxgroundelevation.ToString("0") + " m";
-
+                lbl_alt.Text = NUM_altitude.Value.ToString("0.#") + " m";
+                lbl_speed.Text = NUM_UpDownFlySpeed.Value.ToString("0.#") + " m/s";
             }
 
             try
@@ -1281,15 +1326,34 @@ namespace MissionPlanner.Grid
                 if (CHK_camdirection.Checked)
                 {
                     NUM_spacing.Value = (decimal)((1 - (overlap / 100.0f)) * viewheight);
-                    //                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewwidth);     // @eams diabled
+                    if (grid_type == 6)
+                    {
+                        NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewwidth);
+                    }
                 }
                 else
                 {
                     NUM_spacing.Value = (decimal)((1 - (overlap / 100.0f)) * viewwidth);
-                    //                    NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewheight);    // @eams disabled
+                    if (grid_type == 6)
+                    {
+                        NUM_Distance.Value = (decimal)((1 - (sidelap / 100.0f)) * viewheight);
+                    }
                 }
                 NUM_spacing.ValueChanged += domainUpDown1_ValueChanged;
                 NUM_Distance.ValueChanged += domainUpDown1_ValueChanged;
+
+                // @eams add
+                if (grid_type == 6 && grid_camera_easy_mode)
+                {
+                    TXT_GrandRes.TextChanged -= TXT_GrandRes_TextChanged;
+                    var res = double.Parse(TXT_cmpixel.Text.TrimEnd(new[] { 'c', 'm', ' ' }));
+                    TXT_GrandRes.Text = res.ToString("F1");
+                    TXT_GrandRes.TextChanged += TXT_GrandRes_TextChanged;
+                    TXT_PhotoEvery.TextChanged -= TXT_PhotoEvery_TextChanged;
+                    double flyspeedms = CurrentState.fromSpeedDisplayUnit((double)NUM_UpDownFlySpeed.Value);
+                    TXT_PhotoEvery.Text = ((double)NUM_spacing.Value / flyspeedms).ToString("F1");
+                    TXT_PhotoEvery.TextChanged += TXT_PhotoEvery_TextChanged;
+                }
             }
             catch { return; }
         }
@@ -1843,7 +1907,7 @@ namespace MissionPlanner.Grid
                     if (CHK_usespeed.Checked)
                     {
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0,
-                        (double)((float)NUM_UpDownFlySpeed.Value / CurrentState.multiplierspeed), 0, 0, 0, 0, 0,
+                        (double)(NUM_UpDownFlySpeed.Value / (Decimal)CurrentState.multiplierspeed), 0, 0, 0, 0, 0,
                             gridobject);
                     }
 
@@ -2267,46 +2331,52 @@ namespace MissionPlanner.Grid
         }
 
         // @eams add / below functions
+        private void BUT_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BUT_zoomIn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                map.Zoom += 0.5;
+                //TRK_zoom.Value += (float)0.5;
 #if false
-        private void BUT_angleplus_Click(object sender, EventArgs e)
-        {
-            int previous = (int)NUM_angle.Value;
-
-            if (previous + 1 > 359)
-            {
-//                TXT_headinghold.Text = (previous - 359).ToString();
-                TXT_angle.Text = (previous - 359).ToString();
-                NUM_angle.Value = (previous - 359);
-            }
-            else
-            {
-//                TXT_headinghold.Text = (previous + 1).ToString();
-                TXT_angle.Text = (previous + 1).ToString();
-                NUM_angle.Value = (previous + 1);
-            }
-        }
-
-        private void BUT_angleminus_Click(object sender, EventArgs e)
-        {
-            int previous = (int)NUM_angle.Value;
-
-            if (previous - 1 < 0)
-            {
-//                TXT_headinghold.Text = (previous + 359).ToString();
-                TXT_angle.Text = (previous + 359).ToString();
-                NUM_angle.Value = (previous + 359);
-            }
-            else
-            {
-//                TXT_headinghold.Text = (previous - 1).ToString();
-                TXT_angle.Text = (previous - 1).ToString();
-                NUM_angle.Value = (previous - 1);
-            }
-        }
+                if (TRK_zoom.Maximum < TRK_zoom.Value)
+                {
+                    TRK_zoom.Value = TRK_zoom.Maximum;
+                }
 #endif
+            }
+            catch
+            {
+            }
+        }
+
+        private void BUT_zoomOut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                map.Zoom -= 0.5;
+                //TRK_zoom.Value -= (float)0.5;
+#if false
+                if (TRK_zoom.Maximum < TRK_zoom.Value)
+                {
+                    TRK_zoom.Value = TRK_zoom.Maximum;
+                }
+#endif
+            }
+            catch
+            {
+            }
+        }
+
         private double incrementValue = 0;
         private static int def_interval = 800;
         TextBox target = null;
+        private double MaximumValue = 9999;
+        private double MinimumValue = 0;
 
         public double CurrentValue
         {
@@ -2332,9 +2402,13 @@ namespace MissionPlanner.Grid
                 }
                 else
                 {
-                    if (value < 0.0)
+                    if (value > MaximumValue)
                     {
-                        value = 0.0;
+                        value = MaximumValue;
+                    }
+                    if (value < MinimumValue)
+                    {
+                        value = MinimumValue;
                     }
                     target.Text = value.ToString("f1");
 #if false
@@ -2385,6 +2459,13 @@ namespace MissionPlanner.Grid
 
         }
 
+        private void BUT_MouseUp(object sender, MouseEventArgs e)
+        {
+            incrementValue = 0;
+            target = null;
+        }
+
+        #region ライン角度
         private void BUT_angle_Down(object sender, MouseEventArgs e)
         {
             target = TXT_angle;
@@ -2394,200 +2475,251 @@ namespace MissionPlanner.Grid
             timer1.Start();
         }
 
-        private void BUT_angle_Up(object sender, MouseEventArgs e)
+        private void TXT_angle_TextChanged(object sender, EventArgs e)
         {
-            incrementValue = 0;
-            target = null;
-        }
-
-        private void BUT_Close_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void BUT_zoomIn_Click(object sender, EventArgs e)
-        {
-            try
+            decimal d = NUM_angle.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_angle.Text))
             {
-                map.Zoom += 0.5;
-                //                TRK_zoom.Value += (float)0.5;
-#if false
-                if (TRK_zoom.Maximum < TRK_zoom.Value)
+                if (decimal.TryParse(TXT_angle.Text, out d))
                 {
-                    TRK_zoom.Value = TRK_zoom.Maximum;
+                    if (d > NUM_angle.Maximum)
+                    {
+                        d = NUM_angle.Maximum;
+                    }
+                    if (d < NUM_angle.Minimum)
+                    {
+                        d = NUM_angle.Minimum;
+                    }
                 }
-#endif
             }
-            catch
-            {
-            }
+            NUM_angle.Value = d;
+            TXT_angle.Text = d.ToString();
         }
+        #endregion
 
-        private void BUT_zoomOut_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                map.Zoom -= 0.5;
-                //                TRK_zoom.Value -= (float)0.5;
-#if false
-                if (TRK_zoom.Maximum < TRK_zoom.Value)
-                {
-                    TRK_zoom.Value = TRK_zoom.Maximum;
-                }
-#endif
-            }
-            catch
-            {
-            }
-        }
-#if false
-        private void BUT_offsetplus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_offset.Text, out value);
-            value += 0.1;
-            TXT_offset.Text = value.ToString();
-    }
-
-    private void BUT_offsetminus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_offset.Text, out value);
-            value -= 0.1;
-            if (value < 0.0)
-            {
-                value = 0.0;
-            }
-            TXT_offset.Text = value.ToString();
-        }
-#endif
-
+        #region ラインオフセット
         private void BUT_offset_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_offset;
+            MaximumValue = 999;
+            MinimumValue = 0;
             CurrentValue += (sender == BUT_offsetplus) ? 0.1 : -0.1;
             timer1.Interval = def_interval;
             incrementValue = (sender == BUT_offsetplus) ? 0.1 : -0.1;
             timer1.Start();
         }
 
-        private void BUT_offset_MouseUp(object sender, MouseEventArgs e)
+        private void TXT_offset_TextChanged(object sender, EventArgs e)
         {
-            incrementValue = 0;
-            target = null;
-        }
-#if false
-        private void BUT_altplus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_altitude.Text, out value);
-            value += 0.1;
-            TXT_altitude.Text = value.ToString("f1");
-            NUM_altitude.Value = (Decimal)value;
-        }
-
-        private void BUT_altminus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_altitude.Text, out value);
-            value -= 0.1;
-            if (value < 0)
+            decimal d = 0;
+            if (!String.IsNullOrWhiteSpace(TXT_offset.Text))
             {
-                value = 0;
+                if (decimal.TryParse(TXT_offset.Text, out d))
+                {
+                    if (d > 999)
+                    {
+                        d = 999;
+                    }
+                    if (d < 0)
+                    {
+                        d = 0;
+                    }
+                }
             }
-            TXT_altitude.Text = value.ToString("f1");
-            NUM_altitude.Value = (Decimal)value;
+            TXT_offset.Text = d.ToString("f1");
+            domainUpDown1_ValueChanged(sender, e);
         }
-#endif
+        #endregion
+
+        #region 飛行高度
         private void BUT_alt_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_altitude;
+            MaximumValue = (double)NUM_altitude.Maximum;
+            MinimumValue = (double)NUM_altitude.Minimum;
             CurrentValue += (sender == BUT_altplus) ? 1 : -1;
             timer1.Interval = def_interval;
             incrementValue = (sender == BUT_altplus) ? 1 : -1;
             timer1.Start();
         }
 
-        private void BUT_alt_MouseUp(object sender, MouseEventArgs e)
+        private void TXT_altitude_TextChanged(object sender, EventArgs e)
         {
-            incrementValue = 0;
-            target = null;
-        }
-#if false
-        private void BUT_speedplus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_FlySpeed.Text, out value);
-            value += 0.1;
-            TXT_FlySpeed.Text = value.ToString();
-            NUM_UpDownFlySpeed.Value = (Decimal)value;
-        }
-
-        private void BUT_speedminus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_FlySpeed.Text, out value);
-            value -= 0.1;
-            if (value < 0.0)
+            decimal d = NUM_altitude.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_altitude.Text))
             {
-                value = 0.0;
+                if (decimal.TryParse(TXT_altitude.Text, out d))
+                {
+                    if (d > NUM_altitude.Maximum)
+                    {
+                        d = NUM_altitude.Maximum;
+                    }
+                    if (d < NUM_altitude.Minimum)
+                    {
+                        d = NUM_altitude.Minimum;
+                    }
+                }
             }
-            TXT_FlySpeed.Text = value.ToString();
-            NUM_UpDownFlySpeed.Value = (Decimal)value;
+            NUM_altitude.Value = d;
+            TXT_altitude.Text = d.ToString("f1");
         }
-#endif
+        #endregion
+
+        #region 飛行速度
         private void BUT_speed_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_FlySpeed;
+            MaximumValue = (double)NUM_UpDownFlySpeed.Maximum;
+            MinimumValue = (double)NUM_UpDownFlySpeed.Minimum;
             CurrentValue += (sender == BUT_speedplus) ? 0.1 : -0.1;
             timer1.Interval = def_interval;
             incrementValue = (sender == BUT_speedplus) ? 0.1 : -0.1;
             timer1.Start();
         }
 
-        private void BUT_speed_MouseUp(object sender, MouseEventArgs e)
+        private void TXT_FlySpeed_TextChanged(object sender, EventArgs e)
         {
-            incrementValue = 0;
-            target = null;
-        }
-#if false
-        private void BUT_distplus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_Distance.Text, out value);
-            value += 0.1;
-            TXT_Distance.Text = value.ToString();
-            NUM_Distance.Value = (Decimal)value;
-        }
-
-        private void BUT_distminus_Click(object sender, EventArgs e)
-        {
-            double value;
-            double.TryParse(TXT_Distance.Text, out value);
-            value -= 0.1;
-            if (value < 0.0)
+            decimal d = NUM_UpDownFlySpeed.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_FlySpeed.Text))
             {
-                value = 0.0;
+                if (decimal.TryParse(TXT_FlySpeed.Text, out d))
+                {
+                    if (d > NUM_UpDownFlySpeed.Maximum)
+                    {
+                        d = NUM_UpDownFlySpeed.Maximum;
+                    }
+                    if (d < NUM_UpDownFlySpeed.Minimum)
+                    {
+                        d = NUM_UpDownFlySpeed.Minimum;
+                    }
+                }
             }
-            TXT_Distance.Text = value.ToString();
-            NUM_Distance.Value = (Decimal)value;
+            NUM_UpDownFlySpeed.Value = d;
+            TXT_FlySpeed.Text = d.ToString("f1");
         }
-#endif
+        #endregion
+
+        #region ライン間距離
         private void BUT_dist_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_Distance;
+            MaximumValue = (double)NUM_Distance.Maximum;
+            MinimumValue = (double)NUM_Distance.Minimum;
             CurrentValue += (sender == BUT_distplus) ? 0.1 : -0.1;
             timer1.Interval = def_interval;
             incrementValue = (sender == BUT_distplus) ? 0.1 : -0.1;
             timer1.Start();
         }
 
-        private void BUT_dist_MouseUp(object sender, MouseEventArgs e)
+        private void TXT_Distance_TextChanged(object sender, EventArgs e)
         {
-            incrementValue = 0;
-            target = null;
+            decimal d = NUM_Distance.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_Distance.Text))
+            {
+                if (decimal.TryParse(TXT_Distance.Text, out d))
+                {
+                    if (d > NUM_Distance.Maximum)
+                    {
+                        d = NUM_Distance.Maximum;
+                    }
+                    if (d < NUM_Distance.Minimum)
+                    {
+                        d = NUM_Distance.Minimum;
+                    }
+                }
+            }
+            NUM_Distance.Value = d;
+            TXT_Distance.Text = d.ToString("f1");
+        }
+        #endregion
+
+        #region 機体前方角度
+        private void TXT_headinghold_TextChanged(object sender, EventArgs e)
+        {
+            decimal d = NUM_angle.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_headinghold.Text))
+            {
+                if (decimal.TryParse(TXT_headinghold.Text, out d))
+                {
+                    if (d >= NUM_angle.Minimum && d <= NUM_angle.Maximum)
+                    {
+                        return;
+                    }
+                }
+            }
+            TXT_headinghold.Text = d.ToString();
+        }
+        #endregion
+
+        #region オーバーラップ
+        private void BUT_overlap_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_Overlap;
+            MaximumValue = (double)num_overlap.Maximum;
+            MinimumValue = (double)num_overlap.Minimum;
+            CurrentValue += (sender == BUT_overlapplus) ? 1 : -1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_overlapplus) ? 1 : -1;
+            timer1.Start();
         }
 
+        private void TXT_Overlap_TextChanged(object sender, EventArgs e)
+        {
+            decimal d = num_overlap.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_Overlap.Text))
+            {
+                if (decimal.TryParse(TXT_Overlap.Text, out d))
+                {
+                    if (d > num_overlap.Maximum)
+                    {
+                        d = num_overlap.Maximum;
+                    }
+                    if (d < num_overlap.Minimum)
+                    {
+                        d = num_overlap.Minimum;
+                    }
+                }
+            }
+            num_overlap.Value = d;
+            TXT_Overlap.Text = d.ToString("f1");
+        }
+        #endregion
+
+        #region サイドラップ
+        private void BUT_sidelap_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_Sidelap;
+            MaximumValue = (double)num_sidelap.Maximum;
+            MinimumValue = (double)num_sidelap.Minimum;
+            CurrentValue += (sender == BUT_sidelapplus) ? 1 : -1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_sidelapplus) ? 1 : -1;
+            timer1.Start();
+        }
+
+        private void TXT_Sidelap_TextChanged(object sender, EventArgs e)
+        {
+            decimal d = num_sidelap.Minimum;
+            if (!String.IsNullOrWhiteSpace(TXT_Sidelap.Text))
+            {
+                if (decimal.TryParse(TXT_Sidelap.Text, out d))
+                {
+                    if (d > num_sidelap.Maximum)
+                    {
+                        d = num_sidelap.Maximum;
+                    }
+                    if (d < num_sidelap.Minimum)
+                    {
+                        d = num_sidelap.Minimum;
+                    }
+                }
+            }
+            num_sidelap.Value = d;
+            TXT_Sidelap.Text = d.ToString("f1");
+        }
+        #endregion
+
+        #region グリッド位置調整
         private void grid_shift(int angle)
         {
             List<PointLatLngAlt> newgrid = new List<PointLatLngAlt>();
@@ -2622,80 +2754,113 @@ namespace MissionPlanner.Grid
         {
             grid_shift(270);
         }
+        #endregion
 
-        private void TXT_altitude_TextChanged(object sender, EventArgs e)
+        #region 地上分解能
+        private void BUT_grandres_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(TXT_altitude.Text))
-            {
-                decimal d;
-                if (decimal.TryParse(TXT_altitude.Text, out d))
-                {
-                    NUM_altitude.Value = d;
-                    return;
-                }
-            }
-            TXT_altitude.Text = "1.0";
+            target = TXT_GrandRes;
+            MaximumValue = 999;
+            MinimumValue = 0.1;
+            CurrentValue += (sender == BUT_grandresplus) ? 0.1 : -0.1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_grandresplus) ? 0.1 : -0.1;
+            timer1.Start();
         }
 
-        private void TXT_FlySpeed_TextChanged(object sender, EventArgs e)
+        private void TXT_GrandRes_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(TXT_FlySpeed.Text))
+            if (first_validate)
             {
-                decimal d;
-                if (decimal.TryParse(TXT_FlySpeed.Text, out d))
-                {
-                    NUM_UpDownFlySpeed.Value = d;
-                    return;
-                }
+                return;
             }
-            TXT_FlySpeed.Text = "0.0";
-        }
-
-        private void TXT_Distance_TextChanged(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrWhiteSpace(TXT_Distance.Text))
+            decimal d = 0;
+            if (!String.IsNullOrWhiteSpace(TXT_GrandRes.Text))
             {
-                decimal d;
-                if (decimal.TryParse(TXT_Distance.Text, out d))
+                if (decimal.TryParse(TXT_GrandRes.Text, out d))
                 {
-                    NUM_Distance.Value = d;
-                    return;
-                }
-            }
-            TXT_Distance.Text = "0.3";
-        }
-
-        private void TXT_angle_TextChanged(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrWhiteSpace(TXT_angle.Text))
-            {
-                decimal d;
-                if (decimal.TryParse(TXT_angle.Text, out d))
-                {
-                    if (d >= NUM_angle.Minimum && d<= NUM_angle.Maximum)
+                    if (d > 999)
                     {
-                        NUM_angle.Value = d;
-                        return;
+                        d = 999;
+                    }
+                    if (d < 0)
+                    {
+                        d = 0;
                     }
                 }
             }
-            TXT_angle.Text = "0";
+            //TXT_GrandRes.Text = d.ToString("f1");
+            NUM_altitude.Value = ResToAlt(d);
+            if (grid_camera_easy_mode)
+            {
+                domainUpDown1_ValueChanged(this, null);
+            }
         }
 
-        private void TXT_headinghold_TextChanged(object sender, EventArgs e)
+        private Decimal ResToAlt(Decimal value)
         {
-            if (!String.IsNullOrWhiteSpace(TXT_headinghold.Text))
+            //地上分解能から飛行高度を演算
+            //逆演算ロジック
+            //fovv(m) = (cmpix(cm/pix) * imageheight(pix)) / 100
+            //flscale = (fovv(m) * 1000) / sensorheight(mm)
+            //flyalt(m) = flscale * (focallen(mm) / 1000)
+            int imageheight = int.Parse(TXT_imgheight.Text);
+            Decimal sensorheight = Decimal.Parse(TXT_sensheight.Text);
+            Decimal focallen = NUM_focallength.Value;
+
+            Decimal fovv = (value * imageheight) / 100;
+            Decimal flscale = (fovv * 1000) / sensorheight;
+            Decimal flyalt = flscale * (focallen / 1000);
+            return flyalt;
+        }
+
+        #endregion
+
+        #region シャッター間隔
+        private void BUT_photoevery_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_PhotoEvery;
+            MaximumValue = 100;
+            MinimumValue = 0.1;
+            CurrentValue += (sender == BUT_photoeveryplus) ? 1 : -1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_photoeveryplus) ? 1 : -1;
+            timer1.Start();
+        }
+
+        private void TXT_PhotoEvery_TextChanged(object sender, EventArgs e)
+        {
+            if (first_validate)
             {
-                decimal d;
-                if (decimal.TryParse(TXT_headinghold.Text, out d))
+                return;
+            }
+            decimal d = 0;
+            if (!String.IsNullOrWhiteSpace(TXT_PhotoEvery.Text))
+            {
+                if (decimal.TryParse(TXT_PhotoEvery.Text, out d))
                 {
-                    if (d >= NUM_angle.Minimum && d <= NUM_angle.Maximum)
+                    if (d > 100)
                     {
-                        return;
+                        d = 100;
+                    }
+                    if (d < (Decimal)0.1)
+                    {
+                        d = (Decimal)0.1;
                     }
                 }
             }
-            TXT_headinghold.Text = "0";
+            //TXT_PhotoEvery.Text = d.ToString("f1");
+            //シャッター間隔から飛行速度を演算
+                //逆演算ロジック
+                //flyspeedms(m/s) = NUM_spacing.Value(m) / photoevery(sec)
+
+            Decimal flyspeed = NUM_spacing.Value / d;
+            NUM_UpDownFlySpeed.Value = flyspeed;
+            if (grid_camera_easy_mode)
+            {
+                domainUpDown1_ValueChanged(this, null);
+            }
         }
+        #endregion
     }
 }
