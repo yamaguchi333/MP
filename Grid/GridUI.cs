@@ -387,9 +387,9 @@ namespace MissionPlanner.Grid
             //CMB_startfrom.Text = griddata.startfrom;
             CMB_startfrom.SelectedIndex = (int)(Utilities.Grid.StartPosition)Enum.Parse(typeof(Utilities.Grid.StartPosition), griddata.startfrom);
             num_overlap.Value = griddata.overlap;
-            TXT_Overlap.Text = Decimal.Round(num_overlap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
+            TXT_Overlap.Text = Decimal.Round(num_overlap.Value, 1, MidpointRounding.AwayFromZero).ToString("f0");   //@eams add
             num_sidelap.Value = griddata.sidelap;
-            TXT_Sidelap.Text = Decimal.Round(num_sidelap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
+            TXT_Sidelap.Text = Decimal.Round(num_sidelap.Value, 1, MidpointRounding.AwayFromZero).ToString("f0");   //@eams add
             NUM_spacing.Value = griddata.spacing;
             chk_crossgrid.Checked = griddata.crossgrid;
 
@@ -505,9 +505,9 @@ namespace MissionPlanner.Grid
                 loadsetting("grid_startfrom", CMB_startfrom);
 #endif
                 loadsetting("grid_overlap", num_overlap);
-                TXT_Overlap.Text = Decimal.Round(num_overlap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
+                TXT_Overlap.Text = Decimal.Round(num_overlap.Value, 1, MidpointRounding.AwayFromZero).ToString("f0");   //@eams add
                 loadsetting("grid_sidelap", num_sidelap);
-                TXT_Sidelap.Text = Decimal.Round(num_sidelap.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
+                TXT_Sidelap.Text = Decimal.Round(num_sidelap.Value, 1, MidpointRounding.AwayFromZero).ToString("f0");   //@eams add
                 loadsetting("grid_spacing", NUM_spacing);
                 loadsetting("grid_crossgrid", chk_crossgrid);
 
@@ -2681,7 +2681,7 @@ namespace MissionPlanner.Grid
                 }
             }
             num_overlap.Value = d;
-            TXT_Overlap.Text = d.ToString("f1");
+            TXT_Overlap.Text = d.ToString("f0");
         }
         #endregion
 
@@ -2715,44 +2715,7 @@ namespace MissionPlanner.Grid
                 }
             }
             num_sidelap.Value = d;
-            TXT_Sidelap.Text = d.ToString("f1");
-        }
-        #endregion
-
-        #region グリッド位置調整
-        private void grid_shift(int angle)
-        {
-            List<PointLatLngAlt> newgrid = new List<PointLatLngAlt>();
-            foreach (var point in list)
-            {
-                newgrid.Add(point.newpos(angle, 0.5));
-            }
-            list.Clear();
-            foreach (var point in newgrid)
-            {
-                list.Add(point);
-            }
-            domainUpDown1_ValueChanged(BUT_shiftup, null);
-        }
-
-        private void BUT_shiftup_Click(object sender, EventArgs e)
-        {
-            grid_shift(0);
-        }
-
-        private void BUT_shiftright_Click(object sender, EventArgs e)
-        {
-            grid_shift(90);
-        }
-
-        private void BUT_shiftdown_Click(object sender, EventArgs e)
-        {
-            grid_shift(180);
-        }
-
-        private void BUT_shiftleft_Click(object sender, EventArgs e)
-        {
-            grid_shift(270);
+            TXT_Sidelap.Text = d.ToString("f0");
         }
         #endregion
 
@@ -2783,9 +2746,9 @@ namespace MissionPlanner.Grid
                     {
                         d = 999;
                     }
-                    if (d < 0)
+                    if (d < (decimal)0.1)
                     {
-                        d = 0;
+                        d = (decimal)0.1;
                     }
                 }
             }
@@ -2860,6 +2823,43 @@ namespace MissionPlanner.Grid
             {
                 domainUpDown1_ValueChanged(this, null);
             }
+        }
+        #endregion
+
+        #region グリッド位置調整
+        private void grid_shift(int angle)
+        {
+            List<PointLatLngAlt> newgrid = new List<PointLatLngAlt>();
+            foreach (var point in list)
+            {
+                newgrid.Add(point.newpos(angle, 0.5));
+            }
+            list.Clear();
+            foreach (var point in newgrid)
+            {
+                list.Add(point);
+            }
+            domainUpDown1_ValueChanged(BUT_shiftup, null);
+        }
+
+        private void BUT_shiftup_Click(object sender, EventArgs e)
+        {
+            grid_shift(0);
+        }
+
+        private void BUT_shiftright_Click(object sender, EventArgs e)
+        {
+            grid_shift(90);
+        }
+
+        private void BUT_shiftdown_Click(object sender, EventArgs e)
+        {
+            grid_shift(180);
+        }
+
+        private void BUT_shiftleft_Click(object sender, EventArgs e)
+        {
+            grid_shift(270);
         }
         #endregion
     }
