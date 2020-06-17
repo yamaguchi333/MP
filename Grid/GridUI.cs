@@ -2737,7 +2737,7 @@ namespace MissionPlanner.Grid
             {
                 return;
             }
-            decimal d = 0;
+            decimal d = (decimal)0.1;
             if (!String.IsNullOrWhiteSpace(TXT_GrandRes.Text))
             {
                 if (decimal.TryParse(TXT_GrandRes.Text, out d))
@@ -2797,7 +2797,7 @@ namespace MissionPlanner.Grid
             {
                 return;
             }
-            decimal d = 0;
+            decimal d = (decimal)0.1;
             if (!String.IsNullOrWhiteSpace(TXT_PhotoEvery.Text))
             {
                 if (decimal.TryParse(TXT_PhotoEvery.Text, out d))
@@ -2806,9 +2806,9 @@ namespace MissionPlanner.Grid
                     {
                         d = 100;
                     }
-                    if (d < (Decimal)0.1)
+                    if (d < (decimal)0.1)
                     {
-                        d = (Decimal)0.1;
+                        d = (decimal)0.1;
                     }
                 }
             }

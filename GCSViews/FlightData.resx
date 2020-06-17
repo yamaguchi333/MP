@@ -5746,7 +5746,7 @@
     <value>NoControl</value>
   </data>
   <data name="LabelTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>539, 12</value>
+    <value>579, 12</value>
   </data>
   <data name="LabelTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 16</value>
@@ -5782,7 +5782,7 @@
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 13</value>
+    <value>473, 13</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 15</value>
@@ -5980,7 +5980,7 @@
     <value>MS UI Gothic, 11.25pt</value>
   </data>
   <data name="Zoomlevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 39</value>
+    <value>361, 39</value>
   </data>
   <data name="Zoomlevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 22</value>
@@ -6016,7 +6016,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 40</value>
+    <value>319, 40</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 18</value>
@@ -6055,7 +6055,7 @@
     <value>NoControl</value>
   </data>
   <data name="CHK_autopan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 40</value>
+    <value>478, 40</value>
   </data>
   <data name="CHK_autopan.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 19</value>
@@ -6091,7 +6091,7 @@
     <value>NoControl</value>
   </data>
   <data name="CB_tuning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 40</value>
+    <value>394, 28</value>
   </data>
   <data name="CB_tuning.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 16</value>
