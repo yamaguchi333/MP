@@ -286,9 +286,9 @@ namespace MissionPlanner.Grid
             {
                 NUM_altitude.ValueChanged -= domainUpDown1_ValueChanged;
                 NUM_UpDownFlySpeed.ValueChanged -= domainUpDown1_ValueChanged;
-                TXT_GrandRes.Text= TXT_cmpixel.Text.TrimEnd(new[] { 'c', 'm', ' ' });
-                double flyspeedms = CurrentState.fromSpeedDisplayUnit((double)NUM_UpDownFlySpeed.Value);
-                TXT_PhotoEvery.Text = ((double)NUM_spacing.Value / flyspeedms).ToString("F1");
+                //TXT_GrandRes.Text= TXT_cmpixel.Text.TrimEnd(new[] { 'c', 'm', ' ' });
+                //double flyspeedms = CurrentState.fromSpeedDisplayUnit((double)NUM_UpDownFlySpeed.Value);
+                //TXT_PhotoEvery.Text = ((double)NUM_spacing.Value / flyspeedms).ToString("F1");
             }
 
             // @eams add
@@ -1583,6 +1583,13 @@ namespace MissionPlanner.Grid
             {
                 camerainfo camera = cameras[CMB_camera.Text];
 
+                // @eams add
+                NUM_focallength.ValueChanged -= NUM_ValueChanged;
+                TXT_sensheight.TextChanged -= TXT_TextChanged;
+                TXT_senswidth.TextChanged -= TXT_TextChanged;
+                TXT_imgheight.TextChanged -= TXT_TextChanged;
+                TXT_imgwidth.TextChanged -= TXT_TextChanged;
+
                 NUM_focallength.Value = (decimal)camera.focallen;
                 TXT_imgheight.Text = camera.imageheight.ToString();
                 TXT_imgwidth.Text = camera.imagewidth.ToString();
@@ -1590,6 +1597,13 @@ namespace MissionPlanner.Grid
                 TXT_senswidth.Text = camera.sensorwidth.ToString();
 
                 //NUM_Distance.Enabled = false;
+
+                // @eams add
+                NUM_focallength.ValueChanged += NUM_ValueChanged;
+                TXT_sensheight.TextChanged += TXT_TextChanged;
+                TXT_senswidth.TextChanged += TXT_TextChanged;
+                TXT_imgheight.TextChanged += TXT_TextChanged;
+                TXT_imgwidth.TextChanged += TXT_TextChanged;
             }
 
             GMapMarkerOverlap.Clear();
