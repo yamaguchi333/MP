@@ -86,6 +86,9 @@ namespace MissionPlanner.Grid
         // @eams add for grid end turn
         bool grid_endturn = false;
 
+        // @eams add for grid end pwm value
+        int grid_repeatservo_pwm_last = 0;
+
         // GridUI
         public GridUI(GridPlugin plugin)
         {
@@ -209,6 +212,10 @@ namespace MissionPlanner.Grid
             // @eams add for grid end turn
             if (plugin.Host.config["grid_endturn"] != null)
                 grid_endturn = bool.Parse(plugin.Host.config["grid_endturn"]);
+
+            // @eams add for grid end pwm value
+            if (plugin.Host.config["grid_repeatservo_pwm_last"] != null)
+                grid_repeatservo_pwm_last = int.Parse(plugin.Host.config["grid_repeatservo_pwm_last"]);
 
             // @eams add / ndvi mesh
             if (plugin.Host.config["overlay_mesh"] != null)
@@ -1063,6 +1070,13 @@ namespace MissionPlanner.Grid
                     {
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)grid_startup_delay2, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
+                    }
+                }
+                else if (grid_type == 3)
+                {
+                    if (addwp_firsttime)
+                    {
+                        plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, (float)grid_startup_delay2, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
                     }
                 }
             }
@@ -2002,10 +2016,21 @@ namespace MissionPlanner.Grid
                                                 {
                                                     time = (float)NUM_repttime.Value;
                                                 }
-                                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
+
+                                                if (grid_type == 3 && addwp_lasttime && grid_repeatservo_pwm_last != 0)
+                                                {
+                                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
+                                                    (float)NUM_reptservo.Value,
+                                                    (float)grid_repeatservo_pwm_last, 1, time, 0, 0, 0,
+                                                    gridobject);
+                                                }
+                                                else
+                                                {
+                                                    plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_REPEAT_SERVO,
                                                     (float)NUM_reptservo.Value,
                                                     (float)num_reptpwm.Value, 1, time, 0, 0, 0,
                                                     gridobject);
+                                                }
 
                                                 if ((grid_type == 3 && (addwp_lasttime || grid_endturn)) || grid_type == 4)
                                                 {

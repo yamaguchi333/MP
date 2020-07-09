@@ -4272,7 +4272,7 @@ namespace MissionPlanner.GCSViews
             txt_messagebox.ScrollToCaret();
         }
 
-        private void BUT_resumemis_Click(object sender, EventArgs e)
+        private async void BUT_resumemis_Click(object sender, EventArgs e)
         {
             if (
                 Common.MessageShowAgain("Resume Mission",
@@ -5277,6 +5277,12 @@ namespace MissionPlanner.GCSViews
                 bool ans = MainV2.comPort.doARM(true);
                 if (ans == false)
                     CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+
+                // arming post delay
+                int waittime = 0;
+                if (Settings.Instance["arm_post_delay"] != null)
+                    waittime = Settings.Instance.GetInt32("arm_post_delay");
+                await Task.Delay(waittime);
 #if false
                 // set Loiter mode for WPNAV_SPEED
                 MainV2.comPort.setMode("Loiter");

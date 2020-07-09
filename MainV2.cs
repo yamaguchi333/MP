@@ -4249,9 +4249,16 @@ namespace MissionPlanner
                 {
                     if (MainV2.instance.FlightData.resume_flag == 0)
                     {
+                        // arming
                         bool ans = MainV2.comPort.doARM(true);
                         if (ans == false)
                             CustomMessageBox.Show(Strings.ErrorRejectedByMAV, Strings.ERROR);
+
+                        // arming post delay
+                        int waittime = 0;
+                        if (Settings.Instance["arm_post_delay"] != null)
+                            waittime = Settings.Instance.GetInt32("arm_post_delay");
+                        await Task.Delay(waittime);
                     }
                 }
                 catch
