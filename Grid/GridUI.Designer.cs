@@ -173,10 +173,6 @@
             this.TXT_altitude = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BUT_photoeveryminus = new System.Windows.Forms.Button();
-            this.BUT_photoeveryplus = new System.Windows.Forms.Button();
-            this.TXT_PhotoEvery = new System.Windows.Forms.TextBox();
-            this.label57 = new System.Windows.Forms.Label();
             this.BUT_grandresminus = new System.Windows.Forms.Button();
             this.BUT_grandresplus = new System.Windows.Forms.Button();
             this.TXT_GrandRes = new System.Windows.Forms.TextBox();
@@ -228,6 +224,11 @@
             this.lbl_speed = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.lbl_alt = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.BUT_photoeveryminus = new System.Windows.Forms.Button();
+            this.BUT_photoeveryplus = new System.Windows.Forms.Button();
+            this.TXT_PhotoEvery = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -273,6 +274,7 @@
             this.panel8.SuspendLayout();
             this.panelMode6.SuspendLayout();
             this.panelMode6Easy.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -1411,6 +1413,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.panel9);
             this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Controls.Add(this.panel7);
             this.flowLayoutPanel1.Controls.Add(this.panel8);
@@ -1510,45 +1513,12 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.BUT_photoeveryminus);
-            this.panel3.Controls.Add(this.BUT_photoeveryplus);
-            this.panel3.Controls.Add(this.TXT_PhotoEvery);
-            this.panel3.Controls.Add(this.label57);
             this.panel3.Controls.Add(this.BUT_grandresminus);
             this.panel3.Controls.Add(this.BUT_grandresplus);
             this.panel3.Controls.Add(this.TXT_GrandRes);
             this.panel3.Controls.Add(this.label58);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
-            // 
-            // BUT_photoeveryminus
-            // 
-            resources.ApplyResources(this.BUT_photoeveryminus, "BUT_photoeveryminus");
-            this.BUT_photoeveryminus.Name = "BUT_photoeveryminus";
-            this.BUT_photoeveryminus.Tag = "custom";
-            this.BUT_photoeveryminus.UseVisualStyleBackColor = false;
-            this.BUT_photoeveryminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_photoevery_MouseDown);
-            this.BUT_photoeveryminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
-            // 
-            // BUT_photoeveryplus
-            // 
-            resources.ApplyResources(this.BUT_photoeveryplus, "BUT_photoeveryplus");
-            this.BUT_photoeveryplus.Name = "BUT_photoeveryplus";
-            this.BUT_photoeveryplus.Tag = "custom";
-            this.BUT_photoeveryplus.UseVisualStyleBackColor = false;
-            this.BUT_photoeveryplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_photoevery_MouseDown);
-            this.BUT_photoeveryplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
-            // 
-            // TXT_PhotoEvery
-            // 
-            resources.ApplyResources(this.TXT_PhotoEvery, "TXT_PhotoEvery");
-            this.TXT_PhotoEvery.Name = "TXT_PhotoEvery";
-            this.TXT_PhotoEvery.TextChanged += new System.EventHandler(this.TXT_PhotoEvery_TextChanged);
-            // 
-            // label57
-            // 
-            resources.ApplyResources(this.label57, "label57");
-            this.label57.Name = "label57";
             // 
             // BUT_grandresminus
             // 
@@ -1926,6 +1896,44 @@
             resources.ApplyResources(this.lbl_alt, "lbl_alt");
             this.lbl_alt.Name = "lbl_alt";
             // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.BUT_photoeveryminus);
+            this.panel9.Controls.Add(this.BUT_photoeveryplus);
+            this.panel9.Controls.Add(this.TXT_PhotoEvery);
+            this.panel9.Controls.Add(this.label57);
+            resources.ApplyResources(this.panel9, "panel9");
+            this.panel9.Name = "panel9";
+            // 
+            // BUT_photoeveryminus
+            // 
+            resources.ApplyResources(this.BUT_photoeveryminus, "BUT_photoeveryminus");
+            this.BUT_photoeveryminus.Name = "BUT_photoeveryminus";
+            this.BUT_photoeveryminus.Tag = "custom";
+            this.BUT_photoeveryminus.UseVisualStyleBackColor = false;
+            this.BUT_photoeveryminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_photoevery_MouseDown);
+            this.BUT_photoeveryminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_photoeveryplus
+            // 
+            resources.ApplyResources(this.BUT_photoeveryplus, "BUT_photoeveryplus");
+            this.BUT_photoeveryplus.Name = "BUT_photoeveryplus";
+            this.BUT_photoeveryplus.Tag = "custom";
+            this.BUT_photoeveryplus.UseVisualStyleBackColor = false;
+            this.BUT_photoeveryplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_photoevery_MouseDown);
+            this.BUT_photoeveryplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_PhotoEvery
+            // 
+            resources.ApplyResources(this.TXT_PhotoEvery, "TXT_PhotoEvery");
+            this.TXT_PhotoEvery.Name = "TXT_PhotoEvery";
+            this.TXT_PhotoEvery.TextChanged += new System.EventHandler(this.TXT_PhotoEvery_TextChanged);
+            // 
+            // label57
+            // 
+            resources.ApplyResources(this.label57, "label57");
+            this.label57.Name = "label57";
+            // 
             // GridUI
             // 
             resources.ApplyResources(this, "$this");
@@ -2018,6 +2026,8 @@
             this.panelMode6.PerformLayout();
             this.panelMode6Easy.ResumeLayout(false);
             this.panelMode6Easy.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2171,10 +2181,6 @@
         private System.Windows.Forms.Button BUT_altplus;
         private System.Windows.Forms.TextBox TXT_altitude;
         private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Button BUT_photoeveryminus;
-        private System.Windows.Forms.Button BUT_photoeveryplus;
-        private System.Windows.Forms.TextBox TXT_PhotoEvery;
-        private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Button BUT_grandresminus;
         private System.Windows.Forms.Button BUT_grandresplus;
         private System.Windows.Forms.TextBox TXT_GrandRes;
@@ -2223,5 +2229,10 @@
         private System.Windows.Forms.Label lbl_speed;
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label lbl_alt;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button BUT_photoeveryminus;
+        private System.Windows.Forms.Button BUT_photoeveryplus;
+        private System.Windows.Forms.TextBox TXT_PhotoEvery;
+        private System.Windows.Forms.Label label57;
     }
 }

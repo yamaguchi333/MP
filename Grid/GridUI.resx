@@ -784,7 +784,7 @@
     <value>19</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>920, 987</value>
+    <value>920, 1107</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 22</value>
@@ -823,7 +823,7 @@
     <value>NoControl</value>
   </data>
   <data name="lbl_area.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 986</value>
+    <value>96, 1106</value>
   </data>
   <data name="lbl_area.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 16</value>
@@ -3359,7 +3359,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 986</value>
+    <value>44, 1106</value>
   </data>
   <data name="label46.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -3395,7 +3395,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_Ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>796, 1004</value>
+    <value>796, 1124</value>
   </data>
   <data name="BUT_Ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 42</value>
@@ -3428,7 +3428,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_Close.Location" type="System.Drawing.Point, System.Drawing">
-    <value>888, 1004</value>
+    <value>888, 1124</value>
   </data>
   <data name="BUT_Close.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 42</value>
@@ -3461,7 +3461,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_zoomIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 992</value>
+    <value>610, 1112</value>
   </data>
   <data name="BUT_zoomIn.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 61</value>
@@ -3494,7 +3494,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="BUT_zoomOut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>699, 992</value>
+    <value>699, 1112</value>
   </data>
   <data name="BUT_zoomOut.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 61</value>
@@ -3527,7 +3527,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="lbl_distbetweenlines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 1040</value>
+    <value>96, 1160</value>
   </data>
   <data name="lbl_distbetweenlines.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 16</value>
@@ -3563,7 +3563,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label52.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 1040</value>
+    <value>9, 1160</value>
   </data>
   <data name="label52.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 16</value>
@@ -3599,7 +3599,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label53.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 1013</value>
+    <value>12, 1133</value>
   </data>
   <data name="label53.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 16</value>
@@ -3635,7 +3635,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="lbl_distance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 1013</value>
+    <value>96, 1133</value>
   </data>
   <data name="lbl_distance.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 16</value>
@@ -3671,7 +3671,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="label54.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 986</value>
+    <value>187, 1106</value>
   </data>
   <data name="label54.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 16</value>
@@ -3707,7 +3707,7 @@ Control-O to load form file</value>
     <value>NoControl</value>
   </data>
   <data name="lbl_flighttime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 986</value>
+    <value>271, 1106</value>
   </data>
   <data name="lbl_flighttime.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 16</value>
@@ -3743,7 +3743,7 @@ Control-O to load form file</value>
     <value>Vertical</value>
   </data>
   <data name="TRK_zoom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 982</value>
+    <value>45, 1102</value>
   </data>
   <data name="TRK_zoom.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -3767,7 +3767,7 @@ Control-O to load form file</value>
     <value>0, 0</value>
   </data>
   <data name="map.Size" type="System.Drawing.Size, System.Drawing">
-    <value>955, 976</value>
+    <value>955, 1096</value>
   </data>
   <data name="map.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4126,126 +4126,6 @@ Control-O to load form file</value>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="BUT_photoeveryminus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 18pt</value>
-  </data>
-  <data name="BUT_photoeveryminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="BUT_photoeveryminus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 94</value>
-  </data>
-  <data name="BUT_photoeveryminus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 35</value>
-  </data>
-  <data name="BUT_photoeveryminus.TabIndex" type="System.Int32, mscorlib">
-    <value>134</value>
-  </data>
-  <data name="BUT_photoeveryminus.Text" xml:space="preserve">
-    <value>-</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryminus.Name" xml:space="preserve">
-    <value>BUT_photoeveryminus</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryminus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryminus.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryminus.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="BUT_photoeveryplus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 18pt</value>
-  </data>
-  <data name="BUT_photoeveryplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="BUT_photoeveryplus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 94</value>
-  </data>
-  <data name="BUT_photoeveryplus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 35</value>
-  </data>
-  <data name="BUT_photoeveryplus.TabIndex" type="System.Int32, mscorlib">
-    <value>133</value>
-  </data>
-  <data name="BUT_photoeveryplus.Text" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryplus.Name" xml:space="preserve">
-    <value>BUT_photoeveryplus</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryplus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryplus.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;BUT_photoeveryplus.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TXT_PhotoEvery.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 14.25pt</value>
-  </data>
-  <data name="TXT_PhotoEvery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 98</value>
-  </data>
-  <data name="TXT_PhotoEvery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 26</value>
-  </data>
-  <data name="TXT_PhotoEvery.TabIndex" type="System.Int32, mscorlib">
-    <value>132</value>
-  </data>
-  <data name="TXT_PhotoEvery.Text" xml:space="preserve">
-    <value>0.0</value>
-  </data>
-  <data name="&gt;&gt;TXT_PhotoEvery.Name" xml:space="preserve">
-    <value>TXT_PhotoEvery</value>
-  </data>
-  <data name="&gt;&gt;TXT_PhotoEvery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TXT_PhotoEvery.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;TXT_PhotoEvery.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label57.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label57.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="label57.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label57.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 73</value>
-  </data>
-  <data name="label57.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 16</value>
-  </data>
-  <data name="label57.TabIndex" type="System.Int32, mscorlib">
-    <value>131</value>
-  </data>
-  <data name="label57.Text" xml:space="preserve">
-    <value>ｼｬｯﾀｰ間隔（sec）</value>
-  </data>
-  <data name="&gt;&gt;label57.Name" xml:space="preserve">
-    <value>label57</value>
-  </data>
-  <data name="&gt;&gt;label57.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label57.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;label57.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="BUT_grandresminus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
   </data>
@@ -4274,7 +4154,7 @@ Control-O to load form file</value>
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;BUT_grandresminus.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="BUT_grandresplus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
@@ -4304,7 +4184,7 @@ Control-O to load form file</value>
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;BUT_grandresplus.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="TXT_GrandRes.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 14.25pt</value>
@@ -4331,7 +4211,7 @@ Control-O to load form file</value>
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;TXT_GrandRes.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="label58.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4364,13 +4244,13 @@ Control-O to load form file</value>
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;label58.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 216</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 134</value>
+    <value>171, 67</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4508,7 +4388,7 @@ Control-O to load form file</value>
     <value>3</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 356</value>
+    <value>3, 289</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 67</value>
@@ -4769,7 +4649,7 @@ Control-O to load form file</value>
     <value>7</value>
   </data>
   <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 429</value>
+    <value>3, 362</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 134</value>
@@ -4788,6 +4668,147 @@ Control-O to load form file</value>
   </data>
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="BUT_photoeveryminus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_photoeveryminus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_photoeveryminus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 26</value>
+  </data>
+  <data name="BUT_photoeveryminus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_photoeveryminus.TabIndex" type="System.Int32, mscorlib">
+    <value>138</value>
+  </data>
+  <data name="BUT_photoeveryminus.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryminus.Name" xml:space="preserve">
+    <value>BUT_photoeveryminus</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryminus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryminus.Parent" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryminus.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BUT_photoeveryplus.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 18pt</value>
+  </data>
+  <data name="BUT_photoeveryplus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BUT_photoeveryplus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>74, 26</value>
+  </data>
+  <data name="BUT_photoeveryplus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 35</value>
+  </data>
+  <data name="BUT_photoeveryplus.TabIndex" type="System.Int32, mscorlib">
+    <value>137</value>
+  </data>
+  <data name="BUT_photoeveryplus.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryplus.Name" xml:space="preserve">
+    <value>BUT_photoeveryplus</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryplus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryplus.Parent" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;BUT_photoeveryplus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="TXT_PhotoEvery.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 14.25pt</value>
+  </data>
+  <data name="TXT_PhotoEvery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 30</value>
+  </data>
+  <data name="TXT_PhotoEvery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 26</value>
+  </data>
+  <data name="TXT_PhotoEvery.TabIndex" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="TXT_PhotoEvery.Text" xml:space="preserve">
+    <value>0.0</value>
+  </data>
+  <data name="&gt;&gt;TXT_PhotoEvery.Name" xml:space="preserve">
+    <value>TXT_PhotoEvery</value>
+  </data>
+  <data name="&gt;&gt;TXT_PhotoEvery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TXT_PhotoEvery.Parent" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;TXT_PhotoEvery.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label57.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label57.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="label57.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label57.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="label57.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 16</value>
+  </data>
+  <data name="label57.TabIndex" type="System.Int32, mscorlib">
+    <value>135</value>
+  </data>
+  <data name="label57.Text" xml:space="preserve">
+    <value>ｼｬｯﾀｰ間隔（sec）</value>
+  </data>
+  <data name="&gt;&gt;label57.Name" xml:space="preserve">
+    <value>label57</value>
+  </data>
+  <data name="&gt;&gt;label57.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label57.Parent" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;label57.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="panel9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 502</value>
+  </data>
+  <data name="panel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 67</value>
+  </data>
+  <data name="panel9.TabIndex" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="&gt;&gt;panel9.Name" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;panel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel9.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;panel9.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="label45.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5132,7 +5153,7 @@ Control-O to load form file</value>
     <value>10</value>
   </data>
   <data name="panel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 569</value>
+    <value>3, 575</value>
   </data>
   <data name="panel6.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 228</value>
@@ -5150,7 +5171,7 @@ Control-O to load form file</value>
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panel6.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="BUT_offsetminus.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 18pt</value>
@@ -5273,7 +5294,7 @@ Control-O to load form file</value>
     <value>3</value>
   </data>
   <data name="panel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 803</value>
+    <value>3, 809</value>
   </data>
   <data name="panel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 67</value>
@@ -5291,7 +5312,7 @@ Control-O to load form file</value>
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panel7.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label51.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5447,7 +5468,7 @@ Control-O to load form file</value>
     <value>4</value>
   </data>
   <data name="panel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 876</value>
+    <value>3, 882</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 138</value>
@@ -5465,16 +5486,16 @@ Control-O to load form file</value>
     <value>flowLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;panel8.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="flowLayoutPanel1.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
     <value>TopDown</value>
   </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1009, 0</value>
+    <value>1012, 0</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 1062</value>
+    <value>174, 1181</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>124</value>
@@ -5627,7 +5648,7 @@ Control-O to load form file</value>
     <value>3</value>
   </data>
   <data name="panelMode6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 1011</value>
+    <value>168, 1131</value>
   </data>
   <data name="panelMode6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -5786,7 +5807,7 @@ Control-O to load form file</value>
     <value>3</value>
   </data>
   <data name="panelMode6Easy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>354, 1011</value>
+    <value>354, 1131</value>
   </data>
   <data name="panelMode6Easy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -5816,7 +5837,7 @@ Control-O to load form file</value>
     <value>Center</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1184, 1062</value>
+    <value>1184, 1182</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>飛行ルート設定</value>

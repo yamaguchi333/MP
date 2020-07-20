@@ -232,6 +232,7 @@ namespace MissionPlanner.Grid
             {
                 panel1.Visible = false;
                 panel3.Visible = false;
+                panel9.Visible = false;
                 panel5.Visible = false;
                 if (grid_type == 5)
                 {
@@ -252,6 +253,7 @@ namespace MissionPlanner.Grid
                 else
                 {
                     panel3.Visible = false;
+                    panel9.Visible = false;
                     panelMode6Easy.Visible = false;
                 }
                 panel4.Visible = false;
@@ -1351,7 +1353,7 @@ namespace MissionPlanner.Grid
                     TXT_GrandRes.TextChanged += TXT_GrandRes_TextChanged;
                     TXT_PhotoEvery.TextChanged -= TXT_PhotoEvery_TextChanged;
                     double flyspeedms = CurrentState.fromSpeedDisplayUnit((double)NUM_UpDownFlySpeed.Value);
-                    TXT_PhotoEvery.Text = ((double)NUM_spacing.Value / flyspeedms).ToString("F1");
+                    TXT_PhotoEvery.Text = ((double)NUM_spacing.Value / flyspeedms).ToString("F0");
                     TXT_PhotoEvery.TextChanged += TXT_PhotoEvery_TextChanged;
                 }
             }
@@ -1453,34 +1455,7 @@ namespace MissionPlanner.Grid
 
         private void map_MouseUp(object sender, MouseEventArgs e)
         {
-            MouseDownEnd = map.FromLocalToLatLng(e.X, e.Y);
 
-            // Console.WriteLine("MainMap MU");
-
-            if (e.Button == MouseButtons.Right) // ignore right clicks
-            {
-                return;
-            }
-
-            if (isMouseDown) // mouse down on some other object and dragged to here.
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    isMouseDown = false;
-                }
-                if (!isMouseDraging)
-                {
-                    if (CurrentGMapMarker != null)
-                    {
-                        // Redraw polygon
-                        //AddDrawPolygon();
-                    }
-                }
-            }
-            isMouseDraging = false;
-            CurrentGMapMarker = null;
-            CurrentGMapMarkerIndex = 0;
-            CurrentGMapMarkerStartPos = null;
         }
 
         private void map_MouseDown(object sender, MouseEventArgs e)
@@ -2506,8 +2481,10 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
-            NUM_angle.Value = d;
+            TXT_angle.TextChanged -= TXT_angle_TextChanged;
             TXT_angle.Text = d.ToString();
+            TXT_angle.TextChanged += TXT_angle_TextChanged;
+            NUM_angle.Value = d;
         }
         #endregion
 
@@ -2540,7 +2517,9 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
+            TXT_offset.TextChanged -= TXT_offset_TextChanged;
             TXT_offset.Text = d.ToString("f1");
+            TXT_offset.TextChanged += TXT_offset_TextChanged;
             domainUpDown1_ValueChanged(sender, e);
         }
         #endregion
@@ -2574,8 +2553,10 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
-            NUM_altitude.Value = d;
+            TXT_altitude.TextChanged -= TXT_altitude_TextChanged;
             TXT_altitude.Text = d.ToString("f1");
+            TXT_altitude.TextChanged += TXT_altitude_TextChanged;
+            NUM_altitude.Value = d;
         }
         #endregion
 
@@ -2608,8 +2589,10 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
-            NUM_UpDownFlySpeed.Value = d;
+            TXT_FlySpeed.TextChanged -= TXT_FlySpeed_TextChanged;
             TXT_FlySpeed.Text = d.ToString("f1");
+            TXT_FlySpeed.TextChanged += TXT_FlySpeed_TextChanged;
+            NUM_UpDownFlySpeed.Value = d;
         }
         #endregion
 
@@ -2642,8 +2625,10 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
-            NUM_Distance.Value = d;
+            TXT_Distance.TextChanged -= TXT_Distance_TextChanged;
             TXT_Distance.Text = d.ToString("f1");
+            TXT_Distance.TextChanged += TXT_Distance_TextChanged;
+            NUM_Distance.Value = d;
         }
         #endregion
 
@@ -2661,7 +2646,9 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
+            TXT_headinghold.TextChanged -= TXT_headinghold_TextChanged;
             TXT_headinghold.Text = d.ToString();
+            TXT_headinghold.TextChanged += TXT_headinghold_TextChanged;
         }
         #endregion
 
@@ -2694,8 +2681,10 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
-            num_overlap.Value = d;
+            TXT_Overlap.TextChanged -= TXT_Overlap_TextChanged;
             TXT_Overlap.Text = d.ToString("f0");
+            TXT_Overlap.TextChanged += TXT_Overlap_TextChanged;
+            num_overlap.Value = d;
         }
         #endregion
 
@@ -2728,8 +2717,10 @@ namespace MissionPlanner.Grid
                     }
                 }
             }
-            num_sidelap.Value = d;
+            TXT_Sidelap.TextChanged -= TXT_Sidelap_TextChanged;
             TXT_Sidelap.Text = d.ToString("f0");
+            TXT_Sidelap.TextChanged += TXT_Sidelap_TextChanged;
+            num_sidelap.Value = d;
         }
         #endregion
 
