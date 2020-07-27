@@ -233,6 +233,9 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Messagetabtimer = new System.Windows.Forms.Timer(this.components);
             this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.labelAccuracy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainH)).BeginInit();
             this.MainH.Panel1.SuspendLayout();
             this.MainH.Panel2.SuspendLayout();
@@ -289,6 +292,7 @@
             this.contextMenuStripHud.SuspendLayout();
             this.contextMenuStripactionstab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).BeginInit();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainH
@@ -325,6 +329,7 @@
             // 
             resources.ApplyResources(this.tableLayoutPanelMessage, "tableLayoutPanelMessage");
             this.tableLayoutPanelMessage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tableLayoutPanelMessage.Controls.Add(this.panel8, 0, 4);
             this.tableLayoutPanelMessage.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanelMessage.Controls.Add(this.panel5, 0, 1);
             this.tableLayoutPanelMessage.Controls.Add(this.panel6, 0, 2);
@@ -2419,7 +2424,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
@@ -2909,6 +2914,29 @@
             // 
             this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label14);
+            this.panel8.Controls.Add(this.labelAccuracy);
+            resources.ApplyResources(this.panel8, "panel8");
+            this.panel8.Name = "panel8";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.BackColor = System.Drawing.Color.Silver;
+            this.label14.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label14.Name = "label14";
+            this.label14.Tag = "custom";
+            // 
+            // labelAccuracy
+            // 
+            this.labelAccuracy.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelAccuracy, "labelAccuracy");
+            this.labelAccuracy.ForeColor = System.Drawing.Color.Black;
+            this.labelAccuracy.Name = "labelAccuracy";
+            this.labelAccuracy.Tag = "custom";
+            // 
             // FlightData
             // 
             this.Controls.Add(this.MainH);
@@ -2988,6 +3016,8 @@
             this.contextMenuStripHud.ResumeLayout(false);
             this.contextMenuStripactionstab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3223,5 +3253,8 @@
         private System.Windows.Forms.Button BtnActRtl;
         private System.Windows.Forms.Button BtnAltHold;
         private System.Windows.Forms.Label LblWPno;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labelAccuracy;
     }
 }

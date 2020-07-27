@@ -1128,6 +1128,51 @@ namespace MissionPlanner.GCSViews
                         labelMessage.Text = mes;
                     }
 
+                    // @eams update GPS accuracy display
+                    string gps = "";
+                    var _fix = Math.Max(hud1.gpsfix, hud1.gpsfix2);
+
+                    if (_fix == 0)
+                    {
+                        gps = ("No GPS");
+                    }
+                    else if (_fix == 1)
+                    {
+                        gps = ("No Fix");
+                    }
+                    else if (_fix == 2)
+                    {
+                        gps = ("2D Fix");
+                    }
+                    else if (_fix == 3)
+                    {
+                        gps = ("3D Fix");
+                    }
+                    else if (_fix == 4)
+                    {
+                        gps = ("3D dgps");
+                    }
+                    else if (_fix == 5)
+                    {
+                        gps = ("rtk Float");
+                    }
+                    else if (_fix == 6)
+                    {
+                        gps = ("rtk Fixed");
+                    }
+                    else
+                    {
+                        gps = _fix.ToString();
+                    }
+                    if (labelAccuracy.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() => labelAccuracy.Text = gps));
+                    }
+                    else
+                    {
+                        labelAccuracy.Text = gps;
+                    }
+
                     // @eams check resume point and failsafe
                     var commands = MainV2.instance.FlightPlanner.GetCommandList();
                     string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();

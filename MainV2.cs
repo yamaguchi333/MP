@@ -4193,8 +4193,8 @@ namespace MissionPlanner
                     if (!MainV2.comPort.BaseStream.IsOpen)
                     {
                         Connect();
-                        //                    CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
-                        //                    return;
+                        //CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
+                        //return;
                     }
 
                     // write mission to UAV
@@ -4210,16 +4210,8 @@ namespace MissionPlanner
                         return;
                     }
                 }
-#if false
-                if (MainV2.instance.FlightData.last_failsafe)
-                {
-                    MainV2.comPort.setMode("GUIDED");
-                }
-                else
-                {
-#endif
-                MainV2.comPort.setMode("Loiter");
-//                }
+
+                MainV2.comPort.setMode("GUIDED");
 
                 // force redraw map
                 await Task.Delay(update_wp_delay+200);

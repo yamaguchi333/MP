@@ -684,7 +684,11 @@ namespace MissionPlanner
         public float timeInAir { get; set; }
 
         //Time in Air converted to min.sec format for easier reading
+#if true    // @eams changed
+        [DisplayText("飛行時間")]
+#else
         [DisplayText("Time in Air (min.sec)")]
+#endif
         public float timeInAirMinSec
         {
             get
