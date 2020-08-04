@@ -693,7 +693,11 @@ namespace MissionPlanner
         {
             get
             {
+#if true    // @eams changed
+                return ((float)((int)(timeSinceArmInAir / 60))) + ((timeSinceArmInAir % 60) / 100);
+#else
                 return ((float)((int)(timeInAir / 60))) + ((timeInAir % 60) / 100);
+#endif
             }
         }
         

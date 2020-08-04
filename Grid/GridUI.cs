@@ -70,8 +70,12 @@ namespace MissionPlanner.Grid
         bool use_impeller = false;
         int impeller_no = 8;
         int impeller_pwm_on = 2000;
+        int impeller_pwm_on1 = 1200;
+        int impeller_pwm_on2 = 1300;
+        int impeller_pwm_on3 = 1400;
         int impeller_pwm_off = 1000;
         double impeller_on_delay = 1.0;
+        double impeller_on_delay_pre = 2.0;
 
         // @eams add for CONDITION_DELAY
         bool addconditiondelay_firsttime = false;
@@ -88,6 +92,10 @@ namespace MissionPlanner.Grid
 
         // @eams add for grid end pwm value
         int grid_repeatservo_pwm_last = 0;
+
+        // @eams add / out of mission speed
+        bool use_outofmission_speed = false;
+        double outofmission_speed = 2.0;
 
         // GridUI
         public GridUI(GridPlugin plugin)
@@ -190,8 +198,16 @@ namespace MissionPlanner.Grid
                 impeller_no = int.Parse(plugin.Host.config["impeller_no"]);
             if (plugin.Host.config["impeller_pwm_on"] != null)
                 impeller_pwm_on = int.Parse(plugin.Host.config["impeller_pwm_on"]);
+            if (plugin.Host.config["impeller_pwm_on1"] != null)
+                impeller_pwm_on1 = int.Parse(plugin.Host.config["impeller_pwm_on1"]);
+            if (plugin.Host.config["impeller_pwm_on2"] != null)
+                impeller_pwm_on2 = int.Parse(plugin.Host.config["impeller_pwm_on2"]);
+            if (plugin.Host.config["impeller_pwm_on3"] != null)
+                impeller_pwm_on3 = int.Parse(plugin.Host.config["impeller_pwm_on3"]);
             if (plugin.Host.config["impeller_pwm_off"] != null)
                 impeller_pwm_off = int.Parse(plugin.Host.config["impeller_pwm_off"]);
+            if (plugin.Host.config["impeller_on_delay_pre"] != null)
+                impeller_on_delay_pre = double.Parse(plugin.Host.config["impeller_on_delay_pre"]);
             if (plugin.Host.config["impeller_on_delay"] != null)
                 impeller_on_delay = double.Parse(plugin.Host.config["impeller_on_delay"]);
 
@@ -220,6 +236,12 @@ namespace MissionPlanner.Grid
             // @eams add / ndvi mesh
             if (plugin.Host.config["overlay_mesh"] != null)
                 mesh_type = int.Parse(plugin.Host.config["overlay_mesh"]);
+
+            // @eams add / out of mission speed
+            if (plugin.Host.config["use_outofmission_speed"] != null)
+                use_outofmission_speed = bool.Parse(plugin.Host.config["use_outofmission_speed"]);
+            if (plugin.Host.config["outofmission_speed"] != null)
+                outofmission_speed = double.Parse(plugin.Host.config["outofmission_speed"]);
 
             // @eams add
             if (mesh_type > 0)
@@ -1094,10 +1116,20 @@ namespace MissionPlanner.Grid
             {
                 delay_time = (double)NUM_copter_delay.Value;
             }
+
+            if (addwp_firsttime && use_impeller)
+            {
+                // turn on 2
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO, (float)impeller_no, (float)impeller_pwm_on2, 0, 0, 0, 0, 0, gridobject);
+            }
+
             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, delay_time, 0, 0, 0, Lng, Lat, (double)(Alt * CurrentState.multiplierdist), gridobject);
 
             if (addwp_firsttime && use_impeller)
             {
+                // turn on3
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO, (float)impeller_no, (float)impeller_pwm_on3, 0, 0, 0, 0, 0, gridobject);
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DELAY, (float)impeller_on_delay_pre, 0, 0, 0, 0, 0, 0, gridobject);
                 // turn on
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO, (float)impeller_no, (float)impeller_pwm_on, 0, 0, 0, 0, 0, gridobject);
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, impeller_on_delay, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
@@ -1849,7 +1881,7 @@ namespace MissionPlanner.Grid
                             // turn off
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                 (float)impeller_no,
-                                (float)impeller_pwm_off, 0, 0, 0, 0, 0,
+                                (float)impeller_pwm_on1, 0, 0, 0, 0, 0,
                                 gridobject);
                         }
                     }

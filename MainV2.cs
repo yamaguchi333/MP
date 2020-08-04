@@ -430,6 +430,8 @@ namespace MissionPlanner
         public static int update_wp_delay = 0;
         public static int grid_dosetservo_PWML;
         public static int grid_dosetservo_PWMH;
+        public static int grid_type = 2;
+        public static float grid_speed = 2;
 
         public void updateLayout(object sender, EventArgs e)
         {
@@ -1035,11 +1037,13 @@ namespace MissionPlanner
             servo7_func_auto = Settings.Instance.GetInt32("servo7_func_auto");
             ignore_port = Settings.Instance.GetList("ignore_port").ToList();
             ekf_status_flags = Settings.Instance.GetInt32("ekf_status_flags");
-            update_wp_delay = Settings.Instance.GetInt32("dialog_delay");
+            update_wp_delay = Settings.Instance.GetInt32("update_wp_delay");
             grid_dosetservo_PWML = Settings.Instance.GetInt32("grid_dosetservo_PWML");
             grid_dosetservo_PWMH = Settings.Instance.GetInt32("grid_dosetservo_PWMH");
+            grid_type = Settings.Instance.GetInt32("grid_type");
+            grid_speed = Settings.Instance.GetFloat("grid_speed");
 
-        Application.DoEvents();
+            Application.DoEvents();
 
             Comports.Add(comPort);
 
@@ -1584,6 +1588,12 @@ namespace MissionPlanner
                 // set SERVO7 value @eams
                 MainV2.comPort.setParam("SERVO7_MAX", (float)grid_dosetservo_PWML);
                 MainV2.comPort.setParam("SERVO7_MIN", (float)grid_dosetservo_PWMH);
+                // set WPNAV_SPEED
+                if (grid_type >= 2 && grid_type <= 4)
+                {
+                    MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
+                }
+
 
                 _connectionControl.UpdateSysIDS();
 

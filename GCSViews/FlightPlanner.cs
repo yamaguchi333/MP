@@ -7591,6 +7591,12 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void grid_shift(int angle)
         {
+            //ミッションリストで任意のWAYPOINTが選択表示されていないとsetfromMapで不具合が生じるの
+            //事前に先頭のWAYPOINTを選択して回避
+            var commands = GetCommandList();
+            int firstwpno = commands.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) && (x.lat != 0));
+            Commands.CurrentCell = Commands[1, firstwpno];
+
             //全選択
             foreach (var marker in MainMap.Overlays.First(a => a.Id == "WPOverlay").Markers)
             {
