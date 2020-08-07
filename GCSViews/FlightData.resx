@@ -6211,7 +6211,7 @@
     <value>NoControl</value>
   </data>
   <data name="CB_tuning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 40</value>
+    <value>394, 28</value>
   </data>
   <data name="CB_tuning.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 16</value>

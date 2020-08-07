@@ -5409,9 +5409,9 @@ namespace MissionPlanner.GCSViews
                     }
                     timeout++;
 
-                    if (timeout > 40)
+                    if (timeout > gotohere.alt + 10)
                     {
-                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        CustomMessageBox.Show("離陸コマンドタイムアウトエラー", Strings.ErrorNoResponce);
                         resume_flag = 1;
                         return;
                     }
@@ -5492,7 +5492,7 @@ namespace MissionPlanner.GCSViews
 
                     if (timeout > 20)
                     {
-                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        CustomMessageBox.Show("ガイドコマンドタイムアウトエラー", Strings.ErrorNoResponce);
                         resume_flag = 1;
                         return;
                     }
@@ -5509,7 +5509,7 @@ namespace MissionPlanner.GCSViews
 
                     if (timeout > 120)
                     {
-                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        CustomMessageBox.Show("ガイドコマンドタイムアウトエラー", Strings.ErrorNoResponce);
                         resume_flag = 1;
                         return;
                     }
@@ -5564,7 +5564,7 @@ namespace MissionPlanner.GCSViews
 
                     if (timeout > 60)
                     {
-                        CustomMessageBox.Show(Strings.ERROR, Strings.ErrorNoResponce);
+                        CustomMessageBox.Show("自動飛行再開コマンドタイムアウトエラー", Strings.ErrorNoResponce);
                         resume_flag = 1;
                         return;
                     }

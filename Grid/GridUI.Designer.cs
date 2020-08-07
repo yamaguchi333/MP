@@ -37,7 +37,6 @@
             this.label40 = new System.Windows.Forms.Label();
             this.lbl_turnrad = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
-            this.lbl_photoevery = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -47,7 +46,6 @@
             this.lbl_pictures = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.lbl_grndres = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.lbl_spacing = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -135,7 +133,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.NUM_angle = new System.Windows.Forms.NumericUpDown();
-            this.CMB_camera = new System.Windows.Forms.ComboBox();
             this.CHK_camdirection = new System.Windows.Forms.CheckBox();
             this.NUM_altitude = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -149,32 +146,7 @@
             this.BUT_Accept = new MissionPlanner.Controls.MyButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label45 = new System.Windows.Forms.Label();
-            this.TXT_angle = new System.Windows.Forms.TextBox();
-            this.BUT_angleminus = new System.Windows.Forms.Button();
-            this.BUT_angleplus = new System.Windows.Forms.Button();
             this.label46 = new System.Windows.Forms.Label();
-            this.labelLineOffset = new System.Windows.Forms.Label();
-            this.TXT_offset = new System.Windows.Forms.TextBox();
-            this.BUT_offsetminus = new System.Windows.Forms.Button();
-            this.BUT_offsetplus = new System.Windows.Forms.Button();
-            this.BUT_altminus = new System.Windows.Forms.Button();
-            this.BUT_altplus = new System.Windows.Forms.Button();
-            this.TXT_altitude = new System.Windows.Forms.TextBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.BUT_speedminus = new System.Windows.Forms.Button();
-            this.BUT_speedplus = new System.Windows.Forms.Button();
-            this.TXT_FlySpeed = new System.Windows.Forms.TextBox();
-            this.label49 = new System.Windows.Forms.Label();
-            this.BUT_distminus = new System.Windows.Forms.Button();
-            this.BUT_distplus = new System.Windows.Forms.Button();
-            this.TXT_Distance = new System.Windows.Forms.TextBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.BUT_shiftright = new System.Windows.Forms.Button();
-            this.BUT_shiftleft = new System.Windows.Forms.Button();
-            this.BUT_shiftup = new System.Windows.Forms.Button();
-            this.BUT_shiftdown = new System.Windows.Forms.Button();
-            this.label51 = new System.Windows.Forms.Label();
             this.BUT_Ok = new System.Windows.Forms.Button();
             this.BUT_Close = new System.Windows.Forms.Button();
             this.BUT_zoomIn = new System.Windows.Forms.Button();
@@ -185,15 +157,78 @@
             this.lbl_distance = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.lbl_flighttime = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.CMB_startfrom = new System.Windows.Forms.ComboBox();
             this.TRK_zoom = new MissionPlanner.Controls.MyTrackBar();
             this.map = new MissionPlanner.Controls.myGMAP();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.CMB_camera = new System.Windows.Forms.ComboBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.BUT_speedminus = new System.Windows.Forms.Button();
+            this.BUT_speedplus = new System.Windows.Forms.Button();
+            this.TXT_FlySpeed = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.BUT_altminus = new System.Windows.Forms.Button();
+            this.BUT_altplus = new System.Windows.Forms.Button();
+            this.TXT_altitude = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.BUT_grandresminus = new System.Windows.Forms.Button();
+            this.BUT_grandresplus = new System.Windows.Forms.Button();
+            this.TXT_GrandRes = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.BUT_distminus = new System.Windows.Forms.Button();
+            this.BUT_distplus = new System.Windows.Forms.Button();
+            this.TXT_Distance = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.BUT_sidelapminus = new System.Windows.Forms.Button();
+            this.BUT_sidelapplus = new System.Windows.Forms.Button();
+            this.TXT_Sidelap = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.BUT_overlapminus = new System.Windows.Forms.Button();
+            this.BUT_overlapplus = new System.Windows.Forms.Button();
+            this.TXT_Overlap = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.BUT_photoeveryminus = new System.Windows.Forms.Button();
+            this.BUT_photoeveryplus = new System.Windows.Forms.Button();
+            this.TXT_PhotoEvery = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label45 = new System.Windows.Forms.Label();
+            this.TXT_angle = new System.Windows.Forms.TextBox();
+            this.BUT_angleminus = new System.Windows.Forms.Button();
+            this.BUT_angleplus = new System.Windows.Forms.Button();
             this.TXT_headinghold = new System.Windows.Forms.TextBox();
             this.BUT_headingholdminus = new System.Windows.Forms.Button();
             this.BUT_headingholdplus = new System.Windows.Forms.Button();
             this.CHK_copter_headingholdlock = new System.Windows.Forms.CheckBox();
             this.CHK_copter_headinghold = new System.Windows.Forms.CheckBox();
+            this.CMB_startfrom = new System.Windows.Forms.ComboBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.BUT_offsetminus = new System.Windows.Forms.Button();
+            this.BUT_offsetplus = new System.Windows.Forms.Button();
+            this.TXT_offset = new System.Windows.Forms.TextBox();
+            this.labelLineOffset = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label51 = new System.Windows.Forms.Label();
+            this.BUT_shiftdown = new System.Windows.Forms.Button();
+            this.BUT_shiftup = new System.Windows.Forms.Button();
+            this.BUT_shiftright = new System.Windows.Forms.Button();
+            this.BUT_shiftleft = new System.Windows.Forms.Button();
+            this.panelMode6 = new System.Windows.Forms.Panel();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.lbl_photoevery = new System.Windows.Forms.Label();
+            this.lbl_grndres = new System.Windows.Forms.Label();
+            this.panelMode6Easy = new System.Windows.Forms.Panel();
+            this.label63 = new System.Windows.Forms.Label();
+            this.lbl_speed = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.lbl_alt = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -228,6 +263,18 @@
             this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panelMode6.SuspendLayout();
+            this.panelMode6Easy.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -239,7 +286,6 @@
             this.groupBox5.Controls.Add(this.label40);
             this.groupBox5.Controls.Add(this.lbl_turnrad);
             this.groupBox5.Controls.Add(this.label36);
-            this.groupBox5.Controls.Add(this.lbl_photoevery);
             this.groupBox5.Controls.Add(this.label35);
             this.groupBox5.Controls.Add(this.label31);
             this.groupBox5.Controls.Add(this.label25);
@@ -249,7 +295,6 @@
             this.groupBox5.Controls.Add(this.lbl_pictures);
             this.groupBox5.Controls.Add(this.label33);
             this.groupBox5.Controls.Add(this.label34);
-            this.groupBox5.Controls.Add(this.lbl_grndres);
             this.groupBox5.Controls.Add(this.label29);
             this.groupBox5.Controls.Add(this.lbl_spacing);
             this.groupBox5.Controls.Add(this.label27);
@@ -287,11 +332,6 @@
             // 
             resources.ApplyResources(this.label36, "label36");
             this.label36.Name = "label36";
-            // 
-            // lbl_photoevery
-            // 
-            resources.ApplyResources(this.lbl_photoevery, "lbl_photoevery");
-            this.lbl_photoevery.Name = "lbl_photoevery";
             // 
             // label35
             // 
@@ -337,11 +377,6 @@
             // 
             resources.ApplyResources(this.label34, "label34");
             this.label34.Name = "label34";
-            // 
-            // lbl_grndres
-            // 
-            resources.ApplyResources(this.lbl_grndres, "lbl_grndres");
-            this.lbl_grndres.Name = "lbl_grndres";
             // 
             // label29
             // 
@@ -1029,7 +1064,6 @@
             this.groupBox6.Controls.Add(this.label26);
             this.groupBox6.Controls.Add(this.label4);
             this.groupBox6.Controls.Add(this.NUM_angle);
-            this.groupBox6.Controls.Add(this.CMB_camera);
             this.groupBox6.Controls.Add(this.CHK_camdirection);
             this.groupBox6.Controls.Add(this.NUM_altitude);
             this.groupBox6.Controls.Add(this.label1);
@@ -1132,13 +1166,6 @@
             0});
             this.NUM_angle.Name = "NUM_angle";
             this.NUM_angle.ValueChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CMB_camera
-            // 
-            this.CMB_camera.FormattingEnabled = true;
-            resources.ApplyResources(this.CMB_camera, "CMB_camera");
-            this.CMB_camera.Name = "CMB_camera";
-            this.CMB_camera.SelectedIndexChanged += new System.EventHandler(this.CMB_camera_SelectedIndexChanged);
             // 
             // CHK_camdirection
             // 
@@ -1262,192 +1289,10 @@
             this.timer1.Interval = 800;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label45
-            // 
-            resources.ApplyResources(this.label45, "label45");
-            this.label45.Name = "label45";
-            // 
-            // TXT_angle
-            // 
-            resources.ApplyResources(this.TXT_angle, "TXT_angle");
-            this.TXT_angle.Name = "TXT_angle";
-            this.TXT_angle.TextChanged += new System.EventHandler(this.TXT_angle_TextChanged);
-            // 
-            // BUT_angleminus
-            // 
-            resources.ApplyResources(this.BUT_angleminus, "BUT_angleminus");
-            this.BUT_angleminus.Name = "BUT_angleminus";
-            this.BUT_angleminus.Tag = "custom";
-            this.BUT_angleminus.UseVisualStyleBackColor = false;
-            this.BUT_angleminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
-            this.BUT_angleminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Up);
-            // 
-            // BUT_angleplus
-            // 
-            resources.ApplyResources(this.BUT_angleplus, "BUT_angleplus");
-            this.BUT_angleplus.Name = "BUT_angleplus";
-            this.BUT_angleplus.Tag = "custom";
-            this.BUT_angleplus.UseVisualStyleBackColor = false;
-            this.BUT_angleplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
-            this.BUT_angleplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Up);
-            // 
             // label46
             // 
             resources.ApplyResources(this.label46, "label46");
             this.label46.Name = "label46";
-            // 
-            // labelLineOffset
-            // 
-            resources.ApplyResources(this.labelLineOffset, "labelLineOffset");
-            this.labelLineOffset.Name = "labelLineOffset";
-            // 
-            // TXT_offset
-            // 
-            resources.ApplyResources(this.TXT_offset, "TXT_offset");
-            this.TXT_offset.Name = "TXT_offset";
-            this.TXT_offset.TextChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // BUT_offsetminus
-            // 
-            resources.ApplyResources(this.BUT_offsetminus, "BUT_offsetminus");
-            this.BUT_offsetminus.Name = "BUT_offsetminus";
-            this.BUT_offsetminus.Tag = "custom";
-            this.BUT_offsetminus.UseVisualStyleBackColor = false;
-            this.BUT_offsetminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseDown);
-            this.BUT_offsetminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseUp);
-            // 
-            // BUT_offsetplus
-            // 
-            resources.ApplyResources(this.BUT_offsetplus, "BUT_offsetplus");
-            this.BUT_offsetplus.Name = "BUT_offsetplus";
-            this.BUT_offsetplus.Tag = "custom";
-            this.BUT_offsetplus.UseVisualStyleBackColor = false;
-            this.BUT_offsetplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseDown);
-            this.BUT_offsetplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseUp);
-            // 
-            // BUT_altminus
-            // 
-            resources.ApplyResources(this.BUT_altminus, "BUT_altminus");
-            this.BUT_altminus.Name = "BUT_altminus";
-            this.BUT_altminus.Tag = "custom";
-            this.BUT_altminus.UseVisualStyleBackColor = false;
-            this.BUT_altminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_alt_MouseDown);
-            this.BUT_altminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_alt_MouseUp);
-            // 
-            // BUT_altplus
-            // 
-            resources.ApplyResources(this.BUT_altplus, "BUT_altplus");
-            this.BUT_altplus.Name = "BUT_altplus";
-            this.BUT_altplus.Tag = "custom";
-            this.BUT_altplus.UseVisualStyleBackColor = false;
-            this.BUT_altplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_alt_MouseDown);
-            this.BUT_altplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_alt_MouseUp);
-            // 
-            // TXT_altitude
-            // 
-            resources.ApplyResources(this.TXT_altitude, "TXT_altitude");
-            this.TXT_altitude.Name = "TXT_altitude";
-            this.TXT_altitude.TextChanged += new System.EventHandler(this.TXT_altitude_TextChanged);
-            // 
-            // label48
-            // 
-            resources.ApplyResources(this.label48, "label48");
-            this.label48.Name = "label48";
-            // 
-            // BUT_speedminus
-            // 
-            resources.ApplyResources(this.BUT_speedminus, "BUT_speedminus");
-            this.BUT_speedminus.Name = "BUT_speedminus";
-            this.BUT_speedminus.Tag = "custom";
-            this.BUT_speedminus.UseVisualStyleBackColor = false;
-            this.BUT_speedminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_speed_MouseDown);
-            this.BUT_speedminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_speed_MouseUp);
-            // 
-            // BUT_speedplus
-            // 
-            resources.ApplyResources(this.BUT_speedplus, "BUT_speedplus");
-            this.BUT_speedplus.Name = "BUT_speedplus";
-            this.BUT_speedplus.Tag = "custom";
-            this.BUT_speedplus.UseVisualStyleBackColor = false;
-            this.BUT_speedplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_speed_MouseDown);
-            this.BUT_speedplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_speed_MouseUp);
-            // 
-            // TXT_FlySpeed
-            // 
-            resources.ApplyResources(this.TXT_FlySpeed, "TXT_FlySpeed");
-            this.TXT_FlySpeed.Name = "TXT_FlySpeed";
-            this.TXT_FlySpeed.TextChanged += new System.EventHandler(this.TXT_FlySpeed_TextChanged);
-            // 
-            // label49
-            // 
-            resources.ApplyResources(this.label49, "label49");
-            this.label49.Name = "label49";
-            // 
-            // BUT_distminus
-            // 
-            resources.ApplyResources(this.BUT_distminus, "BUT_distminus");
-            this.BUT_distminus.Name = "BUT_distminus";
-            this.BUT_distminus.Tag = "custom";
-            this.BUT_distminus.UseVisualStyleBackColor = false;
-            this.BUT_distminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_dist_MouseDown);
-            this.BUT_distminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_dist_MouseUp);
-            // 
-            // BUT_distplus
-            // 
-            resources.ApplyResources(this.BUT_distplus, "BUT_distplus");
-            this.BUT_distplus.Name = "BUT_distplus";
-            this.BUT_distplus.Tag = "custom";
-            this.BUT_distplus.UseVisualStyleBackColor = false;
-            this.BUT_distplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_dist_MouseDown);
-            this.BUT_distplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_dist_MouseUp);
-            // 
-            // TXT_Distance
-            // 
-            resources.ApplyResources(this.TXT_Distance, "TXT_Distance");
-            this.TXT_Distance.Name = "TXT_Distance";
-            this.TXT_Distance.TextChanged += new System.EventHandler(this.TXT_Distance_TextChanged);
-            // 
-            // label50
-            // 
-            resources.ApplyResources(this.label50, "label50");
-            this.label50.Name = "label50";
-            // 
-            // BUT_shiftright
-            // 
-            resources.ApplyResources(this.BUT_shiftright, "BUT_shiftright");
-            this.BUT_shiftright.Name = "BUT_shiftright";
-            this.BUT_shiftright.Tag = "custom";
-            this.BUT_shiftright.UseVisualStyleBackColor = false;
-            this.BUT_shiftright.Click += new System.EventHandler(this.BUT_shiftright_Click);
-            // 
-            // BUT_shiftleft
-            // 
-            resources.ApplyResources(this.BUT_shiftleft, "BUT_shiftleft");
-            this.BUT_shiftleft.Name = "BUT_shiftleft";
-            this.BUT_shiftleft.Tag = "custom";
-            this.BUT_shiftleft.UseVisualStyleBackColor = false;
-            this.BUT_shiftleft.Click += new System.EventHandler(this.BUT_shiftleft_Click);
-            // 
-            // BUT_shiftup
-            // 
-            resources.ApplyResources(this.BUT_shiftup, "BUT_shiftup");
-            this.BUT_shiftup.Name = "BUT_shiftup";
-            this.BUT_shiftup.Tag = "custom";
-            this.BUT_shiftup.UseVisualStyleBackColor = false;
-            this.BUT_shiftup.Click += new System.EventHandler(this.BUT_shiftup_Click);
-            // 
-            // BUT_shiftdown
-            // 
-            resources.ApplyResources(this.BUT_shiftdown, "BUT_shiftdown");
-            this.BUT_shiftdown.Name = "BUT_shiftdown";
-            this.BUT_shiftdown.Tag = "custom";
-            this.BUT_shiftdown.UseVisualStyleBackColor = false;
-            this.BUT_shiftdown.Click += new System.EventHandler(this.BUT_shiftdown_Click);
-            // 
-            // label51
-            // 
-            resources.ApplyResources(this.label51, "label51");
-            this.label51.Name = "label51";
             // 
             // BUT_Ok
             // 
@@ -1521,19 +1366,6 @@
             resources.ApplyResources(this.lbl_flighttime, "lbl_flighttime");
             this.lbl_flighttime.Name = "lbl_flighttime";
             // 
-            // label55
-            // 
-            resources.ApplyResources(this.label55, "label55");
-            this.label55.Name = "label55";
-            // 
-            // CMB_startfrom
-            // 
-            resources.ApplyResources(this.CMB_startfrom, "CMB_startfrom");
-            this.CMB_startfrom.BackColor = System.Drawing.SystemColors.Control;
-            this.CMB_startfrom.FormattingEnabled = true;
-            this.CMB_startfrom.Name = "CMB_startfrom";
-            this.CMB_startfrom.SelectedIndexChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
             // TRK_zoom
             // 
             resources.ApplyResources(this.TRK_zoom, "TRK_zoom");
@@ -1572,6 +1404,343 @@
             this.map.Zoom = 3D;
             this.map.MouseDown += new System.Windows.Forms.MouseEventHandler(this.map_MouseDown);
             this.map.MouseMove += new System.Windows.Forms.MouseEventHandler(this.map_MouseMove);
+            this.map.MouseUp += new System.Windows.Forms.MouseEventHandler(this.map_MouseUp);
+            // 
+            // flowLayoutPanel1
+            // 
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Controls.Add(this.panel4);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.panel9);
+            this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Controls.Add(this.panel7);
+            this.flowLayoutPanel1.Controls.Add(this.panel8);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.CMB_camera);
+            this.panel1.Controls.Add(this.label61);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // CMB_camera
+            // 
+            this.CMB_camera.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.CMB_camera, "CMB_camera");
+            this.CMB_camera.FormattingEnabled = true;
+            this.CMB_camera.Name = "CMB_camera";
+            this.CMB_camera.SelectedIndexChanged += new System.EventHandler(this.CMB_camera_SelectedIndexChanged);
+            // 
+            // label61
+            // 
+            resources.ApplyResources(this.label61, "label61");
+            this.label61.Name = "label61";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.BUT_speedminus);
+            this.panel2.Controls.Add(this.BUT_speedplus);
+            this.panel2.Controls.Add(this.TXT_FlySpeed);
+            this.panel2.Controls.Add(this.label49);
+            this.panel2.Controls.Add(this.BUT_altminus);
+            this.panel2.Controls.Add(this.BUT_altplus);
+            this.panel2.Controls.Add(this.TXT_altitude);
+            this.panel2.Controls.Add(this.label48);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // BUT_speedminus
+            // 
+            resources.ApplyResources(this.BUT_speedminus, "BUT_speedminus");
+            this.BUT_speedminus.Name = "BUT_speedminus";
+            this.BUT_speedminus.Tag = "custom";
+            this.BUT_speedminus.UseVisualStyleBackColor = false;
+            this.BUT_speedminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_speed_MouseDown);
+            this.BUT_speedminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_speedplus
+            // 
+            resources.ApplyResources(this.BUT_speedplus, "BUT_speedplus");
+            this.BUT_speedplus.Name = "BUT_speedplus";
+            this.BUT_speedplus.Tag = "custom";
+            this.BUT_speedplus.UseVisualStyleBackColor = false;
+            this.BUT_speedplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_speed_MouseDown);
+            this.BUT_speedplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_FlySpeed
+            // 
+            resources.ApplyResources(this.TXT_FlySpeed, "TXT_FlySpeed");
+            this.TXT_FlySpeed.Name = "TXT_FlySpeed";
+            this.TXT_FlySpeed.TextChanged += new System.EventHandler(this.TXT_FlySpeed_TextChanged);
+            // 
+            // label49
+            // 
+            resources.ApplyResources(this.label49, "label49");
+            this.label49.Name = "label49";
+            // 
+            // BUT_altminus
+            // 
+            resources.ApplyResources(this.BUT_altminus, "BUT_altminus");
+            this.BUT_altminus.Name = "BUT_altminus";
+            this.BUT_altminus.Tag = "custom";
+            this.BUT_altminus.UseVisualStyleBackColor = false;
+            this.BUT_altminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_alt_MouseDown);
+            this.BUT_altminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_altplus
+            // 
+            resources.ApplyResources(this.BUT_altplus, "BUT_altplus");
+            this.BUT_altplus.Name = "BUT_altplus";
+            this.BUT_altplus.Tag = "custom";
+            this.BUT_altplus.UseVisualStyleBackColor = false;
+            this.BUT_altplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_alt_MouseDown);
+            this.BUT_altplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_altitude
+            // 
+            resources.ApplyResources(this.TXT_altitude, "TXT_altitude");
+            this.TXT_altitude.Name = "TXT_altitude";
+            this.TXT_altitude.TextChanged += new System.EventHandler(this.TXT_altitude_TextChanged);
+            // 
+            // label48
+            // 
+            resources.ApplyResources(this.label48, "label48");
+            this.label48.Name = "label48";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.BUT_grandresminus);
+            this.panel3.Controls.Add(this.BUT_grandresplus);
+            this.panel3.Controls.Add(this.TXT_GrandRes);
+            this.panel3.Controls.Add(this.label58);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // BUT_grandresminus
+            // 
+            resources.ApplyResources(this.BUT_grandresminus, "BUT_grandresminus");
+            this.BUT_grandresminus.Name = "BUT_grandresminus";
+            this.BUT_grandresminus.Tag = "custom";
+            this.BUT_grandresminus.UseVisualStyleBackColor = false;
+            this.BUT_grandresminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_grandres_MouseDown);
+            this.BUT_grandresminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_grandresplus
+            // 
+            resources.ApplyResources(this.BUT_grandresplus, "BUT_grandresplus");
+            this.BUT_grandresplus.Name = "BUT_grandresplus";
+            this.BUT_grandresplus.Tag = "custom";
+            this.BUT_grandresplus.UseVisualStyleBackColor = false;
+            this.BUT_grandresplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_grandres_MouseDown);
+            this.BUT_grandresplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_GrandRes
+            // 
+            resources.ApplyResources(this.TXT_GrandRes, "TXT_GrandRes");
+            this.TXT_GrandRes.Name = "TXT_GrandRes";
+            this.TXT_GrandRes.TextChanged += new System.EventHandler(this.TXT_GrandRes_TextChanged);
+            // 
+            // label58
+            // 
+            resources.ApplyResources(this.label58, "label58");
+            this.label58.Name = "label58";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.BUT_distminus);
+            this.panel4.Controls.Add(this.BUT_distplus);
+            this.panel4.Controls.Add(this.TXT_Distance);
+            this.panel4.Controls.Add(this.label50);
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Name = "panel4";
+            // 
+            // BUT_distminus
+            // 
+            resources.ApplyResources(this.BUT_distminus, "BUT_distminus");
+            this.BUT_distminus.Name = "BUT_distminus";
+            this.BUT_distminus.Tag = "custom";
+            this.BUT_distminus.UseVisualStyleBackColor = false;
+            this.BUT_distminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_dist_MouseDown);
+            this.BUT_distminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_distplus
+            // 
+            resources.ApplyResources(this.BUT_distplus, "BUT_distplus");
+            this.BUT_distplus.Name = "BUT_distplus";
+            this.BUT_distplus.Tag = "custom";
+            this.BUT_distplus.UseVisualStyleBackColor = false;
+            this.BUT_distplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_dist_MouseDown);
+            this.BUT_distplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_Distance
+            // 
+            resources.ApplyResources(this.TXT_Distance, "TXT_Distance");
+            this.TXT_Distance.Name = "TXT_Distance";
+            this.TXT_Distance.TextChanged += new System.EventHandler(this.TXT_Distance_TextChanged);
+            // 
+            // label50
+            // 
+            resources.ApplyResources(this.label50, "label50");
+            this.label50.Name = "label50";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.BUT_sidelapminus);
+            this.panel5.Controls.Add(this.BUT_sidelapplus);
+            this.panel5.Controls.Add(this.TXT_Sidelap);
+            this.panel5.Controls.Add(this.label59);
+            this.panel5.Controls.Add(this.BUT_overlapminus);
+            this.panel5.Controls.Add(this.BUT_overlapplus);
+            this.panel5.Controls.Add(this.TXT_Overlap);
+            this.panel5.Controls.Add(this.label60);
+            resources.ApplyResources(this.panel5, "panel5");
+            this.panel5.Name = "panel5";
+            // 
+            // BUT_sidelapminus
+            // 
+            resources.ApplyResources(this.BUT_sidelapminus, "BUT_sidelapminus");
+            this.BUT_sidelapminus.Name = "BUT_sidelapminus";
+            this.BUT_sidelapminus.Tag = "custom";
+            this.BUT_sidelapminus.UseVisualStyleBackColor = false;
+            this.BUT_sidelapminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_sidelap_MouseDown);
+            this.BUT_sidelapminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_sidelapplus
+            // 
+            resources.ApplyResources(this.BUT_sidelapplus, "BUT_sidelapplus");
+            this.BUT_sidelapplus.Name = "BUT_sidelapplus";
+            this.BUT_sidelapplus.Tag = "custom";
+            this.BUT_sidelapplus.UseVisualStyleBackColor = false;
+            this.BUT_sidelapplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_sidelap_MouseDown);
+            this.BUT_sidelapplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_Sidelap
+            // 
+            resources.ApplyResources(this.TXT_Sidelap, "TXT_Sidelap");
+            this.TXT_Sidelap.Name = "TXT_Sidelap";
+            this.TXT_Sidelap.TextChanged += new System.EventHandler(this.TXT_Sidelap_TextChanged);
+            // 
+            // label59
+            // 
+            resources.ApplyResources(this.label59, "label59");
+            this.label59.Name = "label59";
+            // 
+            // BUT_overlapminus
+            // 
+            resources.ApplyResources(this.BUT_overlapminus, "BUT_overlapminus");
+            this.BUT_overlapminus.Name = "BUT_overlapminus";
+            this.BUT_overlapminus.Tag = "custom";
+            this.BUT_overlapminus.UseVisualStyleBackColor = false;
+            this.BUT_overlapminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_overlap_MouseDown);
+            this.BUT_overlapminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_overlapplus
+            // 
+            resources.ApplyResources(this.BUT_overlapplus, "BUT_overlapplus");
+            this.BUT_overlapplus.Name = "BUT_overlapplus";
+            this.BUT_overlapplus.Tag = "custom";
+            this.BUT_overlapplus.UseVisualStyleBackColor = false;
+            this.BUT_overlapplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_overlap_MouseDown);
+            this.BUT_overlapplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_Overlap
+            // 
+            resources.ApplyResources(this.TXT_Overlap, "TXT_Overlap");
+            this.TXT_Overlap.Name = "TXT_Overlap";
+            this.TXT_Overlap.TextChanged += new System.EventHandler(this.TXT_Overlap_TextChanged);
+            // 
+            // label60
+            // 
+            resources.ApplyResources(this.label60, "label60");
+            this.label60.Name = "label60";
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.BUT_photoeveryminus);
+            this.panel9.Controls.Add(this.BUT_photoeveryplus);
+            this.panel9.Controls.Add(this.TXT_PhotoEvery);
+            this.panel9.Controls.Add(this.label57);
+            resources.ApplyResources(this.panel9, "panel9");
+            this.panel9.Name = "panel9";
+            // 
+            // BUT_photoeveryminus
+            // 
+            resources.ApplyResources(this.BUT_photoeveryminus, "BUT_photoeveryminus");
+            this.BUT_photoeveryminus.Name = "BUT_photoeveryminus";
+            this.BUT_photoeveryminus.Tag = "custom";
+            this.BUT_photoeveryminus.UseVisualStyleBackColor = false;
+            this.BUT_photoeveryminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_photoevery_MouseDown);
+            this.BUT_photoeveryminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_photoeveryplus
+            // 
+            resources.ApplyResources(this.BUT_photoeveryplus, "BUT_photoeveryplus");
+            this.BUT_photoeveryplus.Name = "BUT_photoeveryplus";
+            this.BUT_photoeveryplus.Tag = "custom";
+            this.BUT_photoeveryplus.UseVisualStyleBackColor = false;
+            this.BUT_photoeveryplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_photoevery_MouseDown);
+            this.BUT_photoeveryplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_PhotoEvery
+            // 
+            resources.ApplyResources(this.TXT_PhotoEvery, "TXT_PhotoEvery");
+            this.TXT_PhotoEvery.Name = "TXT_PhotoEvery";
+            this.TXT_PhotoEvery.TextChanged += new System.EventHandler(this.TXT_PhotoEvery_TextChanged);
+            // 
+            // label57
+            // 
+            resources.ApplyResources(this.label57, "label57");
+            this.label57.Name = "label57";
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label45);
+            this.panel6.Controls.Add(this.TXT_angle);
+            this.panel6.Controls.Add(this.BUT_angleminus);
+            this.panel6.Controls.Add(this.BUT_angleplus);
+            this.panel6.Controls.Add(this.TXT_headinghold);
+            this.panel6.Controls.Add(this.BUT_headingholdminus);
+            this.panel6.Controls.Add(this.BUT_headingholdplus);
+            this.panel6.Controls.Add(this.CHK_copter_headingholdlock);
+            this.panel6.Controls.Add(this.CHK_copter_headinghold);
+            this.panel6.Controls.Add(this.CMB_startfrom);
+            this.panel6.Controls.Add(this.label55);
+            resources.ApplyResources(this.panel6, "panel6");
+            this.panel6.Name = "panel6";
+            // 
+            // label45
+            // 
+            resources.ApplyResources(this.label45, "label45");
+            this.label45.Name = "label45";
+            // 
+            // TXT_angle
+            // 
+            resources.ApplyResources(this.TXT_angle, "TXT_angle");
+            this.TXT_angle.Name = "TXT_angle";
+            this.TXT_angle.TextChanged += new System.EventHandler(this.TXT_angle_TextChanged);
+            // 
+            // BUT_angleminus
+            // 
+            resources.ApplyResources(this.BUT_angleminus, "BUT_angleminus");
+            this.BUT_angleminus.Name = "BUT_angleminus";
+            this.BUT_angleminus.Tag = "custom";
+            this.BUT_angleminus.UseVisualStyleBackColor = false;
+            this.BUT_angleminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
+            this.BUT_angleminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_angleplus
+            // 
+            resources.ApplyResources(this.BUT_angleplus, "BUT_angleplus");
+            this.BUT_angleplus.Name = "BUT_angleplus";
+            this.BUT_angleplus.Tag = "custom";
+            this.BUT_angleplus.UseVisualStyleBackColor = false;
+            this.BUT_angleplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_angle_Down);
+            this.BUT_angleplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
             // 
             // TXT_headinghold
             // 
@@ -1610,12 +1779,169 @@
             this.CHK_copter_headinghold.UseVisualStyleBackColor = true;
             this.CHK_copter_headinghold.CheckedChanged += new System.EventHandler(this.CHK_copter_headinghold_CheckedChanged);
             // 
+            // CMB_startfrom
+            // 
+            this.CMB_startfrom.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.CMB_startfrom, "CMB_startfrom");
+            this.CMB_startfrom.FormattingEnabled = true;
+            this.CMB_startfrom.Name = "CMB_startfrom";
+            this.CMB_startfrom.SelectedIndexChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
+            // 
+            // label55
+            // 
+            resources.ApplyResources(this.label55, "label55");
+            this.label55.Name = "label55";
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.BUT_offsetminus);
+            this.panel7.Controls.Add(this.BUT_offsetplus);
+            this.panel7.Controls.Add(this.TXT_offset);
+            this.panel7.Controls.Add(this.labelLineOffset);
+            resources.ApplyResources(this.panel7, "panel7");
+            this.panel7.Name = "panel7";
+            // 
+            // BUT_offsetminus
+            // 
+            resources.ApplyResources(this.BUT_offsetminus, "BUT_offsetminus");
+            this.BUT_offsetminus.Name = "BUT_offsetminus";
+            this.BUT_offsetminus.Tag = "custom";
+            this.BUT_offsetminus.UseVisualStyleBackColor = false;
+            this.BUT_offsetminus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseDown);
+            this.BUT_offsetminus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_offsetplus
+            // 
+            resources.ApplyResources(this.BUT_offsetplus, "BUT_offsetplus");
+            this.BUT_offsetplus.Name = "BUT_offsetplus";
+            this.BUT_offsetplus.Tag = "custom";
+            this.BUT_offsetplus.UseVisualStyleBackColor = false;
+            this.BUT_offsetplus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_offset_MouseDown);
+            this.BUT_offsetplus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_offset
+            // 
+            resources.ApplyResources(this.TXT_offset, "TXT_offset");
+            this.TXT_offset.Name = "TXT_offset";
+            this.TXT_offset.TextChanged += new System.EventHandler(this.TXT_offset_TextChanged);
+            // 
+            // labelLineOffset
+            // 
+            resources.ApplyResources(this.labelLineOffset, "labelLineOffset");
+            this.labelLineOffset.Name = "labelLineOffset";
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label51);
+            this.panel8.Controls.Add(this.BUT_shiftdown);
+            this.panel8.Controls.Add(this.BUT_shiftup);
+            this.panel8.Controls.Add(this.BUT_shiftright);
+            this.panel8.Controls.Add(this.BUT_shiftleft);
+            resources.ApplyResources(this.panel8, "panel8");
+            this.panel8.Name = "panel8";
+            // 
+            // label51
+            // 
+            resources.ApplyResources(this.label51, "label51");
+            this.label51.Name = "label51";
+            // 
+            // BUT_shiftdown
+            // 
+            resources.ApplyResources(this.BUT_shiftdown, "BUT_shiftdown");
+            this.BUT_shiftdown.Name = "BUT_shiftdown";
+            this.BUT_shiftdown.Tag = "custom";
+            this.BUT_shiftdown.UseVisualStyleBackColor = false;
+            this.BUT_shiftdown.Click += new System.EventHandler(this.BUT_shiftdown_Click);
+            // 
+            // BUT_shiftup
+            // 
+            resources.ApplyResources(this.BUT_shiftup, "BUT_shiftup");
+            this.BUT_shiftup.Name = "BUT_shiftup";
+            this.BUT_shiftup.Tag = "custom";
+            this.BUT_shiftup.UseVisualStyleBackColor = false;
+            this.BUT_shiftup.Click += new System.EventHandler(this.BUT_shiftup_Click);
+            // 
+            // BUT_shiftright
+            // 
+            resources.ApplyResources(this.BUT_shiftright, "BUT_shiftright");
+            this.BUT_shiftright.Name = "BUT_shiftright";
+            this.BUT_shiftright.Tag = "custom";
+            this.BUT_shiftright.UseVisualStyleBackColor = false;
+            this.BUT_shiftright.Click += new System.EventHandler(this.BUT_shiftright_Click);
+            // 
+            // BUT_shiftleft
+            // 
+            resources.ApplyResources(this.BUT_shiftleft, "BUT_shiftleft");
+            this.BUT_shiftleft.Name = "BUT_shiftleft";
+            this.BUT_shiftleft.Tag = "custom";
+            this.BUT_shiftleft.UseVisualStyleBackColor = false;
+            this.BUT_shiftleft.Click += new System.EventHandler(this.BUT_shiftleft_Click);
+            // 
+            // panelMode6
+            // 
+            resources.ApplyResources(this.panelMode6, "panelMode6");
+            this.panelMode6.Controls.Add(this.label56);
+            this.panelMode6.Controls.Add(this.label47);
+            this.panelMode6.Controls.Add(this.lbl_photoevery);
+            this.panelMode6.Controls.Add(this.lbl_grndres);
+            this.panelMode6.Name = "panelMode6";
+            // 
+            // label56
+            // 
+            resources.ApplyResources(this.label56, "label56");
+            this.label56.Name = "label56";
+            // 
+            // label47
+            // 
+            resources.ApplyResources(this.label47, "label47");
+            this.label47.Name = "label47";
+            // 
+            // lbl_photoevery
+            // 
+            resources.ApplyResources(this.lbl_photoevery, "lbl_photoevery");
+            this.lbl_photoevery.Name = "lbl_photoevery";
+            // 
+            // lbl_grndres
+            // 
+            resources.ApplyResources(this.lbl_grndres, "lbl_grndres");
+            this.lbl_grndres.Name = "lbl_grndres";
+            // 
+            // panelMode6Easy
+            // 
+            resources.ApplyResources(this.panelMode6Easy, "panelMode6Easy");
+            this.panelMode6Easy.Controls.Add(this.label63);
+            this.panelMode6Easy.Controls.Add(this.lbl_speed);
+            this.panelMode6Easy.Controls.Add(this.label62);
+            this.panelMode6Easy.Controls.Add(this.lbl_alt);
+            this.panelMode6Easy.Name = "panelMode6Easy";
+            // 
+            // label63
+            // 
+            resources.ApplyResources(this.label63, "label63");
+            this.label63.Name = "label63";
+            // 
+            // lbl_speed
+            // 
+            resources.ApplyResources(this.lbl_speed, "lbl_speed");
+            this.lbl_speed.Name = "lbl_speed";
+            // 
+            // label62
+            // 
+            resources.ApplyResources(this.label62, "label62");
+            this.label62.Name = "label62";
+            // 
+            // lbl_alt
+            // 
+            resources.ApplyResources(this.lbl_alt, "lbl_alt");
+            this.lbl_alt.Name = "lbl_alt";
+            // 
             // GridUI
             // 
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.CMB_startfrom);
+            this.Controls.Add(this.panelMode6Easy);
+            this.Controls.Add(this.panelMode6);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label55);
             this.Controls.Add(this.lbl_flighttime);
             this.Controls.Add(this.label54);
             this.Controls.Add(this.lbl_distance);
@@ -1626,41 +1952,11 @@
             this.Controls.Add(this.BUT_zoomIn);
             this.Controls.Add(this.BUT_Close);
             this.Controls.Add(this.BUT_Ok);
-            this.Controls.Add(this.label51);
-            this.Controls.Add(this.BUT_shiftdown);
-            this.Controls.Add(this.BUT_shiftup);
-            this.Controls.Add(this.BUT_shiftright);
-            this.Controls.Add(this.BUT_shiftleft);
-            this.Controls.Add(this.BUT_distminus);
-            this.Controls.Add(this.BUT_distplus);
-            this.Controls.Add(this.TXT_Distance);
-            this.Controls.Add(this.label50);
-            this.Controls.Add(this.BUT_speedminus);
-            this.Controls.Add(this.BUT_speedplus);
-            this.Controls.Add(this.TXT_FlySpeed);
-            this.Controls.Add(this.label49);
-            this.Controls.Add(this.BUT_altminus);
-            this.Controls.Add(this.BUT_altplus);
-            this.Controls.Add(this.TXT_altitude);
-            this.Controls.Add(this.label48);
-            this.Controls.Add(this.BUT_offsetminus);
-            this.Controls.Add(this.BUT_offsetplus);
-            this.Controls.Add(this.TXT_offset);
-            this.Controls.Add(this.labelLineOffset);
             this.Controls.Add(this.label46);
-            this.Controls.Add(this.label45);
-            this.Controls.Add(this.TXT_angle);
-            this.Controls.Add(this.BUT_angleminus);
-            this.Controls.Add(this.BUT_angleplus);
             this.Controls.Add(this.TRK_zoom);
             this.Controls.Add(this.map);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lbl_area);
-            this.Controls.Add(this.TXT_headinghold);
-            this.Controls.Add(this.BUT_headingholdminus);
-            this.Controls.Add(this.BUT_headingholdplus);
-            this.Controls.Add(this.CHK_copter_headingholdlock);
-            this.Controls.Add(this.CHK_copter_headinghold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GridUI";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -1710,6 +2006,29 @@
             this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panelMode6.ResumeLayout(false);
+            this.panelMode6.PerformLayout();
+            this.panelMode6Easy.ResumeLayout(false);
+            this.panelMode6Easy.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1718,13 +2037,11 @@
         #endregion
 
         private Controls.myGMAP map;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lbl_area;
         private System.Windows.Forms.Label lbl_spacing;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label lbl_grndres;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lbl_footprint;
@@ -1734,7 +2051,6 @@
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label lbl_photoevery;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.TabPage tabCamera;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1795,7 +2111,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown NUM_angle;
-        private System.Windows.Forms.ComboBox CMB_camera;
         private System.Windows.Forms.CheckBox CHK_camdirection;
         private System.Windows.Forms.NumericUpDown NUM_altitude;
         private System.Windows.Forms.Label label1;
@@ -1807,7 +2122,6 @@
         private System.Windows.Forms.CheckBox CHK_markers;
         private System.Windows.Forms.CheckBox CHK_boundary;
         private Controls.MyButton BUT_Accept;
-        private System.Windows.Forms.TabControl tabControl1;
         private Controls.MyTrackBar TRK_zoom;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label28;
@@ -1838,32 +2152,7 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.NumericUpDown num_corridorwidth;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.TextBox TXT_angle;
-        private System.Windows.Forms.Button BUT_angleminus;
-        private System.Windows.Forms.Button BUT_angleplus;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label labelLineOffset;
-        private System.Windows.Forms.TextBox TXT_offset;
-        private System.Windows.Forms.Button BUT_offsetminus;
-        private System.Windows.Forms.Button BUT_offsetplus;
-        private System.Windows.Forms.Button BUT_altminus;
-        private System.Windows.Forms.Button BUT_altplus;
-        private System.Windows.Forms.TextBox TXT_altitude;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Button BUT_speedminus;
-        private System.Windows.Forms.Button BUT_speedplus;
-        private System.Windows.Forms.TextBox TXT_FlySpeed;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Button BUT_distminus;
-        private System.Windows.Forms.Button BUT_distplus;
-        private System.Windows.Forms.TextBox TXT_Distance;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Button BUT_shiftright;
-        private System.Windows.Forms.Button BUT_shiftleft;
-        private System.Windows.Forms.Button BUT_shiftup;
-        private System.Windows.Forms.Button BUT_shiftdown;
-        private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Button BUT_Ok;
         private System.Windows.Forms.Button BUT_Close;
         private System.Windows.Forms.Button BUT_zoomIn;
@@ -1874,12 +2163,77 @@
         private System.Windows.Forms.Label lbl_distance;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label lbl_flighttime;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.ComboBox CMB_startfrom;
+        protected System.Windows.Forms.GroupBox groupBox5;
+        protected System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BUT_speedminus;
+        private System.Windows.Forms.Button BUT_speedplus;
+        private System.Windows.Forms.TextBox TXT_FlySpeed;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Button BUT_altminus;
+        private System.Windows.Forms.Button BUT_altplus;
+        private System.Windows.Forms.TextBox TXT_altitude;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Button BUT_grandresminus;
+        private System.Windows.Forms.Button BUT_grandresplus;
+        private System.Windows.Forms.TextBox TXT_GrandRes;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Button BUT_distminus;
+        private System.Windows.Forms.Button BUT_distplus;
+        private System.Windows.Forms.TextBox TXT_Distance;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Button BUT_sidelapminus;
+        private System.Windows.Forms.Button BUT_sidelapplus;
+        private System.Windows.Forms.TextBox TXT_Sidelap;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Button BUT_overlapminus;
+        private System.Windows.Forms.Button BUT_overlapplus;
+        private System.Windows.Forms.TextBox TXT_Overlap;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox TXT_angle;
+        private System.Windows.Forms.Button BUT_angleminus;
+        private System.Windows.Forms.Button BUT_angleplus;
         private System.Windows.Forms.TextBox TXT_headinghold;
         private System.Windows.Forms.Button BUT_headingholdminus;
         private System.Windows.Forms.Button BUT_headingholdplus;
         private System.Windows.Forms.CheckBox CHK_copter_headingholdlock;
         private System.Windows.Forms.CheckBox CHK_copter_headinghold;
+        private System.Windows.Forms.ComboBox CMB_startfrom;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Button BUT_offsetminus;
+        private System.Windows.Forms.Button BUT_offsetplus;
+        private System.Windows.Forms.TextBox TXT_offset;
+        private System.Windows.Forms.Label labelLineOffset;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Button BUT_shiftdown;
+        private System.Windows.Forms.Button BUT_shiftup;
+        private System.Windows.Forms.Button BUT_shiftright;
+        private System.Windows.Forms.Button BUT_shiftleft;
+        private System.Windows.Forms.ComboBox CMB_camera;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Panel panelMode6;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label lbl_photoevery;
+        private System.Windows.Forms.Label lbl_grndres;
+        private System.Windows.Forms.Panel panelMode6Easy;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label lbl_speed;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label lbl_alt;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button BUT_photoeveryminus;
+        private System.Windows.Forms.Button BUT_photoeveryplus;
+        private System.Windows.Forms.TextBox TXT_PhotoEvery;
+        private System.Windows.Forms.Label label57;
     }
 }
