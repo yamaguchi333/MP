@@ -4230,7 +4230,6 @@ namespace MissionPlanner
 //                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
                 GCSViews.FlightData.mymap.Refresh();
 
-//                if (MainV2.instance.FlightData.last_failsafe)
                 if (MainV2.instance.FlightData.resume_flag > 0)
                 {
                     if (CustomMessageBox.Show("フェイルセーフからのレジューム飛行を行います。\n\n離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
@@ -4276,8 +4275,17 @@ namespace MissionPlanner
                 }
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_auto);
 
+                if (Settings.Instance.GetBoolean("use_grid_speed2"))
+                {
+                    float speed2 = Settings.Instance.GetFloat("grid_speed2");
+                    MainV2.comPort.setParam("RTL_SPEED", speed2 * 100);
+                }
+                else
+                {
+                    MainV2.comPort.setParam("RTL_SPEED", 0);
+                }
+
                 // branch resume on failsafe
-//                if (MainV2.instance.FlightData.last_failsafe)
                 if (MainV2.instance.FlightData.resume_flag > 0)
                 {
                     MainV2.instance.FlightData.ResumeOnFailSafe();

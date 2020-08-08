@@ -99,7 +99,11 @@ namespace MissionPlanner.Grid
 
         // @eams add for camera easy mode
         bool grid_camera_easy_mode = false;
-
+#if false
+        // @eams add / grid_speed2
+        bool use_grid_speed2 = false;
+        double grid_speed2 = 0.0;
+#endif
         // GridUI
         public GridUI(GridPlugin plugin)
         {
@@ -249,7 +253,13 @@ namespace MissionPlanner.Grid
             // @eams add / grid_camera_easy_mode
             if (plugin.Host.config["grid_camera_easy_mode"] != null)
                 grid_camera_easy_mode = bool.Parse(plugin.Host.config["grid_camera_easy_mode"]);
-
+#if false
+            // @eams add / grid_speed2
+            if (plugin.Host.config["use_grid_speed2"] != null)
+                use_grid_speed2 = bool.Parse(plugin.Host.config["use_grid_speed2"]);
+            if (plugin.Host.config["grid_speed2"] != null)
+                grid_speed2 = double.Parse(plugin.Host.config["grid_speed2"]);
+#endif
             // @eams add
             if (mesh_type > 0)
             {
@@ -266,6 +276,10 @@ namespace MissionPlanner.Grid
                 if (grid_type == 5)
                 {
                     panel7.Visible = false;
+                }
+                else
+                {
+                    panel10.Visible = false;
                 }
 
                 panelMode6.Visible = false;
@@ -288,6 +302,9 @@ namespace MissionPlanner.Grid
                 panel4.Visible = false;
                 panel7.Visible = false;
             }
+            TXT_speed2.Enabled = false;
+            BUT_speed2plus.Enabled = false;
+            BUT_speed2minus.Enabled = false;
         }
 
         bool deleteLastLAND = false;    // @eams add
@@ -405,6 +422,7 @@ namespace MissionPlanner.Grid
             CHK_usespeed.Checked = griddata.usespeed;
             NUM_UpDownFlySpeed.Value = griddata.speed;
             TXT_FlySpeed.Text = Decimal.Round(NUM_UpDownFlySpeed.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
+            TXT_speed2.Text = Decimal.Round(NUM_UpDownFlySpeed.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
             CHK_toandland.Checked = griddata.autotakeoff;
             CHK_toandland_RTL.Checked = griddata.autotakeoff_RTL;
             NUM_split.Value = griddata.splitmission;
@@ -521,6 +539,9 @@ namespace MissionPlanner.Grid
                 loadsetting("grid_usespeed", CHK_usespeed);
                 loadsetting("grid_speed", NUM_UpDownFlySpeed);
                 TXT_FlySpeed.Text = Decimal.Round(NUM_UpDownFlySpeed.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
+                loadsetting("use_grid_speed2", CHK_speed2);
+                loadsetting("grid_speed2", TXT_speed2);
+//                TXT_speed2.Text = Decimal.Round(NUM_UpDownFlySpeed.Value, 1, MidpointRounding.AwayFromZero).ToString();   //@eams add
                 loadsetting("grid_autotakeoff", CHK_toandland);
                 loadsetting("grid_autotakeoff_RTL", CHK_toandland_RTL);
 
@@ -618,6 +639,8 @@ namespace MissionPlanner.Grid
 
             plugin.Host.config["grid_usespeed"] = CHK_usespeed.Checked.ToString();
             plugin.Host.config["grid_speed"] = NUM_UpDownFlySpeed.Value.ToString(); //@eams add
+            plugin.Host.config["use_grid_speed2"] = CHK_speed2.Checked.ToString();  //@eams add
+            plugin.Host.config["grid_speed2"] = TXT_speed2.Text;    //@eams add
 
             plugin.Host.config["grid_dist"] = NUM_Distance.Value.ToString();
             plugin.Host.config["grid_overshoot1"] = NUM_overshoot.Value.ToString();
@@ -1181,6 +1204,13 @@ namespace MissionPlanner.Grid
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO, (float)impeller_no, (float)impeller_pwm_on, 0, 0, 0, 0, 0, gridobject);
                 plugin.Host.AddWPtoList(MAVLink.MAV_CMD.WAYPOINT, impeller_on_delay, 0, 0, 0, 0, 0, (double)(Alt * CurrentState.multiplierdist), gridobject);
             }
+
+            if (CHK_speed2.Checked && addwp_firsttime)
+            {
+                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0,
+                (double)(NUM_UpDownFlySpeed.Value / (Decimal)CurrentState.multiplierspeed), 0, 0, 0, 0, 0, gridobject);
+            }
+
             addwp_firsttime = false;
         }
 
@@ -1946,6 +1976,12 @@ namespace MissionPlanner.Grid
                             wpsplitstart.Add(wpno);
                         }
 
+                        if (CHK_speed2.Checked)
+                        {
+                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0,
+                            (double)(Decimal.Parse(TXT_speed2.Text) / (Decimal)CurrentState.multiplierspeed), 0, 0, 0, 0, 0, gridobject);
+                        }
+
                         if (grid_type >= 2 && grid_type <= 4)
                         {
                             // @eams add to close
@@ -2293,6 +2329,13 @@ namespace MissionPlanner.Grid
 
                     if (CHK_toandland.Checked)
                     {
+#if false
+                        if (CHK_speed2.Checked)
+                        {
+                            plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0,
+                            (double)(Decimal.Parse(TXT_speed2.Text) / (Decimal)CurrentState.multiplierspeed), 0, 0, 0, 0, 0, gridobject);
+                        }
+#endif
                         if (CHK_toandland_RTL.Checked)
                         {
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.RETURN_TO_LAUNCH, 0, 0, 0, 0, 0, 0, 0, gridobject);
@@ -2538,7 +2581,7 @@ namespace MissionPlanner.Grid
             target = null;
         }
 
-        #region ライン角度
+#region ライン角度
         private void BUT_angle_Down(object sender, MouseEventArgs e)
         {
             target = TXT_angle;
@@ -2570,9 +2613,9 @@ namespace MissionPlanner.Grid
             TXT_angle.TextChanged += TXT_angle_TextChanged;
             NUM_angle.Value = d;
         }
-        #endregion
+#endregion
 
-        #region ラインオフセット
+#region ラインオフセット
         private void BUT_offset_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_offset;
@@ -2606,9 +2649,9 @@ namespace MissionPlanner.Grid
             TXT_offset.TextChanged += TXT_offset_TextChanged;
             domainUpDown1_ValueChanged(sender, e);
         }
-        #endregion
+#endregion
 
-        #region 飛行高度
+#region 飛行高度
         private void BUT_alt_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_altitude;
@@ -2642,9 +2685,9 @@ namespace MissionPlanner.Grid
             TXT_altitude.TextChanged += TXT_altitude_TextChanged;
             NUM_altitude.Value = d;
         }
-        #endregion
+#endregion
 
-        #region 飛行速度
+#region 飛行速度
         private void BUT_speed_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_FlySpeed;
@@ -2678,9 +2721,9 @@ namespace MissionPlanner.Grid
             TXT_FlySpeed.TextChanged += TXT_FlySpeed_TextChanged;
             NUM_UpDownFlySpeed.Value = d;
         }
-        #endregion
+#endregion
 
-        #region ライン間距離
+#region ライン間距離
         private void BUT_dist_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_Distance;
@@ -2714,9 +2757,9 @@ namespace MissionPlanner.Grid
             TXT_Distance.TextChanged += TXT_Distance_TextChanged;
             NUM_Distance.Value = d;
         }
-        #endregion
+#endregion
 
-        #region 機体前方角度
+#region 機体前方角度
         private void TXT_headinghold_TextChanged(object sender, EventArgs e)
         {
             decimal d = NUM_angle.Minimum;
@@ -2734,9 +2777,9 @@ namespace MissionPlanner.Grid
             TXT_headinghold.Text = d.ToString();
             TXT_headinghold.TextChanged += TXT_headinghold_TextChanged;
         }
-        #endregion
+#endregion
 
-        #region オーバーラップ
+#region オーバーラップ
         private void BUT_overlap_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_Overlap;
@@ -2770,9 +2813,9 @@ namespace MissionPlanner.Grid
             TXT_Overlap.TextChanged += TXT_Overlap_TextChanged;
             num_overlap.Value = d;
         }
-        #endregion
+#endregion
 
-        #region サイドラップ
+#region サイドラップ
         private void BUT_sidelap_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_Sidelap;
@@ -2806,9 +2849,9 @@ namespace MissionPlanner.Grid
             TXT_Sidelap.TextChanged += TXT_Sidelap_TextChanged;
             num_sidelap.Value = d;
         }
-        #endregion
+#endregion
 
-        #region 地上分解能
+#region 地上分解能
         private void BUT_grandres_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_GrandRes;
@@ -2866,9 +2909,9 @@ namespace MissionPlanner.Grid
             return flyalt;
         }
 
-        #endregion
+#endregion
 
-        #region シャッター間隔
+#region シャッター間隔
         private void BUT_photoevery_MouseDown(object sender, MouseEventArgs e)
         {
             target = TXT_PhotoEvery;
@@ -2913,9 +2956,64 @@ namespace MissionPlanner.Grid
                 domainUpDown1_ValueChanged(this, null);
             }
         }
-        #endregion
+#endregion
 
-        #region グリッド位置調整
+#region ミッション外飛行速度
+        private void CHK_speed2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CHK_speed2.Checked)
+            {
+                TXT_speed2.Enabled = true;
+                //CHK_speed2.Enabled = true;
+                //CHK_speed2.Checked = false;
+                BUT_speed2plus.Enabled = true;
+                BUT_speed2minus.Enabled = true;
+            }
+            else
+            {
+                TXT_speed2.Enabled = false;
+                //CHK_speed2.Enabled = false;
+                BUT_speed2plus.Enabled = false;
+                BUT_speed2minus.Enabled = false;
+            }
+        }
+
+        private void BUT_speed2_MouseDown(object sender, MouseEventArgs e)
+        {
+            target = TXT_speed2;
+            MaximumValue = 999;
+            MinimumValue = 0;
+            CurrentValue += (sender == BUT_speed2plus) ? 0.1 : -0.1;
+            timer1.Interval = def_interval;
+            incrementValue = (sender == BUT_speed2plus) ? 0.1 : -0.1;
+            timer1.Start();
+        }
+
+        private void TXT_speed2_TextChanged(object sender, EventArgs e)
+        {
+            decimal d = 0;
+            if (!String.IsNullOrWhiteSpace(TXT_speed2.Text))
+            {
+                if (decimal.TryParse(TXT_speed2.Text, out d))
+                {
+                    if (d > 999)
+                    {
+                        d = 999;
+                    }
+                    if (d < 0)
+                    {
+                        d = 0;
+                    }
+                }
+            }
+            TXT_speed2.TextChanged -= TXT_speed2_TextChanged;
+            TXT_speed2.Text = d.ToString("f1");
+            TXT_speed2.TextChanged += TXT_speed2_TextChanged;
+            //domainUpDown1_ValueChanged(sender, e);
+        }
+#endregion
+
+#region グリッド位置調整
         private void grid_shift(int angle)
         {
             List<PointLatLngAlt> newgrid = new List<PointLatLngAlt>();
@@ -2950,6 +3048,6 @@ namespace MissionPlanner.Grid
         {
             grid_shift(270);
         }
-        #endregion
+#endregion
     }
 }

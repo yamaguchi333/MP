@@ -816,8 +816,93 @@ namespace MissionPlanner
         }
 
         private int _battery_remaining;
-
-        [DisplayText("Bat Current (Amps)")]
+#if true    // @eams add
+        [DisplayText("機体バッテリ残量 (%)")]
+        public int battery_remaining2
+        {
+            get
+            {
+                var batt_per = 0;
+#if true
+                if (_battery_voltage >= 25.0)
+                {
+                    batt_per = 100;
+                }
+                else if (_battery_voltage >= 24.0)
+                {
+                    batt_per = 90;
+                }
+                else if (_battery_voltage >= 23.5)
+                {
+                    batt_per = 70;
+                }
+                else if (_battery_voltage >= 23.0)
+                {
+                    batt_per = 65;
+                }
+                else if (_battery_voltage >= 22.5)
+                {
+                    batt_per = 50;
+                }
+                else if (_battery_voltage >= 22.0)
+                {
+                    batt_per = 35;
+                }
+                else if (_battery_voltage >= 21.7)
+                {
+                    batt_per = 15;
+                }
+                else if (_battery_voltage >= 21.0)
+                {
+                    batt_per = 5;
+                }
+                else
+                {
+                    batt_per = 0;
+                }
+#else
+                if (_battery_voltage >= 12.5)
+                {
+                    batt_per = 100;
+                }
+                else if (_battery_voltage >= 12.0)
+                {
+                    batt_per = 90;
+                }
+                else if (_battery_voltage >= 11.75)
+                {
+                    batt_per = 70;
+                }
+                else if (_battery_voltage >= 11.5)
+                {
+                    batt_per = 65;
+                }
+                else if (_battery_voltage >= 11.25)
+                {
+                    batt_per = 50;
+                }
+                else if (_battery_voltage >= 11.0)
+                {
+                    batt_per = 35;
+                }
+                else if (_battery_voltage >= 10.85)
+                {
+                    batt_per = 15;
+                }
+                else if (_battery_voltage >= 10.5)
+                {
+                    batt_per = 5;
+                }
+                else
+                {
+                    batt_per = 0;
+                }
+#endif
+                return batt_per;
+            }
+        }
+#endif
+            [DisplayText("Bat Current (Amps)")]
         public double current
         {
             get { return _current; }
@@ -1626,12 +1711,17 @@ namespace MissionPlanner
                         if ((ch3percent > 12 || _groundspeed > 3.0) && armed)
                         {
                             timeInAir++;
-                            timeSinceArmInAir++;
                         }
 
                         // to maintain total timeinair for this session not just based on arming
                         if (!armed)
+                        {
                             timeSinceArmInAir = 0;
+                        }
+                        else
+                        {
+                            timeSinceArmInAir++;
+                        }
 
                         if (!gotwind)
                             dowindcalc();

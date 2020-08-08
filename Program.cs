@@ -60,13 +60,13 @@ namespace MissionPlanner
         [STAThread]
         public static void Main(string[] args)
         {
+            Program.args = args;
             Start();
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void Start()
         { 
-            Program.args = args;
             Console.WriteLine(
                 "If your error is about Microsoft.DirectX.DirectInput, please install the latest directx redist from here http://www.microsoft.com/en-us/download/details.aspx?id=35 \n\n");
             Console.WriteLine("Debug under mono    MONO_LOG_LEVEL=debug mono MissionPlanner.exe");
@@ -98,6 +98,13 @@ namespace MissionPlanner
             {
                 Utilities.Update.DoUpdate();
                 return;
+            }
+
+            // @eams add for title name
+            string config_name = "";
+            if (args.Length >= 2 && args[0] == "/title")
+            {
+                config_name = args[1];
             }
 
             name = "Mission Planner";
@@ -146,6 +153,10 @@ namespace MissionPlanner
                 ? File.ReadAllText("version.txt")
                 : System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             Splash.Text = name + " " + Application.ProductVersion + " build " + strVersion;
+            if (config_name != "")
+            {
+                Splash.Text += " [" + config_name + "]";  // @eams add
+            }
             Splash.Show();
 
             Application.DoEvents();

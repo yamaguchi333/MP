@@ -213,6 +213,11 @@
             this.BUT_offsetplus = new System.Windows.Forms.Button();
             this.TXT_offset = new System.Windows.Forms.TextBox();
             this.labelLineOffset = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.BUT_speed2minus = new System.Windows.Forms.Button();
+            this.BUT_speed2plus = new System.Windows.Forms.Button();
+            this.TXT_speed2 = new System.Windows.Forms.TextBox();
+            this.CHK_speed2 = new System.Windows.Forms.CheckBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label51 = new System.Windows.Forms.Label();
             this.BUT_shiftdown = new System.Windows.Forms.Button();
@@ -272,6 +277,7 @@
             this.panel9.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panelMode6.SuspendLayout();
             this.panelMode6Easy.SuspendLayout();
@@ -1417,6 +1423,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panel9);
             this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Controls.Add(this.panel7);
+            this.flowLayoutPanel1.Controls.Add(this.panel10);
             this.flowLayoutPanel1.Controls.Add(this.panel8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -1830,6 +1837,46 @@
             resources.ApplyResources(this.labelLineOffset, "labelLineOffset");
             this.labelLineOffset.Name = "labelLineOffset";
             // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.BUT_speed2minus);
+            this.panel10.Controls.Add(this.BUT_speed2plus);
+            this.panel10.Controls.Add(this.TXT_speed2);
+            this.panel10.Controls.Add(this.CHK_speed2);
+            resources.ApplyResources(this.panel10, "panel10");
+            this.panel10.Name = "panel10";
+            // 
+            // BUT_speed2minus
+            // 
+            resources.ApplyResources(this.BUT_speed2minus, "BUT_speed2minus");
+            this.BUT_speed2minus.Name = "BUT_speed2minus";
+            this.BUT_speed2minus.Tag = "custom";
+            this.BUT_speed2minus.UseVisualStyleBackColor = false;
+            this.BUT_speed2minus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_speed2_MouseDown);
+            this.BUT_speed2minus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // BUT_speed2plus
+            // 
+            resources.ApplyResources(this.BUT_speed2plus, "BUT_speed2plus");
+            this.BUT_speed2plus.Name = "BUT_speed2plus";
+            this.BUT_speed2plus.Tag = "custom";
+            this.BUT_speed2plus.UseVisualStyleBackColor = false;
+            this.BUT_speed2plus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BUT_speed2_MouseDown);
+            this.BUT_speed2plus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BUT_MouseUp);
+            // 
+            // TXT_speed2
+            // 
+            resources.ApplyResources(this.TXT_speed2, "TXT_speed2");
+            this.TXT_speed2.Name = "TXT_speed2";
+            this.TXT_speed2.TextChanged += new System.EventHandler(this.TXT_speed2_TextChanged);
+            // 
+            // CHK_speed2
+            // 
+            resources.ApplyResources(this.CHK_speed2, "CHK_speed2");
+            this.CHK_speed2.Name = "CHK_speed2";
+            this.CHK_speed2.UseVisualStyleBackColor = true;
+            this.CHK_speed2.CheckedChanged += new System.EventHandler(this.CHK_speed2_CheckedChanged);
+            // 
             // panel8
             // 
             this.panel8.Controls.Add(this.label51);
@@ -2023,6 +2070,8 @@
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panelMode6.ResumeLayout(false);
@@ -2235,5 +2284,10 @@
         private System.Windows.Forms.Button BUT_photoeveryplus;
         private System.Windows.Forms.TextBox TXT_PhotoEvery;
         private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Button BUT_speed2minus;
+        private System.Windows.Forms.Button BUT_speed2plus;
+        private System.Windows.Forms.TextBox TXT_speed2;
+        private System.Windows.Forms.CheckBox CHK_speed2;
     }
 }
