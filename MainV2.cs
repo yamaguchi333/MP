@@ -4277,8 +4277,8 @@ namespace MissionPlanner
 
                 if (Settings.Instance.GetBoolean("use_grid_speed2"))
                 {
-                    float speed2 = Settings.Instance.GetFloat("grid_speed2");
-                    MainV2.comPort.setParam("RTL_SPEED", speed2 * 100);
+                    float grid_speed2 = Settings.Instance.GetFloat("grid_speed2");
+                    MainV2.comPort.setParam("RTL_SPEED", grid_speed2 * 100);
                 }
                 else
                 {

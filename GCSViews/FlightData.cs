@@ -5423,10 +5423,7 @@ namespace MissionPlanner.GCSViews
                         return;
                     }
                 }
-#if false
-                // DO_CHANGE_SPEED
-                MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed, 0, 0, 0, 0, 0);
-#endif
+
                 // startup delay
                 int grid_startup_delay = 0;
                 for (ushort a = 0; a < wpcount; a++)
@@ -5462,6 +5459,14 @@ namespace MissionPlanner.GCSViews
                     }
                 }
                 await Task.Delay(grid_startup_delay * 1000);
+
+                // change speed2 for outer mission speed
+                if (Settings.Instance.GetBoolean("use_grid_speed2"))
+                {
+                    float grid_speed2 = Settings.Instance.GetFloat("grid_speed2");
+                    // DO_CHANGE_SPEED
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed2, 0, 0, 0, 0, 0);
+                }
 
                 // check wp_dist value is not 0
                 timeout = 0;
@@ -5544,6 +5549,15 @@ namespace MissionPlanner.GCSViews
                 // set WPNAV_SPEED original value
                 MainV2.comPort.setParam("WPNAV_SPEED", wpnav_speed);
 #endif
+
+                // change speed for inner mission speed
+                if (Settings.Instance.GetBoolean("use_grid_speed2"))
+                {
+                    float grid_speed = Settings.Instance.GetFloat("grid_speed");
+                    // DO_CHANGE_SPEED
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed, 0, 0, 0, 0, 0);
+                }
+
                 // auto 
                 timeout = 0;
                 while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())

@@ -191,7 +191,7 @@ namespace MissionPlanner
         public float gpshdop { get; set; }
 
 #if true    // @eams changed
-        [DisplayText("衛星捕捉数")]
+        [DisplayText("衛星捕捉数 (個)")]
 #else
         [DisplayText("Sat Count")]
 #endif
@@ -264,13 +264,15 @@ namespace MissionPlanner
         public float asratio { get; set; }
 
 #if true    // @eams changed
-        [DisplayText("機体速度 (m/s)")]
+        //[DisplayText("機体速度 (m/s)")]
+        [DisplayText("機体速度 (km/h)")]
 #else
         [DisplayText("GroundSpeed (speed)")]
 #endif
         public float groundspeed
         {
-            get { return _groundspeed*multiplierspeed; }
+            //get { return _groundspeed*multiplierspeed; }
+            get { return (_groundspeed * multiplierspeed)/1000*3600; }  // @eams change
             set { _groundspeed = value; }
         }
 
@@ -685,7 +687,7 @@ namespace MissionPlanner
 
         //Time in Air converted to min.sec format for easier reading
 #if true    // @eams changed
-        [DisplayText("飛行時間")]
+        [DisplayText("飛行時間 (分/秒)")]
 #else
         [DisplayText("Time in Air (min.sec)")]
 #endif
@@ -818,11 +820,11 @@ namespace MissionPlanner
         private int _battery_remaining;
 #if true    // @eams add
         [DisplayText("機体バッテリ残量 (%)")]
-        public int battery_remaining2
+        public double battery_remaining2
         {
             get
             {
-                var batt_per = 0;
+                double batt_per = 0;
 #if true
                 if (_battery_voltage >= 25.0)
                 {
@@ -830,31 +832,35 @@ namespace MissionPlanner
                 }
                 else if (_battery_voltage >= 24.0)
                 {
-                    batt_per = 90;
+                    batt_per = (_battery_voltage - 24.0) * 10 + 90;
                 }
                 else if (_battery_voltage >= 23.5)
                 {
-                    batt_per = 70;
+                    batt_per = (_battery_voltage - 23.5) * (20 / 0.5) + 70;
                 }
                 else if (_battery_voltage >= 23.0)
                 {
-                    batt_per = 65;
+                    batt_per = (_battery_voltage - 23.0) * (5 / 0.5) + 65;
                 }
                 else if (_battery_voltage >= 22.5)
                 {
-                    batt_per = 50;
+                    batt_per = (_battery_voltage - 22.5) * (15 / 0.5) + 50;
                 }
                 else if (_battery_voltage >= 22.0)
                 {
-                    batt_per = 35;
+                    batt_per = (_battery_voltage - 22.0) * (15 / 0.5) + 35;
                 }
                 else if (_battery_voltage >= 21.7)
                 {
-                    batt_per = 15;
+                    batt_per = (_battery_voltage - 21.7) * (20 / 0.3) + 15;
+                }
+                else if (_battery_voltage >= 21.5)
+                {
+                    batt_per = (_battery_voltage - 21.5) * (5 / 0.2) + 10;
                 }
                 else if (_battery_voltage >= 21.0)
                 {
-                    batt_per = 5;
+                    batt_per = (_battery_voltage - 21.0) * (10 / 0.5);
                 }
                 else
                 {

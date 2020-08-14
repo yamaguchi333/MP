@@ -7595,6 +7595,11 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 return;
             }
+
+            double grid_shift = 0.5;
+            if (Settings.Instance["grid_shift"] != null)
+                grid_shift = double.Parse(Settings.Instance["grid_shift"]);
+
             //ミッションリストで任意のWAYPOINTが選択表示されていないとsetfromMapで不具合が生じる
             //事前に先頭のWAYPOINTを選択して回避
             var commands = GetCommandList();
@@ -7636,7 +7641,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         if (marker.Tag != null && marker.Tag.ToString() == markerid.ToString())
                         {
                             var temp = new PointLatLngAlt(marker.Position.Lat, marker.Position.Lng);
-                            marker.Position = temp.newpos(angle, 0.5).Point();
+                            marker.Position = temp.newpos(angle, grid_shift).Point();
                         }
                     }
                 }

@@ -99,11 +99,7 @@ namespace MissionPlanner.Grid
 
         // @eams add for camera easy mode
         bool grid_camera_easy_mode = false;
-#if false
-        // @eams add / grid_speed2
-        bool use_grid_speed2 = false;
-        double grid_speed2 = 0.0;
-#endif
+
         // GridUI
         public GridUI(GridPlugin plugin)
         {
@@ -253,13 +249,7 @@ namespace MissionPlanner.Grid
             // @eams add / grid_camera_easy_mode
             if (plugin.Host.config["grid_camera_easy_mode"] != null)
                 grid_camera_easy_mode = bool.Parse(plugin.Host.config["grid_camera_easy_mode"]);
-#if false
-            // @eams add / grid_speed2
-            if (plugin.Host.config["use_grid_speed2"] != null)
-                use_grid_speed2 = bool.Parse(plugin.Host.config["use_grid_speed2"]);
-            if (plugin.Host.config["grid_speed2"] != null)
-                grid_speed2 = double.Parse(plugin.Host.config["grid_speed2"]);
-#endif
+
             // @eams add
             if (mesh_type > 0)
             {
@@ -1164,7 +1154,7 @@ namespace MissionPlanner.Grid
                         plugin.Host.AddWPtoList(MAVLink.MAV_CMD.CONDITION_YAW, Convert.ToInt32(TXT_headinghold.Text), 0, 0, 0, 0, 0, 0, gridobject);
                     }
                 }
-                else if (grid_type == 3)
+                else if (grid_type == 3 || grid_type == 5 || grid_type == 6)
                 {
                     if (addwp_firsttime)
                     {
@@ -3016,10 +3006,14 @@ namespace MissionPlanner.Grid
 #region グリッド位置調整
         private void grid_shift(int angle)
         {
+            double grid_shift = 0.5;
+            if (plugin.Host.config["grid_shift"] != null)
+                grid_shift = double.Parse(plugin.Host.config["grid_shift"]);
+
             List<PointLatLngAlt> newgrid = new List<PointLatLngAlt>();
             foreach (var point in list)
             {
-                newgrid.Add(point.newpos(angle, 0.5));
+                newgrid.Add(point.newpos(angle, grid_shift));
             }
             list.Clear();
             foreach (var point in newgrid)
