@@ -275,7 +275,7 @@ namespace MissionPlanner
         }
 #if true    // @eams changed
         [DisplayText("機体速度 (km/h)")]
-        public float groundspeed_kmh
+        public float groundspeed_kph
         {
             get { return (_groundspeed * multiplierspeed) / 1000 * 3600; }
             set { _groundspeed = value; }
