@@ -264,18 +264,23 @@ namespace MissionPlanner
         public float asratio { get; set; }
 
 #if true    // @eams changed
-        //[DisplayText("機体速度 (m/s)")]
-        [DisplayText("機体速度 (km/h)")]
+        [DisplayText("機体速度 (m/s)")]
 #else
         [DisplayText("GroundSpeed (speed)")]
 #endif
         public float groundspeed
         {
-            //get { return _groundspeed*multiplierspeed; }
-            get { return (_groundspeed * multiplierspeed)/1000*3600; }  // @eams change
+            get { return _groundspeed*multiplierspeed; }
             set { _groundspeed = value; }
         }
-
+#if true    // @eams changed
+        [DisplayText("機体速度 (km/h)")]
+        public float groundspeed_kmh
+        {
+            get { return (_groundspeed * multiplierspeed) / 1000 * 3600; }
+            set { _groundspeed = value; }
+        }
+#endif
         // accel
         [DisplayText("Accel X")]
         public float ax { get; set; }
@@ -819,91 +824,86 @@ namespace MissionPlanner
 
         private int _battery_remaining;
 #if true    // @eams add
+        private double _battery_voltage_pre = 0;
+        private bool _recover_flag = true;
         [DisplayText("機体バッテリ残量 (%)")]
         public double battery_remaining2
         {
             get
             {
+                double batt_vol = 0;
+                if (_recover_flag)
+                {
+                    if (_battery_voltage < 23.8)
+                    {
+                        _recover_flag = false;
+                    }
+                    batt_vol = _battery_voltage_pre = _battery_voltage;
+                }
+                else
+                {
+                    if (_battery_voltage >= 23.8)
+                    {
+                        //表示回復
+                        batt_vol = _battery_voltage_pre = _battery_voltage;
+                        _recover_flag = true;
+                    }
+                    else
+                    {
+                        if (_battery_voltage > _battery_voltage_pre)
+                        {
+                            //表示回復防止
+                            batt_vol = _battery_voltage_pre;
+                        }
+                        else
+                        {
+                            batt_vol = _battery_voltage_pre = _battery_voltage;
+                        }
+                    }
+                }
+
                 double batt_per = 0;
-#if true
-                if (_battery_voltage >= 25.0)
+
+                if (batt_vol >= 25.0)
                 {
                     batt_per = 100;
                 }
-                else if (_battery_voltage >= 24.0)
+                else if (batt_vol >= 24.0)
                 {
-                    batt_per = (_battery_voltage - 24.0) * 10 + 90;
+                    batt_per = (batt_vol - 24.0) * 10 + 90;
                 }
-                else if (_battery_voltage >= 23.5)
+                else if (batt_vol >= 23.8)
                 {
-                    batt_per = (_battery_voltage - 23.5) * (20 / 0.5) + 70;
+                    batt_per = (batt_vol - 23.8) * (15 / 0.2) + 85;
                 }
-                else if (_battery_voltage >= 23.0)
+                else if (batt_vol >= 23.0)
                 {
-                    batt_per = (_battery_voltage - 23.0) * (5 / 0.5) + 65;
+                    batt_per = (batt_vol - 23.0) * (20 / 0.8) + 65;
                 }
-                else if (_battery_voltage >= 22.5)
+                else if (batt_vol >= 22.5)
                 {
-                    batt_per = (_battery_voltage - 22.5) * (15 / 0.5) + 50;
+                    batt_per = (batt_vol - 22.5) * (15 / 0.5) + 50;
                 }
-                else if (_battery_voltage >= 22.0)
+                else if (batt_vol >= 22.0)
                 {
-                    batt_per = (_battery_voltage - 22.0) * (15 / 0.5) + 35;
+                    batt_per = (batt_vol - 22.0) * (15 / 0.5) + 35;
                 }
-                else if (_battery_voltage >= 21.7)
+                else if (batt_vol >= 21.7)
                 {
-                    batt_per = (_battery_voltage - 21.7) * (20 / 0.3) + 15;
+                    batt_per = (batt_vol - 21.7) * (20 / 0.3) + 15;
                 }
-                else if (_battery_voltage >= 21.5)
+                else if (batt_vol >= 21.5)
                 {
-                    batt_per = (_battery_voltage - 21.5) * (5 / 0.2) + 10;
+                    batt_per = (batt_vol - 21.5) * (5 / 0.2) + 10;
                 }
-                else if (_battery_voltage >= 21.0)
+                else if (batt_vol >= 21.0)
                 {
-                    batt_per = (_battery_voltage - 21.0) * (10 / 0.5);
+                    batt_per = (batt_vol - 21.0) * (10 / 0.5);
                 }
                 else
                 {
                     batt_per = 0;
                 }
-#else
-                if (_battery_voltage >= 12.5)
-                {
-                    batt_per = 100;
-                }
-                else if (_battery_voltage >= 12.0)
-                {
-                    batt_per = 90;
-                }
-                else if (_battery_voltage >= 11.75)
-                {
-                    batt_per = 70;
-                }
-                else if (_battery_voltage >= 11.5)
-                {
-                    batt_per = 65;
-                }
-                else if (_battery_voltage >= 11.25)
-                {
-                    batt_per = 50;
-                }
-                else if (_battery_voltage >= 11.0)
-                {
-                    batt_per = 35;
-                }
-                else if (_battery_voltage >= 10.85)
-                {
-                    batt_per = 15;
-                }
-                else if (_battery_voltage >= 10.5)
-                {
-                    batt_per = 5;
-                }
-                else
-                {
-                    batt_per = 0;
-                }
-#endif
                 return batt_per;
             }
         }

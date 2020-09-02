@@ -1585,12 +1585,12 @@ namespace MissionPlanner
 
                 // set SERVO7_FUNCTION normal @eams
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
-                // set SERVO7 value @eams
-                MainV2.comPort.setParam("SERVO7_MAX", (float)grid_dosetservo_PWML);
-                MainV2.comPort.setParam("SERVO7_MIN", (float)grid_dosetservo_PWMH);
-                // set WPNAV_SPEED
                 if (grid_type >= 2 && grid_type <= 4)
                 {
+                    // set SERVO7 value @eams
+                    MainV2.comPort.setParam("SERVO7_MAX", (float)grid_dosetservo_PWML);
+                    MainV2.comPort.setParam("SERVO7_MIN", (float)grid_dosetservo_PWMH);
+                    // set WPNAV_SPEED
                     MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
                 }
 
@@ -4232,7 +4232,7 @@ namespace MissionPlanner
 
                 if (MainV2.instance.FlightData.resume_flag > 0)
                 {
-                    if (CustomMessageBox.Show("フェイルセーフからのレジューム飛行を行います。\n\n離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+                    if (CustomMessageBox.Show("自動飛行再開ポイントからレジューム飛行を行います。\n\n離陸してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
                     {
                         return;
                     }
@@ -4428,6 +4428,7 @@ namespace MissionPlanner
 
         // @eams add / update COM and failsafe display
         string detect_com = "";
+        bool failsafe_Popup = false;
         private void timerCustom_Tick(Object sender, EventArgs e)
         {
             try
@@ -4489,6 +4490,31 @@ namespace MissionPlanner
                 if (MainV2.comPort.MAV.cs.armed)
                 {
                     MainV2.instance.FlightData.LabelNextWPdist_ChangeDist(MainV2.comPort.MAV.cs.wp_dist);
+                }
+
+                // failsafe popup display
+                if (MainV2.comPort.MAV.cs.message != null)
+                {
+                    mes = MainV2.comPort.MAV.cs.message;
+                }
+                if (mes.Equals("Battery Failsafe") && !failsafe_Popup)
+                {
+                    failsafe_Popup = true;
+                    CustomMessageBox.Show("バッテリーフェールセーフが発動しました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.OK);
+                }
+                if (mes.Equals("Radio Failsafe") && !failsafe_Popup)
+                {
+                    failsafe_Popup = true;
+                    CustomMessageBox.Show("送信機との通信が切断されました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.OK);
+                }
+                if (mes.Equals("Empty Tank Failsafe") && !failsafe_Popup)
+                {
+                    failsafe_Popup = true;
+                    CustomMessageBox.Show("タンク内が空になりました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.OK);
+                }
+                if (!mes.Equals("Battery Failsafe") && !mes.Equals("Radio Failsafe") && !mes.Equals("Empty Tank Failsafe"))
+                {
+                    failsafe_Popup = false;
                 }
             }
             catch (Exception ex)
