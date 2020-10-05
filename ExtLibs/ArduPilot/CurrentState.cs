@@ -826,15 +826,21 @@ namespace MissionPlanner
 #if true    // @eams add
         private double _battery_voltage_pre = 0;
         private bool _recover_flag = true;
+        public double cells_mag = 1;    //バッテリセル数倍率　6セルの時に1
         [DisplayText("機体バッテリ残量 (%)")]
         public double battery_remaining2
         {
             get
             {
+                if (_battery_voltage == 0)
+                {
+                    return 0;
+                }
+
                 double batt_vol = 0;
                 if (_recover_flag)
                 {
-                    if (_battery_voltage < 23.8)
+                    if (_battery_voltage < 23.8 * cells_mag)
                     {
                         _recover_flag = false;
                     }
@@ -842,7 +848,7 @@ namespace MissionPlanner
                 }
                 else
                 {
-                    if (_battery_voltage >= 23.8)
+                    if (_battery_voltage >= 23.8 * cells_mag)
                     {
                         //表示回復
                         batt_vol = _battery_voltage_pre = _battery_voltage;
@@ -864,41 +870,41 @@ namespace MissionPlanner
 
                 double batt_per = 0;
 
-                if (batt_vol >= 25.0)
+                if (batt_vol >= 25.0 * cells_mag)
                 {
                     batt_per = 100;
                 }
-                else if (batt_vol >= 24.0)
+                else if (batt_vol >= 24.0 * cells_mag)
                 {
-                    batt_per = (batt_vol - 24.0) * 10 + 90;
+                    batt_per = (batt_vol - (24.0 * cells_mag)) * (10 / (1.0 * cells_mag)) + 90;
                 }
-                else if (batt_vol >= 23.8)
+                else if (batt_vol >= 23.8 * cells_mag)
                 {
-                    batt_per = (batt_vol - 23.8) * (15 / 0.2) + 85;
+                    batt_per = (batt_vol - (23.8 * cells_mag)) * (15 / (0.2 * cells_mag)) + 85;
                 }
-                else if (batt_vol >= 23.0)
+                else if (batt_vol >= 23.0 * cells_mag)
                 {
-                    batt_per = (batt_vol - 23.0) * (20 / 0.8) + 65;
+                    batt_per = (batt_vol - (23.0 * cells_mag)) * (20 / (0.8 * cells_mag)) + 65;
                 }
-                else if (batt_vol >= 22.5)
+                else if (batt_vol >= 22.5 * cells_mag)
                 {
-                    batt_per = (batt_vol - 22.5) * (15 / 0.5) + 50;
+                    batt_per = (batt_vol - (22.5 * cells_mag)) * (15 / (0.5 * cells_mag)) + 50;
                 }
-                else if (batt_vol >= 22.0)
+                else if (batt_vol >= 22.0 * cells_mag)
                 {
-                    batt_per = (batt_vol - 22.0) * (15 / 0.5) + 35;
+                    batt_per = (batt_vol - (22.0 * cells_mag)) * (15 / (0.5 * cells_mag)) + 35;
                 }
-                else if (batt_vol >= 21.7)
+                else if (batt_vol >= 21.7 * cells_mag)
                 {
-                    batt_per = (batt_vol - 21.7) * (20 / 0.3) + 15;
+                    batt_per = (batt_vol - (21.7 * cells_mag)) * (20 / (0.3 * cells_mag)) + 15;
                 }
-                else if (batt_vol >= 21.5)
+                else if (batt_vol >= 21.5 * cells_mag)
                 {
-                    batt_per = (batt_vol - 21.5) * (5 / 0.2) + 10;
+                    batt_per = (batt_vol - (21.5 * cells_mag)) * (5 / (0.2 * cells_mag)) + 10;
                 }
-                else if (batt_vol >= 21.0)
+                else if (batt_vol >= 21.0 * cells_mag)
                 {
-                    batt_per = (batt_vol - 21.0) * (10 / 0.5);
+                    batt_per = (batt_vol - (21.0 * cells_mag)) * (10 / (0.5 * cells_mag));
                 }
                 else
                 {

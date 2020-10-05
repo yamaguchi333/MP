@@ -837,7 +837,9 @@ namespace MissionPlanner.GCSViews
             while (!IsHandleCreated)
                 Thread.Sleep(1000);
 
-            bool first_RTL = true;
+            bool first_RTL = true;  // @eams add
+            string pre_RTL_mode = "";  // @eams add
+
             while (threadrun)
             {
                 if (MainV2.comPort.giveComport)
@@ -1040,6 +1042,7 @@ namespace MissionPlanner.GCSViews
                             mode_jp = "マニュアルモード";
                             break;
                         case "AUTO":
+                        case "GUIDED":
                             mode_jp = "自動飛行モード";
                             break;
                         case "ZIGZAG":
@@ -1192,6 +1195,11 @@ namespace MissionPlanner.GCSViews
                                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
                                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
                             }
+                            rtl_yaw = MainV2.comPort.MAV.cs.yaw;
+                            if (pre_RTL_mode == "ZIGZAG" && MainV2.comPort.MAV.cs.armed && resume_flag > 0)
+                            {
+                                resume_flag = 0;
+                            }
                             first_RTL = false;
                         }
                         if (resume_flag == 0 || resume_flag == 3)
@@ -1199,7 +1207,8 @@ namespace MissionPlanner.GCSViews
                             // search first & end waypoint no in current mission
                             int firstwpno = commands.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT)&&(x.lat != 0)) + 1;
                             int endwpno = commands.FindLastIndex(x => x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) + 1;
-                            if (curwpno > firstwpno && curwpno <= endwpno)
+                            if ((curwpno > firstwpno && curwpno <= endwpno && pre_RTL_mode == "AUTO")
+                                || (pre_RTL_mode == "ZIGZAG" && MainV2.comPort.MAV.cs.armed))
                             {
                                 var rtl_alt = (float)MainV2.comPort.MAV.param["RTL_ALT"] / 100;
                                 string rngfnd_type = "0";
@@ -1228,18 +1237,27 @@ namespace MissionPlanner.GCSViews
                                     resume_pos.Alt = alt;
                                     resume_flag = 1;
                                     lastwpno = curwpno;
+                                    if (pre_RTL_mode == "ZIGZAG")
+                                    {
+                                        zigzag_flag = true;
+                                    }
+                                    else
+                                    {
+                                        zigzag_flag = false;
+                                    }
                                 }
                             }
                         }
                     }
                     else
                     {
+                        pre_RTL_mode = MainV2.comPort.MAV.cs.mode.ToUpper();
                         first_RTL = true;
                     }
 
                     if (resume_flag >= 2)
                     {
-                        if (curwpno >= commands.Count && !MainV2.comPort.MAV.cs.armed)
+                        if (curwpno >= commands.Count && !MainV2.comPort.MAV.cs.armed && !zigzag_flag)
                         {
                             resume_flag = 0;
                         }
@@ -5247,6 +5265,8 @@ namespace MissionPlanner.GCSViews
         private int lastwpno = 0;
         private PointLatLngAlt resume_pos = new PointLatLngAlt();
         public int resume_flag = 0;
+        public bool zigzag_flag = false;
+        private float rtl_yaw = 0;
 
         /// <summary>
         /// フェイルセーフからのレジューム
@@ -5276,6 +5296,7 @@ namespace MissionPlanner.GCSViews
                 int impeller_no = Settings.Instance.GetInt32("impeller_no");
                 int impeller_pwm_on = Settings.Instance.GetInt32("impeller_pwm_on");
                 int impeller_pwm_off = Settings.Instance.GetInt32("impeller_pwm_off");
+                float grid_alt = Settings.Instance.GetFloat("grid_alt");
                 string rngfnd_type = "0";
                 try
                 {
@@ -5312,7 +5333,14 @@ namespace MissionPlanner.GCSViews
                 int takeoffwpno = cmds.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.TAKEOFF));
                 Locationwp gotohere = new Locationwp();
                 gotohere.id = (ushort)MAVLink.MAV_CMD.WAYPOINT;
-                gotohere.alt = cmds[takeoffwpno].alt;
+                if (zigzag_flag)
+                {
+                    gotohere.alt = grid_alt;
+                }
+                else
+                {
+                    gotohere.alt = cmds[takeoffwpno].alt;
+                }
                 gotohere.lat = resume_pos.Lat;
                 gotohere.lng = resume_pos.Lng;
                 MainV2.comPort.setGuidedModeWP(gotohere);
@@ -5438,12 +5466,19 @@ namespace MissionPlanner.GCSViews
 
                 // CONDTION_YAW for GUIDED
                 float grid_angle = 0;
-                for (ushort a = 0; a < wpcount; a++)
+                if (zigzag_flag)
                 {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
+                    grid_angle = rtl_yaw;
+                }
+                else
+                {
+                    for (ushort a = 0; a < wpcount; a++)
                     {
-                        grid_angle = cmds[a].p1;
-                        break;
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
+                        {
+                            grid_angle = cmds[a].p1;
+                            break;
+                        }
                     }
                 }
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
@@ -5461,11 +5496,15 @@ namespace MissionPlanner.GCSViews
                 await Task.Delay(grid_startup_delay * 1000);
 
                 // change speed2 for outer mission speed
-                if (Settings.Instance.GetBoolean("use_grid_speed2"))
+                if (!zigzag_flag)
                 {
-                    float grid_speed2 = Settings.Instance.GetFloat("grid_speed2");
-                    // DO_CHANGE_SPEED
-                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed2, 0, 0, 0, 0, 0);
+                    if (Settings.Instance.GetBoolean("use_grid_speed2"))
+                    {
+                        float grid_speed2 = Settings.Instance.GetFloat("grid_speed2");
+                        // DO_CHANGE_SPEED
+                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_CHANGE_SPEED, 0, grid_speed2, 0, 0, 0, 0, 0);
+                    }
+
                 }
 
                 // check wp_dist value is not 0
@@ -5544,7 +5583,10 @@ namespace MissionPlanner.GCSViews
                 }
 
                 // set resume point wp
-                MainV2.comPort.setWPCurrent((ushort)lastwpno);
+                if (!zigzag_flag)
+                {
+                    MainV2.comPort.setWPCurrent((ushort)lastwpno);
+                }
 #if false
                 // set WPNAV_SPEED original value
                 MainV2.comPort.setParam("WPNAV_SPEED", wpnav_speed);
@@ -5560,11 +5602,16 @@ namespace MissionPlanner.GCSViews
 
                 // auto 
                 timeout = 0;
-                while (MainV2.comPort.MAV.cs.mode.ToLower() != "AUTO".ToLower())
+                string cmd_str = "auto";
+                if (zigzag_flag)
+                {
+                    cmd_str = "zigzag";
+                }
+                while (MainV2.comPort.MAV.cs.mode.ToLower() != cmd_str)
                 {
                     if (MainV2.comPort.MAV.cs.mode.ToLower() == "guided")
                     {
-                        MainV2.comPort.setMode("AUTO");
+                        MainV2.comPort.setMode(cmd_str);
                     }
                     else
                     {
@@ -5607,7 +5654,14 @@ namespace MissionPlanner.GCSViews
             {
                 CustomMessageBox.Show(Strings.CommandFailed + "\n" + ex.ToString(), Strings.ERROR);
             }
-            resume_flag = 3;
+            if (zigzag_flag)
+            {
+                resume_flag = 0;
+            }
+            else
+            {
+                resume_flag = 3;
+            }
         }
 
         private void ButtonResumeClear_Click(object sender, EventArgs e)

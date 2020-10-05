@@ -1594,6 +1594,13 @@ namespace MissionPlanner
                     MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
                 }
 
+                // update battery cells magnification
+                if (MainV2.comPort.MAV.param.ContainsKey("MOT_BAT_VOLT_MAX"))
+                {
+                    double batt_max = double.Parse(MainV2.comPort.MAV.param["MOT_BAT_VOLT_MAX"].ToString());
+                    int cells = (int)Math.Round(batt_max / 4.2, MidpointRounding.AwayFromZero);
+                    MainV2.comPort.MAV.cs.cells_mag = cells / 6;
+                }
 
                 _connectionControl.UpdateSysIDS();
 
@@ -4212,7 +4219,7 @@ namespace MissionPlanner
 
                 }
 
-                // change mode STABILIZE/Loiter
+                // failsafe check
                 if (MainV2.comPort.MAV.cs.failsafe)
                 {
                     if (CustomMessageBox.Show("フェイルセーフ中です。実行してもよろしいですか？", "自動飛行", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
@@ -4224,11 +4231,14 @@ namespace MissionPlanner
                 MainV2.comPort.setMode("GUIDED");
 
                 // force redraw map
-                await Task.Delay(update_wp_delay+200);
-//                GCSViews.FlightData.mymap.Refresh();
-                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("WPOverlay");
-//                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
-                GCSViews.FlightData.mymap.Refresh();
+                if (!MainV2.instance.FlightData.zigzag_flag)
+                {
+                    await Task.Delay(update_wp_delay + 200);
+                    //                GCSViews.FlightData.mymap.Refresh();
+                    GCSViews.FlightData.mymap.ZoomAndCenterMarkers("WPOverlay");
+                    //                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
+                    GCSViews.FlightData.mymap.Refresh();
+                }
 
                 if (MainV2.instance.FlightData.resume_flag > 0)
                 {
