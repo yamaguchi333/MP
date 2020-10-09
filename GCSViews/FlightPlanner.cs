@@ -1783,7 +1783,8 @@ namespace MissionPlanner.GCSViews
             IProgressReporterDialogue frmProgressReporter = new ProgressReporterDialogue
             {
                 StartPosition = FormStartPosition.CenterScreen,
-                Text = "Sending WP's"
+                //Text = "Sending WP's"
+                Text = "飛行プログラム書き込み中"
             };
 
             frmProgressReporter.DoWork += saveWPs;

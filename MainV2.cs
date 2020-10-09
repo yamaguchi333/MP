@@ -1594,12 +1594,44 @@ namespace MissionPlanner
                     MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
                 }
 
-                // update battery cells magnification
+                // update battery cells magnification @eams
                 if (MainV2.comPort.MAV.param.ContainsKey("MOT_BAT_VOLT_MAX"))
                 {
                     double batt_max = double.Parse(MainV2.comPort.MAV.param["MOT_BAT_VOLT_MAX"].ToString());
                     int cells = (int)Math.Round(batt_max / 4.2, MidpointRounding.AwayFromZero);
                     MainV2.comPort.MAV.cs.cells_mag = cells / 6;
+                }
+
+                // update RangeFinder related parameters @eams
+                if (grid_type >= 2 && grid_type <= 4)
+                {
+                    if (MainV2.comPort.MAV.param.ContainsKey("RNGFND1_TYPE"))
+                    {
+                        MainV2.comPort.setParam("RNGFND1_TYPE", (float)8);
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("RTL_ALT_TYPE"))
+                    {
+                        MainV2.comPort.setParam("RTL_ALT_TYPE", (float)1);
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_RFND_USE"))
+                    {
+                        MainV2.comPort.setParam("WPNAV_RFND_USE", (float)1);
+                    }
+                }
+                else if(grid_type >= 5 && grid_type <= 6)
+                {
+                    if (MainV2.comPort.MAV.param.ContainsKey("RNGFND1_TYPE"))
+                    {
+                        MainV2.comPort.setParam("RNGFND1_TYPE", (float)0);
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("RTL_ALT_TYPE"))
+                    {
+                        MainV2.comPort.setParam("RTL_ALT_TYPE", (float)0);
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_RFND_USE"))
+                    {
+                        MainV2.comPort.setParam("WPNAV_RFND_USE", (float)0);
+                    }
                 }
 
                 _connectionControl.UpdateSysIDS();
@@ -1788,7 +1820,7 @@ namespace MissionPlanner
             Connect();
         }
 
-        public void Connect()  // @eams change public
+        public bool Connect()  // @eams change public and return value
         {
             comPort.giveComport = false;
 
@@ -1800,7 +1832,7 @@ namespace MissionPlanner
                 if ((int) DialogResult.No ==
                     CustomMessageBox.Show(Strings.Stillmoving, Strings.Disconnect, MessageBoxButtons.YesNo))
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -1821,6 +1853,7 @@ namespace MissionPlanner
 
             comPort.logfile = null;
             comPort.rawlogfile = null;
+            bool rtn = true;
 
             // decide if this is a connect or disconnect
             if (comPort.BaseStream.IsOpen)
@@ -1840,11 +1873,37 @@ namespace MissionPlanner
                 }
 
                 doConnect(comPort, _connectionControl.CMB_serialport.Text, _connectionControl.CMB_baudrate.Text);
+
+                // update BATT2_MONITOR @eams
+                int batt2_monitor_config = 0;
+                if (Settings.Instance["batt2_monitor"] != null)
+                    batt2_monitor_config = Settings.Instance.GetInt32("batt2_monitor");
+                int batt2_monitor = 0;
+                if (MainV2.comPort.MAV.param.ContainsKey("BATT2_MONITOR"))
+                {
+                    batt2_monitor = int.Parse(MainV2.comPort.MAV.param["BATT2_MONITOR"].ToString());
+                }
+                if (batt2_monitor != batt2_monitor_config)
+                {
+                    MainV2.comPort.setParam("BATT2_MONITOR", (float)batt2_monitor_config);
+                    CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.OK);
+                    try
+                    {
+                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                    }
+                    rtn = false;
+                }
             }
 
             _connectionControl.UpdateSysIDS();
 
             loadph_serial();
+
+            return rtn;
         }
 
         void loadph_serial()
@@ -4209,7 +4268,10 @@ namespace MissionPlanner
                     // connect MUAV
                     if (!MainV2.comPort.BaseStream.IsOpen)
                     {
-                        Connect();
+                        if (!Connect())
+                        {
+                            return;
+                        }
                         //CustomMessageBox.Show(Strings.PleaseConnect, Strings.ERROR);
                         //return;
                     }
@@ -4502,6 +4564,9 @@ namespace MissionPlanner
                     MainV2.instance.FlightData.LabelNextWPdist_ChangeDist(MainV2.comPort.MAV.cs.wp_dist);
                 }
 
+                // update link quality display
+                MainV2.instance.FlightData.LabelComQ_ChangeValue(GCSViews.FlightData.myhud.linkqualitygcs);
+
                 // failsafe popup display
                 if (MainV2.comPort.MAV.cs.message != null)
                 {
@@ -4531,6 +4596,36 @@ namespace MissionPlanner
             {
                 log.Error(ex);
             }
+        }
+
+        private void MenuEKF_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Name == "EKFStatus")
+                {
+                    form.Close();
+                    return;
+                }
+            }
+            EKFStatus frm = new EKFStatus();
+            frm.TopMost = true;
+            frm.Show();
+        }
+
+        private void MenuVIVE_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Name == "Vibration")
+                {
+                    form.Close();
+                    return;
+                }
+            }
+            Vibration frm = new Vibration();
+            frm.TopMost = true;
+            frm.Show();
         }
     }
 }

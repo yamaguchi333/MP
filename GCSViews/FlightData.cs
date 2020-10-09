@@ -27,6 +27,7 @@ using ZedGraph;
 using LogAnalyzer = MissionPlanner.Utilities.LogAnalyzer;
 using MissionPlanner.Maps;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 // written by michael oborne
 
@@ -1099,6 +1100,7 @@ namespace MissionPlanner.GCSViews
                     DateTime messageHighTime = MainV2.comPort.MAV.cs.messageHighTime;
                     if (messageHigh != null)
                     {
+                        messageHigh = ReplaceMessage(messageHigh);
                         if (!messageHigh.StartsWith("PX4v2 "))
                         {
                             if (messageHigh != "" && messageHighTime.AddSeconds(10) < DateTime.Now)
@@ -1120,7 +1122,7 @@ namespace MissionPlanner.GCSViews
                     string mes = "";
                     if (MainV2.comPort.MAV.cs.message != null)
                     {
-                        mes = MainV2.comPort.MAV.cs.message;
+                        mes = ReplaceMessage(MainV2.comPort.MAV.cs.message);
                     }
                     if (labelMessage.InvokeRequired)
                     {
@@ -4582,7 +4584,7 @@ namespace MissionPlanner.GCSViews
             {
                 try
                 {
-                    MainV2.cam = new Capture(Settings.Instance.GetInt32("video_device"), new AMMediaType());
+                    MainV2.cam = new WebCamService.Capture(Settings.Instance.GetInt32("video_device"), new AMMediaType());
 
                     MainV2.cam.Start();
 
@@ -5250,7 +5252,12 @@ namespace MissionPlanner.GCSViews
         /// </summary>
         public void LabelTime_ChangeTime(int time)
         {
-            LabelTime.Text = (time / 3600.0).ToString("F2") + " (h)";
+            var hour = time / 3600.0;
+            LabelTime.Text = hour.ToString("F2") + " (h)";
+            if (hour >= 50.0)
+            {
+                LabelTime.ForeColor = Color.Yellow;
+            }
         }
 
         /// <summary>
@@ -5260,6 +5267,15 @@ namespace MissionPlanner.GCSViews
         public void LabelNextWPdist_ChangeDist(float dist)
         {
             LabelNextWPdist.Text = dist.ToString("F1") + " (m)";
+        }
+
+        /// <summary>
+        /// 通信品質表示の更新
+        /// <param name="comm">通信品質</param>
+        /// </summary>
+        public void LabelComQ_ChangeValue(float q)
+        {
+            LabelComQ.Text = q.ToString("F0") + "%";
         }
 
         private int lastwpno = 0;
@@ -5794,6 +5810,127 @@ namespace MissionPlanner.GCSViews
         private void BtnActKeyClear_Click(object sender, EventArgs e)
         {
             LblWPno.Text = "0";
+        }
+
+        private string ReplaceMessage(string mes)
+        {
+            string rtn = mes;
+            if (mes.Contains("ZigZag"))
+            {
+                if (mes.Contains("moving to A"))
+                {
+                    rtn = "A点へ向け自動散布飛行";
+                }
+                else if (mes.Contains("point A stored"))
+                {
+                    rtn = "A点記録完了";
+                }
+                else if (mes.Contains("moving to B"))
+                {
+                    rtn = "B点へ向け自動散布飛行";
+                }
+                else if (mes.Contains("point B stored"))
+                {
+                    rtn = "B点記録完了";
+                }
+                else if (mes.Contains("moving to right"))
+                {
+                    rtn = "右へ自動移動";
+                }
+                else if (mes.Contains("moving to left"))
+                {
+                    rtn = "左へ自動移動";
+                }
+                else if (mes.Contains("manual control"))
+                {
+                    rtn = "自動飛行停止中";
+                }
+            }
+            else if (mes.Contains("EKF") && mes.Contains("IMU"))
+            {
+                if (mes.Contains("using GPS"))
+                {
+                    rtn = "GPS使用準備";
+                }
+                else if (mes.Contains("in-flight yaw alignment complete"))
+                {
+                    rtn = "機首向き校正完了";
+                }
+                else if (mes.Contains("origin set"))
+                {
+                    rtn = "飛行プログラム起動中";
+                }
+            }
+            else if (mes.Contains("PreArm: Need 3D Fix"))
+            {
+                rtn = "衛星補足中";
+            }
+            else if (mes.Contains("Mission:"))
+            {
+                if (mes.Contains("WP"))
+                {
+                    string str = Regex.Replace(mes, @"[^0-9]", "");
+                    rtn = str + " 番通過";
+                }
+                else if (mes.Contains("LoitTurns"))
+                {
+                    rtn = "回転散布";
+                }
+                else if (mes.Contains("CondYaw"))
+                {
+                    string str = Regex.Replace(mes, @"[^0-9]", "");
+                    rtn = str + " 機首向き校正";
+                }
+                else if (mes.Contains("RTL"))
+                {
+                    rtn = "自動帰還";
+                }
+                else if (mes.Contains("Takeoff"))
+                {
+                    rtn = "離陸";
+                }
+            }
+            else if (mes.Contains("Delaying"))
+            {
+                if (mes.Contains("sec"))
+                {
+                    string str = Regex.Replace(mes, @"[^0-9]", "");
+                    rtn = str + " 秒静止";
+                }
+            }
+            else if (mes.Contains("Failsafe"))
+            {
+                if (mes.Contains("Empty Tank"))
+                {
+                    rtn = "空タンク・自動帰還";
+                }
+                else if (mes.Contains("Radio"))
+                {
+                    rtn = "送信機通信断";
+                }
+                else if (mes.Contains("Battery") && mes.Contains("Continuing Landing"))
+                {
+                    rtn = "低バッテリー・自動帰還";
+                }
+            }
+            else if (mes.Contains("RC受信機がありません"))
+            {
+                rtn = "送信機通信断";
+            }
+            else if (mes.Contains("Initialising ArduPilot"))
+            {
+                rtn = "飛行プログラム起動中";
+            }
+            else if (mes.Contains("Flight plan received"))
+            {
+                rtn = "飛行ルート書き込み完了";
+            }
+            else if (mes.Contains("Fence Breach") || mes.Contains("フェンス違反"))
+            {
+                rtn = "ジオフェンスの限界に到達";
+            }
+
+            return rtn;
         }
     }
 }

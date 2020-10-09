@@ -41,8 +41,10 @@ namespace MissionPlanner
             this.MenuFlightData = new System.Windows.Forms.ToolStripButton();
             this.MenuFlightPlanner = new System.Windows.Forms.ToolStripButton();
             this.MenuInitConfig = new System.Windows.Forms.ToolStripButton();
-            this.MenuConfigTune = new System.Windows.Forms.ToolStripButton();
             this.MenuSimulation = new System.Windows.Forms.ToolStripButton();
+            this.MenuConfigTune = new System.Windows.Forms.ToolStripButton();
+            this.MenuEKF = new System.Windows.Forms.ToolStripButton();
+            this.MenuVIVE = new System.Windows.Forms.ToolStripButton();
             this.MenuTerminal = new System.Windows.Forms.ToolStripButton();
             this.MenuHelp = new System.Windows.Forms.ToolStripButton();
             this.MenuDonate = new System.Windows.Forms.ToolStripButton();
@@ -79,6 +81,8 @@ namespace MissionPlanner
             this.MenuInitConfig,
             this.MenuSimulation,
             this.MenuConfigTune,
+            this.MenuEKF,
+            this.MenuVIVE,
             this.MenuTerminal,
             this.MenuHelp,
             this.MenuDonate,
@@ -140,15 +144,6 @@ namespace MissionPlanner
             this.MenuInitConfig.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.MenuInitConfig.Click += new System.EventHandler(this.MenuSetup_Click);
             // 
-            // MenuConfigTune
-            // 
-            resources.ApplyResources(this.MenuConfigTune, "MenuConfigTune");
-            this.MenuConfigTune.ForeColor = System.Drawing.Color.White;
-            this.MenuConfigTune.Margin = new System.Windows.Forms.Padding(0);
-            this.MenuConfigTune.Name = "MenuConfigTune";
-            this.MenuConfigTune.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.MenuConfigTune.Click += new System.EventHandler(this.MenuTuning_Click);
-            // 
             // MenuSimulation
             // 
             resources.ApplyResources(this.MenuSimulation, "MenuSimulation");
@@ -159,6 +154,33 @@ namespace MissionPlanner
             this.MenuSimulation.Name = "MenuSimulation";
             this.MenuSimulation.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.MenuSimulation.Click += new System.EventHandler(this.MenuSimulation_Click);
+            // 
+            // MenuConfigTune
+            // 
+            resources.ApplyResources(this.MenuConfigTune, "MenuConfigTune");
+            this.MenuConfigTune.ForeColor = System.Drawing.Color.White;
+            this.MenuConfigTune.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuConfigTune.Name = "MenuConfigTune";
+            this.MenuConfigTune.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.MenuConfigTune.Click += new System.EventHandler(this.MenuTuning_Click);
+            // 
+            // MenuEKF
+            // 
+            resources.ApplyResources(this.MenuEKF, "MenuEKF");
+            this.MenuEKF.ForeColor = System.Drawing.Color.White;
+            this.MenuEKF.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuEKF.Name = "MenuEKF";
+            this.MenuEKF.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.MenuEKF.Click += new System.EventHandler(this.MenuEKF_Click);
+            // 
+            // MenuVIVE
+            // 
+            resources.ApplyResources(this.MenuVIVE, "MenuVIVE");
+            this.MenuVIVE.ForeColor = System.Drawing.Color.White;
+            this.MenuVIVE.Margin = new System.Windows.Forms.Padding(0);
+            this.MenuVIVE.Name = "MenuVIVE";
+            this.MenuVIVE.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.MenuVIVE.Click += new System.EventHandler(this.MenuVIVE_Click);
             // 
             // MenuTerminal
             // 
@@ -367,5 +389,7 @@ namespace MissionPlanner
         public System.Windows.Forms.ToolStripButton MenuStop;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxCom;
         private System.Windows.Forms.ToolStripButton MenuEams;
+        public System.Windows.Forms.ToolStripButton MenuEKF;
+        public System.Windows.Forms.ToolStripButton MenuVIVE;
     }
 }
