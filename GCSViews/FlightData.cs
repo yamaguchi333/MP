@@ -5860,10 +5860,25 @@ namespace MissionPlanner.GCSViews
                 {
                     rtn = "飛行プログラム起動中";
                 }
+                else if (mes.Contains("tilt alignment complete"))
+                {
+                    rtn = "飛行プログラム起動";
+                }
             }
-            else if (mes.Contains("PreArm: Need 3D Fix"))
+            else if (mes.Contains("PreArm:"))
             {
-                rtn = "衛星補足中";
+                if (mes.Contains("Need 3D Fix"))
+                {
+                    rtn = "衛星補足中";
+                }
+                else if (mes.Contains("Battery failsafe"))
+                {
+                    rtn = "バッテリーフェールセーフ：飛行不可";
+                }
+                else if (mes.Contains("Logging failed"))
+                {
+                    rtn = "ログ書き込み不良：飛行不可";
+                }
             }
             else if (mes.Contains("Mission:"))
             {
@@ -5908,9 +5923,16 @@ namespace MissionPlanner.GCSViews
                 {
                     rtn = "送信機通信断";
                 }
-                else if (mes.Contains("Battery") && mes.Contains("Continuing Landing"))
+                else if (mes.Contains("Battery"))
                 {
-                    rtn = "低バッテリー・自動帰還";
+                    if (mes.Contains("Continuing Landing"))
+                    {
+                        rtn = "低バッテリー・自動帰還";
+                    }
+                    else
+                    {
+                        rtn = "バッテリーフェールセーフ";
+                    }
                 }
             }
             else if (mes.Contains("RC受信機がありません"))
@@ -5928,6 +5950,10 @@ namespace MissionPlanner.GCSViews
             else if (mes.Contains("Fence Breach") || mes.Contains("フェンス違反"))
             {
                 rtn = "ジオフェンスの限界に到達";
+            }
+            else if (mes.Contains("Bad Logging"))
+            {
+                rtn = "ログ書き込み不良";
             }
 
             return rtn;

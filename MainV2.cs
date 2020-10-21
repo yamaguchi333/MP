@@ -1886,7 +1886,7 @@ namespace MissionPlanner
                 if (batt2_monitor != batt2_monitor_config)
                 {
                     MainV2.comPort.setParam("BATT2_MONITOR", (float)batt2_monitor_config);
-                    CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.OK);
+                    CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel);
                     try
                     {
                         MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
@@ -4296,9 +4296,9 @@ namespace MissionPlanner
                 if (!MainV2.instance.FlightData.zigzag_flag)
                 {
                     await Task.Delay(update_wp_delay + 200);
-                    //                GCSViews.FlightData.mymap.Refresh();
+                    //GCSViews.FlightData.mymap.Refresh();
                     GCSViews.FlightData.mymap.ZoomAndCenterMarkers("WPOverlay");
-                    //                GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
+                    //GCSViews.FlightData.mymap.ZoomAndCenterMarkers("routes");
                     GCSViews.FlightData.mymap.Refresh();
                 }
 

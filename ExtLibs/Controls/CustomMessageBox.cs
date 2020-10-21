@@ -333,6 +333,21 @@ namespace MissionPlanner.MsgBox
                     msgBoxFrm.CancelButton = butcancel;
                     break;
 
+                case MessageBoxButtons.RetryCancel:  // @eams add
+                    var butretry = new Button
+                    {
+//                        Size = new Size(75, 23),
+                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_act_reboot,
+                        Size = new Size(130, 48),
+                        Left = msgBoxFrm.Width - 135 - FORM_X_MARGIN,
+                        Top = msgBoxFrm.Height - 48 - FORM_Y_MARGIN - titleHeight
+                    };
+
+                    butretry.Click += delegate { _state = DialogResult.OK; msgBoxFrm.Close(); };
+                    msgBoxFrm.Controls.Add(butretry);
+                    msgBoxFrm.AcceptButton = butretry;
+                    break;
+
                 default:
                     throw new NotImplementedException("Only MessageBoxButtons.OK and YesNo supported at this time");
             }
