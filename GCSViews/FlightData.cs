@@ -5869,7 +5869,7 @@ namespace MissionPlanner.GCSViews
             {
                 if (mes.Contains("Need 3D Fix"))
                 {
-                    rtn = "衛星補足中";
+                    rtn = "衛星捕捉中";
                 }
                 else if (mes.Contains("Battery failsafe"))
                 {

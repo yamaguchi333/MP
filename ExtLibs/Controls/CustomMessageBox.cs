@@ -343,7 +343,7 @@ namespace MissionPlanner.MsgBox
                         Top = msgBoxFrm.Height - 48 - FORM_Y_MARGIN - titleHeight
                     };
 
-                    butretry.Click += delegate { _state = DialogResult.OK; msgBoxFrm.Close(); };
+                    butretry.Click += delegate { _state = DialogResult.Retry; msgBoxFrm.Close(); };
                     msgBoxFrm.Controls.Add(butretry);
                     msgBoxFrm.AcceptButton = butretry;
                     break;

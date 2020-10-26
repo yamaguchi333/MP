@@ -1418,7 +1418,7 @@ namespace MissionPlanner
             this.MenuConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
         }
 
-        public void doConnect(MAVLinkInterface comPort, string portname, string baud, bool getparams = true)
+        public bool doConnect(MAVLinkInterface comPort, string portname, string baud, bool getparams = true)
         {
             bool skipconnectcheck = false;
             log.Info("We are connecting to " + portname + " " + baud );
@@ -1462,10 +1462,10 @@ namespace MissionPlanner
                         {
                             CustomMessageBox.Show(Strings.Timeout);
                             _connectionControl.IsConnected(false);
-                            return;
+                            return false;
                         }
                     }
-                    return;
+                    return true;
                 default:
                     comPort.BaseStream = new SerialPort();
                     break;
@@ -1577,11 +1577,37 @@ namespace MissionPlanner
                     catch
                     {
                     }
-                    return;
+                    return false;
                 }
 
                 if (getparams)
                     comPort.getParamList();
+
+                // update BATT2_MONITOR @eams
+                int batt2_monitor_config = 0;
+                if (Settings.Instance["batt2_monitor"] != null)
+                    batt2_monitor_config = Settings.Instance.GetInt32("batt2_monitor");
+                int batt2_monitor = 0;
+                if (MainV2.comPort.MAV.param.ContainsKey("BATT2_MONITOR"))
+                {
+                    batt2_monitor = int.Parse(MainV2.comPort.MAV.param["BATT2_MONITOR"].ToString());
+                }
+                if (batt2_monitor != batt2_monitor_config)
+                {
+                    MainV2.comPort.setParam("BATT2_MONITOR", (float)batt2_monitor_config);
+                    if (CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel) == (int)CustomMessageBox.DialogResult.Retry)
+                    {
+                        try
+                        {
+                            MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
+                        }
+                        catch
+                        {
+                            CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                        }
+                        return false;
+                    }
+                }
 
                 // set SERVO7_FUNCTION normal @eams
                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
@@ -1811,8 +1837,9 @@ namespace MissionPlanner
 #else
                 CustomMessageBox.Show("Can not establish a connection\n\n" + ex.Message);
 #endif
-                return;
+                return false;
             }
+            return true;
         }
 
         private void MenuConnect_Click(object sender, EventArgs e)
@@ -1853,7 +1880,6 @@ namespace MissionPlanner
 
             comPort.logfile = null;
             comPort.rawlogfile = null;
-            bool rtn = true;
 
             // decide if this is a connect or disconnect
             if (comPort.BaseStream.IsOpen)
@@ -1872,30 +1898,9 @@ namespace MissionPlanner
                         Settings.Instance[_connectionControl.CMB_serialport.Text + "_BAUD"];
                 }
 
-                doConnect(comPort, _connectionControl.CMB_serialport.Text, _connectionControl.CMB_baudrate.Text);
-
-                // update BATT2_MONITOR @eams
-                int batt2_monitor_config = 0;
-                if (Settings.Instance["batt2_monitor"] != null)
-                    batt2_monitor_config = Settings.Instance.GetInt32("batt2_monitor");
-                int batt2_monitor = 0;
-                if (MainV2.comPort.MAV.param.ContainsKey("BATT2_MONITOR"))
+                if (!doConnect(comPort, _connectionControl.CMB_serialport.Text, _connectionControl.CMB_baudrate.Text))
                 {
-                    batt2_monitor = int.Parse(MainV2.comPort.MAV.param["BATT2_MONITOR"].ToString());
-                }
-                if (batt2_monitor != batt2_monitor_config)
-                {
-                    MainV2.comPort.setParam("BATT2_MONITOR", (float)batt2_monitor_config);
-                    CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel);
-                    try
-                    {
-                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
-                    }
-                    catch
-                    {
-                        CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
-                    }
-                    rtn = false;
+                    return false;
                 }
             }
 
@@ -1903,7 +1908,7 @@ namespace MissionPlanner
 
             loadph_serial();
 
-            return rtn;
+            return true;
         }
 
         void loadph_serial()
