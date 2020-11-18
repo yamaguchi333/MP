@@ -1597,15 +1597,18 @@ namespace MissionPlanner
                     MainV2.comPort.setParam("BATT2_MONITOR", (float)batt2_monitor_config);
                     if (CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel) == (int)CustomMessageBox.DialogResult.Retry)
                     {
-                        try
+                        if (!MainV2.comPort.MAV.cs.armed)
                         {
-                            MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
+                            try
+                            {
+                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
+                            }
+                            catch
+                            {
+                                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                            }
+                            return false;
                         }
-                        catch
-                        {
-                            CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
-                        }
-                        return false;
                     }
                 }
 

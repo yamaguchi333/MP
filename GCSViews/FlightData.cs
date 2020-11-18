@@ -5324,7 +5324,7 @@ namespace MissionPlanner.GCSViews
                 }
 
                 // get our target wp
-                var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
+                //var lastwpdata = MainV2.comPort.getWP((ushort)lastwpno);
 
                 // get wp data
                 List<Locationwp> cmds = new List<Locationwp>();
@@ -5651,7 +5651,7 @@ namespace MissionPlanner.GCSViews
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
                 // servo operation in mode2
-                if (grid_type == 2)
+                if (grid_type == 2 && !zigzag_flag)
                 {
                     for (int a = lastwpno; a >= 0; a--)
                     {
@@ -5878,6 +5878,14 @@ namespace MissionPlanner.GCSViews
                 else if (mes.Contains("Logging failed"))
                 {
                     rtn = "ログ書き込み不良：飛行不可";
+                }
+                else if (mes.Contains("is not neutral"))
+                {
+                    rtn = "スティックの入力が不正確です";
+                }
+                else if (mes.Contains("Accels inconsistent"))
+                {
+                    rtn = "アクセルキャリブレーション";
                 }
             }
             else if (mes.Contains("Mission:"))
