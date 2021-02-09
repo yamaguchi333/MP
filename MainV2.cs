@@ -1583,18 +1583,123 @@ namespace MissionPlanner
                 if (getparams)
                     comPort.getParamList();
 
+                int param = 0;
+                float param_float = 0;
                 // update BATT2_MONITOR @eams
+                bool param_chg = false;
                 int batt2_monitor_config = 0;
                 if (Settings.Instance["batt2_monitor"] != null)
                     batt2_monitor_config = Settings.Instance.GetInt32("batt2_monitor");
-                int batt2_monitor = 0;
                 if (MainV2.comPort.MAV.param.ContainsKey("BATT2_MONITOR"))
                 {
-                    batt2_monitor = int.Parse(MainV2.comPort.MAV.param["BATT2_MONITOR"].ToString());
+                    param = int.Parse(MainV2.comPort.MAV.param["BATT2_MONITOR"].ToString());
                 }
-                if (batt2_monitor != batt2_monitor_config)
+                if (param != batt2_monitor_config)
                 {
                     MainV2.comPort.setParam("BATT2_MONITOR", (float)batt2_monitor_config);
+                    param_chg = true;
+                }
+
+                // update RangeFinder related parameters @eams
+                if (grid_type >= 2 && grid_type <= 4)
+                {
+                    if (MainV2.comPort.MAV.param.ContainsKey("RNGFND1_TYPE"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString());
+                        if (param != 8)
+                        {
+                            MainV2.comPort.setParam("RNGFND1_TYPE", (float)8);
+                            param_chg = true;
+                        }
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("RTL_ALT_TYPE"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["RTL_ALT_TYPE"].ToString());
+                        if (param != 1)
+                        {
+                            MainV2.comPort.setParam("RTL_ALT_TYPE", (float)1);
+                            param_chg = true;
+                        }
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_RFND_USE"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["WPNAV_RFND_USE"].ToString());
+                        if (param != 1)
+                        {
+                            MainV2.comPort.setParam("WPNAV_RFND_USE", (float)1);
+                            param_chg = true;
+                        }
+                    }
+                }
+                else if(grid_type >= 5 && grid_type <= 6)
+                {
+                    if (MainV2.comPort.MAV.param.ContainsKey("RNGFND1_TYPE"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["RNGFND1_TYPE"].ToString());
+                        if (param != 0)
+                        {
+                            MainV2.comPort.setParam("RNGFND1_TYPE", (float)0);
+                            param_chg = true;
+                        }
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("RTL_ALT_TYPE"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["RTL_ALT_TYPE"].ToString());
+                        if (param != 0)
+                        {
+                            MainV2.comPort.setParam("RTL_ALT_TYPE", (float)0);
+                            param_chg = true;
+                        }
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_RFND_USE"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["WPNAV_RFND_USE"].ToString());
+                        if (param != 0)
+                        {
+                            MainV2.comPort.setParam("WPNAV_RFND_USE", (float)0);
+                            param_chg = true;
+                        }
+                    }
+                }
+
+                // set SERVO7_FUNCTION normal @eams
+                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
+
+                if (grid_type >= 2 && grid_type <= 4)
+                {
+                    // set SERVO7 value @eams
+                    if (MainV2.comPort.MAV.param.ContainsKey("SERVO7_MAX"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["SERVO7_MAX"].ToString());
+                        if (param != grid_dosetservo_PWML)
+                        {
+                            MainV2.comPort.setParam("SERVO7_MAX", (float)grid_dosetservo_PWML);
+                            param_chg = true;
+                        }
+                    }
+                    if (MainV2.comPort.MAV.param.ContainsKey("SERVO7_MIN"))
+                    {
+                        param = int.Parse(MainV2.comPort.MAV.param["SERVO7_MIN"].ToString());
+                        if (param != grid_dosetservo_PWMH)
+                        {
+                            MainV2.comPort.setParam("SERVO7_MIN", (float)grid_dosetservo_PWMH);
+                            param_chg = true;
+                        }
+                    }
+                    // set WPNAV_SPEED
+                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_SPEED"))
+                    {
+                        param_float = float.Parse(MainV2.comPort.MAV.param["WPNAV_SPEED"].ToString());
+                        if (param_float != grid_speed * 100)
+                        {
+                            MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
+                            param_chg = true;
+                        }
+                    }
+                }
+
+                if (param_chg)
+                {
                     if (CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel) == (int)CustomMessageBox.DialogResult.Retry)
                     {
                         if (!MainV2.comPort.MAV.cs.armed)
@@ -1612,55 +1717,12 @@ namespace MissionPlanner
                     }
                 }
 
-                // set SERVO7_FUNCTION normal @eams
-                MainV2.comPort.setParam("SERVO7_FUNCTION", (float)servo7_func_normal);
-                if (grid_type >= 2 && grid_type <= 4)
-                {
-                    // set SERVO7 value @eams
-                    MainV2.comPort.setParam("SERVO7_MAX", (float)grid_dosetservo_PWML);
-                    MainV2.comPort.setParam("SERVO7_MIN", (float)grid_dosetservo_PWMH);
-                    // set WPNAV_SPEED
-                    MainV2.comPort.setParam("WPNAV_SPEED", grid_speed * 100);
-                }
-
                 // update battery cells magnification @eams
                 if (MainV2.comPort.MAV.param.ContainsKey("MOT_BAT_VOLT_MAX"))
                 {
                     double batt_max = double.Parse(MainV2.comPort.MAV.param["MOT_BAT_VOLT_MAX"].ToString());
                     int cells = (int)Math.Round(batt_max / 4.2, MidpointRounding.AwayFromZero);
                     MainV2.comPort.MAV.cs.cells_mag = cells / 6;
-                }
-
-                // update RangeFinder related parameters @eams
-                if (grid_type >= 2 && grid_type <= 4)
-                {
-                    if (MainV2.comPort.MAV.param.ContainsKey("RNGFND1_TYPE"))
-                    {
-                        MainV2.comPort.setParam("RNGFND1_TYPE", (float)8);
-                    }
-                    if (MainV2.comPort.MAV.param.ContainsKey("RTL_ALT_TYPE"))
-                    {
-                        MainV2.comPort.setParam("RTL_ALT_TYPE", (float)1);
-                    }
-                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_RFND_USE"))
-                    {
-                        MainV2.comPort.setParam("WPNAV_RFND_USE", (float)1);
-                    }
-                }
-                else if(grid_type >= 5 && grid_type <= 6)
-                {
-                    if (MainV2.comPort.MAV.param.ContainsKey("RNGFND1_TYPE"))
-                    {
-                        MainV2.comPort.setParam("RNGFND1_TYPE", (float)0);
-                    }
-                    if (MainV2.comPort.MAV.param.ContainsKey("RTL_ALT_TYPE"))
-                    {
-                        MainV2.comPort.setParam("RTL_ALT_TYPE", (float)0);
-                    }
-                    if (MainV2.comPort.MAV.param.ContainsKey("WPNAV_RFND_USE"))
-                    {
-                        MainV2.comPort.setParam("WPNAV_RFND_USE", (float)0);
-                    }
                 }
 
                 _connectionControl.UpdateSysIDS();

@@ -131,10 +131,7 @@
       <Project>{d0c39d9d-bed0-418b-9a5e-713176caf40c}</Project>
       <Name>GMap.NET.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="ExtLibs\GMap.NET.WindowsForms\GMap.NET.WindowsForms.csproj">
-      <Project>{e06def77-f933-42fb-afd7-db2d0d8d6a98}</Project>
-      <Name>GMap.NET.WindowsForms</Name>
-    </ProjectReference>
+    <ProjectReference Include="ExtLibs\GMap.NET.WindowsForms\GMap.NET.WindowsForms.csproj" />
     <ProjectReference Include="ExtLibs\HIL\MissionPlanner.HIL.csproj" />
     <ProjectReference Include="ExtLibs\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.csproj" />
     <ProjectReference Include="ExtLibs\KMLib\KMLib.csproj">
@@ -1782,6 +1779,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\launchSettings.json" />
+    <None Include="Resources\btn_root_cal.jpg" />
     <None Include="Resources\btn_return_stop.jpg" />
     <None Include="Resources\btn_act_auto.jpg" />
     <None Include="Resources\btn_resume_clear.png" />

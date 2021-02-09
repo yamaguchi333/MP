@@ -2875,7 +2875,8 @@ namespace MissionPlanner.GCSViews
 
             if (polygon.Count == 0)
             {
-                CustomMessageBox.Show("Please define a polygon!");
+                //CustomMessageBox.Show("Please define a polygon!");
+                CustomMessageBox.Show("ミッションを作成する場所にポリゴンを設定してください。");
                 return 0;
             }
 
@@ -7192,7 +7193,8 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             else
             {
                 CustomMessageBox.Show(
-                    "If you're at the field, connect to your APM and wait for GPS lock. Then click 'Home Location' link to set home to your location");
+                    //"If you're at the field, connect to your APM and wait for GPS lock. Then click 'Home Location' link to set home to your location");
+                    "機体に接続しGPSロック状態を確認後に再度ボタン押下をしてください。");
             }
         }
 
@@ -7592,14 +7594,18 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void grid_shift(int angle)
         {
+            double shift = 0.5;
+            if (Settings.Instance["grid_shift"] != null)
+                shift = double.Parse(Settings.Instance["grid_shift"]);
+            grid_shift(angle, shift);
+        }
+
+        private void grid_shift(double angle, double dist)
+        {
             if (Commands.RowCount == 0)
             {
                 return;
             }
-
-            double grid_shift = 0.5;
-            if (Settings.Instance["grid_shift"] != null)
-                grid_shift = double.Parse(Settings.Instance["grid_shift"]);
 
             //ミッションリストで任意のWAYPOINTが選択表示されていないとsetfromMapで不具合が生じる
             //事前に先頭のWAYPOINTを選択して回避
@@ -7642,7 +7648,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                         if (marker.Tag != null && marker.Tag.ToString() == markerid.ToString())
                         {
                             var temp = new PointLatLngAlt(marker.Position.Lat, marker.Position.Lng);
-                            marker.Position = temp.newpos(angle, grid_shift).Point();
+                            marker.Position = temp.newpos(angle, dist).Point();
                         }
                     }
                 }
@@ -7679,6 +7685,34 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
                 CurentRectMarker = null;
             }
+        }
+
+        private void labelPosiCal_Click(object sender, EventArgs e)
+        {
+            if (MainV2.comPort.MAV.cs.lat == 0)
+            {
+                CustomMessageBox.Show("機体に接続しGPSロック状態を確認後に再度ボタン押下をしてください。");
+                return;
+            }
+            var commands = GetCommandList();
+            int firstwpno = commands.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) && (x.lat != 0));
+            if (firstwpno < 0)
+            {
+                CustomMessageBox.Show("ミッションが作成されていません。");
+                return;
+            }
+
+            PointLatLng pt_ref = new PointLatLng(MainV2.comPort.MAV.cs.lat, MainV2.comPort.MAV.cs.lng);
+            PointLatLng pt_tgt = new PointLatLng(commands[firstwpno].lat, commands[firstwpno].lng);
+            //MainMap.Offset(pt_ref, center.Position);
+            MainMap.Offset(pt_ref, pt_tgt);
+
+            var plla_ref = new PointLatLngAlt(pt_ref.Lat, pt_ref.Lng);
+            var plla_tgt = new PointLatLngAlt(pt_tgt.Lat, pt_tgt.Lng);
+            var angle = plla_tgt.GetBearing(plla_ref);
+            var dist = plla_tgt.GetDistance(plla_ref);
+            grid_shift(angle, dist);
+            clearPolygonToolStripMenuItem_Click(this, null);
         }
     }
 

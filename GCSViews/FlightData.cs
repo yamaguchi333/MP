@@ -5845,6 +5845,10 @@ namespace MissionPlanner.GCSViews
                 {
                     rtn = "自動飛行停止中";
                 }
+                else if (mes.Contains("point AB restored"))
+                {
+                    rtn = "A・Bポイント設定完了";
+                }
             }
             else if (mes.Contains("EKF") && mes.Contains("IMU"))
             {
