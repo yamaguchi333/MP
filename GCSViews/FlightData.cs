@@ -4980,6 +4980,8 @@ namespace MissionPlanner.GCSViews
         /// </summary>
         public void ButtonStart_ChangeState(bool state)
         {
+            return;
+
             ButtonStart.Enabled = state;
 
             //描画先とするImageオブジェクトを作成する
