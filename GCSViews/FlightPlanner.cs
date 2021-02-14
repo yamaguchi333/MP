@@ -7194,7 +7194,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             {
                 CustomMessageBox.Show(
                     //"If you're at the field, connect to your APM and wait for GPS lock. Then click 'Home Location' link to set home to your location");
-                    "機体に接続しGPSロック状態を確認後に再度ボタン押下をしてください。");
+                    "機体に接続しGPSロック状態を確認後に再度ボタンを押下してください。");
             }
         }
 
@@ -7689,16 +7689,26 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
 
         private void labelPosiCal_Click(object sender, EventArgs e)
         {
-            if (MainV2.comPort.MAV.cs.lat == 0)
+            if (MainV2.comPort.MAV.cs.lat == 0 || !MainV2.comPort.MAV.cs.connected)
             {
-                CustomMessageBox.Show("機体に接続しGPSロック状態を確認後に再度ボタン押下をしてください。");
+                CustomMessageBox.Show("機体に接続しGPSロック状態を確認後に再度ボタンを押下してください。", "ルートキャリブレーション");
                 return;
             }
             var commands = GetCommandList();
             int firstwpno = commands.FindIndex(x => (x.id == (ushort)MAVLink.MAV_CMD.WAYPOINT) && (x.lat != 0));
             if (firstwpno < 0)
             {
-                CustomMessageBox.Show("ミッションが作成されていません。");
+                CustomMessageBox.Show("ミッションが作成されていません。", "ルートキャリブレーション");
+                return;
+            }
+            var dist_home = MainV2.comPort.MAV.cs.DistToHome;
+            if (dist_home > 30.0)
+            {
+                CustomMessageBox.Show("安全上の理由のため、離陸地点から30m以上離れた場所での\nルートキャリブレーションはできません。", "ルートキャリブレーション");
+                return;
+            }
+            if (CustomMessageBox.Show("ルートキャリブレーションを行います。\n読み出している圃場ルートは合ってますか？", "ルートキャリブレーション", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
+            {
                 return;
             }
 
@@ -7706,9 +7716,13 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             PointLatLng pt_tgt = new PointLatLng(commands[firstwpno].lat, commands[firstwpno].lng);
             //MainMap.Offset(pt_ref, center.Position);
             MainMap.Offset(pt_ref, pt_tgt);
-
+#if false
+            var plla_ref = new PointLatLngAlt(MainMap.CalRefPoint.Lat, MainMap.CalRefPoint.Lng);
+            var plla_tgt = new PointLatLngAlt(MainMap.CalTgtPoint.Lat, MainMap.CalTgtPoint.Lng);
+#else
             var plla_ref = new PointLatLngAlt(pt_ref.Lat, pt_ref.Lng);
             var plla_tgt = new PointLatLngAlt(pt_tgt.Lat, pt_tgt.Lng);
+#endif
             var angle = plla_tgt.GetBearing(plla_ref);
             var dist = plla_tgt.GetDistance(plla_ref);
             grid_shift(angle, dist);

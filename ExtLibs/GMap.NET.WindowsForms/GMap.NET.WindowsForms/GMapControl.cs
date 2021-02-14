@@ -1347,19 +1347,21 @@ namespace GMap.NET.WindowsForms
         /// <summary>
         /// offset position in LatLng
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="refp">機体位置</param>
+        /// <param name="tgtp">最初のWP位置</param>
+        /// <comment>
+        /// 別途ミッションがマップシフト量に応じてシフトする前提
+        /// </comment>
         public void Offset(PointLatLng refp, PointLatLng tgtp)
         {
             if (IsHandleCreated)
             {
                 CalRefPoint = refp;
-                if (!CalTgtPoint.IsEmpty)
+
+                if (CalTgtPoint.IsEmpty)
                 {
-                    tgtp.Lat = tgtp.Lat - (CalRefPoint.Lat - CalTgtPoint.Lat);
-                    tgtp.Lng = tgtp.Lng - (CalRefPoint.Lng - CalTgtPoint.Lng);
+                    CalTgtPoint = tgtp;
                 }
-                CalTgtPoint = tgtp;
 
                 ForceUpdateOverlays();
             }
