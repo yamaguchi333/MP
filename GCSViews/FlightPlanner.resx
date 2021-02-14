@@ -1964,6 +1964,42 @@
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="labelCal.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="labelCal.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCal.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 11.25pt</value>
+  </data>
+  <data name="labelCal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelCal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 56</value>
+  </data>
+  <data name="labelCal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 15</value>
+  </data>
+  <data name="labelCal.TabIndex" type="System.Int32, mscorlib">
+    <value>108</value>
+  </data>
+  <data name="labelCal.Text" xml:space="preserve">
+    <value>キャリブレーション中</value>
+  </data>
+  <data name="&gt;&gt;labelCal.Name" xml:space="preserve">
+    <value>labelCal</value>
+  </data>
+  <data name="&gt;&gt;labelCal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCal.Parent" xml:space="preserve">
+    <value>panel10</value>
+  </data>
+  <data name="&gt;&gt;labelCal.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="labelPosiCal.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 4</value>
   </data>
@@ -1983,13 +2019,13 @@
     <value>panel10</value>
   </data>
   <data name="&gt;&gt;labelPosiCal.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="panel10.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 849</value>
   </data>
   <data name="panel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 59</value>
+    <value>158, 80</value>
   </data>
   <data name="panel10.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -2219,7 +2255,14 @@
   <data name="MainMap.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="MainMap.CalOffset" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data name="MainMap.CalRefPoint" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAERHTWFwLk5FVC5Db3JlLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1
+        cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUBAAAAFEdNYXAuTkVULlBvaW50TGF0TG5nAwAA
+        AANsYXQDbG5nCE5vdEVtcHR5AAAABgYBAgAAAAAAAAAAAAAAAAAAAAAAAAAACw==
+</value>
+  </data>
+  <data name="MainMap.CalTgtPoint" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAERHTWFwLk5FVC5Db3JlLCBWZXJzaW9uPTEuMC4wLjAsIEN1bHR1
         cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUBAAAAFEdNYXAuTkVULlBvaW50TGF0TG5nAwAA

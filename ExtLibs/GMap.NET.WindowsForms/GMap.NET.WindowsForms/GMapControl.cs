@@ -1345,7 +1345,7 @@ namespace GMap.NET.WindowsForms
       }
 
         /// <summary>
-        /// offset position in LatLng
+        /// map offset position in LatLng
         /// </summary>
         /// <param name="refp">機体位置</param>
         /// <param name="tgtp">最初のWP位置</param>
@@ -1367,7 +1367,21 @@ namespace GMap.NET.WindowsForms
             }
         }
 
-#region UserControl Events
+        /// <summary>
+        /// reset map offset
+        /// </summary>
+        public void ResetOffset()
+        {
+            if (IsHandleCreated)
+            {
+                CalRefPoint = PointLatLng.Empty;
+                CalTgtPoint = PointLatLng.Empty;
+
+                ForceUpdateOverlays();
+            }
+        }
+
+        #region UserControl Events
 
 #if !PocketPC
         public readonly static bool IsDesignerHosted = LicenseManager.UsageMode == LicenseUsageMode.Designtime;

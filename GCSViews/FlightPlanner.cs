@@ -696,6 +696,7 @@ namespace MissionPlanner.GCSViews
             if (Settings.Instance["overlay_mesh"] != null)
                 mesh_type = int.Parse(Settings.Instance["overlay_mesh"]);
 
+            labelCal.Visible = false;
             /*
             var timer = new System.Timers.Timer();
 
@@ -2756,6 +2757,8 @@ namespace MissionPlanner.GCSViews
                     }
 
                     lbl_wpfile.Text = "Loaded " + Path.GetFileName(file);
+                    MainMap.ResetOffset();
+                    labelCal.Visible = false;
                 }
             }
         }
@@ -4221,6 +4224,8 @@ namespace MissionPlanner.GCSViews
             selectedrow = 0;
             quickadd = false;
             writeKML();
+            MainMap.ResetOffset();
+            labelCal.Visible = false;
         }
 
         private void loiterForeverToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7727,6 +7732,7 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             var dist = plla_tgt.GetDistance(plla_ref);
             grid_shift(angle, dist);
             clearPolygonToolStripMenuItem_Click(this, null);
+            labelCal.Visible = true;
         }
     }
 

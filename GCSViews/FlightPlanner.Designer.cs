@@ -225,6 +225,7 @@ namespace MissionPlanner.GCSViews
             this.panelBASE = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.labelCal = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelWaypoints.SuspendLayout();
@@ -941,6 +942,7 @@ namespace MissionPlanner.GCSViews
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.labelCal);
             this.panel10.Controls.Add(this.labelPosiCal);
             resources.ApplyResources(this.panel10, "panel10");
             this.panel10.Name = "panel10";
@@ -1008,6 +1010,8 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.MainMap, "MainMap");
             this.MainMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.MainMap.Bearing = 0F;
+            this.MainMap.CalRefPoint = ((GMap.NET.PointLatLng)(resources.GetObject("MainMap.CalRefPoint")));
+            this.MainMap.CalTgtPoint = ((GMap.NET.PointLatLng)(resources.GetObject("MainMap.CalTgtPoint")));
             this.MainMap.CanDragMap = true;
             this.MainMap.ContextMenuStrip = this.contextMenuStrip1;
             this.MainMap.Cursor = System.Windows.Forms.Cursors.Default;
@@ -1557,6 +1561,11 @@ namespace MissionPlanner.GCSViews
             this.timer1.Interval = 1200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // labelCal
+            // 
+            resources.ApplyResources(this.labelCal, "labelCal");
+            this.labelCal.Name = "labelCal";
+            // 
             // FlightPlanner
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -1586,6 +1595,7 @@ namespace MissionPlanner.GCSViews
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panelMap.ResumeLayout(false);
             this.panelMap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
@@ -1774,5 +1784,6 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.Button BUT_shiftleft;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.LinkLabel labelPosiCal;
+        private System.Windows.Forms.Label labelCal;
     }
 }
