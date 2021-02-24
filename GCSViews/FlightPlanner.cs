@@ -542,7 +542,7 @@ namespace MissionPlanner.GCSViews
                 int a = 1;
                 commandlist.ForEach(i =>
                 {
-                    MAVLink.mavlink_mission_item_t item = (MAVLink.mavlink_mission_item_t) i;
+                    MAVLink.mavlink_mission_item_int_t item = i;
                     item.seq = (ushort)a;
                     MainV2.comPort.MAV.wps[a] = item;
                     a++;
@@ -2086,7 +2086,7 @@ namespace MissionPlanner.GCSViews
                 // log
                 log.Info("wps values " + MainV2.comPort.MAV.wps.Values.Count);
                 log.Info("cmd rows " + (Commands.Rows.Count + 1)); // + home
-
+#if false
                 // check for changes / future mod to send just changed wp's
                 if (MainV2.comPort.MAV.wps.Values.Count == (Commands.Rows.Count + 1))
                 {
@@ -2125,7 +2125,7 @@ namespace MissionPlanner.GCSViews
                         a++;
                     }
                 }
-
+#endif
                 bool use_int = (port.MAV.cs.capabilities & (uint)MAVLink.MAV_PROTOCOL_CAPABILITY.MISSION_INT) > 0;
 
                 // set wp total

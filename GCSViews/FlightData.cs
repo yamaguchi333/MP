@@ -1178,6 +1178,16 @@ namespace MissionPlanner.GCSViews
                         labelAccuracy.Text = gps;
                     }
 
+                    // @eams update current clock display
+                    if (labelClock.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() => labelClock.Text = DateTime.Now.ToLongTimeString()));
+                    }
+                    else
+                    {
+                        labelClock.Text = gps;
+                    }
+
                     // @eams check resume point and failsafe
                     var commands = MainV2.instance.FlightPlanner.GetCommandList();
                     string lastwp = MainV2.comPort.MAV.cs.lastautowp.ToString();

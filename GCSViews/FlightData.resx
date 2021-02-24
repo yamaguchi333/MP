@@ -145,7 +145,109 @@
     <value>True</value>
   </data>
   <data name="tableLayoutPanelMessage.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label16.Font" type="System.Drawing.Font, System.Drawing">
+    <value>メイリオ, 9pt</value>
+  </data>
+  <data name="label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 49</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 18</value>
+  </data>
+  <data name="label16.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>現在時刻</value>
+  </data>
+  <data name="&gt;&gt;label16.Name" xml:space="preserve">
+    <value>label16</value>
+  </data>
+  <data name="&gt;&gt;label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelClock.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="labelClock.Font" type="System.Drawing.Font, System.Drawing">
+    <value>メイリオ, 21.75pt, style=Bold</value>
+  </data>
+  <data name="labelClock.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelClock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="labelClock.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 1, 3, 2</value>
+  </data>
+  <data name="labelClock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 66</value>
+  </data>
+  <data name="labelClock.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="labelClock.Text" xml:space="preserve">
+    <value>00:00:00</value>
+  </data>
+  <data name="labelClock.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;labelClock.Name" xml:space="preserve">
+    <value>labelClock</value>
+  </data>
+  <data name="&gt;&gt;labelClock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelClock.Parent" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;labelClock.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="panel9.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panel9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 277</value>
+  </data>
+  <data name="panel9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 1, 1, 2</value>
+  </data>
+  <data name="panel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 66</value>
+  </data>
+  <data name="panel9.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;panel9.Name" xml:space="preserve">
+    <value>panel9</value>
+  </data>
+  <data name="&gt;&gt;panel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel9.Parent" xml:space="preserve">
+    <value>tableLayoutPanelMessage</value>
+  </data>
+  <data name="&gt;&gt;panel9.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -160,7 +262,7 @@
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 49</value>
+    <value>164, 49</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 18</value>
@@ -199,7 +301,7 @@
     <value>3, 1, 3, 2</value>
   </data>
   <data name="labelAccuracy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 66</value>
+    <value>219, 66</value>
   </data>
   <data name="labelAccuracy.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -226,13 +328,13 @@
     <value>Fill</value>
   </data>
   <data name="panel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 277</value>
+    <value>223, 277</value>
   </data>
   <data name="panel8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 2</value>
+    <value>1, 1, 3, 2</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 66</value>
+    <value>219, 66</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -247,7 +349,7 @@
     <value>tableLayoutPanelMessage</value>
   </data>
   <data name="&gt;&gt;panel8.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -262,7 +364,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 48</value>
+    <value>372, 48</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 18</value>
@@ -301,7 +403,7 @@
     <value>3, 2, 3, 1</value>
   </data>
   <data name="labelMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 66</value>
+    <value>439, 66</value>
   </data>
   <data name="labelMode.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -334,7 +436,7 @@
     <value>3, 2, 3, 1</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 66</value>
+    <value>439, 66</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -349,7 +451,7 @@
     <value>tableLayoutPanelMessage</value>
   </data>
   <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -364,7 +466,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 49</value>
+    <value>360, 49</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 18</value>
@@ -403,7 +505,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="labelArm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 67</value>
+    <value>439, 67</value>
   </data>
   <data name="labelArm.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -436,7 +538,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 67</value>
+    <value>439, 67</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -451,7 +553,7 @@
     <value>tableLayoutPanelMessage</value>
   </data>
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -466,7 +568,7 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 49</value>
+    <value>336, 49</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 18</value>
@@ -505,7 +607,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 67</value>
+    <value>439, 67</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -538,7 +640,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 67</value>
+    <value>439, 67</value>
   </data>
   <data name="panel6.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -553,7 +655,7 @@
     <value>tableLayoutPanelMessage</value>
   </data>
   <data name="&gt;&gt;panel6.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -568,7 +670,7 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 50</value>
+    <value>372, 50</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 18</value>
@@ -607,7 +709,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="labelMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 67</value>
+    <value>439, 67</value>
   </data>
   <data name="labelMessage.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -640,7 +742,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="panel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 67</value>
+    <value>439, 67</value>
   </data>
   <data name="panel7.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -655,7 +757,10 @@
     <value>tableLayoutPanelMessage</value>
   </data>
   <data name="&gt;&gt;panel7.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanelMessage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="tableLayoutPanelMessage.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -664,7 +769,7 @@
     <value>5</value>
   </data>
   <data name="tableLayoutPanelMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 345</value>
+    <value>445, 345</value>
   </data>
   <data name="tableLayoutPanelMessage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -682,7 +787,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelMessage.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel8" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel5" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel6" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel7" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,20,Percent,20,Percent,20,Percent,20,Percent,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel9" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel8" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="panel5" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="panel6" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="panel7" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,20,Percent,20,Percent,20,Percent,20,Percent,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="bindingSourceHud.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -5374,7 +5479,7 @@
     <value>zg1</value>
   </data>
   <data name="&gt;&gt;zg1.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.34238, Culture=neutral, PublicKeyToken=null</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.22731, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;zg1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -5710,114 +5815,6 @@
         cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUBAAAAFEdNYXAuTkVULlBvaW50TGF0TG5nAwAA
         AANsYXQDbG5nCE5vdEVtcHR5AAAABgYBAgAAAAAAAAAAAAAAAAAAAAAAAAAACw==
 </value>
-  </data>
-  <metadata name="contextMenuStripMap.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>444, 17</value>
-  </metadata>
-  <data name="goHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="goHereToolStripMenuItem.Text" xml:space="preserve">
-    <value>Fly To Here</value>
-  </data>
-  <data name="flyToHereAltToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="flyToHereAltToolStripMenuItem.Text" xml:space="preserve">
-    <value>Fly To Here Alt</value>
-  </data>
-  <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="saveFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="saveFileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save File</value>
-  </data>
-  <data name="loadFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="loadFileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Load File</value>
-  </data>
-  <data name="addPoiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="addPoiToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add Poi</value>
-  </data>
-  <data name="pointCameraHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="pointCameraHereToolStripMenuItem.Text" xml:space="preserve">
-    <value>Point Camera Here</value>
-  </data>
-  <data name="PointCameraCoordsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="PointCameraCoordsToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Point Camera Coords</value>
-  </data>
-  <data name="triggerCameraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="triggerCameraToolStripMenuItem.Text" xml:space="preserve">
-    <value>Trigger Camera NOW</value>
-  </data>
-  <data name="flightPlannerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="flightPlannerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Flight Planner</value>
-  </data>
-  <data name="setEKFHomeHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="setEKFHomeHereToolStripMenuItem.Text" xml:space="preserve">
-    <value>Set EKF Origin Here</value>
-  </data>
-  <data name="setHomeHereToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="setHomeHereToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Set Home Here</value>
-  </data>
-  <data name="setHomeHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="setHomeHereToolStripMenuItem.Text" xml:space="preserve">
-    <value>Set Home Here</value>
-  </data>
-  <data name="takeOffToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="takeOffToolStripMenuItem.Text" xml:space="preserve">
-    <value>TakeOff</value>
-  </data>
-  <data name="onOffCameraOverlapToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="onOffCameraOverlapToolStripMenuItem.Text" xml:space="preserve">
-    <value>Camera Overlap</value>
-  </data>
-  <data name="altitudeAngelSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
-  </data>
-  <data name="altitudeAngelSettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Altitude Angel Settings</value>
-  </data>
-  <data name="contextMenuStripMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 246</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripMap.Name" xml:space="preserve">
-    <value>contextMenuStripMap</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripMap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="gMapControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -6523,6 +6520,114 @@
   </data>
   <data name="&gt;&gt;MainH.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <metadata name="contextMenuStripMap.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>444, 17</value>
+  </metadata>
+  <data name="goHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="goHereToolStripMenuItem.Text" xml:space="preserve">
+    <value>Fly To Here</value>
+  </data>
+  <data name="flyToHereAltToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="flyToHereAltToolStripMenuItem.Text" xml:space="preserve">
+    <value>Fly To Here Alt</value>
+  </data>
+  <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="saveFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="saveFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save File</value>
+  </data>
+  <data name="loadFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="loadFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Load File</value>
+  </data>
+  <data name="addPoiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="addPoiToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add Poi</value>
+  </data>
+  <data name="pointCameraHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="pointCameraHereToolStripMenuItem.Text" xml:space="preserve">
+    <value>Point Camera Here</value>
+  </data>
+  <data name="PointCameraCoordsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="PointCameraCoordsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Point Camera Coords</value>
+  </data>
+  <data name="triggerCameraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="triggerCameraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Trigger Camera NOW</value>
+  </data>
+  <data name="flightPlannerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="flightPlannerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Flight Planner</value>
+  </data>
+  <data name="setEKFHomeHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="setEKFHomeHereToolStripMenuItem.Text" xml:space="preserve">
+    <value>Set EKF Origin Here</value>
+  </data>
+  <data name="setHomeHereToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="setHomeHereToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Set Home Here</value>
+  </data>
+  <data name="setHomeHereToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="setHomeHereToolStripMenuItem.Text" xml:space="preserve">
+    <value>Set Home Here</value>
+  </data>
+  <data name="takeOffToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="takeOffToolStripMenuItem.Text" xml:space="preserve">
+    <value>TakeOff</value>
+  </data>
+  <data name="onOffCameraOverlapToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="onOffCameraOverlapToolStripMenuItem.Text" xml:space="preserve">
+    <value>Camera Overlap</value>
+  </data>
+  <data name="altitudeAngelSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="altitudeAngelSettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Altitude Angel Settings</value>
+  </data>
+  <data name="contextMenuStripMap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 246</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripMap.Name" xml:space="preserve">
+    <value>contextMenuStripMap</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripMap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="contextMenuStripHud.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>714, 17</value>
