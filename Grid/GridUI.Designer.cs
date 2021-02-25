@@ -133,7 +133,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.NUM_angle = new System.Windows.Forms.NumericUpDown();
-            this.CHK_camdirection = new System.Windows.Forms.CheckBox();
             this.NUM_altitude = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -234,6 +233,8 @@
             this.lbl_speed = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.lbl_alt = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.CHK_camdirection = new System.Windows.Forms.CheckBox();
             this.groupBox5.SuspendLayout();
             this.tabCamera.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -281,6 +282,7 @@
             this.panel8.SuspendLayout();
             this.panelMode6.SuspendLayout();
             this.panelMode6Easy.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox5
@@ -1070,7 +1072,6 @@
             this.groupBox6.Controls.Add(this.label26);
             this.groupBox6.Controls.Add(this.label4);
             this.groupBox6.Controls.Add(this.NUM_angle);
-            this.groupBox6.Controls.Add(this.CHK_camdirection);
             this.groupBox6.Controls.Add(this.NUM_altitude);
             this.groupBox6.Controls.Add(this.label1);
             resources.ApplyResources(this.groupBox6, "groupBox6");
@@ -1172,15 +1173,6 @@
             0});
             this.NUM_angle.Name = "NUM_angle";
             this.NUM_angle.ValueChanged += new System.EventHandler(this.domainUpDown1_ValueChanged);
-            // 
-            // CHK_camdirection
-            // 
-            resources.ApplyResources(this.CHK_camdirection, "CHK_camdirection");
-            this.CHK_camdirection.Checked = true;
-            this.CHK_camdirection.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHK_camdirection.Name = "CHK_camdirection";
-            this.CHK_camdirection.UseVisualStyleBackColor = true;
-            this.CHK_camdirection.CheckedChanged += new System.EventHandler(this.CHK_camdirection_CheckedChanged);
             // 
             // NUM_altitude
             // 
@@ -1389,6 +1381,8 @@
             // 
             resources.ApplyResources(this.map, "map");
             this.map.Bearing = 0F;
+            this.map.CalRefPoint = ((GMap.NET.PointLatLng)(resources.GetObject("map.CalRefPoint")));
+            this.map.CalTgtPoint = ((GMap.NET.PointLatLng)(resources.GetObject("map.CalTgtPoint")));
             this.map.CanDragMap = true;
             this.map.EmptyTileColor = System.Drawing.Color.Gray;
             this.map.GrayScaleMode = false;
@@ -1422,6 +1416,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.panel9);
             this.flowLayoutPanel1.Controls.Add(this.panel6);
+            this.flowLayoutPanel1.Controls.Add(this.panel11);
             this.flowLayoutPanel1.Controls.Add(this.panel7);
             this.flowLayoutPanel1.Controls.Add(this.panel10);
             this.flowLayoutPanel1.Controls.Add(this.panel8);
@@ -1982,6 +1977,21 @@
             resources.ApplyResources(this.lbl_alt, "lbl_alt");
             this.lbl_alt.Name = "lbl_alt";
             // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.CHK_camdirection);
+            resources.ApplyResources(this.panel11, "panel11");
+            this.panel11.Name = "panel11";
+            // 
+            // CHK_camdirection
+            // 
+            resources.ApplyResources(this.CHK_camdirection, "CHK_camdirection");
+            this.CHK_camdirection.Checked = true;
+            this.CHK_camdirection.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHK_camdirection.Name = "CHK_camdirection";
+            this.CHK_camdirection.UseVisualStyleBackColor = true;
+            this.CHK_camdirection.CheckedChanged += new System.EventHandler(this.CHK_camdirection_CheckedChanged);
+            // 
             // GridUI
             // 
             resources.ApplyResources(this, "$this");
@@ -2078,6 +2088,8 @@
             this.panelMode6.PerformLayout();
             this.panelMode6Easy.ResumeLayout(false);
             this.panelMode6Easy.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2160,7 +2172,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown NUM_angle;
-        private System.Windows.Forms.CheckBox CHK_camdirection;
         private System.Windows.Forms.NumericUpDown NUM_altitude;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -2289,5 +2300,7 @@
         private System.Windows.Forms.Button BUT_speed2plus;
         private System.Windows.Forms.TextBox TXT_speed2;
         private System.Windows.Forms.CheckBox CHK_speed2;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.CheckBox CHK_camdirection;
     }
 }

@@ -263,6 +263,7 @@ namespace MissionPlanner.Grid
                 panel3.Visible = false;
                 panel9.Visible = false;
                 panel5.Visible = false;
+                panel11.Visible = false;
                 if (grid_type == 5)
                 {
                     panel7.Visible = false;
