@@ -4348,7 +4348,7 @@ namespace MissionPlanner
 
                     // write mission to UAV
                     MainV2.instance.FlightPlanner.BUT_write_Click(this, null);
-
+                    MainV2.comPort.setWPCurrent(0); // set nav to
                 }
 
                 // failsafe check

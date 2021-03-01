@@ -840,6 +840,8 @@ namespace MissionPlanner.GCSViews
 
             bool first_RTL = true;  // @eams add
             string pre_RTL_mode = "";  // @eams add
+            bool lastArm = false;  // @eams add
+            DateTime lastArmTime = DateTime.Parse("00:00:00");  // @eams add
 
             while (threadrun)
             {
@@ -1181,11 +1183,46 @@ namespace MissionPlanner.GCSViews
                     // @eams update current clock display
                     if (labelClock.InvokeRequired)
                     {
-                        Invoke((MethodInvoker)(() => labelClock.Text = DateTime.Now.ToLongTimeString()));
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            labelClock.Text = DateTime.Now.ToLongTimeString();
+                            if (lastArm != MainV2.comPort.MAV.cs.armed)
+                            {
+                                lastArm = MainV2.comPort.MAV.cs.armed;
+                                if (lastArm)
+                                {
+                                    lastArmTime = DateTime.Now;
+                                    labelClockArm.Text = lastArmTime.ToLongTimeString();
+                                    labelClockArming.Text = "00:00";
+                                }
+                                else
+                                {
+                                    var now = DateTime.Now;
+                                    labelClockDisarm.Text = now.ToLongTimeString();
+                                    labelClockArming.Text = (now - lastArmTime).ToString(@"mm\:ss");
+                                }
+                            }
+                        }));
                     }
                     else
                     {
-                        labelClock.Text = gps;
+                        labelClock.Text = DateTime.Now.ToLongTimeString();
+                        if (lastArm != MainV2.comPort.MAV.cs.armed)
+                        {
+                            lastArm = MainV2.comPort.MAV.cs.armed;
+                            if (lastArm)
+                            {
+                                lastArmTime = DateTime.Now;
+                                labelClockArm.Text = lastArmTime.ToLongTimeString();
+                                labelClockArming.Text = "00:00";
+                            }
+                            else
+                            {
+                                var now = DateTime.Now;
+                                labelClockDisarm.Text = now.ToLongTimeString();
+                                labelClockArming.Text = (now - lastArmTime).ToString("mm:ss");
+                            }
+                        }
                     }
 
                     // @eams check resume point and failsafe

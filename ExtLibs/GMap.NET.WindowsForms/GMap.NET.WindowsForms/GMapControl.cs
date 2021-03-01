@@ -768,16 +768,17 @@ namespace GMap.NET.WindowsForms
                                               }
                                               else
                                               {
-                                                  g.DrawImage(img.Img,
-                                                      new Rectangle((int) Core.tileRect.X, (int) Core.tileRect.Y,
-                                                          (int) Core.tileRect.Width, (int) Core.tileRect.Height), 0, 0,
-                                                      Core.tileRect.Width, Core.tileRect.Height, GraphicsUnit.Pixel,
-                                                      TileFlipXYAttributes);
-                                              }
+                                                    g.DrawImage(img.Img,
+                                                        new Rectangle((int)Core.tileRect.X, (int)Core.tileRect.Y,
+                                                            (int)Core.tileRect.Width + 1,
+                                                            (int)Core.tileRect.Height + 1), 0, 0,
+                                                        Core.tileRect.Width, Core.tileRect.Height, GraphicsUnit.Pixel,
+                                                        TileFlipXYAttributes);
+                                                }
 #else
                                     g.DrawImage(img.Img, (int) Core.tileRect.X, (int) Core.tileRect.Y);
 #endif
-                                          }
+                                            }
 #if !PocketPC
                                           else
                                           {
