@@ -160,7 +160,7 @@
     <value>NoControl</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 16</value>
+    <value>54, 15</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 18</value>
@@ -196,10 +196,10 @@
     <value>0, 0</value>
   </data>
   <data name="labelClockArming.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 2</value>
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="labelClockArming.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 33</value>
+    <value>109, 32</value>
   </data>
   <data name="labelClockArming.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -226,13 +226,13 @@
     <value>Fill</value>
   </data>
   <data name="panel12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 325</value>
+    <value>112, 277</value>
   </data>
   <data name="panel12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 2</value>
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="panel12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 33</value>
+    <value>109, 32</value>
   </data>
   <data name="panel12.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -262,7 +262,7 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 16</value>
+    <value>54, 15</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 18</value>
@@ -298,10 +298,10 @@
     <value>0, 0</value>
   </data>
   <data name="labelClockDisarm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 3, 2</value>
+    <value>1, 1, 1, 2</value>
   </data>
   <data name="labelClockDisarm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 33</value>
+    <value>109, 32</value>
   </data>
   <data name="labelClockDisarm.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -328,13 +328,13 @@
     <value>Fill</value>
   </data>
   <data name="panel11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 325</value>
+    <value>112, 311</value>
   </data>
   <data name="panel11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 1, 2</value>
+    <value>1, 1, 1, 2</value>
   </data>
   <data name="panel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 33</value>
+    <value>109, 32</value>
   </data>
   <data name="panel11.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -364,7 +364,7 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 17</value>
+    <value>52, 15</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 18</value>
@@ -400,10 +400,10 @@
     <value>0, 0</value>
   </data>
   <data name="labelClockArm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>3, 1, 1, 2</value>
   </data>
   <data name="labelClockArm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 34</value>
+    <value>107, 32</value>
   </data>
   <data name="labelClockArm.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -430,13 +430,13 @@
     <value>Fill</value>
   </data>
   <data name="panel10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 289</value>
+    <value>3, 311</value>
   </data>
   <data name="panel10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
+    <value>3, 1, 1, 2</value>
   </data>
   <data name="panel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 34</value>
+    <value>107, 32</value>
   </data>
   <data name="panel10.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -466,7 +466,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 17</value>
+    <value>52, 15</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 18</value>
@@ -502,10 +502,10 @@
     <value>0, 0</value>
   </data>
   <data name="labelClock.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 1, 1, 2</value>
+    <value>3, 1, 1, 1</value>
   </data>
   <data name="labelClock.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 34</value>
+    <value>107, 32</value>
   </data>
   <data name="labelClock.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -532,13 +532,13 @@
     <value>Fill</value>
   </data>
   <data name="panel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 289</value>
+    <value>3, 277</value>
   </data>
   <data name="panel9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 1, 1</value>
   </data>
   <data name="panel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 34</value>
+    <value>107, 32</value>
   </data>
   <data name="panel9.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -568,7 +568,7 @@
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 52</value>
+    <value>164, 49</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 18</value>
@@ -607,7 +607,7 @@
     <value>3, 1, 3, 2</value>
   </data>
   <data name="labelAccuracy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 69</value>
+    <value>219, 66</value>
   </data>
   <data name="labelAccuracy.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -634,13 +634,13 @@
     <value>Fill</value>
   </data>
   <data name="panel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 289</value>
+    <value>223, 277</value>
   </data>
   <data name="panel8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 3, 2</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 69</value>
+    <value>219, 66</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -670,7 +670,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 51</value>
+    <value>372, 48</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 18</value>
@@ -709,7 +709,7 @@
     <value>3, 2, 3, 1</value>
   </data>
   <data name="labelMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 69</value>
+    <value>439, 66</value>
   </data>
   <data name="labelMode.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -742,7 +742,7 @@
     <value>3, 2, 3, 1</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 69</value>
+    <value>439, 66</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -772,7 +772,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 52</value>
+    <value>360, 49</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 18</value>
@@ -811,7 +811,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="labelArm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 70</value>
+    <value>439, 67</value>
   </data>
   <data name="labelArm.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -838,13 +838,13 @@
     <value>Fill</value>
   </data>
   <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 73</value>
+    <value>3, 70</value>
   </data>
   <data name="panel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 70</value>
+    <value>439, 67</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -874,7 +874,7 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 52</value>
+    <value>336, 49</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 18</value>
@@ -913,7 +913,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="labelError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 70</value>
+    <value>439, 67</value>
   </data>
   <data name="labelError.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -940,13 +940,13 @@
     <value>Fill</value>
   </data>
   <data name="panel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 145</value>
+    <value>3, 139</value>
   </data>
   <data name="panel6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 70</value>
+    <value>439, 67</value>
   </data>
   <data name="panel6.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -976,7 +976,7 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 53</value>
+    <value>372, 50</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 18</value>
@@ -1015,7 +1015,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="labelMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 70</value>
+    <value>439, 67</value>
   </data>
   <data name="labelMessage.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -1042,13 +1042,13 @@
     <value>Fill</value>
   </data>
   <data name="panel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 217</value>
+    <value>3, 208</value>
   </data>
   <data name="panel7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
   </data>
   <data name="panel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 70</value>
+    <value>439, 67</value>
   </data>
   <data name="panel7.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1065,6 +1065,9 @@
   <data name="&gt;&gt;panel7.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="tableLayoutPanelMessage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tableLayoutPanelMessage.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -1072,7 +1075,7 @@
     <value>6</value>
   </data>
   <data name="tableLayoutPanelMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 360</value>
+    <value>445, 345</value>
   </data>
   <data name="tableLayoutPanelMessage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1090,7 +1093,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanelMessage.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel12" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel11" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel10" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel9" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel8" Row="4" RowSpan="2" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panel5" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panel6" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panel7" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,50" /&gt;&lt;Rows Styles="Percent,20,Percent,20,Percent,20,Percent,20,Percent,10,Percent,10,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel12" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel11" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel10" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel9" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel8" Row="4" RowSpan="2" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panel5" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panel6" Row="2" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="panel7" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,25,Percent,25,Percent,50" /&gt;&lt;Rows Styles="Percent,20,Percent,20,Percent,20,Percent,20,Percent,10,Percent,10,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="bindingSourceHud.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -5782,7 +5785,7 @@
     <value>zg1</value>
   </data>
   <data name="&gt;&gt;zg1.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.22479, Culture=neutral, PublicKeyToken=null</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.22731, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;zg1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -7067,41 +7070,11 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1280, 800</value>
   </data>
-  <data name="&gt;&gt;bindingSourceHud.Name" xml:space="preserve">
-    <value>bindingSourceHud</value>
-  </data>
-  <data name="&gt;&gt;bindingSourceHud.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;setViewCountToolStripMenuItem.Name" xml:space="preserve">
     <value>setViewCountToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;setViewCountToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bindingSourceQuickTab.Name" xml:space="preserve">
-    <value>bindingSourceQuickTab</value>
-  </data>
-  <data name="&gt;&gt;bindingSourceQuickTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bindingSourceGaugesTab.Name" xml:space="preserve">
-    <value>bindingSourceGaugesTab</value>
-  </data>
-  <data name="&gt;&gt;bindingSourceGaugesTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bindingSourcePayloadTab.Name" xml:space="preserve">
-    <value>bindingSourcePayloadTab</value>
-  </data>
-  <data name="&gt;&gt;bindingSourcePayloadTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bindingSource1.Name" xml:space="preserve">
-    <value>bindingSource1</value>
-  </data>
-  <data name="&gt;&gt;bindingSource1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;goHereToolStripMenuItem.Name" xml:space="preserve">
     <value>goHereToolStripMenuItem</value>
@@ -7306,6 +7279,36 @@
   </data>
   <data name="&gt;&gt;Messagetabtimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindingSourceHud.Name" xml:space="preserve">
+    <value>bindingSourceHud</value>
+  </data>
+  <data name="&gt;&gt;bindingSourceHud.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindingSourceQuickTab.Name" xml:space="preserve">
+    <value>bindingSourceQuickTab</value>
+  </data>
+  <data name="&gt;&gt;bindingSourceQuickTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindingSourceGaugesTab.Name" xml:space="preserve">
+    <value>bindingSourceGaugesTab</value>
+  </data>
+  <data name="&gt;&gt;bindingSourceGaugesTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindingSourcePayloadTab.Name" xml:space="preserve">
+    <value>bindingSourcePayloadTab</value>
+  </data>
+  <data name="&gt;&gt;bindingSourcePayloadTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindingSource1.Name" xml:space="preserve">
+    <value>bindingSource1</value>
+  </data>
+  <data name="&gt;&gt;bindingSource1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bindingSourceStatusTab.Name" xml:space="preserve">
     <value>bindingSourceStatusTab</value>

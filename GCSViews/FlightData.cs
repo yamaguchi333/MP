@@ -1189,15 +1189,16 @@ namespace MissionPlanner.GCSViews
                             if (lastArm != MainV2.comPort.MAV.cs.armed)
                             {
                                 lastArm = MainV2.comPort.MAV.cs.armed;
+                                var now = DateTime.Now;
                                 if (lastArm)
                                 {
-                                    lastArmTime = DateTime.Now;
+                                    lastArmTime = now;
                                     labelClockArm.Text = lastArmTime.ToLongTimeString();
                                     labelClockArming.Text = "00:00";
+                                    labelClockDisarm.Text = "00:00:00";
                                 }
                                 else
                                 {
-                                    var now = DateTime.Now;
                                     labelClockDisarm.Text = now.ToLongTimeString();
                                     labelClockArming.Text = (now - lastArmTime).ToString(@"mm\:ss");
                                 }
@@ -1210,15 +1211,16 @@ namespace MissionPlanner.GCSViews
                         if (lastArm != MainV2.comPort.MAV.cs.armed)
                         {
                             lastArm = MainV2.comPort.MAV.cs.armed;
+                            var now = DateTime.Now;
                             if (lastArm)
                             {
-                                lastArmTime = DateTime.Now;
+                                lastArmTime = now;
                                 labelClockArm.Text = lastArmTime.ToLongTimeString();
                                 labelClockArming.Text = "00:00";
+                                labelClockDisarm.Text = "00:00:00";
                             }
                             else
                             {
-                                var now = DateTime.Now;
                                 labelClockDisarm.Text = now.ToLongTimeString();
                                 labelClockArming.Text = (now - lastArmTime).ToString("mm:ss");
                             }

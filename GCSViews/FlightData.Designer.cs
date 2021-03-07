@@ -16,6 +16,9 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.labelClock = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.labelAccuracy = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.labelMode = new System.Windows.Forms.Label();
@@ -29,14 +32,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.labelMessage = new System.Windows.Forms.Label();
             this.hud1 = new MissionPlanner.Controls.HUD();
-            this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlactions = new System.Windows.Forms.TabControl();
             this.tabQuick = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelQuick = new System.Windows.Forms.TableLayoutPanel();
             this.quickView6 = new MissionPlanner.Controls.QuickView();
             this.contextMenuStripQuickView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setViewCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSourceQuickTab = new System.Windows.Forms.BindingSource(this.components);
             this.quickView5 = new MissionPlanner.Controls.QuickView();
             this.quickView4 = new MissionPlanner.Controls.QuickView();
             this.quickView3 = new MissionPlanner.Controls.QuickView();
@@ -69,7 +70,6 @@
             this.tabPagePreFlight = new System.Windows.Forms.TabPage();
             this.tabGauges = new System.Windows.Forms.TabPage();
             this.Gvspeed = new AGaugeApp.AGauge();
-            this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
             this.Gheading = new MissionPlanner.Controls.HSI();
             this.Galt = new AGaugeApp.AGauge();
             this.Gspeed = new AGaugeApp.AGauge();
@@ -115,7 +115,6 @@
             this.BUT_PayloadFolder = new MissionPlanner.Controls.MyButton();
             this.groupBoxRoll = new System.Windows.Forms.GroupBox();
             this.TXT_gimbalRollPos = new System.Windows.Forms.TextBox();
-            this.bindingSourcePayloadTab = new System.Windows.Forms.BindingSource(this.components);
             this.trackBarRoll = new System.Windows.Forms.TrackBar();
             this.groupBoxYaw = new System.Windows.Forms.GroupBox();
             this.TXT_gimbalYawPos = new System.Windows.Forms.TextBox();
@@ -160,7 +159,6 @@
             this.zg1 = new ZedGraph.ZedGraphControl();
             this.but_disablejoystick = new MissionPlanner.Controls.MyButton();
             this.windDir1 = new MissionPlanner.Controls.WindDir();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -222,19 +220,21 @@
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Messagetabtimer = new System.Windows.Forms.Timer(this.components);
-            this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
-            this.labelAccuracy = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.labelClockArm = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
             this.labelClockDisarm = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.labelClockArm = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.labelClockArming = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.bindingSourceHud = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceQuickTab = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceGaugesTab = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourcePayloadTab = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceStatusTab = new System.Windows.Forms.BindingSource(this.components);
             this.modifyandSetLoiterRad = new MissionPlanner.Controls.ModifyandSet();
             this.modifyandSetSpeed = new MissionPlanner.Controls.ModifyandSet();
             this.modifyandSetAlt = new MissionPlanner.Controls.ModifyandSet();
@@ -260,21 +260,19 @@
             this.SubMainLeft.SuspendLayout();
             this.tableLayoutPanelMessage.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
             this.tabControlactions.SuspendLayout();
             this.tabQuick.SuspendLayout();
             this.tableLayoutPanelQuick.SuspendLayout();
             this.contextMenuStripQuickView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).BeginInit();
             this.tabActions.SuspendLayout();
             this.tabActionsSimple.SuspendLayout();
             this.tabPagePreFlight.SuspendLayout();
             this.tabGauges.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).BeginInit();
             this.tabServo.SuspendLayout();
             this.flowLayoutPanelServos.SuspendLayout();
             this.tabTLogs.SuspendLayout();
@@ -286,7 +284,6 @@
             this.tabPagemessages.SuspendLayout();
             this.tabPayload.SuspendLayout();
             this.groupBoxRoll.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePayloadTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRoll)).BeginInit();
             this.groupBoxYaw.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarYaw)).BeginInit();
@@ -299,18 +296,21 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Zoomlevel)).BeginInit();
             this.contextMenuStripMap.SuspendLayout();
             this.contextMenuStripHud.SuspendLayout();
             this.contextMenuStripactionstab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).BeginInit();
-            this.panel8.SuspendLayout();
-            this.panel10.SuspendLayout();
             this.panel11.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePayloadTab)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).BeginInit();
             this.SuspendLayout();
             // 
             // MainH
@@ -347,9 +347,9 @@
             // 
             resources.ApplyResources(this.tableLayoutPanelMessage, "tableLayoutPanelMessage");
             this.tableLayoutPanelMessage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableLayoutPanelMessage.Controls.Add(this.panel12, 1, 5);
-            this.tableLayoutPanelMessage.Controls.Add(this.panel11, 0, 5);
-            this.tableLayoutPanelMessage.Controls.Add(this.panel10, 1, 4);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel12, 1, 4);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel11, 1, 5);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel10, 0, 5);
             this.tableLayoutPanelMessage.Controls.Add(this.panel9, 0, 4);
             this.tableLayoutPanelMessage.Controls.Add(this.panel8, 2, 4);
             this.tableLayoutPanelMessage.Controls.Add(this.panel4, 0, 0);
@@ -380,6 +380,30 @@
             this.labelClock.ForeColor = System.Drawing.Color.Black;
             this.labelClock.Name = "labelClock";
             this.labelClock.Tag = "custom";
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label14);
+            this.panel8.Controls.Add(this.labelAccuracy);
+            resources.ApplyResources(this.panel8, "panel8");
+            this.panel8.Name = "panel8";
+            this.tableLayoutPanelMessage.SetRowSpan(this.panel8, 2);
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.BackColor = System.Drawing.Color.Silver;
+            this.label14.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label14.Name = "label14";
+            this.label14.Tag = "custom";
+            // 
+            // labelAccuracy
+            // 
+            this.labelAccuracy.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelAccuracy, "labelAccuracy");
+            this.labelAccuracy.ForeColor = System.Drawing.Color.Black;
+            this.labelAccuracy.Name = "labelAccuracy";
+            this.labelAccuracy.Tag = "custom";
             // 
             // panel4
             // 
@@ -594,10 +618,6 @@
             this.hud1.DoubleClick += new System.EventHandler(this.hud1_DoubleClick);
             this.hud1.Resize += new System.EventHandler(this.hud1_Resize);
             // 
-            // bindingSourceHud
-            // 
-            this.bindingSourceHud.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
             // tabControlactions
             // 
             this.tabControlactions.Controls.Add(this.tabQuick);
@@ -664,10 +684,6 @@
             this.setViewCountToolStripMenuItem.Name = "setViewCountToolStripMenuItem";
             resources.ApplyResources(this.setViewCountToolStripMenuItem, "setViewCountToolStripMenuItem");
             this.setViewCountToolStripMenuItem.Click += new System.EventHandler(this.setViewCountToolStripMenuItem_Click);
-            // 
-            // bindingSourceQuickTab
-            // 
-            this.bindingSourceQuickTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // quickView5
             // 
@@ -1157,10 +1173,6 @@
             this.Gvspeed.Value1 = 0F;
             this.Gvspeed.Value2 = 0F;
             this.Gvspeed.Value3 = 0F;
-            // 
-            // bindingSourceGaugesTab
-            // 
-            this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // Gheading
             // 
@@ -1849,10 +1861,6 @@
             resources.ApplyResources(this.TXT_gimbalRollPos, "TXT_gimbalRollPos");
             this.TXT_gimbalRollPos.Name = "TXT_gimbalRollPos";
             // 
-            // bindingSourcePayloadTab
-            // 
-            this.bindingSourcePayloadTab.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
             // trackBarRoll
             // 
             resources.ApplyResources(this.trackBarRoll, "trackBarRoll");
@@ -2337,10 +2345,6 @@
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // label6
             // 
@@ -2835,63 +2839,13 @@
             this.Messagetabtimer.Interval = 200;
             this.Messagetabtimer.Tick += new System.EventHandler(this.Messagetabtimer_Tick);
             // 
-            // bindingSourceStatusTab
+            // labelClockDisarm
             // 
-            this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
-            // 
-            // labelAccuracy
-            // 
-            this.labelAccuracy.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.labelAccuracy, "labelAccuracy");
-            this.labelAccuracy.ForeColor = System.Drawing.Color.Black;
-            this.labelAccuracy.Name = "labelAccuracy";
-            this.labelAccuracy.Tag = "custom";
-            // 
-            // label14
-            // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.BackColor = System.Drawing.Color.Silver;
-            this.label14.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label14.Name = "label14";
-            this.label14.Tag = "custom";
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.label14);
-            this.panel8.Controls.Add(this.labelAccuracy);
-            resources.ApplyResources(this.panel8, "panel8");
-            this.panel8.Name = "panel8";
-            this.tableLayoutPanelMessage.SetRowSpan(this.panel8, 2);
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.label17);
-            this.panel10.Controls.Add(this.labelClockArm);
-            resources.ApplyResources(this.panel10, "panel10");
-            this.panel10.Name = "panel10";
-            // 
-            // label17
-            // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.BackColor = System.Drawing.Color.Silver;
-            this.label17.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label17.Name = "label17";
-            this.label17.Tag = "custom";
-            // 
-            // labelClockArm
-            // 
-            this.labelClockArm.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.labelClockArm, "labelClockArm");
-            this.labelClockArm.ForeColor = System.Drawing.Color.Black;
-            this.labelClockArm.Name = "labelClockArm";
-            this.labelClockArm.Tag = "custom";
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.label19);
-            this.panel11.Controls.Add(this.labelClockDisarm);
-            resources.ApplyResources(this.panel11, "panel11");
-            this.panel11.Name = "panel11";
+            this.labelClockDisarm.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelClockDisarm, "labelClockDisarm");
+            this.labelClockDisarm.ForeColor = System.Drawing.Color.Black;
+            this.labelClockDisarm.Name = "labelClockDisarm";
+            this.labelClockDisarm.Tag = "custom";
             // 
             // label19
             // 
@@ -2901,20 +2855,43 @@
             this.label19.Name = "label19";
             this.label19.Tag = "custom";
             // 
-            // labelClockDisarm
+            // panel11
             // 
-            this.labelClockDisarm.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.labelClockDisarm, "labelClockDisarm");
-            this.labelClockDisarm.ForeColor = System.Drawing.Color.Black;
-            this.labelClockDisarm.Name = "labelClockDisarm";
-            this.labelClockDisarm.Tag = "custom";
+            this.panel11.Controls.Add(this.label19);
+            this.panel11.Controls.Add(this.labelClockDisarm);
+            resources.ApplyResources(this.panel11, "panel11");
+            this.panel11.Name = "panel11";
             // 
-            // panel12
+            // labelClockArm
             // 
-            this.panel12.Controls.Add(this.label21);
-            this.panel12.Controls.Add(this.labelClockArming);
-            resources.ApplyResources(this.panel12, "panel12");
-            this.panel12.Name = "panel12";
+            this.labelClockArm.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelClockArm, "labelClockArm");
+            this.labelClockArm.ForeColor = System.Drawing.Color.Black;
+            this.labelClockArm.Name = "labelClockArm";
+            this.labelClockArm.Tag = "custom";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.BackColor = System.Drawing.Color.Silver;
+            this.label17.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label17.Name = "label17";
+            this.label17.Tag = "custom";
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.label17);
+            this.panel10.Controls.Add(this.labelClockArm);
+            resources.ApplyResources(this.panel10, "panel10");
+            this.panel10.Name = "panel10";
+            // 
+            // labelClockArming
+            // 
+            this.labelClockArming.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.labelClockArming, "labelClockArming");
+            this.labelClockArming.ForeColor = System.Drawing.Color.Black;
+            this.labelClockArming.Name = "labelClockArming";
+            this.labelClockArming.Tag = "custom";
             // 
             // label21
             // 
@@ -2924,13 +2901,36 @@
             this.label21.Name = "label21";
             this.label21.Tag = "custom";
             // 
-            // labelClockArming
+            // panel12
             // 
-            this.labelClockArming.BackColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.labelClockArming, "labelClockArming");
-            this.labelClockArming.ForeColor = System.Drawing.Color.Black;
-            this.labelClockArming.Name = "labelClockArming";
-            this.labelClockArming.Tag = "custom";
+            this.panel12.Controls.Add(this.label21);
+            this.panel12.Controls.Add(this.labelClockArming);
+            resources.ApplyResources(this.panel12, "panel12");
+            this.panel12.Name = "panel12";
+            // 
+            // bindingSourceHud
+            // 
+            this.bindingSourceHud.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSourceQuickTab
+            // 
+            this.bindingSourceQuickTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSourceGaugesTab
+            // 
+            this.bindingSourceGaugesTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSourcePayloadTab
+            // 
+            this.bindingSourcePayloadTab.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(MissionPlanner.CurrentState);
+            // 
+            // bindingSourceStatusTab
+            // 
+            this.bindingSourceStatusTab.DataSource = typeof(MissionPlanner.CurrentState);
             // 
             // modifyandSetLoiterRad
             // 
@@ -3093,6 +3093,8 @@
             this.tableLayoutPanelMessage.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -3101,17 +3103,14 @@
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
             this.tabControlactions.ResumeLayout(false);
             this.tabQuick.ResumeLayout(false);
             this.tableLayoutPanelQuick.ResumeLayout(false);
             this.contextMenuStripQuickView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).EndInit();
             this.tabActions.ResumeLayout(false);
             this.tabActionsSimple.ResumeLayout(false);
             this.tabPagePreFlight.ResumeLayout(false);
             this.tabGauges.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).EndInit();
             this.tabServo.ResumeLayout(false);
             this.flowLayoutPanelServos.ResumeLayout(false);
             this.tabTLogs.ResumeLayout(false);
@@ -3128,7 +3127,6 @@
             this.tabPayload.ResumeLayout(false);
             this.groupBoxRoll.ResumeLayout(false);
             this.groupBoxRoll.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePayloadTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRoll)).EndInit();
             this.groupBoxYaw.ResumeLayout(false);
             this.groupBoxYaw.PerformLayout();
@@ -3144,7 +3142,6 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TRK_zoom)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -3152,15 +3149,18 @@
             this.contextMenuStripMap.ResumeLayout(false);
             this.contextMenuStripHud.ResumeLayout(false);
             this.contextMenuStripactionstab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceHud)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuickTab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceGaugesTab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePayloadTab)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceStatusTab)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3401,6 +3401,9 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label labelClock;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labelAccuracy;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label labelClockArming;
@@ -3410,8 +3413,5 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label labelClockArm;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label labelAccuracy;
     }
 }

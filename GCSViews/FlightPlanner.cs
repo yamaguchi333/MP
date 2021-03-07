@@ -74,6 +74,8 @@ namespace MissionPlanner.GCSViews
 
         int mesh_type = 0;  // @eams add
 
+        int cal_dist_max = 15;  // @eams add
+
         public enum altmode
         {
             Relative = MAVLink.MAV_FRAME.GLOBAL_RELATIVE_ALT,
@@ -695,6 +697,10 @@ namespace MissionPlanner.GCSViews
             // @eams add / ndvi mesh
             if (Settings.Instance["overlay_mesh"] != null)
                 mesh_type = int.Parse(Settings.Instance["overlay_mesh"]);
+
+            // @eams add / cal available dist
+            if (Settings.Instance["cal_dist_max"] != null)
+                cal_dist_max = int.Parse(Settings.Instance["cal_dist_max"]);
 
             labelCal.Visible = false;
             /*
@@ -7707,9 +7713,9 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
                 return;
             }
             var dist_home = MainV2.comPort.MAV.cs.DistToHome;
-            if (dist_home > 30.0)
+            if (dist_home > cal_dist_max)
             {
-                CustomMessageBox.Show("安全上の理由のため、離陸地点から30m以上離れた場所での\nルートキャリブレーションはできません。", "ルートキャリブレーション");
+                CustomMessageBox.Show("安全上の理由のため、離陸地点から一定距離以上離れた場所での\nルートキャリブレーションはできません。", "ルートキャリブレーション");
                 return;
             }
             if (CustomMessageBox.Show("ルートキャリブレーションを行います。\n読み出している圃場ルートは合ってますか？", "ルートキャリブレーション", MessageBoxButtons.YesNo) != (int)DialogResult.Yes)
