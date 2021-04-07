@@ -5942,6 +5942,10 @@ namespace MissionPlanner.GCSViews
                 {
                     rtn = "アクセルキャリブレーション";
                 }
+                else if (mes.Contains("Waiting for IMU warming up"))
+                {
+                    rtn = "機体暖気の未完了";
+                }
             }
             else if (mes.Contains("Mission:"))
             {
