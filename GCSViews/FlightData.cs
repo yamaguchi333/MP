@@ -1246,7 +1246,6 @@ namespace MissionPlanner.GCSViews
                                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, 7, servohigh, 0, 0, 0, 0, 0);
                                 MainV2.comPort.setParam("SERVO7_FUNCTION", (float)MainV2.servo7_func_normal);
                             }
-                            rtl_yaw = MainV2.comPort.MAV.cs.yaw;
                             if (pre_RTL_mode == "ZIGZAG" && MainV2.comPort.MAV.cs.armed && resume_flag > 0)
                             {
                                 resume_flag = 0;
@@ -1290,6 +1289,8 @@ namespace MissionPlanner.GCSViews
                                     lastwpno = curwpno;
                                     if (pre_RTL_mode == "ZIGZAG")
                                     {
+                                        rtl_yaw = MainV2.comPort.MAV.cs.yaw;
+                                        log.Info("rtl yaw value for ZIGZAG mode: " + rtl_yaw.ToString("0.00"));
                                         zigzag_flag = true;
                                     }
                                     else
@@ -5521,12 +5522,20 @@ namespace MissionPlanner.GCSViews
 
                 // startup delay
                 int grid_startup_delay = 0;
-                for (ushort a = 0; a < wpcount; a++)
+                if (zigzag_flag)
                 {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DELAY)
+                    if (Settings.Instance["grid_startup_delay"] != null)
+                        grid_startup_delay = Settings.Instance.GetInt32("grid_startup_delay");
+                }
+                else
+                {
+                    for (ushort a = 0; a < wpcount; a++)
                     {
-                        grid_startup_delay = (int)cmds[a].p1;
-                        break;
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.DELAY)
+                        {
+                            grid_startup_delay = (int)cmds[a].p1;
+                            break;
+                        }
                     }
                 }
                 await Task.Delay(grid_startup_delay * 1000);
@@ -5552,12 +5561,20 @@ namespace MissionPlanner.GCSViews
 
                 // startup delay after CONDITION_YAW
                 // ホーム用のWAYPOINTコマンド無視、その後最初にあったWAYPOINTコマンドがセカンドディレイ用
-                for (ushort a = 1; a < wpcount; a++)
+                if (zigzag_flag)
                 {
-                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.WAYPOINT)
+                    if (Settings.Instance["grid_startup_delay2"] != null)
+                        grid_startup_delay = Settings.Instance.GetInt32("grid_startup_delay2");
+                }
+                else
+                {
+                    for (ushort a = 1; a < wpcount; a++)
                     {
-                        grid_startup_delay = (int)cmds[a].p1;
-                        break;
+                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.WAYPOINT)
+                        {
+                            grid_startup_delay = (int)cmds[a].p1;
+                            break;
+                        }
                     }
                 }
                 await Task.Delay(grid_startup_delay * 1000);
@@ -5922,7 +5939,7 @@ namespace MissionPlanner.GCSViews
             }
             else if (mes.Contains("PreArm:"))
             {
-                if (mes.Contains("Need 3D Fix"))
+                if (mes.Contains("Need 3D Fix") || mes.Contains("need 3D Fix"))
                 {
                     rtn = "衛星捕捉中";
                 }
@@ -6021,6 +6038,10 @@ namespace MissionPlanner.GCSViews
             else if (mes.Contains("Bad Logging"))
             {
                 rtn = "ログ書き込み不良";
+            }
+            else if (mes.Contains("Mode not armable"))
+            {
+                rtn = "飛行モードを確認してください";
             }
 
             return rtn;

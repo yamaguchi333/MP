@@ -1346,6 +1346,9 @@ namespace MissionPlanner
         public int mag_ofs_z { get; set; }
         public float mag_declination { get; set; }
         public int raw_press { get; set; }
+#if true    // @eams added
+        [DisplayText("機体温度")]
+#endif
         public int raw_temp { get; set; }
         public float gyro_cal_x { get; set; }
         public float gyro_cal_y { get; set; }
