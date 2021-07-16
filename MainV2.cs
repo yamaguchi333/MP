@@ -1700,21 +1700,8 @@ namespace MissionPlanner
 
                 if (param_chg)
                 {
-                    if (CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel) == (int)CustomMessageBox.DialogResult.Retry)
-                    {
-                        if (!MainV2.comPort.MAV.cs.armed)
-                        {
-                            try
-                            {
-                                MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
-                            }
-                            catch
-                            {
-                                CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
-                            }
-                            return false;
-                        }
-                    }
+                    Reboot4ParamChange();
+                    return false;
                 }
 
                 // update battery cells magnification @eams
@@ -1905,6 +1892,27 @@ namespace MissionPlanner
                 return false;
             }
             return true;
+        }
+
+        // @eams add
+        private async void Reboot4ParamChange()
+        {
+            if (CustomMessageBox.Show("機体の設定を変更しました。機体から離れて機体の再起動を行ってください。", "再起動", MessageBoxButtons.RetryCancel) == (int)CustomMessageBox.DialogResult.Retry)
+            {
+                if (!MainV2.comPort.MAV.cs.armed)
+                {
+                    try
+                    {
+                        MainV2.comPort.doCommand(MAVLink.MAV_CMD.PREFLIGHT_REBOOT_SHUTDOWN, 1, 0, 1, 0, 0, 0, 0);
+                        await Task.Delay(1000);
+                        doDisconnect(MainV2.comPort);
+                    }
+                    catch
+                    {
+                        CustomMessageBox.Show(Strings.CommandFailed, Strings.ERROR);
+                    }
+                }
+            }
         }
 
         private void MenuConnect_Click(object sender, EventArgs e)

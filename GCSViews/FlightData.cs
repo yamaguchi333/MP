@@ -6043,6 +6043,17 @@ namespace MissionPlanner.GCSViews
             {
                 rtn = "飛行モードを確認してください";
             }
+            else if (mes.Contains("rming motors"))
+            {
+                if (mes.Contains("Arming"))
+                {
+                    rtn = "モーター回転";
+                }
+                else if (mes.Contains("Disarming"))
+                {
+                    rtn = "モーター停止";
+                }
+            }
 
             return rtn;
         }
