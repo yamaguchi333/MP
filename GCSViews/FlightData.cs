@@ -5939,7 +5939,7 @@ namespace MissionPlanner.GCSViews
             }
             else if (mes.Contains("PreArm:"))
             {
-                if (mes.Contains("Need 3D Fix") || mes.Contains("need 3D Fix"))
+                if (mes.Contains("Need 3D Fix") || mes.Contains("need 3D Fix") || mes.Contains("GPS glitching") || mes.Contains("Hight GPS HDOP"))
                 {
                     rtn = "衛星捕捉中";
                 }
@@ -5962,6 +5962,10 @@ namespace MissionPlanner.GCSViews
                 else if (mes.Contains("Waiting for IMU warming up"))
                 {
                     rtn = "機体暖気の未完了";
+                }
+                else if (mes.Contains("Mode not armable"))
+                {
+                    rtn = "飛行モードを確認してください";
                 }
             }
             else if (mes.Contains("Mission:"))
@@ -6038,10 +6042,6 @@ namespace MissionPlanner.GCSViews
             else if (mes.Contains("Bad Logging"))
             {
                 rtn = "ログ書き込み不良";
-            }
-            else if (mes.Contains("Mode not armable"))
-            {
-                rtn = "飛行モードを確認してください";
             }
             else if (mes.Contains("rming motors"))
             {
