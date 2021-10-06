@@ -1285,12 +1285,12 @@ namespace MissionPlanner.GCSViews
                                     resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
                                     resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
                                     resume_pos.Alt = alt;
+                                    rtl_yaw = MainV2.comPort.MAV.cs.yaw;
+                                    log.Info("rtl yaw value: " + rtl_yaw.ToString("0.00"));
                                     resume_flag = 1;
                                     lastwpno = curwpno;
                                     if (pre_RTL_mode == "ZIGZAG")
                                     {
-                                        rtl_yaw = MainV2.comPort.MAV.cs.yaw;
-                                        log.Info("rtl yaw value for ZIGZAG mode: " + rtl_yaw.ToString("0.00"));
                                         zigzag_flag = true;
                                     }
                                     else
@@ -5541,22 +5541,17 @@ namespace MissionPlanner.GCSViews
                 await Task.Delay(grid_startup_delay * 1000);
 
                 // CONDTION_YAW for GUIDED
-                float grid_angle = 0;
-                if (zigzag_flag)
+                float grid_angle = rtl_yaw;
+#if false
+                for (ushort a = 0; a < wpcount; a++)
                 {
-                    grid_angle = rtl_yaw;
-                }
-                else
-                {
-                    for (ushort a = 0; a < wpcount; a++)
+                    if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
                     {
-                        if (cmds[a].id == (ushort)MAVLink.MAV_CMD.CONDITION_YAW)
-                        {
-                            grid_angle = cmds[a].p1;
-                            break;
-                        }
+                        grid_angle = cmds[a].p1;
+                        break;
                     }
                 }
+#endif
                 MainV2.comPort.doCommand(MAVLink.MAV_CMD.CONDITION_YAW, grid_angle, 0, 0, 0, 0, 0, 0);
 
                 // startup delay after CONDITION_YAW

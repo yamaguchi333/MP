@@ -1582,12 +1582,12 @@ namespace MissionPlanner
 
                 if (getparams)
                     comPort.getParamList();
-
+#if false
                 int param = 0;
                 float param_float = 0;
                 // update BATT2_MONITOR @eams
                 bool param_chg = false;
-                int batt2_monitor_config = 0;
+                int f_config = 0;
                 if (Settings.Instance["batt2_monitor"] != null)
                     batt2_monitor_config = Settings.Instance.GetInt32("batt2_monitor");
                 if (MainV2.comPort.MAV.param.ContainsKey("BATT2_MONITOR"))
@@ -1697,8 +1697,8 @@ namespace MissionPlanner
                         }
                     }
                 }
-
-                if (param_chg)
+#endif
+                if (CheckCustomParam())
                 {
                     Reboot4ParamChange();
                     return false;
@@ -1914,6 +1914,44 @@ namespace MissionPlanner
                 }
             }
         }
+
+        // @eams add
+        private bool CheckCustomParam()
+        {
+            // カスタムパラメータファイルのパスを取得
+            if (Settings.Instance["customparam"] == null) return false;
+            string filepath = Settings.Instance["customparam"];
+
+            try
+            {
+                var param2 = Utilities.ParamFile.loadParamFile(filepath);
+
+                var param_chg = false;
+                foreach (string name in param2.Keys)
+                {
+                    var value = param2[name].ToString();
+                    var param = "";
+                    // set param table as well
+                    if (MainV2.comPort.MAV.param.ContainsKey(name))
+                    {
+                        param = MainV2.comPort.MAV.param[name].ToString();
+                        if (param != value)
+                        {
+                            MainV2.comPort.setParam(name, float.Parse(value));
+                            param_chg = true;
+                        }
+                    }
+                }
+                return param_chg;
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.Show("カスタムパラメータファイルが正常に読み込めませんでした。\n" + ex);
+            }
+
+            return true;
+        }
+
 
         private void MenuConnect_Click(object sender, EventArgs e)
         {
