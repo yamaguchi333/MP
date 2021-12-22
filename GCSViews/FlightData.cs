@@ -1282,8 +1282,8 @@ namespace MissionPlanner.GCSViews
                                 if (alt >= rtl_alt * 0.95)
                                 {
                                     // save resume point
-                                    resume_pos.Lat = MainV2.comPort.MAV.cs.lat;
-                                    resume_pos.Lng = MainV2.comPort.MAV.cs.lng;
+                                    resume_pos.Lat = (double)MainV2.comPort.MAV.param["RTL_POINT_LAT"] / 10000000; // MainV2.comPort.MAV.cs.lat;
+                                    resume_pos.Lng = (double)MainV2.comPort.MAV.param["RTL_POINT_LON"] / 10000000; // MainV2.comPort.MAV.cs.lng;
                                     resume_pos.Alt = alt;
                                     rtl_yaw = MainV2.comPort.MAV.cs.yaw;
                                     log.Info("rtl yaw value: " + rtl_yaw.ToString("0.00"));
