@@ -1068,6 +1068,16 @@ namespace MissionPlanner.GCSViews
                             }
                             break;
                     }
+                    // phase1.12 dev23：ZIGZAGモード時は飛行停止ボタンを無効にする
+                    // TextChangeEventで状態変化をキャッチさせる
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "ZIGZAG")
+                    {
+                        Invoke((MethodInvoker)(() => ButtonStop.Text = " "));
+                    }
+                    else
+                    {
+                        Invoke((MethodInvoker)(() => ButtonStop.Text = ""));
+                    }
                     if (labelMode.InvokeRequired)
                     {
                         Invoke((MethodInvoker)(() => labelMode.Text = mode_jp));
@@ -5059,6 +5069,11 @@ namespace MissionPlanner.GCSViews
 
         async private void ButtonStop_Click(object sender, EventArgs e)
         {
+            // 飛行中でない時＝disarm中は機能しないようにする
+            if (MainV2.comPort.MAV.cs.armed == false)
+            {
+                return;
+            }
             if ((string)ButtonStop.BackgroundImage.Tag == "stop")
             {
                 MainV2.instance.MenuStopClick(sender);
@@ -5153,29 +5168,64 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        Image img_stop = global::MissionPlanner.Properties.Resources.btn_stop;
+        Image img_restart = global::MissionPlanner.Properties.Resources.btn_restart;
         /// <summary>
         /// 飛行停止ボタンの更新
         /// <param name="state">true:飛行停止、false:飛行再開</param>
         /// </summary>
         public void ButtonStop_ChangeState(bool state)
         {
+            //描画先とするImageオブジェクトを作成する
+            Bitmap canvas = new Bitmap(ButtonStop.Width, ButtonStop.Height);
+            //ImageオブジェクトのGraphicsオブジェクトを作成する
+            Graphics g = Graphics.FromImage(canvas);
+
             if (state)
             {
-                ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_stop;
+                if (ButtonStop.Text == "")
+                {
+                    //画像を普通に表示
+                    g.DrawImage(img_stop, 0, 0);
+                }
+                else
+                {
+                    //画像を無効状態で表示
+                    ControlPaint.DrawImageDisabled(g, img_stop, 0, 0, ButtonStop.BackColor);
+                }
+                g.Dispose();    //リソースを解放する
+                ButtonStop.BackgroundImage = canvas; //表示する
+
                 ButtonStop.BackgroundImage.Tag = "stop";
                 toolTip1.SetToolTip(ButtonStop, "自動飛行停止");
             }
             else
             {
-                ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_restart;
+                if (ButtonStop.Text == "")
+                {
+                    //画像を普通に表示
+                    g.DrawImage(img_restart, 0, 0);
+                }
+                else
+                {
+                    //画像を無効状態で表示
+                    ControlPaint.DrawImageDisabled(g, img_restart, 0, 0, ButtonStop.BackColor);
+                }
+                g.Dispose();    //リソースを解放する
+                ButtonStop.BackgroundImage = canvas; //表示する
+
                 ButtonStop.BackgroundImage.Tag = "restart";
                 toolTip1.SetToolTip(ButtonStop, "自動飛行再開");
             }
-
         }
 
         private void ButtonReturn_Click(object sender, EventArgs e)
         {
+            // 飛行中でない時＝disarm中は機能しないようにする
+            if (MainV2.comPort.MAV.cs.armed == false)
+            {
+                return;
+            }
             if ((string)ButtonReturn.BackgroundImage.Tag == "return")
             {
                 MainV2.instance.MenuReturnClick(sender);
@@ -5201,6 +5251,8 @@ namespace MissionPlanner.GCSViews
             ButtonStop_ChangeState(true);
         }
 
+        Image img_return = global::MissionPlanner.Properties.Resources.btn_return;
+        Image img_return_stop = global::MissionPlanner.Properties.Resources.btn_return_stop;
         /// <summary>
         /// 強制帰還ボタンの更新
         /// <param name="state">true:強制帰還、false:帰還停止</param>
@@ -5209,13 +5261,13 @@ namespace MissionPlanner.GCSViews
         {
             if (state)
             {
-                ButtonReturn.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_return;
+                ButtonReturn.BackgroundImage = img_return;
                 ButtonReturn.BackgroundImage.Tag = "return";
                 toolTip1.SetToolTip(ButtonReturn, "強制帰還");
             }
             else
             {
-                ButtonReturn.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_return_stop;
+                ButtonReturn.BackgroundImage = img_return_stop;
                 ButtonReturn.BackgroundImage.Tag = "return_stop";
                 toolTip1.SetToolTip(ButtonReturn, "帰還停止");
             }
@@ -5227,6 +5279,8 @@ namespace MissionPlanner.GCSViews
             MainV2.instance.Connect();
         }
 
+        Image img_disconnect = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
+        Image img_connect = global::MissionPlanner.Properties.Resources.light_connect_icon;
         /// <summary>
         /// 接続アイコンの更新
         /// <param name="state">true:接続時＝iconは接続、Textは切断、false:切断時＝iconは切断、Textは接続</param>
@@ -5235,12 +5289,12 @@ namespace MissionPlanner.GCSViews
         {
             if (state)
             {
-                this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
+                this.ButtonConnect.Image = img_disconnect;
                 this.ButtonConnect.Image.Tag = "Disconnect";
             }
             else
             {
-                this.ButtonConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
+                this.ButtonConnect.Image = img_connect;
                 this.ButtonConnect.Image.Tag = "Connect";
                 ButtonReturn_ChangeState(true);
                 ButtonStop_ChangeState(true);
@@ -5265,6 +5319,8 @@ namespace MissionPlanner.GCSViews
             }
         }
 
+        Image img_flight_ok = global::MissionPlanner.Properties.Resources.btn_flight_ok;
+        Image img_flight_ng = global::MissionPlanner.Properties.Resources.btn_flight_ng;
         /// <summary>
         /// PreArm表示の更新
         /// <param name="state">true=failsafe以外、false=failsafe中</param>
@@ -5273,11 +5329,11 @@ namespace MissionPlanner.GCSViews
         {
             if (state)
             {
-                LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ok;
+                LabelPreArm.Image = img_flight_ok;
             }
             else
             {
-                LabelPreArm.Image = global::MissionPlanner.Properties.Resources.btn_flight_ng;
+                LabelPreArm.Image = img_flight_ng;
             }
         }
 
@@ -5748,6 +5804,7 @@ namespace MissionPlanner.GCSViews
             resume_flag = 0;
         }
 
+        Image img_resume_clear = global::MissionPlanner.Properties.Resources.btn_resume_clear;
         /// <summary>
         /// レジュームクリアボタンの更新
         /// <param name="state">true:enabled、false:disabled</param>
@@ -5761,18 +5818,15 @@ namespace MissionPlanner.GCSViews
             //ImageオブジェクトのGraphicsオブジェクトを作成する
             Graphics g = Graphics.FromImage(canvas);
 
-            //画像を取得
-            Bitmap img = global::MissionPlanner.Properties.Resources.btn_resume_clear;
-
             if (state)
             {
                 //画像を普通に表示
-                g.DrawImage(img, 0, 0);
+                g.DrawImage(img_resume_clear, 0, 0);
             }
             else
             {
                 //画像を無効状態で表示
-                ControlPaint.DrawImageDisabled(g, img, 0, 0, ButtonResumeClear.BackColor);
+                ControlPaint.DrawImageDisabled(g, img_resume_clear, 0, 0, ButtonResumeClear.BackColor);
             }
 
             g.Dispose();    //リソースを解放する
@@ -6051,6 +6105,11 @@ namespace MissionPlanner.GCSViews
             }
 
             return rtn;
+        }
+
+        private void ButtonStop_TextChanged(object sender, EventArgs e)
+        {
+            ButtonStop_ChangeState((string)ButtonStop.BackgroundImage.Tag == "stop");
         }
     }
 }

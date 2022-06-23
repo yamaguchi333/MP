@@ -19,6 +19,10 @@ namespace MissionPlanner.MsgBox
 
         static DialogResult _state = DialogResult.None;
 
+        static Image img_ok = global::MissionPlanner.Controls.Properties.Resources.btn_ok;
+        static Image img_cancel = global::MissionPlanner.Controls.Properties.Resources.btn_cancel;
+        static Image img_reboot = global::MissionPlanner.Controls.Properties.Resources.btn_act_reboot;
+   
         public static DialogResult Show(string text)
         {
             return Show(text, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -245,7 +249,7 @@ namespace MissionPlanner.MsgBox
                     var but = new Button
                     {
 //                        Size = new Size(75, 23),
-                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_ok,
+                        BackgroundImage = img_ok,
                         Size = new Size(75, 42),
 //                        Text = "OK",
                         Left = msgBoxFrm.Width - 100 - FORM_X_MARGIN,
@@ -266,7 +270,7 @@ namespace MissionPlanner.MsgBox
                     var butyes = new Button
                     {
 //                        Size = new Size(75, 23),
-                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_ok,
+                        BackgroundImage = img_ok,
                         Size = new Size(75, 42),
 //                        Text = "Yes",
                         Left = msgBoxFrm.Width - 75 * 2 - FORM_X_MARGIN * 2,
@@ -282,7 +286,7 @@ namespace MissionPlanner.MsgBox
                     var butno = new Button
                     {
 //                        Size = new Size(75, 23),
-                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_cancel,
+                        BackgroundImage = img_cancel,
                         Size = new Size(75, 42),
 //                        Text = "No",
                         Left = msgBoxFrm.Width - 75 - FORM_X_MARGIN,
@@ -304,7 +308,7 @@ namespace MissionPlanner.MsgBox
                     var butok = new Button
                     {
 //                        Size = new Size(75, 23),
-                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_ok,
+                        BackgroundImage = img_ok,
                         Size = new Size(75, 42),
 //                        Text = "OK",
                         Left = msgBoxFrm.Width - 75 * 2 - FORM_X_MARGIN * 2,
@@ -320,7 +324,7 @@ namespace MissionPlanner.MsgBox
                     var butcancel = new Button
                     {
 //                        Size = new Size(75, 23),
-                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_cancel,
+                        BackgroundImage = img_cancel,
                         Size = new Size(75, 42),
 //                        Text = "Cancel",
                         Left = msgBoxFrm.Width - 75 - FORM_X_MARGIN,
@@ -337,7 +341,7 @@ namespace MissionPlanner.MsgBox
                     var butretry = new Button
                     {
 //                        Size = new Size(75, 23),
-                        BackgroundImage = global::MissionPlanner.Controls.Properties.Resources.btn_act_reboot,
+                        BackgroundImage = img_reboot,
                         Size = new Size(130, 48),
                         Left = msgBoxFrm.Width - 135 - FORM_X_MARGIN,
                         Top = msgBoxFrm.Height - 48 - FORM_Y_MARGIN - titleHeight

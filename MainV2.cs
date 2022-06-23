@@ -1359,6 +1359,7 @@ namespace MissionPlanner
             MyView.ShowScreen("Terminal");
         }
 
+        Image img_connect = global::MissionPlanner.Properties.Resources.light_connect_icon;
         public void doDisconnect(MAVLinkInterface comPort)
         {
             log.Info("We are disconnecting");
@@ -1415,7 +1416,7 @@ namespace MissionPlanner
             {
             }
 
-            this.MenuConnect.Image = global::MissionPlanner.Properties.Resources.light_connect_icon;
+            this.MenuConnect.Image = img_connect;
         }
 
         public bool doConnect(MAVLinkInterface comPort, string portname, string baud, bool getparams = true)
