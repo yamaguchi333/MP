@@ -132,7 +132,7 @@
     <value>None</value>
   </data>
   <data name="MenuArduPilot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 63</value>
+    <value>387, 93</value>
   </data>
   <data name="MenuArduPilot.Text" xml:space="preserve">
     <value>ArduPilot</value>
@@ -157,7 +157,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuFlightData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 63</value>
+    <value>117, 93</value>
   </data>
   <data name="MenuFlightData.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -184,7 +184,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuFlightPlanner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 63</value>
+    <value>117, 93</value>
   </data>
   <data name="MenuFlightPlanner.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -211,7 +211,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuInitConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 63</value>
+    <value>117, 93</value>
   </data>
   <data name="MenuInitConfig.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -238,7 +238,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 63</value>
+    <value>117, 93</value>
   </data>
   <data name="MenuSimulation.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -262,7 +262,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuConfigTune.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 63</value>
+    <value>73, 92</value>
   </data>
   <data name="MenuConfigTune.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -286,7 +286,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuEKF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 63</value>
+    <value>73, 92</value>
   </data>
   <data name="MenuEKF.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -307,7 +307,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuVIVE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 63</value>
+    <value>73, 92</value>
   </data>
   <data name="MenuVIVE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>
@@ -347,7 +347,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuTerminal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 63</value>
+    <value>57, 93</value>
   </data>
   <data name="MenuTerminal.Text" xml:space="preserve">
     <value>TERMINAL</value>
@@ -402,7 +402,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 63</value>
+    <value>58, 93</value>
   </data>
   <data name="MenuHelp.Text" xml:space="preserve">
     <value>HELP</value>
@@ -423,7 +423,7 @@
     <value>None</value>
   </data>
   <data name="MenuDonate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 63</value>
+    <value>54, 93</value>
   </data>
   <data name="MenuDonate.Text" xml:space="preserve">
     <value>DONATE</value>
@@ -450,7 +450,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 63</value>
+    <value>58, 93</value>
   </data>
   <data name="MenuStart.Text" xml:space="preserve">
     <value>START</value>
@@ -471,7 +471,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 63</value>
+    <value>53, 93</value>
   </data>
   <data name="MenuStop.Text" xml:space="preserve">
     <value>STOP</value>
@@ -492,7 +492,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuReturn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 63</value>
+    <value>72, 93</value>
   </data>
   <data name="MenuReturn.Text" xml:space="preserve">
     <value>RETURN</value>
@@ -548,7 +548,7 @@
     <value>Magenta</value>
   </data>
   <data name="MenuConnect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 63</value>
+    <value>66, 93</value>
   </data>
   <data name="MenuConnect.Text" xml:space="preserve">
     <value>CONNECT</value>
@@ -572,7 +572,7 @@
     <value>COM</value>
   </data>
   <data name="toolStripConnectionControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 63</value>
+    <value>230, 93</value>
   </data>
   <data name="MenuEams.Font" type="System.Drawing.Font, System.Drawing">
     <value>メイリオ, 9.75pt</value>
@@ -581,7 +581,7 @@
     <value>None</value>
   </data>
   <data name="MenuEams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 63</value>
+    <value>267, 93</value>
   </data>
   <data name="MenuEams.Text" xml:space="preserve">
     <value>Ⓒ2018-2019 EAMS ROBOTICS Co., Ltd.</value>
@@ -596,7 +596,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="MainMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 63</value>
+    <value>1900, 93</value>
   </data>
   <data name="MainMenu.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -698,7 +698,7 @@
     <value>133332, 114</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1900, 63</value>
+    <value>1900, 93</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2381,7 +2381,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1024, 534</value>
+    <value>1380, 580</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

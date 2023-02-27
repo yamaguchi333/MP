@@ -1787,4 +1787,37 @@ Control-S - save grid file\par
   <data name="btn_root_cal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_root_cal.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="btn_restart_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_restart_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_resume_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_resume_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_resume_clear_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_resume_clear_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_return_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_return_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_start_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_start_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_stop_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_stop_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_plan_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_plan_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_return_stop_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_return_stop_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_setting_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_setting_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_sim_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_sim_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="btn_status_big" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_status_big.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

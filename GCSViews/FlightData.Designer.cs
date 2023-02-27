@@ -13,6 +13,10 @@
             this.MainH = new System.Windows.Forms.SplitContainer();
             this.SubMainLeft = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelMessage = new System.Windows.Forms.TableLayoutPanel();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.LabelLiquid = new System.Windows.Forms.Label();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.LabelPreArm2 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
             this.labelClockArming = new System.Windows.Forms.Label();
@@ -174,6 +178,7 @@
             this.BtnActAuto = new System.Windows.Forms.Button();
             this.tableMap = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.ButtonResume = new System.Windows.Forms.Button();
             this.ButtonResumeClear = new System.Windows.Forms.Button();
             this.labelResume = new System.Windows.Forms.Label();
             this.LabelCom = new System.Windows.Forms.Label();
@@ -259,6 +264,8 @@
             this.SubMainLeft.Panel2.SuspendLayout();
             this.SubMainLeft.SuspendLayout();
             this.tableLayoutPanelMessage.SuspendLayout();
+            this.panel14.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -345,8 +352,10 @@
             // 
             // tableLayoutPanelMessage
             // 
-            resources.ApplyResources(this.tableLayoutPanelMessage, "tableLayoutPanelMessage");
             this.tableLayoutPanelMessage.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            resources.ApplyResources(this.tableLayoutPanelMessage, "tableLayoutPanelMessage");
+            this.tableLayoutPanelMessage.Controls.Add(this.panel14, 3, 1);
+            this.tableLayoutPanelMessage.Controls.Add(this.panel13, 3, 0);
             this.tableLayoutPanelMessage.Controls.Add(this.panel12, 1, 4);
             this.tableLayoutPanelMessage.Controls.Add(this.panel11, 1, 5);
             this.tableLayoutPanelMessage.Controls.Add(this.panel10, 0, 5);
@@ -357,6 +366,34 @@
             this.tableLayoutPanelMessage.Controls.Add(this.panel6, 0, 2);
             this.tableLayoutPanelMessage.Controls.Add(this.panel7, 0, 3);
             this.tableLayoutPanelMessage.Name = "tableLayoutPanelMessage";
+            // 
+            // panel14
+            // 
+            this.panel14.Controls.Add(this.LabelLiquid);
+            resources.ApplyResources(this.panel14, "panel14");
+            this.panel14.Name = "panel14";
+            // 
+            // LabelLiquid
+            // 
+            this.LabelLiquid.BackColor = System.Drawing.Color.Blue;
+            resources.ApplyResources(this.LabelLiquid, "LabelLiquid");
+            this.LabelLiquid.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LabelLiquid.Name = "LabelLiquid";
+            this.LabelLiquid.Tag = "custom";
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.LabelPreArm2);
+            resources.ApplyResources(this.panel13, "panel13");
+            this.panel13.Name = "panel13";
+            // 
+            // LabelPreArm2
+            // 
+            this.LabelPreArm2.BackColor = System.Drawing.Color.LimeGreen;
+            resources.ApplyResources(this.LabelPreArm2, "LabelPreArm2");
+            this.LabelPreArm2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.LabelPreArm2.Name = "LabelPreArm2";
+            this.LabelPreArm2.Tag = "custom";
             // 
             // panel12
             // 
@@ -452,6 +489,7 @@
             // 
             // panel8
             // 
+            this.tableLayoutPanelMessage.SetColumnSpan(this.panel8, 2);
             this.panel8.Controls.Add(this.label14);
             this.panel8.Controls.Add(this.labelAccuracy);
             resources.ApplyResources(this.panel8, "panel8");
@@ -524,7 +562,7 @@
             // 
             // panel6
             // 
-            this.tableLayoutPanelMessage.SetColumnSpan(this.panel6, 3);
+            this.tableLayoutPanelMessage.SetColumnSpan(this.panel6, 4);
             this.panel6.Controls.Add(this.label10);
             this.panel6.Controls.Add(this.labelError);
             resources.ApplyResources(this.panel6, "panel6");
@@ -548,7 +586,7 @@
             // 
             // panel7
             // 
-            this.tableLayoutPanelMessage.SetColumnSpan(this.panel7, 3);
+            this.tableLayoutPanelMessage.SetColumnSpan(this.panel7, 4);
             this.panel7.Controls.Add(this.label11);
             this.panel7.Controls.Add(this.labelMessage);
             resources.ApplyResources(this.panel7, "panel7");
@@ -2408,6 +2446,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.ButtonResume);
             this.panel3.Controls.Add(this.ButtonResumeClear);
             this.panel3.Controls.Add(this.labelResume);
             this.panel3.Controls.Add(this.LabelCom);
@@ -2419,11 +2458,23 @@
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
+            // ButtonResume
+            // 
+            this.ButtonResume.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.ButtonResume.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_resume_big;
+            resources.ApplyResources(this.ButtonResume, "ButtonResume");
+            this.ButtonResume.FlatAppearance.BorderSize = 0;
+            this.ButtonResume.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ButtonResume.Name = "ButtonResume";
+            this.toolTip1.SetToolTip(this.ButtonResume, resources.GetString("ButtonResume.ToolTip"));
+            this.ButtonResume.UseVisualStyleBackColor = false;
+            this.ButtonResume.Click += new System.EventHandler(this.ButtonResume_Click);
+            // 
             // ButtonResumeClear
             // 
             resources.ApplyResources(this.ButtonResumeClear, "ButtonResumeClear");
             this.ButtonResumeClear.BackColor = System.Drawing.Color.Transparent;
-            this.ButtonResumeClear.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_resume_clear;
+            this.ButtonResumeClear.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_resume_clear_big;
             this.ButtonResumeClear.FlatAppearance.BorderSize = 0;
             this.ButtonResumeClear.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonResumeClear.Name = "ButtonResumeClear";
@@ -2473,7 +2524,7 @@
             // ButtonStart
             // 
             this.ButtonStart.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.ButtonStart.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_start;
+            this.ButtonStart.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_start_big;
             resources.ApplyResources(this.ButtonStart, "ButtonStart");
             this.ButtonStart.FlatAppearance.BorderSize = 0;
             this.ButtonStart.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -2485,7 +2536,7 @@
             // ButtonStop
             // 
             this.ButtonStop.BackColor = System.Drawing.Color.DodgerBlue;
-            this.ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_stop;
+            this.ButtonStop.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_stop_big;
             resources.ApplyResources(this.ButtonStop, "ButtonStop");
             this.ButtonStop.FlatAppearance.BorderSize = 0;
             this.ButtonStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -2498,7 +2549,7 @@
             // ButtonReturn
             // 
             this.ButtonReturn.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ButtonReturn.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_return;
+            this.ButtonReturn.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_return_big;
             resources.ApplyResources(this.ButtonReturn, "ButtonReturn");
             this.ButtonReturn.FlatAppearance.BorderSize = 0;
             this.ButtonReturn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -2567,7 +2618,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 180D;
+            this.windDir1.Direction = 360D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;
@@ -3087,11 +3138,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.MainH)).EndInit();
             this.MainH.ResumeLayout(false);
             this.SubMainLeft.Panel1.ResumeLayout(false);
-            this.SubMainLeft.Panel1.PerformLayout();
             this.SubMainLeft.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SubMainLeft)).EndInit();
             this.SubMainLeft.ResumeLayout(false);
             this.tableLayoutPanelMessage.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
             this.panel11.ResumeLayout(false);
@@ -3414,5 +3466,10 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label labelClockArm;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Label LabelLiquid;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label LabelPreArm2;
+        private System.Windows.Forms.Button ButtonResume;
     }
 }

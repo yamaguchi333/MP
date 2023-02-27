@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using MissionPlanner.Controls;
 using System.Threading;
+using MissionPlanner.Utilities;
 
 namespace MissionPlanner.MsgBox
 {
@@ -19,10 +20,11 @@ namespace MissionPlanner.MsgBox
 
         static DialogResult _state = DialogResult.None;
 
-        static Image img_ok = global::MissionPlanner.Controls.Properties.Resources.btn_ok;
-        static Image img_cancel = global::MissionPlanner.Controls.Properties.Resources.btn_cancel;
+        static Image img_ok = global::MissionPlanner.Controls.Properties.Resources.btn_ok_big;
+        static Image img_cancel = global::MissionPlanner.Controls.Properties.Resources.btn_cancel_big;
         static Image img_reboot = global::MissionPlanner.Controls.Properties.Resources.btn_act_reboot;
-   
+        static Image img_confirm = global::MissionPlanner.Controls.Properties.Resources.btn_confirm;
+
         public static DialogResult Show(string text)
         {
             return Show(text, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -75,6 +77,9 @@ namespace MissionPlanner.MsgBox
 
         static DialogResult ShowUI(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
+            float fontmag = Settings.Instance.GetFloat("custom_msgbox_fontmag", 1.5f);
+            double opacity = Settings.Instance.GetDouble("custom_msgbox_opacity", 0.85);
+
             DialogResult answer = DialogResult.Abort;
 
             if (text == null)
@@ -102,7 +107,9 @@ namespace MissionPlanner.MsgBox
             // convert to nice wrapped lines.
             text = AddNewLinesToText(text);
             // get pixel width and height
-            Size textSize = TextRenderer.MeasureText(text, SystemFonts.DefaultFont);
+            //Size textSize = TextRenderer.MeasureText(text, SystemFonts.DefaultFont);
+            Font font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size * fontmag);
+            Size textSize = TextRenderer.MeasureText(text, font);
             // allow for icon
             if (icon != MessageBoxIcon.None)
                 textSize.Width += SystemIcons.Question.Width;
@@ -119,6 +126,7 @@ namespace MissionPlanner.MsgBox
                 Height = textSize.Height + 120,
                 TopMost = true,
                 AutoScaleMode = AutoScaleMode.None,
+                Opacity = opacity,
             })
             {
 
@@ -129,9 +137,10 @@ namespace MissionPlanner.MsgBox
                 {
                     Left = 58,
                     Top = 15,
-                    Width = textSize.Width + 10,
-                    Height = textSize.Height + 10,
-                    Text = text
+                    Width = textSize.Width + 20,
+                    Height = textSize.Height + 8,
+                    Text = text,
+                    Font = font
                 };
 
                 msgBoxFrm.Controls.Add(lblMessage);
@@ -250,10 +259,10 @@ namespace MissionPlanner.MsgBox
                     {
 //                        Size = new Size(75, 23),
                         BackgroundImage = img_ok,
-                        Size = new Size(75, 42),
+                        Size = new Size(113, 63),
 //                        Text = "OK",
-                        Left = msgBoxFrm.Width - 100 - FORM_X_MARGIN,
-                        Top = msgBoxFrm.Height - 40 - FORM_Y_MARGIN - titleHeight
+                        Left = msgBoxFrm.Width - 113 - FORM_X_MARGIN,
+                        Top = msgBoxFrm.Height - 63 - FORM_Y_MARGIN - titleHeight
                     };
 
                     but.Click += delegate { _state = DialogResult.OK; msgBoxFrm.Close(); };
@@ -271,11 +280,11 @@ namespace MissionPlanner.MsgBox
                     {
 //                        Size = new Size(75, 23),
                         BackgroundImage = img_ok,
-                        Size = new Size(75, 42),
+                        Size = new Size(113, 63),
 //                        Text = "Yes",
-                        Left = msgBoxFrm.Width - 75 * 2 - FORM_X_MARGIN * 2,
+                        Left = msgBoxFrm.Width - 113 * 2 - FORM_X_MARGIN * 2,
 //                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
-                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 63 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butyes.Click += delegate { _state = DialogResult.Yes; msgBoxFrm.Close(); };
@@ -287,11 +296,11 @@ namespace MissionPlanner.MsgBox
                     {
 //                        Size = new Size(75, 23),
                         BackgroundImage = img_cancel,
-                        Size = new Size(75, 42),
-//                        Text = "No",
-                        Left = msgBoxFrm.Width - 75 - FORM_X_MARGIN,
+                        Size = new Size(113, 63),
+                        //                        Text = "No",
+                        Left = msgBoxFrm.Width - 113 - FORM_X_MARGIN,
 //                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
-                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 63 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butno.Click += delegate { _state = DialogResult.No; msgBoxFrm.Close(); };
@@ -309,11 +318,11 @@ namespace MissionPlanner.MsgBox
                     {
 //                        Size = new Size(75, 23),
                         BackgroundImage = img_ok,
-                        Size = new Size(75, 42),
-//                        Text = "OK",
-                        Left = msgBoxFrm.Width - 75 * 2 - FORM_X_MARGIN * 2,
+                        Size = new Size(113, 63),
+                        //                        Text = "OK",
+                        Left = msgBoxFrm.Width - 113 * 2 - FORM_X_MARGIN * 2,
 //                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
-                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 63 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butok.Click += delegate { _state = DialogResult.OK; msgBoxFrm.Close(); };
@@ -325,11 +334,11 @@ namespace MissionPlanner.MsgBox
                     {
 //                        Size = new Size(75, 23),
                         BackgroundImage = img_cancel,
-                        Size = new Size(75, 42),
-//                        Text = "Cancel",
-                        Left = msgBoxFrm.Width - 75 - FORM_X_MARGIN,
+                        Size = new Size(113, 63),
+                        //                        Text = "Cancel",
+                        Left = msgBoxFrm.Width - 113 - FORM_X_MARGIN,
 //                        Top = msgBoxFrm.Height - 23 - FORM_Y_MARGIN - titleHeight
-                        Top = msgBoxFrm.Height - 42 - FORM_Y_MARGIN - titleHeight
+                        Top = msgBoxFrm.Height - 63 - FORM_Y_MARGIN - titleHeight
                     };
 
                     butcancel.Click += delegate { _state = DialogResult.Cancel; msgBoxFrm.Close(); };
@@ -350,6 +359,21 @@ namespace MissionPlanner.MsgBox
                     butretry.Click += delegate { _state = DialogResult.Retry; msgBoxFrm.Close(); };
                     msgBoxFrm.Controls.Add(butretry);
                     msgBoxFrm.AcceptButton = butretry;
+                    break;
+
+                case MessageBoxButtons.AbortRetryIgnore:  // @eams add
+                    var butconfirm = new Button
+                    {
+//                        Size = new Size(75, 23),
+                        BackgroundImage = img_confirm,
+                        Size = new Size(113, 63),
+                        Left = msgBoxFrm.Width - 113 - FORM_X_MARGIN,
+                        Top = msgBoxFrm.Height - 63 - FORM_Y_MARGIN - titleHeight
+                    };
+
+                    butconfirm.Click += delegate { _state = DialogResult.Retry; msgBoxFrm.Close(); };
+                    msgBoxFrm.Controls.Add(butconfirm);
+                    msgBoxFrm.AcceptButton = butconfirm;
                     break;
 
                 default:

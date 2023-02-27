@@ -1699,10 +1699,13 @@ namespace MissionPlanner
                     }
                 }
 #endif
-                if (CheckCustomParam())
+                if (!MainV2.comPort.MAV.cs.armed)
                 {
-                    Reboot4ParamChange();
-                    return false;
+                    if (CheckCustomParam())
+                    {
+                        Reboot4ParamChange();
+                        return false;
+                    }
                 }
 
                 // update battery cells magnification @eams
@@ -4645,13 +4648,15 @@ namespace MissionPlanner
                     detect_com = detect;
                 }
 
-                // update failsafe display
+                // update prearm display
                 //MainV2.instance.FlightData.LabelPreArm_ChangeState(!MainV2.comPort.MAV.cs.failsafe);
                 MainV2.instance.FlightData.LabelPreArm_ChangeState(MainV2.comPort.MAV.cs.ekfflags == ekf_status_flags);
 
                 // update flight start button state
                 //MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
-                MainV2.instance.FlightData.ButtonStart_ChangeState(!MainV2.comPort.MAV.cs.armed);
+                //MainV2.instance.FlightData.ButtonStart_ChangeState(!MainV2.comPort.MAV.cs.armed);
+                MainV2.instance.FlightData.ButtonStart_ChangeState(MainV2.instance.FlightData.resume_flag == 0);
+                MainV2.instance.FlightData.ButtonResume_ChangeState(MainV2.instance.FlightData.resume_flag > 0);
 
                 // update resume clear button state
                 MainV2.instance.FlightData.ButtonResumeClear_ChangeState(MainV2.instance.FlightData.resume_flag > 0 && !MainV2.comPort.MAV.cs.armed);
@@ -4684,6 +4689,10 @@ namespace MissionPlanner
                 // update link quality display
                 MainV2.instance.FlightData.LabelComQ_ChangeValue(GCSViews.FlightData.myhud.linkqualitygcs);
 
+
+                // update liquid display
+                MainV2.instance.FlightData.LabelLiquid_ChangeState(MainV2.comPort.MAV.cs.current2);
+
                 // failsafe popup display
                 if (MainV2.comPort.MAV.cs.message != null)
                 {
@@ -4692,21 +4701,21 @@ namespace MissionPlanner
                 if (mes.Equals("Battery Failsafe") && !failsafe_Popup)
                 {
                     failsafe_Popup = true;
-                    CustomMessageBox.Show("バッテリーフェールセーフが発動しました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.OK);
+                    CustomMessageBox.Show("バッテリーフェールセーフが発動しました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.AbortRetryIgnore);
                 }
                 if (mes.Equals("Radio Failsafe") && !failsafe_Popup)
                 {
                     failsafe_Popup = true;
-                    CustomMessageBox.Show("送信機との通信が切断されました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.OK);
+                    CustomMessageBox.Show("送信機との通信が切断されました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.AbortRetryIgnore);
                 }
                 if (mes.Equals("Empty Tank Failsafe") && !failsafe_Popup)
                 {
                     failsafe_Popup = true;
-                    CustomMessageBox.Show("タンク内が空になりました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.OK);
+                    CustomMessageBox.Show("タンク内が空になりました。\n\nホームポイントへ自動帰還中。", "フェールセーフ", MessageBoxButtons.AbortRetryIgnore);
                 }
                 if (!mes.Equals("Battery Failsafe") && !mes.Equals("Radio Failsafe") && !mes.Equals("Empty Tank Failsafe"))
                 {
-                    failsafe_Popup = false;
+                    //failsafe_Popup = false;
                 }
             }
             catch (Exception ex)

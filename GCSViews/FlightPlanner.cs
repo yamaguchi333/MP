@@ -7740,6 +7740,16 @@ Column 1: Field type (RALLY is the only one at the moment -- may have RALLY_LAND
             clearPolygonToolStripMenuItem_Click(this, null);
             labelCal.Visible = true;
         }
+
+        private void BUT_loadpolyfile_Click(object sender, EventArgs e)
+        {
+            loadPolygonToolStripMenuItem.PerformClick();
+        }
+
+        private void BUT_savepolyfile_Click(object sender, EventArgs e)
+        {
+            savePolygonToolStripMenuItem.PerformClick();
+        }
     }
 
     public class GMapPolygonMesh : GMapPolygon

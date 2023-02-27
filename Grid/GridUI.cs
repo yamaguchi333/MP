@@ -70,6 +70,7 @@ namespace MissionPlanner.Grid
         bool use_impeller = false;
         int impeller_no = 8;
         int impeller_pwm_on = 2000;
+        int impeller_pwm_on0 = 1500;
         int impeller_pwm_on1 = 1200;
         int impeller_pwm_on2 = 1300;
         int impeller_pwm_on3 = 1400;
@@ -201,6 +202,8 @@ namespace MissionPlanner.Grid
                 impeller_no = int.Parse(plugin.Host.config["impeller_no"]);
             if (plugin.Host.config["impeller_pwm_on"] != null)
                 impeller_pwm_on = int.Parse(plugin.Host.config["impeller_pwm_on"]);
+            if (plugin.Host.config["impeller_pwm_on0"] != null)
+                impeller_pwm_on0 = int.Parse(plugin.Host.config["impeller_pwm_on0"]);
             if (plugin.Host.config["impeller_pwm_on1"] != null)
                 impeller_pwm_on1 = int.Parse(plugin.Host.config["impeller_pwm_on1"]);
             if (plugin.Host.config["impeller_pwm_on2"] != null)
@@ -1950,6 +1953,15 @@ namespace MissionPlanner.Grid
                     {
                         if (plugin.Host.cs.firmware == Firmwares.ArduCopter2)
                         {
+                            // @eams add to use impeller
+                            if (use_impeller)
+                            {
+                                // turn on 0
+                                plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
+                                    (float)impeller_no,
+                                    (float)impeller_pwm_on0, 0, 0, 0, 0, 0,
+                                    gridobject);
+                            }
 #if true    // @eams change
                             var wpno = plugin.Host.AddWPtoList(MAVLink.MAV_CMD.TAKEOFF, 20, 0, 0, 0, 0, 0,
                                 Decimal.ToDouble(NUM_altitude.Value), gridobject);
@@ -1985,7 +1997,7 @@ namespace MissionPlanner.Grid
                         // @eams add to use impeller
                         if (use_impeller)
                         {
-                            // turn off
+                            // turn on 1
                             plugin.Host.AddWPtoList(MAVLink.MAV_CMD.DO_SET_SERVO,
                                 (float)impeller_no,
                                 (float)impeller_pwm_on1, 0, 0, 0, 0, 0,

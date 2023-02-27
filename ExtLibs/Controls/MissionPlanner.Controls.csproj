@@ -117,6 +117,11 @@
     <Compile Include="ProgressStep.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="PseudoOpacityHelper.cs" />
     <Compile Include="QuickView.cs">
       <SubType>UserControl</SubType>
@@ -156,7 +161,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="HUDT.Designer.cs" />
-    <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coords.Designer.cs">
@@ -271,7 +275,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HUDT.resx" />
     <EmbeddedResource Include="HUDT.zh-Hans.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BSE.Windows.Forms\BSE.Windows.Forms.csproj">
@@ -303,6 +310,9 @@
     <None Include="Resources\btn_ok.jpg" />
     <None Include="Resources\btn_cancel.jpg" />
     <None Include="Resources\btn_act_reboot.jpg" />
+    <None Include="Resources\btn_confirm.jpg" />
+    <None Include="Resources\btn_cancel_big.jpg" />
+    <None Include="Resources\btn_ok_big.jpg" />
     <Content Include="Resources\guagebg.jpg" />
     <Content Include="Resources\iconWarning32.png" />
     <Content Include="Resources\iconWarning48.png" />

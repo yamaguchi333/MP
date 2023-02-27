@@ -5034,14 +5034,13 @@ namespace MissionPlanner.GCSViews
             ButtonReturn_ChangeState(true);
         }
 
+        Image img_start = global::MissionPlanner.Properties.Resources.btn_start_big;
         /// <summary>
         /// 飛行開始ボタンの更新
         /// <param name="state">true:enabled、false:disabled</param>
         /// </summary>
         public void ButtonStart_ChangeState(bool state)
         {
-            return;
-
             ButtonStart.Enabled = state;
 
             //描画先とするImageオブジェクトを作成する
@@ -5049,18 +5048,15 @@ namespace MissionPlanner.GCSViews
             //ImageオブジェクトのGraphicsオブジェクトを作成する
             Graphics g = Graphics.FromImage(canvas);
 
-            //画像を取得
-            Bitmap img = global::MissionPlanner.Properties.Resources.btn_start;
-
             if (state)
             {
                 //画像を普通に表示
-                g.DrawImage(img, 0, 0);
+                g.DrawImage(img_start, 0, 0);
             }
             else
             {
                 //画像を無効状態で表示
-                ControlPaint.DrawImageDisabled(g, img, 0, 0, ButtonStart.BackColor);
+                ControlPaint.DrawImageDisabled(g, img_start, 0, 0, ButtonStart.BackColor);
             }
 
             g.Dispose();    //リソースを解放する
@@ -5168,8 +5164,8 @@ namespace MissionPlanner.GCSViews
             }
         }
 
-        Image img_stop = global::MissionPlanner.Properties.Resources.btn_stop;
-        Image img_restart = global::MissionPlanner.Properties.Resources.btn_restart;
+        Image img_stop = global::MissionPlanner.Properties.Resources.btn_stop_big;
+        Image img_restart = global::MissionPlanner.Properties.Resources.btn_restart_big;
         /// <summary>
         /// 飛行停止ボタンの更新
         /// <param name="state">true:飛行停止、false:飛行再開</param>
@@ -5251,8 +5247,8 @@ namespace MissionPlanner.GCSViews
             ButtonStop_ChangeState(true);
         }
 
-        Image img_return = global::MissionPlanner.Properties.Resources.btn_return;
-        Image img_return_stop = global::MissionPlanner.Properties.Resources.btn_return_stop;
+        Image img_return = global::MissionPlanner.Properties.Resources.btn_return_big;
+        Image img_return_stop = global::MissionPlanner.Properties.Resources.btn_return_stop_big;
         /// <summary>
         /// 強制帰還ボタンの更新
         /// <param name="state">true:強制帰還、false:帰還停止</param>
@@ -5330,10 +5326,14 @@ namespace MissionPlanner.GCSViews
             if (state)
             {
                 LabelPreArm.Image = img_flight_ok;
+                LabelPreArm2.Text = "飛行OK";
+                LabelPreArm2.BackColor = Color.LimeGreen;
             }
             else
             {
                 LabelPreArm.Image = img_flight_ng;
+                LabelPreArm2.Text = "飛行NG";
+                LabelPreArm2.BackColor = Color.Red;
             }
         }
 
@@ -5420,6 +5420,7 @@ namespace MissionPlanner.GCSViews
                 int impeller_no = Settings.Instance.GetInt32("impeller_no");
                 int impeller_pwm_on = Settings.Instance.GetInt32("impeller_pwm_on");
                 int impeller_pwm_off = Settings.Instance.GetInt32("impeller_pwm_off");
+                int impeller_pwm_on0 = Settings.Instance.GetInt32("impeller_pwm_on0");
                 float grid_alt = Settings.Instance.GetFloat("grid_alt");
                 string rngfnd_type = "0";
                 try
@@ -5574,6 +5575,13 @@ namespace MissionPlanner.GCSViews
                         resume_flag = 1;
                         return;
                     }
+                }
+
+                // use impeller
+                if (use_impeller)
+                {
+                    // turn on0
+                    MainV2.comPort.doCommand(MAVLink.MAV_CMD.DO_SET_SERVO, impeller_no, impeller_pwm_on0, 0, 0, 0, 0, 0);
                 }
 
                 // startup delay
@@ -5801,10 +5809,11 @@ namespace MissionPlanner.GCSViews
 
         private void ButtonResumeClear_Click(object sender, EventArgs e)
         {
-            resume_flag = 0;
+            if (CustomMessageBox.Show("レジューム情報をクリアしてよろしいですか？", "レジュームクリア", MessageBoxButtons.YesNo) ==(int)DialogResult.Yes)
+                resume_flag = 0;
         }
 
-        Image img_resume_clear = global::MissionPlanner.Properties.Resources.btn_resume_clear;
+        Image img_resume_clear = global::MissionPlanner.Properties.Resources.btn_resume_clear_big;
         /// <summary>
         /// レジュームクリアボタンの更新
         /// <param name="state">true:enabled、false:disabled</param>
@@ -6010,7 +6019,7 @@ namespace MissionPlanner.GCSViews
                 }
                 else if (mes.Contains("Waiting for IMU warming up"))
                 {
-                    rtn = "機体暖気の未完了";
+                    rtn = "機体暖機の未完了";
                 }
                 else if (mes.Contains("Mode not armable"))
                 {
@@ -6103,6 +6112,14 @@ namespace MissionPlanner.GCSViews
                     rtn = "モーター停止";
                 }
             }
+            else if (mes.Contains("GPS Glitch"))
+            {
+                rtn = "衛星捕捉中";
+            }
+            else if (mes.Contains("GPS Glitch cleared"))
+            {
+                rtn = "衛星捕捉完了";
+            }
 
             return rtn;
         }
@@ -6110,6 +6127,66 @@ namespace MissionPlanner.GCSViews
         private void ButtonStop_TextChanged(object sender, EventArgs e)
         {
             ButtonStop_ChangeState((string)ButtonStop.BackgroundImage.Tag == "stop");
+        }
+
+        private void ButtonResume_Click(object sender, EventArgs e)
+        {
+            MainV2.instance.MenuStartClick(sender);
+            ButtonStop_ChangeState(true);
+            ButtonReturn_ChangeState(true);
+        }
+
+        Image img_resume = global::MissionPlanner.Properties.Resources.btn_resume_big;
+        /// <summary>
+        /// レジューム開始ボタンの更新
+        /// <param name="state">true:enabled、false:disabled</param>
+        /// </summary>
+        public void ButtonResume_ChangeState(bool state)
+        {
+            ButtonResume.Enabled = state;
+
+            //描画先とするImageオブジェクトを作成する
+            Bitmap canvas = new Bitmap(ButtonResume.Width, ButtonResume.Height);
+            //ImageオブジェクトのGraphicsオブジェクトを作成する
+            Graphics g = Graphics.FromImage(canvas);
+
+            if (state)
+            {
+                //画像を普通に表示
+                g.DrawImage(img_resume, 0, 0);
+            }
+            else
+            {
+                //画像を無効状態で表示
+                ControlPaint.DrawImageDisabled(g, img_resume, 0, 0, ButtonResume.BackColor);
+            }
+
+            g.Dispose();    //リソースを解放する
+            ButtonResume.BackgroundImage = canvas; //表示する
+        }
+
+        /// <summary>
+        /// 液剤流量チェッカ表示の更新
+        /// </summary>
+        public void LabelLiquid_ChangeState(double liquid)
+        {
+            if (liquid == 0) return;
+
+            var th1 = Settings.Instance.GetDouble("liquid_th1", 38.0);
+            var th2 = Settings.Instance.GetDouble("liquid_th2", 42.0);
+
+            if (liquid < th1)
+            {
+                LabelLiquid.BackColor = Color.Red;
+            }
+            else if (liquid < th2)
+            {
+                LabelLiquid.BackColor = Color.Yellow;
+            }
+            else
+            {
+                LabelLiquid.BackColor = Color.Blue;
+            }
         }
     }
 }

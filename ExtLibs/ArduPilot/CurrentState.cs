@@ -60,10 +60,18 @@ namespace MissionPlanner
         }
 
         // orientation - rads
+#if true    // @eams changed
+        [DisplayText("左右傾き(左〈－〉右〈＋〉：度)")]
+#else
         [DisplayText("Roll (deg)")]
+#endif
         public float roll { get; set; }
 
+#if true    // @eams changed
+        [DisplayText("前後傾き(前〈－〉後〈＋〉：度)")]
+#else
         [DisplayText("Pitch (deg)")]
+#endif
         public float pitch { get; set; }
 
         [DisplayText("Yaw (deg)")]
@@ -576,7 +584,11 @@ namespace MissionPlanner
         float _groundspeed;
         float _verticalspeed;
 
+#if true    // @eams changed
+        [DisplayText("上昇下降速度 (speed)")]
+#else
         [DisplayText("Vertical Speed (speed)")]
+#endif
         public float verticalspeed
         {
             get
@@ -977,7 +989,11 @@ namespace MissionPlanner
 
         private DateTime _lastcurrent2 = DateTime.MinValue;
 
+#if true    // @eams changed
+        [DisplayText("液剤流速")]
+#else
         [DisplayText("Bat2 Current (Amps)")]
+#endif
         public double current2
         {
             get { return _current2; }

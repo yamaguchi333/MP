@@ -141,7 +141,12 @@ namespace MissionPlanner.GCSViews
             this.comboBoxMapType = new System.Windows.Forms.ComboBox();
             this.lnk_kml = new System.Windows.Forms.LinkLabel();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.labelCal = new System.Windows.Forms.Label();
             this.labelPosiCal = new System.Windows.Forms.LinkLabel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.BUT_loadpolyfile = new System.Windows.Forms.Button();
+            this.BUT_savepolyfile = new System.Windows.Forms.Button();
             this.panelMap = new System.Windows.Forms.Panel();
             this.lbl_homedist = new System.Windows.Forms.Label();
             this.lbl_prevdist = new System.Windows.Forms.Label();
@@ -225,7 +230,6 @@ namespace MissionPlanner.GCSViews
             this.panelBASE = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.labelCal = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelWaypoints.SuspendLayout();
@@ -240,6 +244,7 @@ namespace MissionPlanner.GCSViews
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.panelMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -729,6 +734,7 @@ namespace MissionPlanner.GCSViews
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.panel10);
+            this.flowLayoutPanel1.Controls.Add(this.panel11);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -947,6 +953,11 @@ namespace MissionPlanner.GCSViews
             resources.ApplyResources(this.panel10, "panel10");
             this.panel10.Name = "panel10";
             // 
+            // labelCal
+            // 
+            resources.ApplyResources(this.labelCal, "labelCal");
+            this.labelCal.Name = "labelCal";
+            // 
             // labelPosiCal
             // 
             this.labelPosiCal.BackColor = System.Drawing.Color.ForestGreen;
@@ -958,6 +969,43 @@ namespace MissionPlanner.GCSViews
             this.labelPosiCal.Name = "labelPosiCal";
             this.labelPosiCal.Tag = "custom";
             this.labelPosiCal.Click += new System.EventHandler(this.labelPosiCal_Click);
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.label8);
+            this.panel11.Controls.Add(this.BUT_loadpolyfile);
+            this.panel11.Controls.Add(this.BUT_savepolyfile);
+            resources.ApplyResources(this.panel11, "panel11");
+            this.panel11.Name = "panel11";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // BUT_loadpolyfile
+            // 
+            this.BUT_loadpolyfile.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BUT_loadpolyfile.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_root_read;
+            resources.ApplyResources(this.BUT_loadpolyfile, "BUT_loadpolyfile");
+            this.BUT_loadpolyfile.FlatAppearance.BorderSize = 0;
+            this.BUT_loadpolyfile.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BUT_loadpolyfile.Name = "BUT_loadpolyfile";
+            this.BUT_loadpolyfile.Tag = "custom";
+            this.BUT_loadpolyfile.UseVisualStyleBackColor = false;
+            this.BUT_loadpolyfile.Click += new System.EventHandler(this.BUT_loadpolyfile_Click);
+            // 
+            // BUT_savepolyfile
+            // 
+            this.BUT_savepolyfile.BackColor = System.Drawing.Color.DarkOrange;
+            this.BUT_savepolyfile.BackgroundImage = global::MissionPlanner.Properties.Resources.btn_root_save;
+            resources.ApplyResources(this.BUT_savepolyfile, "BUT_savepolyfile");
+            this.BUT_savepolyfile.FlatAppearance.BorderSize = 0;
+            this.BUT_savepolyfile.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BUT_savepolyfile.Name = "BUT_savepolyfile";
+            this.BUT_savepolyfile.Tag = "custom";
+            this.BUT_savepolyfile.UseVisualStyleBackColor = false;
+            this.BUT_savepolyfile.Click += new System.EventHandler(this.BUT_savepolyfile_Click);
             // 
             // panelMap
             // 
@@ -1561,11 +1609,6 @@ namespace MissionPlanner.GCSViews
             this.timer1.Interval = 1200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // labelCal
-            // 
-            resources.ApplyResources(this.labelCal, "labelCal");
-            this.labelCal.Name = "labelCal";
-            // 
             // FlightPlanner
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -1596,6 +1639,8 @@ namespace MissionPlanner.GCSViews
             this.panel3.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.panelMap.ResumeLayout(false);
             this.panelMap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
@@ -1785,5 +1830,9 @@ namespace MissionPlanner.GCSViews
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.LinkLabel labelPosiCal;
         private System.Windows.Forms.Label labelCal;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button BUT_loadpolyfile;
+        private System.Windows.Forms.Button BUT_savepolyfile;
     }
 }

@@ -1779,6 +1779,17 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\launchSettings.json" />
+    <None Include="Resources\btn_return_stop_big.jpg" />
+    <None Include="Resources\btn_status_big.jpg" />
+    <None Include="Resources\btn_sim_big.jpg" />
+    <None Include="Resources\btn_setting_big.jpg" />
+    <None Include="Resources\btn_plan_big.jpg" />
+    <None Include="Resources\btn_resume_big.jpg" />
+    <None Include="Resources\btn_restart_big.jpg" />
+    <None Include="Resources\btn_stop_big.jpg" />
+    <None Include="Resources\btn_return_big.jpg" />
+    <None Include="Resources\btn_start_big.jpg" />
+    <None Include="Resources\btn_resume_clear_big.jpg" />
     <None Include="Resources\btn_root_cal.jpg" />
     <None Include="Resources\btn_return_stop.jpg" />
     <None Include="Resources\btn_act_auto.jpg" />
