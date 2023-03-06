@@ -6172,10 +6172,15 @@ namespace MissionPlanner.GCSViews
         {
             if (liquid == 0) return;
 
+            var th0 = Settings.Instance.GetDouble("liquid_th0", 10.0);
             var th1 = Settings.Instance.GetDouble("liquid_th1", 38.0);
             var th2 = Settings.Instance.GetDouble("liquid_th2", 42.0);
 
-            if (liquid < th1)
+            if (liquid <= th0)
+            {
+                LabelLiquid.BackColor = Color.Silver;
+            }
+            else if (liquid < th1)
             {
                 LabelLiquid.BackColor = Color.Red;
             }

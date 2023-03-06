@@ -4715,7 +4715,7 @@ namespace MissionPlanner
                 }
                 if (!mes.Equals("Battery Failsafe") && !mes.Equals("Radio Failsafe") && !mes.Equals("Empty Tank Failsafe"))
                 {
-                    //failsafe_Popup = false;
+                    failsafe_Popup = false;
                 }
             }
             catch (Exception ex)

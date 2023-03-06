@@ -998,7 +998,16 @@ namespace MissionPlanner.Grid
 
                     if (CHK_markers.Checked)
                     {
-                        var marker = new GMapMarkerWP(item, a.ToString()) { ToolTipText = a.ToString(), ToolTipMode = MarkerTooltipMode.OnMouseOver };
+                        GMapMarkerWP marker;
+                        if (strips == 1)
+                        {
+                            marker = new GMapMarkerWP(item, a.ToString(), GMarkerGoogleType.red) { ToolTipText = a.ToString(), ToolTipMode = MarkerTooltipMode.OnMouseOver };
+
+                        }
+                        else
+                        {
+                            marker = new GMapMarkerWP(item, a.ToString()) { ToolTipText = a.ToString(), ToolTipMode = MarkerTooltipMode.OnMouseOver };
+                        }
                         routesOverlay.Markers.Add(marker);
                     }
 
