@@ -4367,6 +4367,7 @@ namespace MissionPlanner
 
         public async void MenuStartClick(object sender)
         {
+            CustomMessageBox.Show("バッテリーフェールセーフが発動しました。\n\nホームポイントへ自動帰還中。テストテスト。", "フェールセーフ", MessageBoxButtons.AbortRetryIgnore);
             Type sender_type = sender.GetType();
             if (sender_type.Equals(typeof(ToolStripButton)))
             {

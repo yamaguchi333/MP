@@ -123,7 +123,7 @@ namespace MissionPlanner.MsgBox
                 MaximizeBox = false,
                 MinimizeBox = false,
                 Width = textSize.Width + 50,
-                Height = textSize.Height + 120,
+                Height = textSize.Height + 125,
                 TopMost = true,
                 AutoScaleMode = AutoScaleMode.None,
                 Opacity = opacity,
@@ -137,8 +137,8 @@ namespace MissionPlanner.MsgBox
                 {
                     Left = 58,
                     Top = 15,
-                    Width = textSize.Width + 20,
-                    Height = textSize.Height + 8,
+                    Width = textSize.Width + (int)(10 * fontmag),
+                    Height = textSize.Height + 10,
                     Text = text,
                     Font = font
                 };

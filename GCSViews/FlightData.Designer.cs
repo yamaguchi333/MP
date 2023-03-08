@@ -375,7 +375,7 @@
             // 
             // LabelLiquid
             // 
-            this.LabelLiquid.BackColor = System.Drawing.Color.Blue;
+            this.LabelLiquid.BackColor = System.Drawing.Color.Silver;
             resources.ApplyResources(this.LabelLiquid, "LabelLiquid");
             this.LabelLiquid.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LabelLiquid.Name = "LabelLiquid";
@@ -2618,7 +2618,7 @@
             this.windDir1.BackColor = System.Drawing.Color.Transparent;
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Direction", this.bindingSource1, "wind_dir", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.windDir1.DataBindings.Add(new System.Windows.Forms.Binding("Speed", this.bindingSource1, "wind_vel", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.windDir1.Direction = 360D;
+            this.windDir1.Direction = 180D;
             resources.ApplyResources(this.windDir1, "windDir1");
             this.windDir1.Name = "windDir1";
             this.windDir1.Speed = 0D;

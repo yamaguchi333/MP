@@ -6170,8 +6170,6 @@ namespace MissionPlanner.GCSViews
         /// </summary>
         public void LabelLiquid_ChangeState(double liquid)
         {
-            if (liquid == 0) return;
-
             var th0 = Settings.Instance.GetDouble("liquid_th0", 10.0);
             var th1 = Settings.Instance.GetDouble("liquid_th1", 38.0);
             var th2 = Settings.Instance.GetDouble("liquid_th2", 42.0);
