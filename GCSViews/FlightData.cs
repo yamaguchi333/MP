@@ -1070,7 +1070,8 @@ namespace MissionPlanner.GCSViews
                     }
                     // phase1.12 dev23：ZIGZAGモード時は飛行停止ボタンを無効にする
                     // TextChangeEventで状態変化をキャッチさせる
-                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "ZIGZAG")
+                    // phase1.13 dev4：RTL時も飛行停止ボタンを無効にする
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "ZIGZAG" || MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
                     {
                         Invoke((MethodInvoker)(() => ButtonStop.Text = " "));
                     }
@@ -1078,6 +1079,17 @@ namespace MissionPlanner.GCSViews
                     {
                         Invoke((MethodInvoker)(() => ButtonStop.Text = ""));
                     }
+
+                    // phase1.13 dev4：RTL時には帰還ボタンを帰還停止にする（プロポ等でRTLになった時の対策）
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
+                    {
+                        Invoke((MethodInvoker)(() => ButtonReturn_ChangeState(false)));
+                    }
+                    else
+                    {
+                        Invoke((MethodInvoker)(() => ButtonReturn_ChangeState(true)));
+                    }
+
                     if (labelMode.InvokeRequired)
                     {
                         Invoke((MethodInvoker)(() => labelMode.Text = mode_jp));
