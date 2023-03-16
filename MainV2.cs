@@ -4656,13 +4656,13 @@ namespace MissionPlanner
                 //MainV2.instance.FlightData.ButtonStart_ChangeState(!(MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() == "AUTO"));
                 //MainV2.instance.FlightData.ButtonStart_ChangeState(!MainV2.comPort.MAV.cs.armed);
                 MainV2.instance.FlightData.ButtonStart_ChangeState(MainV2.instance.FlightData.resume_flag == 0);
-                MainV2.instance.FlightData.ButtonResume_ChangeState(MainV2.instance.FlightData.resume_flag > 0);
+                MainV2.instance.FlightData.ButtonResume_ChangeState(MainV2.instance.FlightData.resume_flag > 0 && !MainV2.comPort.MAV.cs.armed);
 
                 // update resume clear button state
                 MainV2.instance.FlightData.ButtonResumeClear_ChangeState(MainV2.instance.FlightData.resume_flag > 0 && !MainV2.comPort.MAV.cs.armed);
 
                 // update forced return button state
-                if ((int)MainV2.comPort.MAV.cs.DistToHome == 0 && !MainV2.comPort.MAV.cs.armed)
+                if ((int)MainV2.comPort.MAV.cs.DistToHome == 0 && !MainV2.comPort.MAV.cs.armed && MainV2.comPort.MAV.cs.mode.ToUpper() != "RTL")
                 {
                     MainV2.instance.FlightData.ButtonReturn_ChangeState(true);
                 }

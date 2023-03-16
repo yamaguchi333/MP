@@ -1071,7 +1071,8 @@ namespace MissionPlanner.GCSViews
                     // phase1.12 dev23：ZIGZAGモード時は飛行停止ボタンを無効にする
                     // TextChangeEventで状態変化をキャッチさせる
                     // phase1.13 dev4：RTL時も飛行停止ボタンを無効にする
-                    if (MainV2.comPort.MAV.cs.mode.ToUpper() == "ZIGZAG" || MainV2.comPort.MAV.cs.mode.ToUpper() == "RTL")
+                    // phase1.13 dev5：AUTO以外で飛行停止ボタンを無効にする
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() != "AUTO")
                     {
                         Invoke((MethodInvoker)(() => ButtonStop.Text = " "));
                     }
