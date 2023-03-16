@@ -1001,7 +1001,7 @@ namespace MissionPlanner.Grid
                         GMapMarkerWP marker;
                         if (strips == 1)
                         {
-                            marker = new GMapMarkerWP(item, a.ToString(), GMarkerGoogleType.red) { ToolTipText = a.ToString(), ToolTipMode = MarkerTooltipMode.OnMouseOver };
+                            marker = new GMapMarkerWP(item, a.ToString(), GMarkerGoogleType.lightblue_pushpin) { ToolTipText = a.ToString(), ToolTipMode = MarkerTooltipMode.OnMouseOver };
 
                         }
                         else

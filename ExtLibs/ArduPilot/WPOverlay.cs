@@ -230,7 +230,7 @@ namespace MissionPlanner.ArduPilot
                 GMapMarkerWP m;
                 if (first)
                 {
-                    m = new GMapMarkerWP(point, tag, GMarkerGoogleType.red);
+                    m = new GMapMarkerWP(point, tag, GMarkerGoogleType.lightblue_pushpin);
                 }
                 else
                 {
