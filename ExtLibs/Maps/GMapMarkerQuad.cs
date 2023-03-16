@@ -10,7 +10,7 @@ namespace MissionPlanner.Maps
     [Serializable]
     public class GMapMarkerQuad : GMapMarker
     {
-        private readonly Bitmap icon = global::MissionPlanner.Maps.Resources.quadicon;
+        private static readonly Bitmap icon = global::MissionPlanner.Maps.Resources.quadicon;
 
         float heading = 0;
         float cog = -1;
