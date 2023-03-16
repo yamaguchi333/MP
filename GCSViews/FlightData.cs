@@ -5047,7 +5047,7 @@ namespace MissionPlanner.GCSViews
             ButtonReturn_ChangeState(true);
         }
 
-        private static readonly Image img_start = global::MissionPlanner.Properties.Resources.btn_start_big;
+        private readonly Image img_start = global::MissionPlanner.Properties.Resources.btn_start_big;
         /// <summary>
         /// 飛行開始ボタンの更新
         /// <param name="state">true:enabled、false:disabled</param>
@@ -5179,8 +5179,8 @@ namespace MissionPlanner.GCSViews
             }
         }
 
-        private static readonly Image img_stop = global::MissionPlanner.Properties.Resources.btn_stop_big;
-        private static readonly Image img_restart = global::MissionPlanner.Properties.Resources.btn_restart_big;
+        private readonly Image img_stop = global::MissionPlanner.Properties.Resources.btn_stop_big;
+        private readonly Image img_restart = global::MissionPlanner.Properties.Resources.btn_restart_big;
         /// <summary>
         /// 飛行停止ボタンの更新
         /// <param name="state">true:飛行停止、false:飛行再開</param>
@@ -5266,8 +5266,8 @@ namespace MissionPlanner.GCSViews
             ButtonStop_ChangeState(true);
         }
 
-        private static readonly Image img_return = global::MissionPlanner.Properties.Resources.btn_return_big;
-        private static readonly Image img_return_stop = global::MissionPlanner.Properties.Resources.btn_return_stop_big;
+        private readonly Image img_return = global::MissionPlanner.Properties.Resources.btn_return_big;
+        private readonly Image img_return_stop = global::MissionPlanner.Properties.Resources.btn_return_stop_big;
         /// <summary>
         /// 強制帰還ボタンの更新
         /// <param name="state">true:強制帰還、false:帰還停止</param>
@@ -5278,15 +5278,20 @@ namespace MissionPlanner.GCSViews
             {
                 ButtonReturn.BackgroundImage = img_return;
                 ButtonReturn.BackgroundImage.Tag = "return";
-                toolTip1.SetToolTip(ButtonReturn, "強制帰還");
+                if(toolTip1.GetToolTip(ButtonReturn) != "強制帰還")
+                {
+                    toolTip1.SetToolTip(ButtonReturn, "強制帰還");
+                }
             }
             else
             {
                 ButtonReturn.BackgroundImage = img_return_stop;
                 ButtonReturn.BackgroundImage.Tag = "return_stop";
-                toolTip1.SetToolTip(ButtonReturn, "帰還停止");
+                if (toolTip1.GetToolTip(ButtonReturn) != "帰還停止")
+                {
+                    toolTip1.SetToolTip(ButtonReturn, "帰還停止");
+                }
             }
-
         }
 
         private void ButtonConnect_Click(object sender, EventArgs e)
@@ -5294,8 +5299,8 @@ namespace MissionPlanner.GCSViews
             MainV2.instance.Connect();
         }
 
-        private static readonly Image img_disconnect = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
-        private static readonly Image img_connect = global::MissionPlanner.Properties.Resources.light_connect_icon;
+        private readonly Image img_disconnect = global::MissionPlanner.Properties.Resources.light_disconnect_icon;
+        private readonly Image img_connect = global::MissionPlanner.Properties.Resources.light_connect_icon;
         /// <summary>
         /// 接続アイコンの更新
         /// <param name="state">true:接続時＝iconは接続、Textは切断、false:切断時＝iconは切断、Textは接続</param>
@@ -5334,8 +5339,8 @@ namespace MissionPlanner.GCSViews
             }
         }
 
-        private static readonly Image img_flight_ok = global::MissionPlanner.Properties.Resources.btn_flight_ok;
-        private static readonly Image img_flight_ng = global::MissionPlanner.Properties.Resources.btn_flight_ng;
+        private readonly Image img_flight_ok = global::MissionPlanner.Properties.Resources.btn_flight_ok;
+        private readonly Image img_flight_ng = global::MissionPlanner.Properties.Resources.btn_flight_ng;
         /// <summary>
         /// PreArm表示の更新
         /// <param name="state">true=failsafe以外、false=failsafe中</param>
@@ -5832,7 +5837,7 @@ namespace MissionPlanner.GCSViews
                 resume_flag = 0;
         }
 
-        private static readonly Image img_resume_clear = global::MissionPlanner.Properties.Resources.btn_resume_clear_big;
+        private readonly Image img_resume_clear = global::MissionPlanner.Properties.Resources.btn_resume_clear_big;
         /// <summary>
         /// レジュームクリアボタンの更新
         /// <param name="state">true:enabled、false:disabled</param>
@@ -6157,7 +6162,7 @@ namespace MissionPlanner.GCSViews
             ButtonReturn_ChangeState(true);
         }
 
-        private static readonly Image img_resume = global::MissionPlanner.Properties.Resources.btn_resume_big;
+        private readonly Image img_resume = global::MissionPlanner.Properties.Resources.btn_resume_big;
         /// <summary>
         /// レジューム開始ボタンの更新
         /// <param name="state">true:enabled、false:disabled</param>
