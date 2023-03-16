@@ -5065,11 +5065,13 @@ namespace MissionPlanner.GCSViews
             {
                 //画像を普通に表示
                 g.DrawImage(img_start, 0, 0);
+                ButtonStart.Enabled = true;
             }
             else
             {
                 //画像を無効状態で表示
                 ControlPaint.DrawImageDisabled(g, img_start, 0, 0, ButtonStart.BackColor);
+                ButtonStart.Enabled = false;
             }
 
             g.Dispose();    //リソースを解放する
@@ -5196,11 +5198,13 @@ namespace MissionPlanner.GCSViews
                 {
                     //画像を普通に表示
                     g.DrawImage(img_stop, 0, 0);
+                    ButtonStop.Enabled = true;
                 }
                 else
                 {
                     //画像を無効状態で表示
                     ControlPaint.DrawImageDisabled(g, img_stop, 0, 0, ButtonStop.BackColor);
+                    ButtonStop.Enabled = false;
                 }
                 g.Dispose();    //リソースを解放する
                 ButtonStop.BackgroundImage = canvas; //表示する
@@ -5214,11 +5218,13 @@ namespace MissionPlanner.GCSViews
                 {
                     //画像を普通に表示
                     g.DrawImage(img_restart, 0, 0);
+                    ButtonStop.Enabled = true;
                 }
                 else
                 {
                     //画像を無効状態で表示
                     ControlPaint.DrawImageDisabled(g, img_restart, 0, 0, ButtonStop.BackColor);
+                    ButtonStop.Enabled = false;
                 }
                 g.Dispose();    //リソースを解放する
                 ButtonStop.BackgroundImage = canvas; //表示する
@@ -5844,11 +5850,13 @@ namespace MissionPlanner.GCSViews
             {
                 //画像を普通に表示
                 g.DrawImage(img_resume_clear, 0, 0);
+                ButtonResumeClear.Enabled = true;
             }
             else
             {
                 //画像を無効状態で表示
                 ControlPaint.DrawImageDisabled(g, img_resume_clear, 0, 0, ButtonResumeClear.BackColor);
+                ButtonResumeClear.Enabled = false;
             }
 
             g.Dispose();    //リソースを解放する
@@ -6167,11 +6175,13 @@ namespace MissionPlanner.GCSViews
             {
                 //画像を普通に表示
                 g.DrawImage(img_resume, 0, 0);
+                ButtonResume.Enabled = true;
             }
             else
             {
                 //画像を無効状態で表示
                 ControlPaint.DrawImageDisabled(g, img_resume, 0, 0, ButtonResume.BackColor);
+                ButtonResume.Enabled = false;
             }
 
             g.Dispose();    //リソースを解放する
