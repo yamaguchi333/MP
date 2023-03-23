@@ -1072,7 +1072,8 @@ namespace MissionPlanner.GCSViews
                     // TextChangeEventで状態変化をキャッチさせる
                     // phase1.13 dev4：RTL時も飛行停止ボタンを無効にする
                     // phase1.13 dev5：AUTO以外で飛行停止ボタンを無効にする
-                    if (MainV2.comPort.MAV.cs.mode.ToUpper() != "AUTO")
+                    // phase1.13 dev6：AUTOまたはLOITER以外で飛行停止ボタンを無効にする
+                    if (MainV2.comPort.MAV.cs.mode.ToUpper() != "AUTO" && MainV2.comPort.MAV.cs.mode.ToUpper() != "LOITER")
                     {
                         Invoke((MethodInvoker)(() => ButtonStop.Text = " "));
                     }
